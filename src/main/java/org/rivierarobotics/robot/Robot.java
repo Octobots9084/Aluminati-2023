@@ -1,7 +1,7 @@
 /*
  * This file is part of GradleRIO-Redux-example, licensed under the GNU General Public License (GPLv3).
  *
- * Copyright (c) Riviera Robotics <https://github.com/Team5818>
+ * Copyright (c) Octobots Robotics <https://github.com/Octobots9084>
  * Copyright (c) contributors
  *
  * This program is free software: you can redistribute it and/or modify
