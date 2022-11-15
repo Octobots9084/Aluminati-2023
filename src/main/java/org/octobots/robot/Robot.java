@@ -1,34 +1,57 @@
-/*
- * This file is part of GradleRIO-Redux-example, licensed under the GNU General Public License (GPLv3).
- *
- * Copyright (c) Octobots Robotics <https://github.com/Octobots9084>
- * Copyright (c) contributors
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 
 package org.octobots.robot;
+//package edu.wpi.first.wpilibj.examples.swervebot;
 
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
-import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
-import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 
 public class Robot extends TimedRobot {
+    private final XboxController m_controller = new XboxController(0);
+    private final DriveTrain m_swerve = new DriveTrain();
 
+    // Slew rate limiters to make joystick inputs more gentle; 1/3 sec from 0 to 1.
+    private final SlewRateLimiter m_xspeedLimiter = new SlewRateLimiter(3);
+    private final SlewRateLimiter m_yspeedLimiter = new SlewRateLimiter(3);
+    private final SlewRateLimiter m_rotLimiter = new SlewRateLimiter(3);
+
+    @Override
+    public void autonomousPeriodic() {
+        driveWithJoystick(false);
+        m_swerve.updateOdometry();
+    }
+
+    @Override
+    public void teleopPeriodic() {
+        driveWithJoystick(true);
+    }
+
+    private void driveWithJoystick(boolean fieldRelative) {
+        // Get the x speed. We are inverting this because Xbox controllers return
+        // negative values when we push forward.
+        final var xSpeed =
+                -m_xspeedLimiter.calculate(MathUtil.applyDeadband(m_controller.getLeftY(), 0.02))
+                        * DriveTrain.kMaxSpeed;
+
+        // Get the y speed or sideways/strafe speed. We are inverting this because
+        // we want a positive value when we pull to the left. Xbox controllers
+        // return positive values when you pull to the right by default.
+        final var ySpeed =
+                -m_yspeedLimiter.calculate(MathUtil.applyDeadband(m_controller.getLeftX(), 0.02))
+                        * DriveTrain.kMaxSpeed;
+
+        // Get the rate of angular rotation. We are inverting this because we want a
+        // positive value when we pull to the left (remember, CCW is positive in
+        // mathematics). Xbox controllers return positive values when you pull to
+        // the right by default.
+        final var rot =
+                -m_rotLimiter.calculate(MathUtil.applyDeadband(m_controller.getRightX(), 0.02))
+                        * DriveTrain.kMaxAngularSpeed;
+
+        m_swerve.drive(xSpeed, ySpeed, rot, fieldRelative);
+    }
 }
