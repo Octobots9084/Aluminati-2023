@@ -21,10 +21,10 @@ public class DriveTrain {
     private final Translation2d m_backLeftLocation = new Translation2d(-0.381, 0.381);
     private final Translation2d m_backRightLocation = new Translation2d(-0.381, -0.381);
 
-    private final SwerveModule m_frontLeft = new SwerveModule();
-    private final SwerveModule m_frontRight = new SwerveModule(3, 4, 4, 5, 6, 7);
-    private final SwerveModule m_backLeft = new SwerveModule(5, 6, 8, 9, 10, 11);
-    private final SwerveModule m_backRight = new SwerveModule(7, 8, 12, 13, 14, 15);
+    private final SwerveModule m_frontLeft = new SwerveModule(MotorIDs.FRONT_LEFT_DRIVE, MotorIDs.FRONT_LEFT_STEER, -2935 + 2048);
+    private final SwerveModule m_frontRight = new SwerveModule(MotorIDs.FRONT_RIGHT_DRIVE, MotorIDs.FRONT_RIGHT_STEER, 3677 + 2048);
+    private final SwerveModule m_backLeft = new SwerveModule(MotorIDs.BACK_LEFT_DRIVE, MotorIDs.BACK_LEFT_STEER, -2833 + 2048);
+    private final SwerveModule m_backRight = new SwerveModule(MotorIDs.BACK_RIGHT_DRIVE, MotorIDs.BACK_RIGHT_STEER, -3619 + 2048);
 
     private final AnalogGyro m_gyro = new AnalogGyro(0);
 
