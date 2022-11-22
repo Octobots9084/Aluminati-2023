@@ -112,6 +112,20 @@ public class SwerveModule {
         }
     }
 
+    public double convertVelocityToTicksPer100ms(double velocity) {
+        return velocity / DRIVE_MOTOR_TICK_TO_SPEED;
+    }
+
+    public void setDriveMotorVelocity(double metersPerSecond) {
+        //shuffleboard.setEntry("target velocity " + driveMotor.getDeviceID(), metersPerSecond);
+        driveMotor.set(TalonFXControlMode.Velocity, convertVelocityToTicksPer100ms(metersPerSecond));
+    }
+
+    public void setSteeringMotorAngle(double angleInRad) {
+        //shuffleboard.setEntry("target Angle" + driveMotor.getDeviceID(), angleInRad);
+        steeringMotor.set(ControlMode.Position, angleInRad);
+    }
+
 
     /**
      * Returns the current position of the module.
