@@ -1,1 +1,1 @@
-rootProject.name = "GradleRIO-Redux-example"
+rootProject.name = "OctoSwerve-Revamp"
