@@ -18,29 +18,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package org.octobots.robot;
-//package edu.wpi.first.wpilibj.examples.swervebot;
 
-import edu.wpi.first.wpilibj.RobotBase;
+import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
+import com.ctre.phoenix.motorcontrol.can.BaseTalon;
 
-/**
- * Do NOT add any static variables to this class, or any initialization at all. Unless you know what
- * you are doing, do not modify this file except to change the parameter class to the startRobot
- * call.
- */
-public final class Main {
-    private Main() {}
+public class StatusFrameDemolisher {
+    public static void demolishStatusFrames(BaseTalon motor, boolean isFollower) {
+        if (isFollower) {
+            motor.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 255);
+            motor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 255);
+        }
+        motor.setStatusFramePeriod(StatusFrameEnhanced.Status_3_Quadrature, 255);
+        motor.setStatusFramePeriod(StatusFrameEnhanced.Status_4_AinTempVbat, 255);
+        motor.setStatusFramePeriod(StatusFrameEnhanced.Status_12_Feedback1, 255);
+    }
 
-    /**
-     * Main initialization function. Do not perform any initialization here.
-     *
-     * <p>If you change your main robot class, change the parameter type.
-     */
-    public static void main(String... args) {
-        RobotBase.startRobot(Robot::new);
+    private StatusFrameDemolisher() {
     }
 }

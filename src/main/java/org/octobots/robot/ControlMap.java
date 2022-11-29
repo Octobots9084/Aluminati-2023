@@ -18,29 +18,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package org.octobots.robot;
-//package edu.wpi.first.wpilibj.examples.swervebot;
 
-import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.Joystick;
 
-/**
- * Do NOT add any static variables to this class, or any initialization at all. Unless you know what
- * you are doing, do not modify this file except to change the parameter class to the startRobot
- * call.
- */
-public final class Main {
-    private Main() {}
+public class ControlMap {
+    public static final Joystick DRIVER_LEFT = new Joystick(0);
+    public static final Joystick DRIVER_RIGHT = new Joystick(1);
+    public static final Joystick CO_DRIVER_LEFT = new Joystick(2);
+    public static final Joystick CO_DRIVER_RIGHT = new Joystick(3);
+    public static final Joystick DRIVER_BUTTONS = new Joystick(4);
+    public static final Joystick CO_DRIVER_BUTTONS = new Joystick(5);
 
-    /**
-     * Main initialization function. Do not perform any initialization here.
-     *
-     * <p>If you change your main robot class, change the parameter type.
-     */
-    public static void main(String... args) {
-        RobotBase.startRobot(Robot::new);
+    private ControlMap() {
     }
 }

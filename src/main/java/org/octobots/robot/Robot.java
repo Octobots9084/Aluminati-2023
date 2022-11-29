@@ -1,58 +1,103 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
+/*
+ * This file is part of GradleRIO-Redux-example, licensed under the GNU General Public License (GPLv3).
+ *
+ * Copyright (c) Octobots <https://github.com/Octobots9084>
+ * Copyright (c) contributors
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 package org.octobots.robot;
-//package edu.wpi.first.wpilibj.examples.swervebot;
 
-import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.filter.SlewRateLimiter;
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class Robot extends TimedRobot {
-    private final Joystick m_controller = new Joystick(0);
-    private final DriveTrain m_swerve = new DriveTrain();
-
-    // Slew rate limiters to make joystick inputs more gentle; 1/3 sec from 0 to 1.
-    private final SlewRateLimiter m_xspeedLimiter = new SlewRateLimiter(3);
-    private final SlewRateLimiter m_yspeedLimiter = new SlewRateLimiter(3);
-    private final SlewRateLimiter m_rotLimiter = new SlewRateLimiter(3);
+    public static double autoStartTime = 0.0;
+    private final Field2d field2d = new Field2d();
+    private SendableChooser<Command> chooser;
+    private boolean autoFlag = false;
+    private boolean ran = false;
 
     @Override
-    public void autonomousPeriodic() {
-        driveWithJoystick(false);
-        //m_swerve.updateOdometry();
+    public void disabledPeriodic() {
+        DriveTrain.getInstance().drive(0, 0, 0, true);
+        CommandScheduler.getInstance().cancelAll();
     }
 
     @Override
-    public void teleopPeriodic() {
-        driveWithJoystick(true);
+    public void robotInit() {
+        initializeAllSubsystems();
+        initializeDefaultCommands();
+        Gyro.getInstance().resetGyro();
+        resetRobotPoseAndGyro();
+        var threader = Executors.newSingleThreadScheduledExecutor();
+        threader.scheduleWithFixedDelay(new Thread(() -> Gyro.getInstance().updateRotation2D()), 0, 5, TimeUnit.MILLISECONDS);
+        LiveWindow.disableAllTelemetry();
+        LiveWindow.setEnabled(false);
+        SmartDashboard.putNumber("period", getPeriod());
     }
 
-    private void driveWithJoystick(boolean fieldRelative) {
-        // Get the x speed. We are inverting this because Xbox controllers return
-        // negative values when we push forward.
-        final var xSpeed =
-                -m_xspeedLimiter.calculate(MathUtil.applyDeadband(m_controller.getY(), 0.02))
-                        * DriveTrain.kMaxSpeed;
+    @Override
+    public void robotPeriodic() {
+        DriveTrain.getInstance().updateSwerveStates();
+        CommandScheduler.getInstance().run();
+    }
 
-        // Get the y speed or sideways/strafe speed. We are inverting this because
-        // we want a positive value when we pull to the left. Xbox controllers
-        // return positive values when you pull to the right by default.
-        final var ySpeed =
-                -m_yspeedLimiter.calculate(MathUtil.applyDeadband(m_controller.getX(), 0.02))
-                        * DriveTrain.kMaxSpeed;
+    @Override
+    public void teleopInit() {
+        CommandScheduler.getInstance().cancelAll();
+//        new ButtonConfiguration().initTeleop();
+        initializeAllSubsystems();
+        initializeDefaultCommands();
 
-        // Get the rate of angular rotation. We are inverting this because we want a
-        // positive value when we pull to the left (remember, CCW is positive in
-        // mathematics). Xbox controllers return positive values when you pull to
-        // the right by default.
-        final var rot =
-                -m_rotLimiter.calculate(MathUtil.applyDeadband(m_controller.getX(), 0.02))
-                        * DriveTrain.kMaxAngularSpeed;
+        if (!autoFlag) {
+            resetRobotPoseAndGyro();
+        }
+        this.autoFlag = false;
+    }
 
-        m_swerve.drive(xSpeed, ySpeed, rot, fieldRelative);
+    @Override
+    public void disabledInit() {
+        CommandScheduler.getInstance().cancelAll();
+    }
+
+    private void initializeAllSubsystems() {
+        DriveTrain.getInstance();
+    }
+
+    private void resetRobotPoseAndGyro() {
+        Gyro.getInstance().resetGyro();
+        DriveTrain.getInstance().getPoseEstimator().resetPose(new Pose2d(5, 7, Gyro.getInstance().getRotation2d()));
+        DriveTrain.getInstance().drive(0, 0, 0, true);
+    }
+
+    private void initializeDefaultCommands() {
+        CommandScheduler.getInstance().setDefaultCommand(DriveTrain.getInstance(), new SwerveControl());
     }
 }
+
