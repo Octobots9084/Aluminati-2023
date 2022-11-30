@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.octobots.robot;
+package org.octobots.robot.util;
 
 /**
  * <p>Stores a PIDF configuration through loop gain constants.</p>

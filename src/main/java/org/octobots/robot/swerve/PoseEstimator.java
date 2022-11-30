@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.octobots.robot;
+package org.octobots.robot.swerve;
 
 import edu.wpi.first.math.MatBuilder;
 import edu.wpi.first.math.Nat;
@@ -34,7 +34,6 @@ import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.wpilibj.Timer;
 import org.octobots.robot.Gyro;
-import org.octobots.robot.SwerveModule;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;

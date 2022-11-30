@@ -18,9 +18,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.octobots.robot;
+package org.octobots.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import org.octobots.robot.ControlMap;
+import org.octobots.robot.swerve.DriveTrain;
+import org.octobots.robot.Gyro;
+import org.octobots.robot.util.MathUtil;
 
 public class SwerveControl extends CommandBase {
     private final DriveTrain driveTrain;
