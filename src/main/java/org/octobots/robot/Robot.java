@@ -57,13 +57,19 @@ public class Robot extends TimedRobot {
         threader.scheduleWithFixedDelay(new Thread(() -> Gyro.getInstance().updateRotation2D()), 0, 5, TimeUnit.MILLISECONDS);
         LiveWindow.disableAllTelemetry();
         LiveWindow.setEnabled(false);
+        //custom slower loop to run swerve optimized angle
+        addPeriodic(this::swervePeriodic, 0.05, 0.01);
         SmartDashboard.putNumber("period", getPeriod());
+
     }
 
     @Override
     public void robotPeriodic() {
-        DriveTrain.getInstance().updateSwerveStates();
         CommandScheduler.getInstance().run();
+    }
+
+    public void swervePeriodic() {
+        DriveTrain.getInstance().updateSwerveStates();
     }
 
     @Override
@@ -90,7 +96,6 @@ public class Robot extends TimedRobot {
 
     private void resetRobotPoseAndGyro() {
         Gyro.getInstance().resetGyro();
-        DriveTrain.getInstance().getPoseEstimator().resetPose(new Pose2d(5, 7, Gyro.getInstance().getRotation2d()));
         DriveTrain.getInstance().drive(0, 0, 0, true);
     }
 

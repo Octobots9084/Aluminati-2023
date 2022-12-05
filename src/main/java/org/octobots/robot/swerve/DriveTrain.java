@@ -67,7 +67,6 @@ public class DriveTrain extends SubsystemBase {
     private final SwerveDriveKinematics swerveDriveKinematics;
     private final HolonomicDriveController holonomicDriveController;
     //Pose Estimators
-    private final PoseEstimator swerveDrivePoseEstimator;
     //Logging
     //shuffleboard lmao
     //Flags
@@ -93,8 +92,6 @@ public class DriveTrain extends SubsystemBase {
         this.swerveDriveKinematics = new SwerveDriveKinematics(
                 swervePosition[0], swervePosition[1], swervePosition[2], swervePosition[3]
         );
-
-        this.swerveDrivePoseEstimator = new PoseEstimator(gyro, swerveDriveKinematics, swerveModules);
 
         this.holonomicDriveController = new HolonomicDriveController(
                 //PID FOR X DISTANCE (kp of 1 = 1m/s extra velocity / m of error)
@@ -186,15 +183,6 @@ public class DriveTrain extends SubsystemBase {
         return this.swerveDriveKinematics;
     }
 
-    public ChassisSpeeds getChassisSpeeds() {
-        return swerveDriveKinematics.toChassisSpeeds(
-                swerveModules[0].getState(),
-                swerveModules[1].getState(),
-                swerveModules[2].getState(),
-                swerveModules[3].getState()
-        );
-    }
-
     public double getTargetRotationAngle() {
         return targetRotationAngle;
     }
@@ -203,9 +191,6 @@ public class DriveTrain extends SubsystemBase {
         this.targetRotationAngle = targetRotationAngle;
     }
 
-    public PoseEstimator getPoseEstimator() {
-        return swerveDrivePoseEstimator;
-    }
 
     public SwerveModule[] getSwerveModules() {
         return swerveModules;

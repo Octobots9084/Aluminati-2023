@@ -31,7 +31,9 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import org.octobots.robot.ControlMap;
 import org.octobots.robot.MotorIDs;
 import org.octobots.robot.util.*;
 
@@ -76,7 +78,7 @@ public class SwerveModule {
 
     // Thread-Safe angles to reduce CAN usage
     private final AtomicReference<Double> swerveAngle = new AtomicReference<>(0.0);
-    private final AtomicReference<Double> swerveSpeed = new AtomicReference<>(0.0);
+//    private final AtomicReference<Double> swerveSpeed = new AtomicReference<>(0.0);
 
     /**
      * Constructs a SwerveModule.
@@ -90,6 +92,7 @@ public class SwerveModule {
         // Steer Motor
         this.steeringMotor = new WPI_TalonSRX(steeringMotorChannel);
         TM_MM_PID.setTolerance(0);
+        //TODO:change to absolute encoder
         MotorUtil.setupMotionMagic(FeedbackDevice.PulseWidthEncodedPosition, TM_MM_PID, TM_MM_CONFIG, steeringMotor);
         steeringMotor.setSensorPhase(false);
         steeringMotor.setInverted(true);
@@ -122,9 +125,9 @@ public class SwerveModule {
         }
     }
 
-    public double getAbsoluteAngle() {
-        return SwerveUtil.clampAngle(getAngle());
-    }
+//    public double getAbsoluteAngle() {
+//        return SwerveUtil.clampAngle(getAngle());
+//    }
 
     public double getAngle() {
         return swerveAngle.get();
@@ -146,13 +149,14 @@ public class SwerveModule {
         return driveMotor.getSelectedSensorPosition();
     }
 
-    public double getVelocity() {
-        return swerveSpeed.get();
-    }
 
-    public SwerveModuleState getState() {
-        return new SwerveModuleState(getVelocity(), new Rotation2d(SwerveUtil.clampAngle(getAngle())));
-    }
+//    public double getVelocity() {
+//        return swerveSpeed.get();
+//    }
+
+//    public SwerveModuleState getState() {
+//        return new SwerveModuleState(getVelocity(), new Rotation2d(SwerveUtil.clampAngle(getAngle())));
+//    }
 
     public void setDriveMotorVelocity(double metersPerSecond) {
         SmartDashboard.putNumber("target velocity " + driveMotor.getDeviceID(), metersPerSecond);
@@ -166,7 +170,7 @@ public class SwerveModule {
 
     public void updateSwerveInformation() {
         swerveAngle.set((steeringMotor.getSelectedSensorPosition() - zeroTicks) * STEER_MOTOR_TICK_TO_ANGLE);
-        swerveSpeed.set(driveMotor.getSensorCollection().getIntegratedSensorVelocity() * DRIVE_MOTOR_TICK_TO_SPEED);
+//        swerveSpeed.set(driveMotor.getSensorCollection().getIntegratedSensorVelocity() * DRIVE_MOTOR_TICK_TO_SPEED);
     }
 
     /**
