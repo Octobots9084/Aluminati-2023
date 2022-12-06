@@ -93,7 +93,7 @@ public class SwerveModule {
         this.steeringMotor = new WPI_TalonSRX(steeringMotorChannel);
         TM_MM_PID.setTolerance(0);
         //TODO:change to absolute encoder
-        MotorUtil.setupMotionMagic(FeedbackDevice.PulseWidthEncodedPosition, TM_MM_PID, TM_MM_CONFIG, steeringMotor);
+        MotorUtil.setupMotionMagic(FeedbackDevice.CTRE_MagEncoder_Absolute, TM_MM_PID, TM_MM_CONFIG, steeringMotor);
         steeringMotor.setSensorPhase(false);
         steeringMotor.setInverted(true);
         steeringMotor.setNeutralMode(NeutralMode.Coast);
