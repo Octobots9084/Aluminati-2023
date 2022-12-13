@@ -1,5 +1,5 @@
 /*
- * This file is part of GradleRIO-Redux-example, licensed under the GNU General Public License (GPLv3).
+ * This file is part of OctoSwerve-Revamp, licensed under the GNU General Public License (GPLv3).
  *
  * Copyright (c) Octobots <https://github.com/Octobots9084>
  * Copyright (c) contributors
@@ -23,7 +23,7 @@ package org.octobots.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import org.octobots.robot.ControlMap;
 import org.octobots.robot.swerve.DriveTrain;
-import org.octobots.robot.Gyro;
+import org.octobots.robot.util.Gyro;
 import org.octobots.robot.util.MathUtil;
 
 public class SwerveControl extends CommandBase {

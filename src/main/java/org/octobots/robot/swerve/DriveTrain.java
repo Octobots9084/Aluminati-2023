@@ -1,5 +1,5 @@
 /*
- * This file is part of GradleRIO-Redux-example, licensed under the GNU General Public License (GPLv3).
+ * This file is part of OctoSwerve-Revamp, licensed under the GNU General Public License (GPLv3).
  *
  * Copyright (c) Octobots <https://github.com/Octobots9084>
  * Copyright (c) contributors
@@ -30,9 +30,10 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import org.octobots.robot.Gyro;
+import org.octobots.robot.util.Gyro;
 import org.octobots.robot.MotorIDs;
 import org.octobots.robot.util.MathUtil;
+import org.octobots.robot.util.PoseEstimator;
 
 
 /**
@@ -67,8 +68,8 @@ public class DriveTrain extends SubsystemBase {
     private final SwerveDriveKinematics swerveDriveKinematics;
     private final HolonomicDriveController holonomicDriveController;
     //Pose Estimators
+    private final PoseEstimator swerveDrivePoseEstimator;
     //Logging
-    //shuffleboard lmao
     //Flags
     private boolean isFieldCentric = true;
     private boolean useDriverAssist = false;
@@ -93,6 +94,8 @@ public class DriveTrain extends SubsystemBase {
                 swervePosition[0], swervePosition[1], swervePosition[2], swervePosition[3]
         );
 
+        this.swerveDrivePoseEstimator = new PoseEstimator(gyro, swerveDriveKinematics, swerveModules);
+
         this.holonomicDriveController = new HolonomicDriveController(
                 //PID FOR X DISTANCE (kp of 1 = 1m/s extra velocity / m of error)
                 new PIDController(1.2, 0.001, 0),
@@ -102,6 +105,7 @@ public class DriveTrain extends SubsystemBase {
                 new ProfiledPIDController(0.1, 0.012, 0,
                         new TrapezoidProfile.Constraints(MAX_ANGULAR_SPEED * 5, MAX_ANGULAR_ACCELERATION * 5))
         );
+
     }
 
     /**
@@ -114,7 +118,7 @@ public class DriveTrain extends SubsystemBase {
      */
     public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(
-                fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(-xSpeed, -ySpeed, rot, gyro.getRotation2d())
+                fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, gyro.getRotation2d())
                         : new ChassisSpeeds(xSpeed, ySpeed, rot)
         );
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, MAX_SPEED);
@@ -183,6 +187,15 @@ public class DriveTrain extends SubsystemBase {
         return this.swerveDriveKinematics;
     }
 
+    public ChassisSpeeds getChassisSpeeds() {
+        return swerveDriveKinematics.toChassisSpeeds(
+                swerveModules[0].getState(),
+                swerveModules[1].getState(),
+                swerveModules[2].getState(),
+                swerveModules[3].getState()
+        );
+    }
+
     public double getTargetRotationAngle() {
         return targetRotationAngle;
     }
@@ -191,6 +204,9 @@ public class DriveTrain extends SubsystemBase {
         this.targetRotationAngle = targetRotationAngle;
     }
 
+    public PoseEstimator getPoseEstimator() {
+        return swerveDrivePoseEstimator;
+    }
 
     public SwerveModule[] getSwerveModules() {
         return swerveModules;
@@ -211,6 +227,8 @@ public class DriveTrain extends SubsystemBase {
     public void setMinTurnSpeed(double minTurnSpeed) {
         this.minTurnSpeed = minTurnSpeed;
     }
+
+
 
     public void updateSwerveStates() {
         for (var sm : swerveModules) {

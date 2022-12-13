@@ -1,7 +1,7 @@
 /*
- * This file is part of GradleRIO-Redux-example, licensed under the GNU General Public License (GPLv3).
+ * This file is part of MrT-2022, licensed under the GNU General Public License (GPLv3).
  *
- * Copyright (c) Octobots <https://github.com/Octobots9084>
+ * Copyright (c) Riviera Robotics <https://github.com/Team5818>
  * Copyright (c) contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -22,14 +22,18 @@ package org.octobots.robot;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.octobots.robot.commands.SwerveControl;
 import org.octobots.robot.swerve.DriveTrain;
+import org.octobots.robot.util.DrivePathweaverPath;
+import org.octobots.robot.util.Gyro;
+
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -52,30 +56,33 @@ public class Robot extends TimedRobot {
         initializeAllSubsystems();
         initializeDefaultCommands();
         Gyro.getInstance().resetGyro();
+
+        var drive = Shuffleboard.getTab("Drive");
+        drive.add(field2d)
+                .withSize(6, 4)
+                .withPosition(0, 0)
+                .withWidget("Field");
+
+        // Initialize custom loops
+
         resetRobotPoseAndGyro();
         var threader = Executors.newSingleThreadScheduledExecutor();
         threader.scheduleWithFixedDelay(new Thread(() -> Gyro.getInstance().updateRotation2D()), 0, 5, TimeUnit.MILLISECONDS);
         LiveWindow.disableAllTelemetry();
         LiveWindow.setEnabled(false);
-        //custom slower loop to run swerve optimized angle
-        addPeriodic(this::swervePeriodic, 0.05, 0.01);
-        SmartDashboard.putNumber("period", getPeriod());
-
+        this.chooser = new SendableChooser<>();
+        chooser.addOption("Unnamed", new DrivePathweaverPath("Unnamed"));
     }
 
     @Override
     public void robotPeriodic() {
-        CommandScheduler.getInstance().run();
-    }
-
-    public void swervePeriodic() {
         DriveTrain.getInstance().updateSwerveStates();
+        CommandScheduler.getInstance().run();
     }
 
     @Override
     public void teleopInit() {
         CommandScheduler.getInstance().cancelAll();
-//        new ButtonConfiguration().initTeleop();
         initializeAllSubsystems();
         initializeDefaultCommands();
 
@@ -83,6 +90,23 @@ public class Robot extends TimedRobot {
             resetRobotPoseAndGyro();
         }
         this.autoFlag = false;
+    }
+
+    @Override
+    public void autonomousInit() {
+        this.autoFlag = true;
+        initializeAllSubsystems();
+        initializeDefaultCommands();
+
+        resetRobotPoseAndGyro();
+        Robot.autoStartTime = Timer.getFPGATimestamp();
+        try {
+            CommandScheduler.getInstance().schedule(new DrivePathweaverPath("Sqore"));
+        } catch (Exception ignored) {
+//            // If this fails we need robot code to still try to work in teleop,
+//            // so unless debugging there is no case where we want this to throw anything.
+        }
+
     }
 
     @Override
@@ -96,6 +120,7 @@ public class Robot extends TimedRobot {
 
     private void resetRobotPoseAndGyro() {
         Gyro.getInstance().resetGyro();
+        DriveTrain.getInstance().getPoseEstimator().resetPose(new Pose2d(5, 7, Gyro.getInstance().getRotation2d()));
         DriveTrain.getInstance().drive(0, 0, 0, true);
     }
 
@@ -103,4 +128,3 @@ public class Robot extends TimedRobot {
         CommandScheduler.getInstance().setDefaultCommand(DriveTrain.getInstance(), new SwerveControl());
     }
 }
-

@@ -1,5 +1,5 @@
 /*
- * This file is part of GradleRIO-Redux-example, licensed under the GNU General Public License (GPLv3).
+ * This file is part of OctoSwerve-Revamp, licensed under the GNU General Public License (GPLv3).
  *
  * Copyright (c) Octobots <https://github.com/Octobots9084>
  * Copyright (c) contributors
@@ -78,7 +78,7 @@ public class SwerveModule {
 
     // Thread-Safe angles to reduce CAN usage
     private final AtomicReference<Double> swerveAngle = new AtomicReference<>(0.0);
-//    private final AtomicReference<Double> swerveSpeed = new AtomicReference<>(0.0);
+    private final AtomicReference<Double> swerveSpeed = new AtomicReference<>(0.0);
 
     /**
      * Constructs a SwerveModule.
@@ -89,10 +89,10 @@ public class SwerveModule {
      */
     public SwerveModule(int driveMotorChannel, int steeringMotorChannel, double zeroTicks) {
         this.zeroTicks = zeroTicks;
+
         // Steer Motor
         this.steeringMotor = new WPI_TalonSRX(steeringMotorChannel);
         TM_MM_PID.setTolerance(0);
-        //TODO:change to absolute encoder
         MotorUtil.setupMotionMagic(FeedbackDevice.CTRE_MagEncoder_Absolute, TM_MM_PID, TM_MM_CONFIG, steeringMotor);
         steeringMotor.setSensorPhase(false);
         steeringMotor.setInverted(true);
@@ -110,8 +110,8 @@ public class SwerveModule {
         StatusFrameDemolisher.demolishStatusFrames(driveMotor, false);
 
         // Current Limits
-        this.driveMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 35, 35, 0.05)); //How much current the motor can use (outputwise)
-        this.driveMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 37, 37, 0.05)); //How much current can be supplied to the motor
+        this.driveMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 50, 50, 0.05)); //How much current the motor can use (outputwise)
+        this.driveMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 53, 53, 0.05)); //How much current can be supplied to the motor
 
         this.steeringMotor.enableCurrentLimit(true);
         this.steeringMotor.configPeakCurrentDuration(0);
@@ -125,9 +125,9 @@ public class SwerveModule {
         }
     }
 
-//    public double getAbsoluteAngle() {
-//        return SwerveUtil.clampAngle(getAngle());
-//    }
+    public double getAbsoluteAngle() {
+        return SwerveUtil.clampAngle(getAngle());
+    }
 
     public double getAngle() {
         return swerveAngle.get();
@@ -149,28 +149,25 @@ public class SwerveModule {
         return driveMotor.getSelectedSensorPosition();
     }
 
+    public double getVelocity() {
+        return swerveSpeed.get();
+    }
 
-//    public double getVelocity() {
-//        return swerveSpeed.get();
-//    }
-
-//    public SwerveModuleState getState() {
-//        return new SwerveModuleState(getVelocity(), new Rotation2d(SwerveUtil.clampAngle(getAngle())));
-//    }
+    public SwerveModuleState getState() {
+        return new SwerveModuleState(getVelocity(), new Rotation2d(SwerveUtil.clampAngle(getAngle())));
+    }
 
     public void setDriveMotorVelocity(double metersPerSecond) {
-        SmartDashboard.putNumber("target velocity " + driveMotor.getDeviceID(), metersPerSecond);
         driveMotor.set(TalonFXControlMode.Velocity, convertVelocityToTicksPer100ms(metersPerSecond));
     }
 
     public void setSteeringMotorAngle(double angleInRad) {
-        SmartDashboard.putNumber("target Angle" + driveMotor.getDeviceID(), angleInRad);
         steeringMotor.set(ControlMode.Position, angleInRad);
     }
 
     public void updateSwerveInformation() {
         swerveAngle.set((steeringMotor.getSelectedSensorPosition() - zeroTicks) * STEER_MOTOR_TICK_TO_ANGLE);
-//        swerveSpeed.set(driveMotor.getSensorCollection().getIntegratedSensorVelocity() * DRIVE_MOTOR_TICK_TO_SPEED);
+        swerveSpeed.set(driveMotor.getSensorCollection().getIntegratedSensorVelocity() * DRIVE_MOTOR_TICK_TO_SPEED);
     }
 
     /**
