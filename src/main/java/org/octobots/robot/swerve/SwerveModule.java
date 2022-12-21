@@ -20,7 +20,6 @@
 
 package org.octobots.robot.swerve;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
@@ -28,12 +27,11 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.SparkMaxAlternateEncoder;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import org.octobots.robot.ControlMap;
 import org.octobots.robot.MotorIDs;
 import org.octobots.robot.util.*;
 
@@ -50,16 +48,16 @@ public class SwerveModule {
     // Controller Constants
     private static final double MAX_TURN_ACCELERATION = 20000; // Rad/s
     private static final double MAX_TURN_VELOCITY = 20000; // Rad/s
+    private static final double MIN_TURN_VELOCITY = 18000; // Rad/s
+    private static final double ALLOWED_CLOSED_LOOP_ERROR = 0.1;
     private static final int TIMEOUT_MS = 60;
 
     // Turn Motor Motion Magic
-    private static final MotionMagicConfig TM_MM_CONFIG = new MotionMagicConfig(
-            new ArrayList<>(), true,
-            MAX_TURN_VELOCITY, MAX_TURN_ACCELERATION,
-            600, 0,
-            TIMEOUT_MS, 10
+    private static final SmartMotionConfig TM_SM_CONFIG = new SmartMotionConfig(
+            true,
+            MAX_TURN_VELOCITY, MIN_TURN_VELOCITY, MAX_TURN_ACCELERATION, ALLOWED_CLOSED_LOOP_ERROR
     );
-    private static final PIDConfig TM_MM_PID = new PIDConfig(3.4, 0.01, 0, 0);
+    private static final PIDConfig TM_SM_PID = new PIDConfig(3.4, 0.01, 0, 0);
 
     // Drive Motor Motion Magic
     private static final MotionMagicConfig DM_MM_CONFIG = new MotionMagicConfig(
@@ -74,7 +72,7 @@ public class SwerveModule {
 
     // Motors
     private final WPI_TalonFX driveMotor;
-    private final WPI_TalonSRX steeringMotor;
+    private final CANSparkMax steeringMotor;
 
     // Thread-Safe angles to reduce CAN usage
     private final AtomicReference<Double> swerveAngle = new AtomicReference<>(0.0);
@@ -91,13 +89,12 @@ public class SwerveModule {
         this.zeroTicks = zeroTicks;
 
         // Steer Motor
-        this.steeringMotor = new WPI_TalonSRX(steeringMotorChannel);
-        TM_MM_PID.setTolerance(0);
-        MotorUtil.setupMotionMagic(FeedbackDevice.CTRE_MagEncoder_Absolute, TM_MM_PID, TM_MM_CONFIG, steeringMotor);
-        steeringMotor.setSensorPhase(false);
-        steeringMotor.setInverted(true);
-        steeringMotor.setNeutralMode(NeutralMode.Coast);
-        StatusFrameDemolisher.demolishStatusFrames(steeringMotor, false);
+        this.steeringMotor = new CANSparkMax(steeringMotorChannel, CANSparkMaxLowLevel.MotorType.kBrushless);
+        TM_SM_PID.setTolerance(0);
+        this.steeringMotor.restoreFactoryDefaults();
+        SparkMaxEncoderType steeringMotorEncoderType = SparkMaxEncoderType.alternate;
+        MotorUtil.setupSmartMotion(steeringMotorEncoderType, TM_SM_PID, TM_SM_CONFIG, SparkMaxAlternateEncoder.Type.kQuadrature,1, steeringMotor);
+
 
         // Drive Motor
         this.driveMotor = new WPI_TalonFX(driveMotorChannel, MotorIDs.CANFD_NAME);
@@ -113,10 +110,7 @@ public class SwerveModule {
         this.driveMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 50, 50, 0.05)); //How much current the motor can use (outputwise)
         this.driveMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 53, 53, 0.05)); //How much current can be supplied to the motor
 
-        this.steeringMotor.enableCurrentLimit(true);
-        this.steeringMotor.configPeakCurrentDuration(0);
-        this.steeringMotor.configContinuousCurrentLimit(20);
-        this.steeringMotor.configPeakCurrentLimit(21);
+        this.steeringMotor.setSmartCurrentLimit(21, 20);
 
         try {
             Thread.sleep(200);
@@ -142,7 +136,7 @@ public class SwerveModule {
     }
 
     public double getPosTicks() {
-        return steeringMotor.getSelectedSensorPosition();
+        return steeringMotor.getEncoder().getPosition();
     }
 
     public double getDriveTicks() {
@@ -162,11 +156,11 @@ public class SwerveModule {
     }
 
     public void setSteeringMotorAngle(double angleInRad) {
-        steeringMotor.set(ControlMode.Position, angleInRad);
+        steeringMotor.getPIDController().setReference(angleInRad, CANSparkMax.ControlType.kSmartMotion);
     }
 
     public void updateSwerveInformation() {
-        swerveAngle.set((steeringMotor.getSelectedSensorPosition() - zeroTicks) * STEER_MOTOR_TICK_TO_ANGLE);
+        swerveAngle.set((steeringMotor.getEncoder().getPosition() - zeroTicks) * STEER_MOTOR_TICK_TO_ANGLE);
         swerveSpeed.set(driveMotor.getSensorCollection().getIntegratedSensorVelocity() * DRIVE_MOTOR_TICK_TO_SPEED);
     }
 

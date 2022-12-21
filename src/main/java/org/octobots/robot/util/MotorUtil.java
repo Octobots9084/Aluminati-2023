@@ -27,6 +27,10 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.BaseTalon;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxAlternateEncoder;
+import com.revrobotics.SparkMaxPIDController;
 
 /**
  * Utility methods relating to robot motor movement.
@@ -107,6 +111,38 @@ public class MotorUtil {
             if (mmConfig.getMaxAccel() != null) {
                 motor.configMotionAcceleration(mmConfig.getMaxAccel());
             }
+        }
+    }
+
+    public static void setupSmartMotion(SparkMaxEncoderType encoderType, PIDConfig pidConfig, SmartMotionConfig smConfig, SparkMaxAlternateEncoder.Type kAltEncType, int kCPR, CANSparkMax... motors) {
+        for (CANSparkMax motor : motors) {
+            if (smConfig.doReset()) {
+                motor.restoreFactoryDefaults();
+            }
+
+            SparkMaxPIDController m_pidController = motor.getPIDController();
+
+            // Default encoder
+            RelativeEncoder m_encoder = motor.getEncoder();
+
+            // Change encoder to alternate
+            if (encoderType==SparkMaxEncoderType.alternate) {
+                m_encoder = motor.getAlternateEncoder(kAltEncType, kCPR);
+            }
+
+            m_pidController.setFeedbackDevice(m_encoder);
+
+            // set PID coefficients
+            m_pidController.setP(pidConfig.kP);
+            m_pidController.setI(pidConfig.kI);
+            m_pidController.setD(pidConfig.kD);
+            m_pidController.setOutputRange(-1, 1);
+
+            int smartMotionSlot = 0;
+            m_pidController.setSmartMotionMaxVelocity(smConfig.getMaxVel(), smartMotionSlot);
+            m_pidController.setSmartMotionMinOutputVelocity(smConfig.getMinVel(), smartMotionSlot);
+            m_pidController.setSmartMotionMaxAccel(smConfig.getMaxAccel(), smartMotionSlot);
+            m_pidController.setSmartMotionAllowedClosedLoopError(smConfig.getClosedLoopAllowedError(), smartMotionSlot);
         }
     }
 
