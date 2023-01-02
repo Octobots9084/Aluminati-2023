@@ -93,7 +93,7 @@ public class SwerveModule {
         TM_SM_PID.setTolerance(0);
         this.steeringMotor.restoreFactoryDefaults();
         SparkMaxEncoderType steeringMotorEncoderType = SparkMaxEncoderType.alternate;
-        MotorUtil.setupSmartMotion(steeringMotorEncoderType, TM_SM_PID, TM_SM_CONFIG, SparkMaxAlternateEncoder.Type.kQuadrature,1, steeringMotor);
+        MotorUtil.setupSmartMotion(steeringMotorEncoderType, TM_SM_PID, TM_SM_CONFIG, SparkMaxAlternateEncoder.Type.kQuadrature,ENCODER_RESOLUTION, steeringMotor);
 
 
         // Drive Motor
@@ -136,7 +136,7 @@ public class SwerveModule {
     }
 
     public double getPosTicks() {
-        return steeringMotor.getEncoder().getPosition();
+        return steeringMotor.getAlternateEncoder(SparkMaxAlternateEncoder.Type.kQuadrature, ENCODER_RESOLUTION).getPosition();
     }
 
     public double getDriveTicks() {
