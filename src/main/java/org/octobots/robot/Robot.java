@@ -1,7 +1,7 @@
 /*
- * This file is part of MrT-2022, licensed under the GNU General Public License (GPLv3).
+ * This file is part of OctoSwerve-Revamp, licensed under the GNU General Public License (GPLv3).
  *
- * Copyright (c) Riviera Robotics <https://github.com/Team5818>
+ * Copyright (c) Octobots <https://github.com/Octobots9084>
  * Copyright (c) contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -33,7 +33,6 @@ import org.octobots.robot.commands.SwerveControl;
 import org.octobots.robot.swerve.DriveTrain;
 import org.octobots.robot.util.DrivePathweaverPath;
 import org.octobots.robot.util.Gyro;
-
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -103,8 +102,8 @@ public class Robot extends TimedRobot {
         try {
             CommandScheduler.getInstance().schedule(new DrivePathweaverPath("Sqore"));
         } catch (Exception ignored) {
-//            // If this fails we need robot code to still try to work in teleop,
-//            // so unless debugging there is no case where we want this to throw anything.
+            // If this fails we need robot code to still try to work in teleop,
+            // so unless debugging there is no case where we want this to throw anything.
         }
 
     }

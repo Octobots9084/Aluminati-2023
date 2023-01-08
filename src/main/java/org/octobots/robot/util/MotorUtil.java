@@ -116,10 +116,13 @@ public class MotorUtil {
 
     public static void setupSmartMotion(SparkMaxEncoderType encoderType, PIDConfig pidConfig, SmartMotionConfig smConfig, SparkMaxAlternateEncoder.Type kAltEncType, int kCPR, CANSparkMax... motors) {
         for (CANSparkMax motor : motors) {
+
+            // Reset config to factory defaults
             if (smConfig.doReset()) {
                 motor.restoreFactoryDefaults();
             }
 
+            // Get PID controller
             SparkMaxPIDController m_pidController = motor.getPIDController();
 
             // Default encoder
@@ -138,6 +141,7 @@ public class MotorUtil {
             m_pidController.setD(pidConfig.kD);
             m_pidController.setOutputRange(-1, 1);
 
+            // Config smart motion settings
             int smartMotionSlot = 0;
             m_pidController.setSmartMotionMaxVelocity(smConfig.getMaxVel(), smartMotionSlot);
             m_pidController.setSmartMotionMinOutputVelocity(smConfig.getMinVel(), smartMotionSlot);

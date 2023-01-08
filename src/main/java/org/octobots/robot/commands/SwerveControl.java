@@ -31,6 +31,7 @@ public class SwerveControl extends CommandBase {
     private final Gyro gyro;
 
     public SwerveControl() {
+        // Initialization
         this.driveTrain = DriveTrain.getInstance();
         this.gyro = Gyro.getInstance();
         addRequirements(this.driveTrain);
@@ -43,13 +44,18 @@ public class SwerveControl extends CommandBase {
 
     @Override
     public void execute() {
+        // Link joysticks
         var leftJoystick = ControlMap.DRIVER_LEFT;
         var rightJoystick = ControlMap.DRIVER_RIGHT;
+
+        // Get speeds from joysticks
         var xSpeed = MathUtil.fitDeadband(leftJoystick.getY()) * DriveTrain.MAX_TURN_SPEED;
         var ySpeed = MathUtil.fitDeadband(leftJoystick.getX()) * DriveTrain.MAX_TURN_SPEED;
 
+        // Calculate the deadband
         var rot = MathUtil.fitDeadband(-rightJoystick.getX()) * DriveTrain.MAX_ANGULAR_SPEED;
 
+        // Check driver assist and drive
         if (rot == 0 && driveTrain.useDriverAssist()) {
             driveTrain.drive(xSpeed, ySpeed, driveTrain.getRotationSpeed(), driveTrain.getFieldCentric());
         } else {

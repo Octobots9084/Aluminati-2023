@@ -1,3 +1,23 @@
+/*
+ * This file is part of OctoSwerve-Revamp, licensed under the GNU General Public License (GPLv3).
+ *
+ * Copyright (c) Octobots <https://github.com/Octobots9084>
+ * Copyright (c) contributors
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package org.octobots.robot.util;
 
 public class SmartMotionConfig {
@@ -7,15 +27,6 @@ public class SmartMotionConfig {
     private Double maxAccel;
     private Double closedLoopAllowedError;
 
-    /**
-     * Constructs a Motion Magic configuration with the specified constants.
-     *
-     * @param reset reset the controller to factory default if true.
-     * @param maxVel maximum velocity of Motion Magic controller in ticks per 100ms.
-     * @param maxAccel maximum acceleration of Motion Magic controller in ticks per 100ms.
-     *
-     * @since 0.3.0
-     */
     public SmartMotionConfig(boolean reset,
                              Double maxVel, Double minVel, Double maxAccel, Double closedLoopAllowedError) {
         this.reset = reset;
@@ -39,16 +50,6 @@ public class SmartMotionConfig {
     public SmartMotionConfig() {
         this(false, null, null, null, null);
     }
-
-    /**
-     * <p>Constructs a Motion Magic configuration with the specified constants.
-     * Initializes timeout and period to 10ms each.</p>
-     *
-     * <p>Overload for {@link #SmartMotionConfig()}.</p>
-     *
-     * @see #SmartMotionConfig()
-     * @since 0.3.0
-     */
 
     public SmartMotionConfig setReset(boolean reset) {
         this.reset = reset;

@@ -30,8 +30,8 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import org.octobots.robot.util.Gyro;
 import org.octobots.robot.MotorIDs;
+import org.octobots.robot.util.Gyro;
 import org.octobots.robot.util.MathUtil;
 import org.octobots.robot.util.PoseEstimator;
 
@@ -89,6 +89,7 @@ public class DriveTrain extends SubsystemBase {
         swerveModules[2] = new SwerveModule(MotorIDs.BACK_LEFT_DRIVE, MotorIDs.BACK_LEFT_STEER, -8075 + 2048);
         swerveModules[3] = new SwerveModule(MotorIDs.BACK_RIGHT_DRIVE, MotorIDs.BACK_RIGHT_STEER, 173 + 2048);
 
+        // Setup gyro and pose estimator
         this.gyro = Gyro.getInstance();
         this.swerveDriveKinematics = new SwerveDriveKinematics(
                 swervePosition[0], swervePosition[1], swervePosition[2], swervePosition[3]
@@ -117,11 +118,14 @@ public class DriveTrain extends SubsystemBase {
      * @param fieldRelative Whether the provided x and y speeds are relative to the field.
      */
     public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
+        // Calculate swerve states
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(
                 fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, gyro.getRotation2d())
                         : new ChassisSpeeds(xSpeed, ySpeed, rot)
         );
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, MAX_SPEED);
+
+        // Set states
         if (Math.abs(xSpeed) <= 0.05 && Math.abs(ySpeed) <= 0.05 && rot == 0) {
             for (int i = 0; i < swerveModuleStates.length; i++) {
                 swerveModules[i].setDesiredState(new SwerveModuleState(0, new Rotation2d(0)));
@@ -152,6 +156,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void setSwerveModuleAngle(double angle) {
+        // Set swerve states with angle
         for (var m : swerveModules) {
             m.setDesiredState(new SwerveModuleState(0, new Rotation2d(angle)));
         }

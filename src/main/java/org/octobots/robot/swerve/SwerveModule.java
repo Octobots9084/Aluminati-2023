@@ -52,7 +52,7 @@ public class SwerveModule {
     private static final double ALLOWED_CLOSED_LOOP_ERROR = 0.1;
     private static final int TIMEOUT_MS = 60;
 
-    // Turn Motor Motion Magic
+    // Turn Motor Smart Motion
     private static final SmartMotionConfig TM_SM_CONFIG = new SmartMotionConfig(
             true,
             MAX_TURN_VELOCITY, MIN_TURN_VELOCITY, MAX_TURN_ACCELERATION, ALLOWED_CLOSED_LOOP_ERROR
@@ -170,6 +170,7 @@ public class SwerveModule {
      * @param state Desired state with speed and angle.
      */
     public void setDesiredState(SwerveModuleState state) {
+        // Optimize the swerve state and set it
         var optimizedAngle = SwerveUtil.optimizeSwerveStates(state, getAngle());
         setDriveMotorVelocity(optimizedAngle.speedMetersPerSecond);
         setSteeringMotorAngle(convertAngleToTick(optimizedAngle.angle.getRadians()));
