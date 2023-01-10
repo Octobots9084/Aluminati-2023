@@ -160,7 +160,7 @@ public class SwerveModule {
     }
 
     public void updateSwerveInformation() {
-        swerveAngle.set((steeringMotor.getAlternateEncoder(4096).getPosition() - zeroTicks) * STEER_MOTOR_TICK_TO_ANGLE);
+        swerveAngle.set((steeringMotor.getAlternateEncoder(ENCODER_RESOLUTION).getPosition() - zeroTicks) * STEER_MOTOR_TICK_TO_ANGLE);
         swerveSpeed.set(driveMotor.getSensorCollection().getIntegratedSensorVelocity() * DRIVE_MOTOR_TICK_TO_SPEED);
     }
 
