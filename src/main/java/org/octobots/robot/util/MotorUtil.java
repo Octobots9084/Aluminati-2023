@@ -114,7 +114,7 @@ public class MotorUtil {
         }
     }
 
-    public static void setupSmartMotion(SparkMaxEncoderType encoderType, PIDConfig pidConfig, SmartMotionConfig smConfig, SparkMaxAlternateEncoder.Type kAltEncType, int kCPR, CANSparkMax... motors) {
+    public static void setupSmartMotion(SparkMaxEncoderType encoderType, PIDConfig pidConfig, SmartMotionConfig smConfig, int kCPR, CANSparkMax... motors) {
         for (CANSparkMax motor : motors) {
 
             // Reset config to factory defaults
@@ -130,7 +130,7 @@ public class MotorUtil {
 
             // Change encoder to alternate
             if (encoderType==SparkMaxEncoderType.alternate) {
-                m_encoder = motor.getAlternateEncoder(kAltEncType, kCPR);
+                m_encoder = motor.getAlternateEncoder(SparkMaxAlternateEncoder.Type.kQuadrature, kCPR);
             }
 
             m_pidController.setFeedbackDevice(m_encoder);
