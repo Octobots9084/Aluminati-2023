@@ -29,7 +29,6 @@ import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
-import com.revrobotics.SparkMaxAlternateEncoder;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.Encoder;
@@ -43,8 +42,9 @@ public class SwerveModule {
     // Physical Constants
     private static final double WHEEL_RADIUS = 0.03915;
     private static final int ENCODER_RESOLUTION = 42;
-    private static final double STEER_MOTOR_TICK_TO_ANGLE = 2 * Math.PI / ENCODER_RESOLUTION; // radians
     private static final double GEARING = 11.0 / 40.0;
+    private static final double GEARING_TURN_MOTORS = 1.0 / 20.0;
+    private static final double STEER_MOTOR_TICK_TO_ANGLE = 2 * Math.PI / ENCODER_RESOLUTION / GEARING_TURN_MOTORS; // radians
     private static final double DRIVE_MOTOR_TICK_TO_SPEED = 10 * GEARING * (2 * Math.PI * WHEEL_RADIUS) / 2048; // m/s
     // Controller Constants
     private static final double MAX_TURN_ACCELERATION = 20000; // Rad/s

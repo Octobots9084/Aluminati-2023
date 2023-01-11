@@ -20,7 +20,6 @@
 
 package org.octobots.robot;
 
-import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -31,7 +30,6 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.octobots.robot.commands.SwerveControl;
 import org.octobots.robot.swerve.DriveTrain;
-import org.octobots.robot.util.DrivePathweaverPath;
 import org.octobots.robot.util.Gyro;
 
 import java.util.concurrent.Executors;
@@ -70,7 +68,6 @@ public class Robot extends TimedRobot {
         LiveWindow.disableAllTelemetry();
         LiveWindow.setEnabled(false);
         this.chooser = new SendableChooser<>();
-        chooser.addOption("Unnamed", new DrivePathweaverPath("Unnamed"));
     }
 
     @Override
@@ -100,7 +97,6 @@ public class Robot extends TimedRobot {
         resetRobotPoseAndGyro();
         Robot.autoStartTime = Timer.getFPGATimestamp();
         try {
-            CommandScheduler.getInstance().schedule(new DrivePathweaverPath("Sqore"));
         } catch (Exception ignored) {
             // If this fails we need robot code to still try to work in teleop,
             // so unless debugging there is no case where we want this to throw anything.
@@ -119,7 +115,6 @@ public class Robot extends TimedRobot {
 
     private void resetRobotPoseAndGyro() {
         Gyro.getInstance().resetGyro();
-        DriveTrain.getInstance().getPoseEstimator().resetPose(new Pose2d(5, 7, Gyro.getInstance().getRotation2d()));
         DriveTrain.getInstance().drive(0, 0, 0, true);
     }
 

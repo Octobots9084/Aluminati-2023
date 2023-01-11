@@ -20,22 +20,16 @@
 
 package org.octobots.robot.swerve;
 
-import edu.wpi.first.math.controller.HolonomicDriveController;
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.octobots.robot.MotorIDs;
 import org.octobots.robot.util.Gyro;
 import org.octobots.robot.util.MathUtil;
-import org.octobots.robot.util.PoseEstimator;
-
 
 /**
  * Represents a swerve drive style drivetrain.
@@ -69,9 +63,6 @@ public class DriveTrain extends SubsystemBase {
     private final Encoder[] rioEncoders = new Encoder[0];
     //Drive Controllers
     private final SwerveDriveKinematics swerveDriveKinematics;
-    private final HolonomicDriveController holonomicDriveController;
-    //Pose Estimators
-    private final PoseEstimator swerveDrivePoseEstimator;
     //Logging
     //Flags
     private boolean isFieldCentric = true;
@@ -103,18 +94,6 @@ public class DriveTrain extends SubsystemBase {
         this.gyro = Gyro.getInstance();
         this.swerveDriveKinematics = new SwerveDriveKinematics(
                 swervePosition[0], swervePosition[1], swervePosition[2], swervePosition[3]
-        );
-
-        this.swerveDrivePoseEstimator = new PoseEstimator(gyro, swerveDriveKinematics, swerveModules);
-
-        this.holonomicDriveController = new HolonomicDriveController(
-                //PID FOR X DISTANCE (kp of 1 = 1m/s extra velocity / m of error)
-                new PIDController(1.2, 0.001, 0),
-                //PID FOR Y DISTANCE (kp of 1.2 = 1.2m/s extra velocity / m of error)
-                new PIDController(1.2, 0.001, 0),
-                //PID FOR ROTATION (kp of 1 = 1rad/s extra velocity / rad of error)
-                new ProfiledPIDController(0.1, 0.012, 0,
-                        new TrapezoidProfile.Constraints(MAX_ANGULAR_SPEED * 5, MAX_ANGULAR_ACCELERATION * 5))
         );
 
     }
@@ -178,10 +157,6 @@ public class DriveTrain extends SubsystemBase {
         }
     }
 
-    public HolonomicDriveController getHolonomicDriveController() {
-        return holonomicDriveController;
-    }
-
     public boolean useDriverAssist() {
         return useDriverAssist;
     }
@@ -219,9 +194,9 @@ public class DriveTrain extends SubsystemBase {
         this.targetRotationAngle = targetRotationAngle;
     }
 
-    public PoseEstimator getPoseEstimator() {
-        return swerveDrivePoseEstimator;
-    }
+//    public PoseEstimator getPoseEstimator() {
+//        return swerveDrivePoseEstimator;
+//    }
 
     public SwerveModule[] getSwerveModules() {
         return swerveModules;

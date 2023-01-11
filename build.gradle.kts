@@ -1,5 +1,5 @@
 plugins {
-    id("org.rivierarobotics.gradlerioredux") version "0.9.7"
+    id("org.rivierarobotics.gradlerioredux") version "0.9.8"
 }
 
 gradleRioRedux {
