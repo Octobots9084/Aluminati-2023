@@ -18,22 +18,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.octobots.robot.util;
+plugins {
+    id("org.rivierarobotics.gradlerioredux") version "0.9.8"
+}
 
-import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
-import com.ctre.phoenix.motorcontrol.can.BaseTalon;
-
-public class StatusFrameDemolisher {
-    public static void demolishStatusFrames(BaseTalon motor, boolean isFollower) {
-        if (isFollower) {
-            motor.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 255);
-            motor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 255);
-        }
-        motor.setStatusFramePeriod(StatusFrameEnhanced.Status_3_Quadrature, 255);
-        motor.setStatusFramePeriod(StatusFrameEnhanced.Status_4_AinTempVbat, 255);
-        motor.setStatusFramePeriod(StatusFrameEnhanced.Status_12_Feedback1, 255);
-    }
-
-    private StatusFrameDemolisher() {
-    }
+gradleRioRedux {
+    robotClass = "org.octobots.robot.Robot"
+    teamNumber = 9084
+    applyGradleRioConfiguration()
 }
