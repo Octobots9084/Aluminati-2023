@@ -42,7 +42,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class SwerveModule {
     // Physical Constants
     private static final double WHEEL_RADIUS = 0.03915;
-    private static final int ENCODER_RESOLUTION = 42;
+    private static final int ENCODER_RESOLUTION = 1;
     private static final double GEARING = 11.0 / 40.0;
     private static final double GEARING_TURN_MOTORS = 1.0 / 20.0;
     private static final double STEER_MOTOR_TICK_TO_ANGLE = 2 * Math.PI / ENCODER_RESOLUTION / GEARING_TURN_MOTORS; // radians
@@ -59,7 +59,7 @@ public class SwerveModule {
             true,
             MAX_TURN_VELOCITY, MIN_TURN_VELOCITY, MAX_TURN_ACCELERATION, ALLOWED_CLOSED_LOOP_ERROR
     );
-    private static final PIDConfig TM_SM_PID = new PIDConfig(3.4, 0.01, 0, 0);
+    private static final PIDConfig TM_SM_PID = new PIDConfig(0.15, 0.001, 0.005, 0);
 
     // Drive Motor Motion Magic
     private static final MotionMagicConfig DM_MM_CONFIG = new MotionMagicConfig(
@@ -69,8 +69,6 @@ public class SwerveModule {
             TIMEOUT_MS, 10
     );
     private static final PIDConfig DM_MM_PID = new PIDConfig(0.035, 0.0001, 0, 0.06);
-
-    private final double zeroTicks;
 
     // Motors
     private final WPI_TalonFX driveMotor;
@@ -88,14 +86,13 @@ public class SwerveModule {
      * @param zeroTicks            ticks when angle = 0
      */
     public SwerveModule(int driveMotorChannel, int steeringMotorChannel, double zeroTicks, DutyCycleEncoder rioEncoder) {
-        this.zeroTicks = zeroTicks;
 
         // Steer Motor
         this.steeringMotor = new CANSparkMax(steeringMotorChannel, CANSparkMaxLowLevel.MotorType.kBrushless);
         TM_SM_PID.setTolerance(0);
         this.steeringMotor.restoreFactoryDefaults();
         SparkMaxEncoderType steeringMotorEncoderType = SparkMaxEncoderType.relative;
-        MotorUtil.setupSmartMotion(steeringMotorEncoderType, TM_SM_PID, TM_SM_CONFIG,ENCODER_RESOLUTION, steeringMotor);
+        MotorUtil.setupSmartMotion(steeringMotorEncoderType, TM_SM_PID, TM_SM_CONFIG ,ENCODER_RESOLUTION, steeringMotor);
         // Initialize position of steering motor encoder to the same as the rio encoder
         this.steeringMotor.getEncoder().setPosition((1/GEARING_TURN_MOTORS) * (rioEncoder.getAbsolutePosition()+zeroTicks));
 ;
@@ -131,7 +128,7 @@ public class SwerveModule {
     }
 
     public double convertAngleToTick(double angleInRads) {
-        return (angleInRads / STEER_MOTOR_TICK_TO_ANGLE) + zeroTicks;
+        return (angleInRads / STEER_MOTOR_TICK_TO_ANGLE);
     }
 
     public double convertVelocityToTicksPer100ms(double velocity) {
@@ -159,11 +156,11 @@ public class SwerveModule {
     }
 
     public void setSteeringMotorAngle(double angleInRad) {
-        steeringMotor.getPIDController().setReference(angleInRad, CANSparkMax.ControlType.kSmartMotion);
+        steeringMotor.getPIDController().setReference(angleInRad, CANSparkMax.ControlType.kPosition);
     }
 
     public void updateSwerveInformation() {
-        swerveAngle.set((steeringMotor.getEncoder().getPosition() - zeroTicks) * STEER_MOTOR_TICK_TO_ANGLE);
+        swerveAngle.set((steeringMotor.getEncoder().getPosition()) * STEER_MOTOR_TICK_TO_ANGLE);
         swerveSpeed.set(driveMotor.getSensorCollection().getIntegratedSensorVelocity() * DRIVE_MOTOR_TICK_TO_SPEED);
     }
 

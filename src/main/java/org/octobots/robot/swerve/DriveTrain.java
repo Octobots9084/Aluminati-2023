@@ -26,7 +26,6 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.octobots.robot.MotorIDs;
 import org.octobots.robot.util.Gyro;
@@ -60,7 +59,7 @@ public class DriveTrain extends SubsystemBase {
     //Modules
     private final SwerveModule[] swerveModules = new SwerveModule[4];
     private final Translation2d[] swervePosition = new Translation2d[4];
-
+    //Encoders
     private final DutyCycleEncoder[] rioEncoders = new DutyCycleEncoder[4];
     //Drive Controllers
     private final SwerveDriveKinematics swerveDriveKinematics;
@@ -91,10 +90,10 @@ public class DriveTrain extends SubsystemBase {
 
 
 
-        // Setup gyro and pose estimator
+        // Setup gyro
         this.gyro = Gyro.getInstance();
         this.swerveDriveKinematics = new SwerveDriveKinematics(
-                swervePosition[0], swervePosition[1], swervePosition[2], swervePosition[3]
+            swervePosition[0], swervePosition[1], swervePosition[2], swervePosition[3]
         );
 
     }

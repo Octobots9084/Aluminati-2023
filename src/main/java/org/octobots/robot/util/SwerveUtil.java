@@ -22,7 +22,6 @@ package org.octobots.robot.util;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import org.octobots.robot.util.MathUtil;
 
 public class SwerveUtil {
     public static double clampAngle(double angle) {
