@@ -31,6 +31,7 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.Encoder;
 import org.octobots.robot.MotorIDs;
 import org.octobots.robot.util.*;
@@ -86,7 +87,7 @@ public class SwerveModule {
      * @param steeringMotorChannel ID for the turning motor.
      * @param zeroTicks            ticks when angle = 0
      */
-    public SwerveModule(int driveMotorChannel, int steeringMotorChannel, double zeroTicks, Encoder rioEncoder) {
+    public SwerveModule(int driveMotorChannel, int steeringMotorChannel, double zeroTicks, DutyCycleEncoder rioEncoder) {
         this.zeroTicks = zeroTicks;
 
         // Steer Motor
@@ -96,7 +97,7 @@ public class SwerveModule {
         SparkMaxEncoderType steeringMotorEncoderType = SparkMaxEncoderType.relative;
         MotorUtil.setupSmartMotion(steeringMotorEncoderType, TM_SM_PID, TM_SM_CONFIG,ENCODER_RESOLUTION, steeringMotor);
         // Initialize position of steering motor encoder to the same as the rio encoder
-        this.steeringMotor.getEncoder().setPosition(rioEncoder.get())
+        this.steeringMotor.getEncoder().setPosition((1/GEARING_TURN_MOTORS) * (rioEncoder.getAbsolutePosition()+zeroTicks));
 ;
         // Drive Motor
         this.driveMotor = new WPI_TalonFX(driveMotorChannel, MotorIDs.CANFD_NAME);
