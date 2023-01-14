@@ -42,7 +42,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class SwerveModule {
     // Physical Constants
     private static final double WHEEL_RADIUS = 0.03915;
-    private static final int ENCODER_RESOLUTION = 1;
+    private static final int ENCODER_RESOLUTION = 4096;
     private static final double GEARING = 11.0 / 40.0;
     private static final double GEARING_TURN_MOTORS = 1.0 / 1.0;
     private static final double STEER_MOTOR_TICK_TO_ANGLE = 2 * Math.PI / ENCODER_RESOLUTION / GEARING_TURN_MOTORS; // radians
