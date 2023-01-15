@@ -25,7 +25,8 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.octobots.robot.MotorIDs;
 import org.octobots.robot.util.Gyro;
@@ -59,8 +60,7 @@ public class DriveTrain extends SubsystemBase {
     //Modules
     private final SwerveModule[] swerveModules = new SwerveModule[4];
     private final Translation2d[] swervePosition = new Translation2d[4];
-
-    private final Encoder[] rioEncoders = new Encoder[0];
+    private final boolean[] steerMotorInverted = new boolean[4];
     //Drive Controllers
     private final SwerveDriveKinematics swerveDriveKinematics;
     //Logging
@@ -72,28 +72,27 @@ public class DriveTrain extends SubsystemBase {
     private double minTurnSpeed = 0.42;
 
     private DriveTrain() {
-        rioEncoders[0] = new Encoder(0,1);
-        rioEncoders[1] = new Encoder(2,3);
-        rioEncoders[2] = new Encoder(4,5);
-        rioEncoders[3] = new Encoder(6,7);
-
         //Position relative to center of robot -> (0,0) is the center (m)
-        swervePosition[0] = new Translation2d(WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER); // FL
-        swervePosition[1] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER); // FR
-        swervePosition[2] = new Translation2d(-WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER); // BL
-        swervePosition[3] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER); // BR
+        swervePosition[2] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER); // FL
+        swervePosition[0] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER); // FR
+        swervePosition[3] = new Translation2d(-WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER); // BL
+        swervePosition[1] = new Translation2d(WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER); // BR
 
-        swerveModules[0] = new SwerveModule(MotorIDs.FRONT_LEFT_DRIVE, MotorIDs.FRONT_LEFT_STEER, 5166 + 2048, rioEncoders[0]);
-        swerveModules[1] = new SwerveModule(MotorIDs.FRONT_RIGHT_DRIVE, MotorIDs.FRONT_RIGHT_STEER, -438 + 2048, rioEncoders[1]);
-        swerveModules[2] = new SwerveModule(MotorIDs.BACK_LEFT_DRIVE, MotorIDs.BACK_LEFT_STEER, -8075 + 2048, rioEncoders[2]);
-        swerveModules[3] = new SwerveModule(MotorIDs.BACK_RIGHT_DRIVE, MotorIDs.BACK_RIGHT_STEER, 173 + 2048, rioEncoders[3]);
+        steerMotorInverted[0] = false;
+        steerMotorInverted[1] = false;
+        steerMotorInverted[2] = false;
+        steerMotorInverted[3] = false;
+        swerveModules[0] = new SwerveModule(MotorIDs.FRONT_LEFT_DRIVE, MotorIDs.FRONT_LEFT_STEER, steerMotorInverted[0]);
+        swerveModules[1] = new SwerveModule(MotorIDs.FRONT_RIGHT_DRIVE, MotorIDs.FRONT_RIGHT_STEER, steerMotorInverted[1]);
+        swerveModules[2] = new SwerveModule(MotorIDs.BACK_LEFT_DRIVE, MotorIDs.BACK_LEFT_STEER, steerMotorInverted[2]);
+        swerveModules[3] = new SwerveModule(MotorIDs.BACK_RIGHT_DRIVE, MotorIDs.BACK_RIGHT_STEER, steerMotorInverted[3]);
 
 
 
-        // Setup gyro and pose estimator
+        // Setup gyro
         this.gyro = Gyro.getInstance();
         this.swerveDriveKinematics = new SwerveDriveKinematics(
-                swervePosition[0], swervePosition[1], swervePosition[2], swervePosition[3]
+            swervePosition[0], swervePosition[1], swervePosition[2], swervePosition[3]
         );
 
     }
@@ -121,6 +120,8 @@ public class DriveTrain extends SubsystemBase {
             }
         } else {
             for (int i = 0; i < swerveModuleStates.length; i++) {
+                SmartDashboard.putNumber("swerve state speed"+i, swerveModuleStates[i].speedMetersPerSecond);
+                SmartDashboard.putNumber("swerve state rotation"+i, swerveModuleStates[i].angle.getDegrees());
                 swerveModules[i].setDesiredState(swerveModuleStates[i]);
             }
         }
