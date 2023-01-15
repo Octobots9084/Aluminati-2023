@@ -20,6 +20,7 @@
 
 package org.octobots.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import org.octobots.robot.ControlMap;
 import org.octobots.robot.swerve.DriveTrain;
@@ -59,7 +60,9 @@ public class SwerveControl extends CommandBase {
         if (rot == 0 && driveTrain.useDriverAssist()) {
             driveTrain.drive(xSpeed, ySpeed, driveTrain.getRotationSpeed(), driveTrain.getFieldCentric());
         } else {
+            SmartDashboard.putNumber("rotation", rot);
             driveTrain.drive(xSpeed, ySpeed, rot, driveTrain.getFieldCentric());
+            
             driveTrain.setTargetRotationAngle(gyro.getRotation2d().getDegrees());
         }
     }

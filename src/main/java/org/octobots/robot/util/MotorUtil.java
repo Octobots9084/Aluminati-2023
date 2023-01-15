@@ -114,7 +114,7 @@ public class MotorUtil {
         }
     }
 
-    public static void setupSmartMotion(Type encoderType, PIDConfig pidConfig, SmartMotionConfig smConfig, int kCPR, CANSparkMax... motors) {
+    public static void setupSmartMotion(Type encoderType, PIDConfig pidConfig, SmartMotionConfig smConfig, double kCPR, CANSparkMax... motors) {
         for (CANSparkMax motor : motors) {
 
             // Reset config to factory defaults
@@ -129,7 +129,9 @@ public class MotorUtil {
             AbsoluteEncoder m_encoder = motor.getAbsoluteEncoder(encoderType);
 
             m_pidController.setFeedbackDevice(m_encoder);
-
+            m_pidController.setPositionPIDWrappingEnabled(true);
+            m_pidController.setPositionPIDWrappingMinInput(0);
+            m_pidController.setPositionPIDWrappingMaxInput(1);
             // set PID coefficients
             m_pidController.setP(pidConfig.kP);
             m_pidController.setI(pidConfig.kI);

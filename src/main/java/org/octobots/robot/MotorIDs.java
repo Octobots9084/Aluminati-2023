@@ -21,9 +21,6 @@
 package org.octobots.robot;
 
 public class MotorIDs {
-    // Global Constants
-    public static final String CANFD_NAME = "can1";
-
     // Drive Train
     public static final int FRONT_RIGHT_DRIVE = 4;
     public static final int FRONT_RIGHT_STEER = 3;
