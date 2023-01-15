@@ -27,10 +27,10 @@ import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.StatusFrame;
 import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.BaseTalon;
+import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxAlternateEncoder;
 import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 /**
  * Utility methods relating to robot motor movement.
@@ -114,7 +114,7 @@ public class MotorUtil {
         }
     }
 
-    public static void setupSmartMotion(SparkMaxEncoderType encoderType, PIDConfig pidConfig, SmartMotionConfig smConfig, int kCPR, CANSparkMax... motors) {
+    public static void setupSmartMotion(Type encoderType, PIDConfig pidConfig, SmartMotionConfig smConfig, int kCPR, CANSparkMax... motors) {
         for (CANSparkMax motor : motors) {
 
             // Reset config to factory defaults
@@ -125,13 +125,8 @@ public class MotorUtil {
             // Get PID controller
             SparkMaxPIDController m_pidController = motor.getPIDController();
 
-            // Default encoder
-            RelativeEncoder m_encoder = motor.getEncoder();
-
-            // Change encoder to alternate
-            if (encoderType==SparkMaxEncoderType.alternate) {
-                m_encoder = motor.getAlternateEncoder(SparkMaxAlternateEncoder.Type.kQuadrature, kCPR);
-            }
+            // Absolute encoder
+            AbsoluteEncoder m_encoder = motor.getAbsoluteEncoder(encoderType);
 
             m_pidController.setFeedbackDevice(m_encoder);
 

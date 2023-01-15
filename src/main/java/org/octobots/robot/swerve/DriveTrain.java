@@ -59,8 +59,6 @@ public class DriveTrain extends SubsystemBase {
     //Modules
     private final SwerveModule[] swerveModules = new SwerveModule[4];
     private final Translation2d[] swervePosition = new Translation2d[4];
-    //Encoders
-    private final DutyCycleEncoder[] rioEncoders = new DutyCycleEncoder[4];
     //Drive Controllers
     private final SwerveDriveKinematics swerveDriveKinematics;
     //Logging
@@ -72,21 +70,16 @@ public class DriveTrain extends SubsystemBase {
     private double minTurnSpeed = 0.42;
 
     private DriveTrain() {
-        rioEncoders[0] = new DutyCycleEncoder(1);
-        rioEncoders[1] = new DutyCycleEncoder(2);
-        rioEncoders[2] = new DutyCycleEncoder(3);
-        rioEncoders[3] = new DutyCycleEncoder(4);
-
         //Position relative to center of robot -> (0,0) is the center (m)
         swervePosition[0] = new Translation2d(WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER); // FL
         swervePosition[1] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER); // FR
         swervePosition[2] = new Translation2d(-WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER); // BL
         swervePosition[3] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER); // BR
 
-        swerveModules[0] = new SwerveModule(MotorIDs.FRONT_LEFT_DRIVE, MotorIDs.FRONT_LEFT_STEER,0, rioEncoders[0]);
-        swerveModules[1] = new SwerveModule(MotorIDs.FRONT_RIGHT_DRIVE, MotorIDs.FRONT_RIGHT_STEER, 0, rioEncoders[1]);
-        swerveModules[2] = new SwerveModule(MotorIDs.BACK_LEFT_DRIVE, MotorIDs.BACK_LEFT_STEER, 0, rioEncoders[2]);
-        swerveModules[3] = new SwerveModule(MotorIDs.BACK_RIGHT_DRIVE, MotorIDs.BACK_RIGHT_STEER, 0, rioEncoders[3]);
+        swerveModules[0] = new SwerveModule(MotorIDs.FRONT_LEFT_DRIVE, MotorIDs.FRONT_LEFT_STEER,0);
+        swerveModules[1] = new SwerveModule(MotorIDs.FRONT_RIGHT_DRIVE, MotorIDs.FRONT_RIGHT_STEER, 0);
+        swerveModules[2] = new SwerveModule(MotorIDs.BACK_LEFT_DRIVE, MotorIDs.BACK_LEFT_STEER, 0);
+        swerveModules[3] = new SwerveModule(MotorIDs.BACK_RIGHT_DRIVE, MotorIDs.BACK_RIGHT_STEER, 0);
 
 
 
