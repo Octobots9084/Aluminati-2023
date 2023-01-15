@@ -26,6 +26,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import org.octobots.robot.commands.SwerveControl;
@@ -52,7 +53,6 @@ public class Robot extends TimedRobot {
     public void robotInit() {
         initializeAllSubsystems();
         initializeDefaultCommands();
-        Gyro.getInstance().resetGyro();
 
         var drive = Shuffleboard.getTab("Drive");
         drive.add(field2d)
@@ -64,7 +64,6 @@ public class Robot extends TimedRobot {
 
         resetRobotPoseAndGyro();
         var threader = Executors.newSingleThreadScheduledExecutor();
-        threader.scheduleWithFixedDelay(new Thread(() -> Gyro.getInstance().updateRotation2D()), 0, 5, TimeUnit.MILLISECONDS);
         LiveWindow.disableAllTelemetry();
         LiveWindow.setEnabled(false);
         this.chooser = new SendableChooser<>();
@@ -72,6 +71,11 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotPeriodic() {
+        
+    }
+
+    @Override
+    public void teleopPeriodic() {
         DriveTrain.getInstance().updateSwerveStates();
         CommandScheduler.getInstance().run();
     }
@@ -114,7 +118,6 @@ public class Robot extends TimedRobot {
     }
 
     private void resetRobotPoseAndGyro() {
-        Gyro.getInstance().resetGyro();
         DriveTrain.getInstance().drive(0, 0, 0, true);
     }
 

@@ -33,16 +33,19 @@ import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import org.octobots.robot.MotorIDs;
 import org.octobots.robot.util.*;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class SwerveModule {
     // Physical Constants
     private static final double WHEEL_RADIUS = 0.03915;
-    private static final int ENCODER_RESOLUTION = 4096;
+    private static final double ENCODER_RESOLUTION = 1;
     private static final double GEARING = 11.0 / 40.0;
     private static final double GEARING_TURN_MOTORS = 1.0 / 1.0;
     private static final double STEER_MOTOR_TICK_TO_ANGLE = 2 * Math.PI / ENCODER_RESOLUTION / GEARING_TURN_MOTORS; // radians
@@ -59,7 +62,7 @@ public class SwerveModule {
             true,
             MAX_TURN_VELOCITY, MIN_TURN_VELOCITY, MAX_TURN_ACCELERATION, ALLOWED_CLOSED_LOOP_ERROR
     );
-    private static final PIDConfig TM_SM_PID = new PIDConfig(0.15, 0.001, 0.005, 0);
+    private static final PIDConfig TM_SM_PID = new PIDConfig(0.9, 0.000, 0.000, 0);
 
     // Drive Motor Motion Magic
     private static final MotionMagicConfig DM_MM_CONFIG = new MotionMagicConfig(
@@ -85,18 +88,20 @@ public class SwerveModule {
      * @param steeringMotorChannel ID for the turning motor.
      * @param zeroTicks            ticks when angle = 0
      */
-    public SwerveModule(int driveMotorChannel, int steeringMotorChannel, double zeroTicks) {
+    public SwerveModule(int driveMotorChannel, int steeringMotorChannel, boolean steerMotorInverted) {//, double zeroTicks) {
 
         // Steer Motor
         this.steeringMotor = new CANSparkMax(steeringMotorChannel, CANSparkMaxLowLevel.MotorType.kBrushless);
         TM_SM_PID.setTolerance(0);
         this.steeringMotor.restoreFactoryDefaults();
         MotorUtil.setupSmartMotion(Type.kDutyCycle, TM_SM_PID, TM_SM_CONFIG ,ENCODER_RESOLUTION, steeringMotor);
+        this.steeringMotor.getAbsoluteEncoder(Type.kDutyCycle).setInverted(false);
+
         // Initialize position of steering motor encoder to the same as the rio encoder
-        this.steeringMotor.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(zeroTicks);
+        // this.steeringMotor.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(zeroTicks);
 
         // Drive Motor
-        this.driveMotor = new WPI_TalonFX(driveMotorChannel, MotorIDs.CANFD_NAME);
+        this.driveMotor = new WPI_TalonFX(driveMotorChannel);
         MotorUtil.setupMotionMagic(FeedbackDevice.IntegratedSensor, DM_MM_PID, DM_MM_CONFIG, driveMotor);
         driveMotor.configAllowableClosedloopError(0, 5);
         driveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
@@ -155,6 +160,7 @@ public class SwerveModule {
     }
 
     public void setSteeringMotorAngle(double angleInRad) {
+        
         steeringMotor.getPIDController().setReference(angleInRad, CANSparkMax.ControlType.kPosition);
     }
 
@@ -173,6 +179,7 @@ public class SwerveModule {
     public void setDesiredState(SwerveModuleState state) {
         // Optimize the swerve state and set it
         var optimizedAngle = SwerveUtil.optimizeSwerveStates(state, getAngle());
+        SmartDashboard.putNumber("Angle", convertAngleToTick(optimizedAngle.angle.getRadians()));
         setDriveMotorVelocity(optimizedAngle.speedMetersPerSecond);
         setSteeringMotorAngle(convertAngleToTick(optimizedAngle.angle.getRadians()));
     }
