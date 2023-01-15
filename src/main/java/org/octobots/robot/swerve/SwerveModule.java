@@ -86,7 +86,6 @@ public class SwerveModule {
      *
      * @param driveMotorChannel    ID for the drive motor.
      * @param steeringMotorChannel ID for the turning motor.
-     * @param zeroTicks            ticks when angle = 0
      */
     public SwerveModule(int driveMotorChannel, int steeringMotorChannel, boolean steerMotorInverted) {//, double zeroTicks) {
 
