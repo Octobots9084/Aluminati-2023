@@ -25,7 +25,6 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.octobots.robot.MotorIDs;
@@ -63,7 +62,6 @@ public class DriveTrain extends SubsystemBase {
     private final boolean[] steerMotorInverted = new boolean[4];
     //Drive Controllers
     private final SwerveDriveKinematics swerveDriveKinematics;
-    //Logging
     //Flags
     private boolean isFieldCentric = true;
     private boolean useDriverAssist = false;
@@ -73,10 +71,10 @@ public class DriveTrain extends SubsystemBase {
 
     private DriveTrain() {
         //Position relative to center of robot -> (0,0) is the center (m)
-        swervePosition[2] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER); // FL
-        swervePosition[0] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER); // FR
-        swervePosition[3] = new Translation2d(-WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER); // BL
-        swervePosition[1] = new Translation2d(WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER); // BR
+        swervePosition[2] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER); 
+        swervePosition[0] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
+        swervePosition[3] = new Translation2d(-WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
+        swervePosition[1] = new Translation2d(WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER); 
 
         steerMotorInverted[0] = false;
         steerMotorInverted[1] = false;
@@ -120,8 +118,6 @@ public class DriveTrain extends SubsystemBase {
             }
         } else {
             for (int i = 0; i < swerveModuleStates.length; i++) {
-                SmartDashboard.putNumber("swerve state speed"+i, swerveModuleStates[i].speedMetersPerSecond);
-                SmartDashboard.putNumber("swerve state rotation"+i, swerveModuleStates[i].angle.getDegrees());
                 swerveModules[i].setDesiredState(swerveModuleStates[i]);
             }
         }
@@ -194,10 +190,6 @@ public class DriveTrain extends SubsystemBase {
     public void setTargetRotationAngle(double targetRotationAngle) {
         this.targetRotationAngle = targetRotationAngle;
     }
-
-//    public PoseEstimator getPoseEstimator() {
-//        return swerveDrivePoseEstimator;
-//    }
 
     public SwerveModule[] getSwerveModules() {
         return swerveModules;

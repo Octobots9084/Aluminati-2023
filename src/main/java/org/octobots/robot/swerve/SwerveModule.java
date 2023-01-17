@@ -35,10 +35,8 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.octobots.robot.MotorIDs;
 import org.octobots.robot.util.*;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 

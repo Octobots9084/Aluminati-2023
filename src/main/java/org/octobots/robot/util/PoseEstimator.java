@@ -85,37 +85,6 @@ public class PoseEstimator {
         return robotPose.get();
     }
 
-    /*public PoseEstimator(Gyro gyro, SwerveDriveKinematics swerveDriveKinematics, SwerveModule[] swerveModules) {
-        this.gyro = gyro;
-        this.swerveModules = swerveModules;
-        SwerveModulePosition[] swerveModulePositions = new SwerveModulePosition[new SwerveModulePosition(swerveModules[0].getState().speedMetersPerSecond, swerveModules[0].getState.getAngle())];
-        this.swerveDrivePoseEstimator = new SwerveDrivePoseEstimator(
-                swerveDriveKinematics,
-                gyro.getRotation2d(),
-                
-                new Pose2d(0, 0, gyro.getRotation2d()),
-                // //Standard deviations of model states. Increase these numbers to trust your model's state estimates less.
-                // //This matrix is in the form [x, y, theta]^T, with units in meters and radians.
-                new MatBuilder<>(Nat.N3(), Nat.N1()).fill(0.2, 0.2, 0.1),
-                // // Standard deviations of the encoder and gyro measurements. Increase these numbers to trust sensor
-                // // readings from encoders and gyros less. This matrix is in the form [theta], with units in radians.
-                // new MatBuilder<>(Nat.N1(), Nat.N1()).fill(0.01),
-                // //Standard deviations of the vision measurements. Increase these numbers to trust global measurements
-                // //from vision less. This matrix is in the form [x, y, theta]^T, with units in meters and radians.
-                new MatBuilder<>(Nat.N3(), Nat.N1()).fill(0.01, 0.01, 0.01) //Vision Measurement stdev
-        );
-
-        var e = Executors.newScheduledThreadPool(2);
-        e.scheduleWithFixedDelay(this::updateOdometry, 5, 15, TimeUnit.MILLISECONDS);
-        robotPose.set(new Pose2d());
-    }
-
-    public Pose2d getRobotPose() {
-        return robotPose.get();
-    } */
-// copy of PoseEstimator
-
-
     public void updateOdometry() {
         resetLock.lock();
         SwerveModulePosition[] swerveModulePositions = {

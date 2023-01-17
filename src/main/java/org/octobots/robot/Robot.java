@@ -64,6 +64,7 @@ public class Robot extends TimedRobot {
 
         resetRobotPoseAndGyro();
         var threader = Executors.newSingleThreadScheduledExecutor();
+        threader.scheduleWithFixedDelay(new Thread(() -> Gyro.getInstance().updateRotation2D()), 0, 5, TimeUnit.MILLISECONDS);
         LiveWindow.disableAllTelemetry();
         LiveWindow.setEnabled(false);
         this.chooser = new SendableChooser<>();
@@ -118,6 +119,7 @@ public class Robot extends TimedRobot {
     }
 
     private void resetRobotPoseAndGyro() {
+        Gyro.getInstance().resetGyro();
         DriveTrain.getInstance().drive(0, 0, 0, true);
     }
 
