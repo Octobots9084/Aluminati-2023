@@ -84,7 +84,7 @@ public class PoseEstimator {
     public Pose2d getRobotPose() {
         return robotPose.get();
     }
-
+    
     public void updateOdometry() {
         resetLock.lock();
         SwerveModulePosition[] swerveModulePositions = {

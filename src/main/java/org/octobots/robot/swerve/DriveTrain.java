@@ -30,6 +30,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.octobots.robot.MotorIDs;
 import org.octobots.robot.util.Gyro;
 import org.octobots.robot.util.MathUtil;
+import org.octobots.robot.util.PoseEstimator;
 
 /**
  * Represents a swerve drive style drivetrain.
@@ -69,6 +70,9 @@ public class DriveTrain extends SubsystemBase {
     private double turnSpeedP = 0.05;
     private double minTurnSpeed = 0.42;
 
+    // Pose Estimator
+    private final PoseEstimator swerveDrivePoseEstimator;
+
     private DriveTrain() {
         //Position relative to center of robot -> (0,0) is the center (m)
         swervePosition[2] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER); 
@@ -93,6 +97,9 @@ public class DriveTrain extends SubsystemBase {
             swervePosition[0], swervePosition[1], swervePosition[2], swervePosition[3]
         );
 
+        swerveDrivePoseEstimator = new PoseEstimator(this.gyro, swerveDriveKinematics, swerveModules);
+
+
     }
 
     /**
@@ -104,6 +111,9 @@ public class DriveTrain extends SubsystemBase {
      * @param fieldRelative Whether the provided x and y speeds are relative to the field.
      */
     public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
+        SmartDashboard.putNumber("XPos", swerveDrivePoseEstimator.getRobotPose().getX());
+        SmartDashboard.putNumber("YPos", swerveDrivePoseEstimator.getRobotPose().getY());
+        SmartDashboard.putNumber("Rotation", swerveDrivePoseEstimator.getRobotPose().getRotation().getDegrees());
         // Calculate swerve states
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(
                 fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, gyro.getRotation2d())
@@ -121,6 +131,7 @@ public class DriveTrain extends SubsystemBase {
                 swerveModules[i].setDesiredState(swerveModuleStates[i]);
             }
         }
+        
     }
 
     public double getRotationSpeed() {
