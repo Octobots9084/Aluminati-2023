@@ -20,11 +20,15 @@
 
 package org.octobots.robot.swerve;
 
+import edu.wpi.first.math.controller.HolonomicDriveController;
+import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.controller.ProfiledPIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import org.octobots.robot.MotorIDs;
@@ -70,6 +74,9 @@ public class DriveTrain extends SubsystemBase {
     private double turnSpeedP = 0.05;
     private double minTurnSpeed = 0.42;
 
+    private final HolonomicDriveController holonomicDriveController;
+
+    
     // Pose Estimator
     private final PoseEstimator swerveDrivePoseEstimator;
 
@@ -99,6 +106,15 @@ public class DriveTrain extends SubsystemBase {
 
         swerveDrivePoseEstimator = new PoseEstimator(this.gyro, swerveDriveKinematics, swerveModules);
 
+        this.holonomicDriveController = new HolonomicDriveController(
+                //PID FOR X DISTANCE (kp of 1 = 1m/s extra velocity / m of error)
+                new PIDController(1.2, 0.001, 0),
+                //PID FOR Y DISTANCE (kp of 1.2 = 1.2m/s extra velocity / m of error)
+                new PIDController(1.2, 0.001, 0),
+                //PID FOR ROTATION (kp of 1 = 1rad/s extra velocity / rad of error)
+                new ProfiledPIDController(0.1, 0.012, 0,
+                        new TrapezoidProfile.Constraints(MAX_ANGULAR_SPEED * 5, MAX_ANGULAR_ACCELERATION * 5))
+        );
 
     }
 
@@ -111,9 +127,7 @@ public class DriveTrain extends SubsystemBase {
      * @param fieldRelative Whether the provided x and y speeds are relative to the field.
      */
     public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
-        SmartDashboard.putNumber("XPos", swerveDrivePoseEstimator.getRobotPose().getX());
-        SmartDashboard.putNumber("YPos", swerveDrivePoseEstimator.getRobotPose().getY());
-        SmartDashboard.putNumber("Rotation", swerveDrivePoseEstimator.getRobotPose().getRotation().getDegrees());
+
         // Calculate swerve states
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(
                 fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, gyro.getRotation2d())
@@ -173,6 +187,10 @@ public class DriveTrain extends SubsystemBase {
         this.useDriverAssist = useDriverAssist;
     }
 
+    public PoseEstimator getPoseEstimator() {
+        return swerveDrivePoseEstimator;
+    }
+
     public void setFieldCentric(boolean fieldCentric) {
         this.isFieldCentric = fieldCentric;
     }
@@ -183,6 +201,10 @@ public class DriveTrain extends SubsystemBase {
 
     public SwerveDriveKinematics getSwerveDriveKinematics() {
         return this.swerveDriveKinematics;
+    }
+
+    public HolonomicDriveController getHolonomicDriveController() {
+        return holonomicDriveController;
     }
 
     public ChassisSpeeds getChassisSpeeds() {

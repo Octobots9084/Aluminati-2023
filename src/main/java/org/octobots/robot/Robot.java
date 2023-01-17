@@ -26,11 +26,15 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+
 import org.octobots.robot.commands.SwerveControl;
 import org.octobots.robot.swerve.DriveTrain;
 import org.octobots.robot.util.Gyro;
+import org.octobots.robot.Autonomous.DrivePathPlannerPath;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -50,6 +54,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
+        
         initializeAllSubsystems();
         initializeDefaultCommands();
 
@@ -82,7 +87,6 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
-        
         CommandScheduler.getInstance().cancelAll();
         initializeAllSubsystems();
         initializeDefaultCommands();
@@ -91,6 +95,8 @@ public class Robot extends TimedRobot {
             resetRobotPoseAndGyro();
         }
         this.autoFlag = false;
+
+        
     }
 
     @Override
@@ -100,8 +106,13 @@ public class Robot extends TimedRobot {
         initializeDefaultCommands();
 
         resetRobotPoseAndGyro();
+        new InstantCommand(() -> new DrivePathPlannerPath("100%Safe", 1, 0.5));
         Robot.autoStartTime = Timer.getFPGATimestamp();
         try {
+            var command = chooser.getSelected();
+            if (command != null) {
+                CommandScheduler.getInstance().schedule(command);
+            }
         } catch (Exception ignored) {
             // If this fails we need robot code to still try to work in teleop,
             // so unless debugging there is no case where we want this to throw anything.

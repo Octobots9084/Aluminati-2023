@@ -50,11 +50,11 @@ public class SwerveControl extends CommandBase {
         var rightJoystick = ControlMap.DRIVER_RIGHT;
 
         // Get speeds from joysticks
-        var xSpeed = MathUtil.fitDeadband(leftJoystick.getY()) * DriveTrain.MAX_TURN_SPEED;
+        var xSpeed = MathUtil.fitDeadband(-leftJoystick.getY()) * DriveTrain.MAX_TURN_SPEED;
         var ySpeed = MathUtil.fitDeadband(leftJoystick.getX()) * DriveTrain.MAX_TURN_SPEED;
 
         // Calculate the deadband
-        var rot = MathUtil.fitDeadband(-rightJoystick.getX()) * DriveTrain.MAX_ANGULAR_SPEED;
+        var rot = MathUtil.fitDeadband(rightJoystick.getX()) * DriveTrain.MAX_ANGULAR_SPEED;
 
         // Check driver assist and drive
         if (rot == 0 && driveTrain.useDriverAssist()) {

@@ -60,7 +60,7 @@ public class SwerveModule {
             true,
             MAX_TURN_VELOCITY, MIN_TURN_VELOCITY, MAX_TURN_ACCELERATION, ALLOWED_CLOSED_LOOP_ERROR
     );
-    private static final PIDConfig TM_SM_PID = new PIDConfig(0.9, 0.000, 0.000, 0);
+    private static final PIDConfig TM_SM_PID = new PIDConfig(20, 0.000, 2.000, 0);
 
     // Drive Motor Motion Magic
     private static final MotionMagicConfig DM_MM_CONFIG = new MotionMagicConfig(
@@ -111,7 +111,7 @@ public class SwerveModule {
         this.driveMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 50, 50, 0.05)); //How much current the motor can use (outputwise)
         this.driveMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 53, 53, 0.05)); //How much current can be supplied to the motor
 
-        this.steeringMotor.setSmartCurrentLimit(21, 20);
+        this.steeringMotor.setSmartCurrentLimit(31, 30);
 
         try {
             Thread.sleep(200);
