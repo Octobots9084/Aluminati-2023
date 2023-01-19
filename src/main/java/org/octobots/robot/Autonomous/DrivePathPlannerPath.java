@@ -1,7 +1,7 @@
 /*
- * This file is part of MrT-2022, licensed under the GNU General Public License (GPLv3).
+ * This file is part of Placeholder-2023, licensed under the GNU General Public License (GPLv3).
  *
- * Copyright (c) Riviera Robotics <https://github.com/Team5818>
+ * Copyright (c) Octobots <https://github.com/Octobots9084>
  * Copyright (c) contributors
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,51 +18,52 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.octobots.robot.Autonomous;
+ package org.octobots.robot.Autonomous;
 
-import com.pathplanner.lib.PathPlanner;
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import org.octobots.robot.swerve.DriveTrain;
-import org.octobots.robot.util.Gyro;
-import org.octobots.robot.util.TrajectoryFollower;
-
-public class DrivePathPlannerPath extends CommandBase {
-    private final DriveTrain driveTrain;
-    private final Gyro gyro;
-    private final double maxVel;
-    private final double maxAccel;
-    private final String trajectoryJSON;
-    private TrajectoryFollower trajectoryFollower;
-
-    public DrivePathPlannerPath(String path, double maxVelocity, double maxAcceleration) {
-        this.trajectoryJSON = path;
-        this.driveTrain = DriveTrain.getInstance();
-        this.gyro = Gyro.getInstance();
-        this.maxAccel = maxAcceleration;
-        this.maxVel = maxVelocity;
-        addRequirements(driveTrain);
-    }
-
-    @Override
-    public void initialize() {
-        this.trajectoryFollower = new TrajectoryFollower(
-                PathPlanner.loadPath(trajectoryJSON, maxVel, maxAccel, false),
-                true, gyro, driveTrain
-        );
-    }
-
-    @Override
-    public void execute() {
-        trajectoryFollower.followController();
-    }
-
-    @Override
-    public boolean isFinished() {
-        return trajectoryFollower.isFinished();
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        DriveTrain.getInstance().drive(0, 0, 0, true);
-    }
-}
+ import com.pathplanner.lib.PathPlanner;
+ import edu.wpi.first.wpilibj2.command.CommandBase;
+ import org.octobots.robot.swerve.DriveTrain;
+ import org.octobots.robot.util.Gyro;
+ import org.octobots.robot.util.TrajectoryFollower;
+ 
+ public class DrivePathPlannerPath extends CommandBase {
+     private final DriveTrain driveTrain;
+     private final Gyro gyro;
+     private final double maxVel;
+     private final double maxAccel;
+     private final String trajectoryJSON;
+     private TrajectoryFollower trajectoryFollower;
+ 
+     public DrivePathPlannerPath(String path, double maxVelocity, double maxAcceleration) {
+         this.trajectoryJSON = path;
+         this.driveTrain = DriveTrain.getInstance();
+         this.gyro = Gyro.getInstance();
+         this.maxAccel = maxAcceleration;
+         this.maxVel = maxVelocity;
+         addRequirements(driveTrain);
+     }
+ 
+     @Override
+     public void initialize() {
+         this.trajectoryFollower = new TrajectoryFollower(
+                 PathPlanner.loadPath(trajectoryJSON, maxVel, maxAccel, false),
+                 true, gyro, driveTrain
+         );
+     }
+ 
+     @Override
+     public void execute() {
+         trajectoryFollower.followController();
+     }
+ 
+     @Override
+     public boolean isFinished() {
+         return trajectoryFollower.isFinished();
+     }
+ 
+     @Override
+     public void end(boolean interrupted) {
+         DriveTrain.getInstance().drive(0, 0, 0, true);
+     }
+ }
+ 

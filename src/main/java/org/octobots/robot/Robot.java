@@ -26,15 +26,14 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 import org.octobots.robot.commands.SwerveControl;
 import org.octobots.robot.swerve.DriveTrain;
 import org.octobots.robot.util.Gyro;
 import org.octobots.robot.Autonomous.DrivePathPlannerPath;
+import org.octobots.robot.Autonomous.followTrajectoryCommand;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -103,10 +102,11 @@ public class Robot extends TimedRobot {
     public void autonomousInit() {
         this.autoFlag = true;
         initializeAllSubsystems();
-        initializeDefaultCommands();
 
         resetRobotPoseAndGyro();
-        new InstantCommand(() -> new DrivePathPlannerPath("100%Safe", 1, 0.5));
+        
+        CommandScheduler.getInstance().schedule(new DrivePathPlannerPath("testing", 1, 0.5));
+        
         Robot.autoStartTime = Timer.getFPGATimestamp();
         try {
             var command = chooser.getSelected();
@@ -118,6 +118,11 @@ public class Robot extends TimedRobot {
             // so unless debugging there is no case where we want this to throw anything.
         }
 
+    }
+
+    @Override
+    public void autonomousPeriodic() {
+        CommandScheduler.getInstance().run();
     }
 
     @Override
