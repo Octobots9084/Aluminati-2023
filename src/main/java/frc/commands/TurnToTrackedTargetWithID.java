@@ -47,13 +47,13 @@ public class TurnToTrackedTargetWithID extends CommandBase {
 	@Override
 	public void execute() {
 		try {
-			driveTrain.setTargetRotationAngle(vision.getTargetWithID(0).getYaw());
-			driveTrain.drive(0, 0, driveTrain.getRotationSpeed(), true);
+			driveTrain.drive(0, 0, Math.toRadians(vision.getTargetWithID(0).getYaw()) * 2, true);
+
 		} catch (Exception e) {
 			//
 		}
 
-		SmartDashboard.putNumber("madeit", 1000);
+		SmartDashboard.putNumber("madeit3", 1000);
 	}
 
 	@Override
