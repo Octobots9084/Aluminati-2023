@@ -71,7 +71,7 @@ public class DriveTrain extends SubsystemBase {
     private final SwerveDriveKinematics swerveDriveKinematics;
     //Flags
     private boolean isFieldCentric = true;
-    private boolean useDriverAssist = false;
+    private boolean useDriverAssist = true;
     private double targetRotationAngle = 0.0;
     private double turnSpeedP = 0.05;
     private double minTurnSpeed = 0.42;
@@ -114,7 +114,7 @@ public class DriveTrain extends SubsystemBase {
                 //PID FOR Y DISTANCE (kp of 1.2 = 1.2m/s extra velocity / m of error)
                 new PIDController(1.2, 0.001, 0),
                 //PID FOR ROTATION (kp of 1 = 1rad/s extra velocity / rad of error)
-                new ProfiledPIDController(0.1, 0.012, 0,
+                new ProfiledPIDController(0.005, 0.0, 0.00,
                         new TrapezoidProfile.Constraints(MAX_ANGULAR_SPEED * 5, MAX_ANGULAR_ACCELERATION * 5))
         );
 
@@ -129,12 +129,15 @@ public class DriveTrain extends SubsystemBase {
     * @param fieldRelative Whether the provided x and y speeds are relative to the field.
     */
     public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
-
+        if (MathUtil.isWithinTolerance(MathUtil.wrapToCircle(gyro.getRotation2d().getRadians(), 2*Math.PI), MathUtil.wrapToCircle(targetRotationAngle, 2*Math.PI), 0.1)) {
+            fieldRelative = false;
+        }
         // Calculate swerve states
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(
-                fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, gyro.getRotation2d())
+                fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, -rot, new Rotation2d(MathUtil.wrapToCircle(gyro.getRotation2d().getRadians(),2*Math.PI)))
                         : new ChassisSpeeds(xSpeed, ySpeed, rot)
         );
+
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, MAX_SPEED);
 
         // Set states
@@ -150,31 +153,11 @@ public class DriveTrain extends SubsystemBase {
         
     }
 
-    public void driveChassisSpeeds(ChassisSpeeds chassisSpeeds) {
-    double xSpeed = chassisSpeeds.vxMetersPerSecond;
-    double ySpeed = chassisSpeeds.vyMetersPerSecond;
-    double rot = chassisSpeeds.omegaRadiansPerSecond;
-    // Calculate swerve states
-    var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(
-        ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, gyro.getRotation2d())
-    );
-    SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, MAX_SPEED);
-
-    // Set states
-    if (Math.abs(xSpeed) <= 0.05 && Math.abs(ySpeed) <= 0.05 && rot == 0) {
-        for (int i = 0; i < swerveModuleStates.length; i++) {
-            swerveModules[i].setDesiredState(new SwerveModuleState(0, new Rotation2d(0)));
-        }
-    } else {
-        for (int i = 0; i < swerveModuleStates.length; i++) {
-            swerveModules[i].setDesiredState(swerveModuleStates[i]);
-        }
-    }
-    }
-    public void setModuleStates(SwerveModuleState[] swerveModuleStates) {
-    for (int i = 0; i < swerveModuleStates.length; i++) {
-        swerveModules[i].setDesiredState(swerveModuleStates[i]);
-    }
+    public void drive(ChassisSpeeds chassisSpeeds) {
+        double xSpeed = chassisSpeeds.vxMetersPerSecond;
+        double ySpeed = chassisSpeeds.vyMetersPerSecond;
+        double rot = chassisSpeeds.omegaRadiansPerSecond;
+        drive(xSpeed, ySpeed, rot, true);
     }
 
     public SwerveModuleState[] getModuleStates() {
