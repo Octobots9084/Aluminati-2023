@@ -30,6 +30,7 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.MotorIDs;
 import frc.robot.util.Gyro;
@@ -114,7 +115,7 @@ public class DriveTrain extends SubsystemBase {
                 //PID FOR Y DISTANCE (kp of 1.2 = 1.2m/s extra velocity / m of error)
                 new PIDController(1.2, 0.001, 0),
                 //PID FOR ROTATION (kp of 1 = 1rad/s extra velocity / rad of error)
-                new ProfiledPIDController(0.005, 0.0, 0.00,
+                new ProfiledPIDController(0.05, 0.0, 0.00,
                         new TrapezoidProfile.Constraints(MAX_ANGULAR_SPEED * 5, MAX_ANGULAR_ACCELERATION * 5))
         );
 
@@ -129,12 +130,9 @@ public class DriveTrain extends SubsystemBase {
     * @param fieldRelative Whether the provided x and y speeds are relative to the field.
     */
     public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
-        if (MathUtil.isWithinTolerance(MathUtil.wrapToCircle(gyro.getRotation2d().getRadians(), 2*Math.PI), MathUtil.wrapToCircle(targetRotationAngle, 2*Math.PI), 0.1)) {
-            fieldRelative = false;
-        }
         // Calculate swerve states
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(
-                fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, -rot, new Rotation2d(MathUtil.wrapToCircle(gyro.getRotation2d().getRadians(),2*Math.PI)))
+                fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, -rot, gyro.getRotation2d())
                         : new ChassisSpeeds(xSpeed, ySpeed, rot)
         );
 

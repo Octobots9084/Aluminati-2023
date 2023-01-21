@@ -43,7 +43,7 @@ public class Gyro {
     }
 
     private double getAngle() {
-        return navX.getAngle();
+        return MathUtil.wrapToCircle(navX.getAngle(),360);
     }
 
     public Rotation2d getRotation2d() {
