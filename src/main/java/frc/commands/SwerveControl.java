@@ -18,14 +18,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package frc.robot.commands;
+package frc.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.ControlMap;
-import frc.robot.swerve.DriveTrain;
-import frc.robot.util.Gyro;
-import frc.robot.util.MathUtil;
+import frc.subsystems.swerve.DriveTrain;
+import frc.util.Gyro;
+import frc.util.MathUtil;
 
 public class SwerveControl extends CommandBase {
     private final DriveTrain driveTrain;

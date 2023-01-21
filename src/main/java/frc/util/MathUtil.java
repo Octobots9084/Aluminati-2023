@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package frc.robot.util;
+package frc.util;
 
 /**
  * Utility methods relating to robot mathematics.

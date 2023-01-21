@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package frc.robot.util;
+ package frc.util;
  import edu.wpi.first.math.MatBuilder;
  import edu.wpi.first.math.Nat;
  import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
@@ -26,7 +26,7 @@
  import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
  import edu.wpi.first.wpilibj.Timer;
- import frc.robot.swerve.SwerveModule;
+ import frc.subsystems.swerve.SwerveModule;
  import java.util.concurrent.Executors;
  import java.util.concurrent.TimeUnit;
  import java.util.concurrent.atomic.AtomicReference;

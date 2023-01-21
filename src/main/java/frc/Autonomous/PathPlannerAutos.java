@@ -1,4 +1,4 @@
-package frc.robot.Autonomous;
+package frc.Autonomous;
 
 import com.pathplanner.lib.PathConstraints;
 import com.pathplanner.lib.PathPlanner;
@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import java.util.HashMap;
 import java.util.Map;
 
-import frc.robot.swerve.DriveTrain;
+import frc.subsystems.swerve.DriveTrain;
 
 public final class PathPlannerAutos {
   private static final Map<String, Command> eventMap = new HashMap<>(Map.ofEntries(

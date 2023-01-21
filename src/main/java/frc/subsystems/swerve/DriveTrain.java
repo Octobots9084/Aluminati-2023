@@ -18,7 +18,7 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package frc.robot.swerve;
+package frc.subsystems.swerve;
 
 import edu.wpi.first.math.controller.HolonomicDriveController;
 import edu.wpi.first.math.controller.PIDController;
@@ -32,9 +32,9 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.MotorIDs;
-import frc.robot.util.Gyro;
-import frc.robot.util.MathUtil;
-import frc.robot.util.PoseEstimator;
+import frc.util.Gyro;
+import frc.util.MathUtil;
+import frc.util.PoseEstimator;
 
 
 

@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package frc.robot.util;
+package frc.util;
 
 /**
  * <p>Stores a PIDF configuration through loop gain constants.</p>
