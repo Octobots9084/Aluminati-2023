@@ -86,6 +86,7 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         SmartDashboard.putNumber("Initialized", 1);
+        new ButtonConfig().initTeleop();
         CommandScheduler.getInstance().cancelAll();
         initializeAllSubsystems();
         initializeDefaultCommands();
