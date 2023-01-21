@@ -20,7 +20,6 @@
 
 package frc.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.subsystems.swerve.DriveTrain;
 import frc.subsystems.vision.PIVision;
@@ -37,21 +36,24 @@ public class TurnToTrackedTargetWithID extends CommandBase {
 		// addRequirements(this.driveTrain);
 	}
 
-	@Override
-	public void initialize() {
-		// driveTrain.setTargetRotationAngle(vision.getBestTarget().getYaw());
-		SmartDashboard.putNumber("Yaw", vision.getTargetWithID(0).getYaw());
+	// @Override
+	// public void initialize() {
+	// // driveTrain.setTargetRotationAngle(vision.getBestTarget().getYaw());
+	// SmartDashboard.putNumber("Yaw", vision.getTargetWithID(0).getYaw());
 
-	}
+	// }
 
 	@Override
 	public void execute() {
 		try {
-			if (!MathUtil.isWithinTolerance(Math.toRadians(vision.getTargetWithID(0).getYaw()) * 2, 0, 0.002)) {
-				driveTrain.drive(0, 0, Math.toRadians(vision.getTargetWithID(0).getYaw()) * 2, true);
-			} else {
-				isFinished();
-			}
+			// if
+			// (!MathUtil.isWithinTolerance(Math.toRadians(vision.getTargetWithID(0).getYaw())
+			// * 2, 0, 0.002)) {
+			driveTrain.drive(0, 0, Math.toRadians(vision.getTargetWithID(0).getYaw()) * 4, true);
+			// } else {
+			// // isFinished();
+
+			// }
 		} catch (Exception e) {
 			//
 		}
@@ -59,13 +61,12 @@ public class TurnToTrackedTargetWithID extends CommandBase {
 
 	@Override
 	public boolean isFinished() {
-		SmartDashboard.putNumber("Yaw", vision.getTargetWithID(0).getYaw());
-		return MathUtil.isWithinTolerance(vision.getTargetWithID(0).getYaw(), 0, 0.002);
+		// SmartDashboard.putNumber("Yaw", vision.getTargetWithID(0).getYaw());
+		return MathUtil.isWithinTolerance(Math.toRadians(vision.getTargetWithID(0).getYaw()), 0, 0.0000002);
 	}
 
 	@Override
 	public void end(boolean interrupted) {
-		SmartDashboard.putNumber("Yaw", vision.getTargetWithID(0).getYaw());
 		driveTrain.drive(0, 0, 0, false);
 	}
 }
