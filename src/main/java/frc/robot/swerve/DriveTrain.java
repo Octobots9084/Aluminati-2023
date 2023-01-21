@@ -72,7 +72,7 @@ public class DriveTrain extends SubsystemBase {
     private final SwerveDriveKinematics swerveDriveKinematics;
     //Flags
     private boolean isFieldCentric = true;
-    private boolean useDriverAssist = true;
+    private boolean useDriverAssist = false;
     private double targetRotationAngle = 0.0;
     private double turnSpeedP = 0.05;
     private double minTurnSpeed = 0.42;
@@ -130,11 +130,22 @@ public class DriveTrain extends SubsystemBase {
     * @param fieldRelative Whether the provided x and y speeds are relative to the field.
     */
     public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
-        // Calculate swerve states
-        var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(
+        var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(new ChassisSpeeds(0, 0, 0));
+        if (MathUtil.isWithinTolerance(gyro.getRotation2d().getDegrees(), targetRotationAngle,0.001)) {
+                // Calculate swerve states
+            swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(
+                fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, -rot, new Rotation2d(Math.toRadians(targetRotationAngle)))
+                : new ChassisSpeeds(xSpeed, ySpeed, rot)
+            );
+        } else {
+                // Calculate swerve states
+            swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(
                 fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, -rot, gyro.getRotation2d())
-                        : new ChassisSpeeds(xSpeed, ySpeed, rot)
-        );
+                : new ChassisSpeeds(xSpeed, ySpeed, rot)
+            );
+        }
+
+        
 
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, MAX_SPEED);
 
