@@ -18,19 +18,45 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package frc.robot.Autonomous;
+package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.swerve.DriveTrain;
 
 
 /**
  * Represents a swerve drive style drivetrain.
 */
-public class TestCommand extends InstantCommand {
+public class RotateTo extends CommandBase {
+    private final DriveTrain dt;
+    private final double angle;
+
+    public RotateTo(double angle) {
+        this.dt = DriveTrain.getInstance();
+        this.angle = angle;
+        addRequirements(this.dt);
+    }
+
     @Override
     public void initialize() {
-        SmartDashboard.putNumber("testcommand", 2);
+        dt.setTargetRotationAngle(angle);
+    }
+
+    @Override
+    public boolean isFinished() {
+        return dt.getRotationSpeed() == 0;
+    }
+
+    @Override
+    public void execute() {
+        dt.drive(0, 0, dt.getRotationSpeed(), true);
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        dt.drive(0, 0, 0, false);
     }
 
 }
