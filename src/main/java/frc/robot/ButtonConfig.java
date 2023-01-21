@@ -1,11 +1,17 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.SetDriverAssist;
+import frc.commands.SetDriverAssist;
+import frc.commands.TurnToTrackedTarget;
+import frc.commands.TurnToTrackedTargetWithID;
 
 public class ButtonConfig {
     public void initTeleop() {
         // DRIVER LEFT
+
+        new JoystickButton(ControlMap.DRIVER_LEFT, 1).whileTrue(new TurnToTrackedTarget());
+
+        new JoystickButton(ControlMap.DRIVER_LEFT, 2).whileTrue(new TurnToTrackedTargetWithID());
 
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
             .onTrue(new SetDriverAssist(true));
