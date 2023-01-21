@@ -30,6 +30,8 @@ public class TurnToTrackedTargetWithID extends CommandBase {
 	private final DriveTrain driveTrain;
 	private final PIVision vision;
 
+    private boolean canSee;
+
 	public TurnToTrackedTargetWithID() {
 		// Initialization
 		this.driveTrain = DriveTrain.getInstance();
@@ -49,8 +51,10 @@ public class TurnToTrackedTargetWithID extends CommandBase {
 		try {
 			driveTrain.setTargetRotationAngle(vision.getTargetWithID(0).getYaw());
 			driveTrain.drive(0, 0, driveTrain.getRotationSpeed(), true);
+            canSee = true;
 		} catch (Exception e) {
 			//
+            canSee = false;
 		}
 
 		SmartDashboard.putNumber("madeit", 1000);
@@ -58,7 +62,14 @@ public class TurnToTrackedTargetWithID extends CommandBase {
 
 	@Override
 	public boolean isFinished() {
-		return MathUtil.isWithinTolerance(vision.getTargetWithID(0).getYaw(), 0, 0.2);
+        if(canSee)
+            {
+                return MathUtil.isWithinTolerance(vision.getTargetWithID(0).getYaw(), 0, 0.2);
+            }
+        else {
+            return false;
+        }
+
 	}
 
 	@Override
