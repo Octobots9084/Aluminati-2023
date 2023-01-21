@@ -38,7 +38,7 @@ public class GoTowardsTargetWithID extends CommandBase {
 
     @Override
     public void initialize() {
-        SmartDashboard.putNumber("Yaw", Math.toRadians(vision.getTargetWithID(0).getYaw()));
+      //  SmartDashboard.putNumber("Yaw", Math.toRadians(vision.getTargetWithID(0).getYaw()));
     }
 
     @Override
