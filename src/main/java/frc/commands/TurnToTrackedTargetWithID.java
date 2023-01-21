@@ -34,12 +34,10 @@ public class TurnToTrackedTargetWithID extends CommandBase {
 		// Initialization
 		this.driveTrain = DriveTrain.getInstance();
 		this.vision = PIVision.getInstance();
-		// addRequirements(this.driveTrain);
 	}
 
 	@Override
 	public void initialize() {
-		// driveTrain.setTargetRotationAngle(vision.getBestTarget().getYaw());
 		SmartDashboard.putNumber("Yaw", Math.toRadians(vision.getTargetWithID(0).getYaw()));
 	}
 
