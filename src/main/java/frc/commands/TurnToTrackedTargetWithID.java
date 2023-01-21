@@ -30,8 +30,6 @@ public class TurnToTrackedTargetWithID extends CommandBase {
 	private final DriveTrain driveTrain;
 	private final PIVision vision;
 
-    private boolean canSee;
-
 	public TurnToTrackedTargetWithID() {
 		// Initialization
 		this.driveTrain = DriveTrain.getInstance();
@@ -42,37 +40,32 @@ public class TurnToTrackedTargetWithID extends CommandBase {
 	@Override
 	public void initialize() {
 		// driveTrain.setTargetRotationAngle(vision.getBestTarget().getYaw());
-		SmartDashboard.putNumber("madeit3", 0);
-		SmartDashboard.putNumber("Times executed22", SmartDashboard.getNumber("Times executed", 0) + 1);
+		SmartDashboard.putNumber("Yaw", vision.getTargetWithID(0).getYaw());
+
 	}
 
 	@Override
 	public void execute() {
 		try {
-			driveTrain.drive(0, 0, Math.toRadians(vision.getTargetWithID(0).getYaw()) * 2, true);
-            canSee = true;
+			if (!MathUtil.isWithinTolerance(Math.toRadians(vision.getTargetWithID(0).getYaw()) * 2, 0, 0.002)) {
+				driveTrain.drive(0, 0, Math.toRadians(vision.getTargetWithID(0).getYaw()) * 2, true);
+			} else {
+				isFinished();
+			}
 		} catch (Exception e) {
 			//
-            canSee = false;
 		}
-
-		SmartDashboard.putNumber("madeit3", 1000);
 	}
 
 	@Override
 	public boolean isFinished() {
-        if(canSee)
-            {
-                return MathUtil.isWithinTolerance(vision.getTargetWithID(0).getYaw(), 0, 0.2);
-            }
-        else {
-            return false;
-        }
-
+		SmartDashboard.putNumber("Yaw", vision.getTargetWithID(0).getYaw());
+		return MathUtil.isWithinTolerance(vision.getTargetWithID(0).getYaw(), 0, 0.002);
 	}
 
 	@Override
 	public void end(boolean interrupted) {
+		SmartDashboard.putNumber("Yaw", vision.getTargetWithID(0).getYaw());
 		driveTrain.drive(0, 0, 0, false);
 	}
 }
