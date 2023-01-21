@@ -10,6 +10,7 @@ public class ButtonConfig {
 
         // new JoystickButton(ControlMap.DRIVER_LEFT, 1).whileTrue(new
         // TurnToTrackedTarget());
+        new JoystickButton(ControlMap.DRIVER_LEFT, 1).whenPressed(new TurnToTrackedTargetWithID());
 
         new JoystickButton(ControlMap.DRIVER_LEFT, 2).whenPressed(new TurnToTrackedTargetWithID());
 

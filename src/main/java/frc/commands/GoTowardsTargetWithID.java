@@ -26,42 +26,42 @@ import frc.subsystems.swerve.DriveTrain;
 import frc.subsystems.vision.PIVision;
 import frc.util.MathUtil;
 
-public class TurnToTrackedTargetWithID extends CommandBase {
-	private final DriveTrain driveTrain;
-	private final PIVision vision;
+public class GoTowardsTargetWithID extends CommandBase {
+    private final DriveTrain driveTrain;
+    private final PIVision vision;
 
-	public TurnToTrackedTargetWithID() {
-		// Initialization
-		this.driveTrain = DriveTrain.getInstance();
-		this.vision = PIVision.getInstance();
-	}
+    public GoTowardsTargetWithID() {
+        // Initialization
+        this.driveTrain = DriveTrain.getInstance();
+        this.vision = PIVision.getInstance();
+    }
 
-	@Override
-	public void initialize() {
-		SmartDashboard.putNumber("Yaw", Math.toRadians(vision.getTargetWithID(0).getYaw()));
-	}
+    @Override
+    public void initialize() {
+        SmartDashboard.putNumber("Yaw", Math.toRadians(vision.getTargetWithID(0).getYaw()));
+    }
 
-	@Override
-	public void execute() {
-		try {
-			if (vision.getHasTarget()) {
-				driveTrain.drive(0, 0, Math.toRadians(vision.getTargetWithID(0).getYaw()) * 3, true);
-			} else {
-				isFinished();
-			}
-		} catch (Exception e) {
-			//
-		}
-	}
+    @Override
+    public void execute() {
+        try {
+            if (vision.getHasTarget()) {
+                driveTrain.drive(0, 0, Math.toRadians(vision.getTargetWithID(0).getYaw()) * 3, true);
+            } else {
+                isFinished();
+            }
+        } catch (Exception e) {
+            //
+        }
+    }
 
-	@Override
-	public boolean isFinished() {
-		return MathUtil.isWithinTolerance(Math.toRadians(vision.getTargetWithID(0).getYaw()), 0, 0.3);
-	}
+    @Override
+    public boolean isFinished() {
+        return MathUtil.isWithinTolerance(Math.toRadians(vision.getTargetWithID(0).getYaw()), 0, 0.3);
+    }
 
-	@Override
-	public void end(boolean interrupted) {
-		driveTrain.drive(0, 0, 0, false);
-	}
+    @Override
+    public void end(boolean interrupted) {
+        driveTrain.drive(0, 0, 0, false);
+    }
 }
 
