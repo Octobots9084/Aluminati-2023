@@ -1,7 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.SetDriverAssist;
+import frc.commands.SetDriverAssist;
 
 public class ButtonConfig {
     public void initTeleop() {
