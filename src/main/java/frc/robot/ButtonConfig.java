@@ -1,6 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.commands.GoTowardsTargetWithID;
 import frc.commands.SetDriverAssist;
 import frc.commands.TurnToTrackedTargetWithID;
 
@@ -12,7 +13,7 @@ public class ButtonConfig {
         // TurnToTrackedTarget());
         new JoystickButton(ControlMap.DRIVER_LEFT, 1).whenPressed(new TurnToTrackedTargetWithID());
 
-        new JoystickButton(ControlMap.DRIVER_LEFT, 2).whenPressed(new TurnToTrackedTargetWithID());
+        new JoystickButton(ControlMap.DRIVER_LEFT, 2).whenPressed(new GoTowardsTargetWithID());
 
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
             .onTrue(new SetDriverAssist(true));
