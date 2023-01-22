@@ -38,7 +38,7 @@ public class GoTowardsTargetWithID extends CommandBase {
 
     @Override
     public void initialize() {
-      SmartDashboard.putNumber("Yaw", Math.toRadians(vision.getTargetWithID(0).getYaw()));
+//      SmartDashboard.putNumber("Yaw", Math.toRadians(vision.getTargetWithID(0).getYaw()));
     }
 
     @Override
@@ -57,18 +57,19 @@ public class GoTowardsTargetWithID extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        if (vision.getTargetWithID(0).getBestCameraToTarget().getX() < 1 && vision.getTargetWithID(0).getBestCameraToTarget().getY() < 1) {
-            return true;
-        }
-        else {
-            return false;
+        try {
+            return vision.getTargetWithID(0).getBestCameraToTarget().getX() < 1 && vision.getTargetWithID(0).getBestCameraToTarget().getY() < 1;
+        } catch (Exception e) {
+            //
         }
 
+        return true;
     }
 
     @Override
     public void end(boolean interrupted) {
         driveTrain.drive(0, 0, 0, false);
     }
+
 }
 
