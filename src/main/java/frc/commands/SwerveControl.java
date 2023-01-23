@@ -62,7 +62,7 @@ public class SwerveControl extends CommandBase {
         } else {
             SmartDashboard.putNumber("rotation", rot);
             driveTrain.drive(xSpeed, ySpeed, rot, driveTrain.getFieldCentric());
-            
+            Gyro.getInstance().updateRotation2D();
             driveTrain.setTargetRotationAngle(gyro.getRotation2d().getDegrees());
         }
     }

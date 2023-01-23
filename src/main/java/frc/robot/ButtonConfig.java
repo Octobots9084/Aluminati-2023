@@ -1,9 +1,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.commands.GoTowardsTargetWithID;
 import frc.commands.SetDriverAssist;
-import frc.commands.TurnToTrackedTargetWithID;
 
 public class ButtonConfig {
     public void initTeleop() {
@@ -16,9 +14,15 @@ public class ButtonConfig {
         new JoystickButton(ControlMap.DRIVER_LEFT, 2).whenPressed(new GoTowardsTargetWithID());
 
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
-            .onTrue(new SetDriverAssist(true));
+            .whileTrue(new SetDriverAssist(true));
         
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
-            .onFalse(new SetDriverAssist(false));
+            .whileFalse(new SetDriverAssist(false));
+
+        new JoystickButton(ControlMap.DRIVER_LEFT, 1)
+            .onTrue(new RotateTo(0));
+
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 11)
+            .onTrue(new ZeroGyro());
     }
 }
