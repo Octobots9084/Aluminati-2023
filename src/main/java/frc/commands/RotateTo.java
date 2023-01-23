@@ -20,15 +20,12 @@
 
 package frc.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.subsystems.swerve.DriveTrain;
-
 
 /**
  * Represents a swerve drive style drivetrain.
-*/
+ */
 public class RotateTo extends CommandBase {
     private final DriveTrain dt;
     private final double angle;
