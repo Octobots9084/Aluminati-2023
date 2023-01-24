@@ -20,7 +20,7 @@
 
 package frc.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.subsystems.swerve.DriveTrain;
 import frc.subsystems.vision.PIVision;
@@ -29,24 +29,37 @@ import frc.util.MathUtil;
 public class GoTowardsTargetWithID extends CommandBase {
     private final DriveTrain driveTrain;
     private final PIVision vision;
+    private final Transform3d cameraToTarget;
 
     public GoTowardsTargetWithID() {
         // Initialization
         this.driveTrain = DriveTrain.getInstance();
         this.vision = PIVision.getInstance();
+        this.cameraToTarget = vision.getTargetWithID(0).getBestCameraToTarget();
     }
 
     @Override
     public void initialize() {
-//     SmartDashboard.putNumber("Yaw", Math.toRadians(vision.getTargetWithID(0).getYaw()));
+        // SmartDashboard.putNumber("Yaw",
+        // Math.toRadians(vision.getTargetWithID(0).getYaw()));
+        // try {
+        // cameraToTarget = vision.getTargetWithID(0).getBestCameraToTarget();
+        // } catch (Exception e) {
+
+        // }
     }
 
     @Override
     public void execute() {
         try {
             if (vision.getHasTarget()) {
-                driveTrain.drive(vision.getTargetWithID(0).getBestCameraToTarget().getX(), vision.getTargetWithID(0).getBestCameraToTarget().getY(), 0,true);
-                driveTrain.drive(0, 0, Math.toRadians(vision.getTargetWithID(0).getYaw()) * 3, true);
+                driveTrain.drive(0, 0, cameraToTarget.getRotation().getZ() * 3, true);
+
+                driveTrain.drive(cameraToTarget.getX(), 0, 0, true);
+
+                if (MathUtil.isWithinTolerance(cameraToTarget.getX(), 0, 0.5)) {
+                    driveTrain.drive(0, cameraToTarget.getY(), 0, true);
+                }
             } else {
                 isFinished();
             }
@@ -58,12 +71,13 @@ public class GoTowardsTargetWithID extends CommandBase {
     @Override
     public boolean isFinished() {
         try {
-            return vision.getTargetWithID(0).getBestCameraToTarget().getX() < 1 && vision.getTargetWithID(0).getBestCameraToTarget().getY() < 1;
+            return MathUtil.isWithinTolerance(cameraToTarget.getX(), 0, 0.5)
+                    && MathUtil.isWithinTolerance(0, cameraToTarget.getY(), 0.5);
         } catch (Exception e) {
             //
         }
 
-        return true;
+        return false;
     }
 
     @Override
@@ -72,4 +86,3 @@ public class GoTowardsTargetWithID extends CommandBase {
     }
 
 }
-

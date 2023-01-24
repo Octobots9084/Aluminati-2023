@@ -20,6 +20,7 @@
 
 package frc.commands;
 
+import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.subsystems.swerve.DriveTrain;
@@ -29,23 +30,25 @@ import frc.util.MathUtil;
 public class TurnToTrackedTargetWithID extends CommandBase {
 	private final DriveTrain driveTrain;
 	private final PIVision vision;
+	private final Transform3d cameraToTarget;
 
 	public TurnToTrackedTargetWithID() {
 		// Initialization
 		this.driveTrain = DriveTrain.getInstance();
 		this.vision = PIVision.getInstance();
+		this.cameraToTarget = this.vision.getTargetWithID(0).getBestCameraToTarget();
 	}
 
 	@Override
 	public void initialize() {
-		SmartDashboard.putNumber("Yaw", Math.toRadians(vision.getTargetWithID(0).getYaw()));
+		SmartDashboard.putNumber("Yaw", cameraToTarget.getRotation().getZ());
 	}
 
 	@Override
 	public void execute() {
 		try {
 			if (vision.getHasTarget()) {
-				driveTrain.drive(0, 0, Math.toRadians(vision.getTargetWithID(0).getYaw()) * 3, true);
+				driveTrain.drive(0, 0, cameraToTarget.getRotation().getZ() * 3, true);
 			} else {
 				isFinished();
 			}
@@ -56,7 +59,7 @@ public class TurnToTrackedTargetWithID extends CommandBase {
 
 	@Override
 	public boolean isFinished() {
-		return MathUtil.isWithinTolerance(Math.toRadians(vision.getTargetWithID(0).getYaw()), 0, 0.3);
+		return MathUtil.isWithinTolerance(cameraToTarget.getRotation().getZ(), 0, 0.3);
 	}
 
 	@Override
@@ -64,4 +67,3 @@ public class TurnToTrackedTargetWithID extends CommandBase {
 		driveTrain.drive(0, 0, 0, false);
 	}
 }
-
