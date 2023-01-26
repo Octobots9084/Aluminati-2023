@@ -30,18 +30,21 @@ import frc.util.MathUtil;
 public class TurnToTrackedTargetWithID extends CommandBase {
 	private final DriveTrain driveTrain;
 	private final PIVision vision;
-	private final Transform3d cameraToTarget;
+	private Transform3d cameraToTarget;
 
 	public TurnToTrackedTargetWithID() {
 		// Initialization
 		this.driveTrain = DriveTrain.getInstance();
 		this.vision = PIVision.getInstance();
-		this.cameraToTarget = this.vision.getTargetWithID(0).getBestCameraToTarget();
+		this.cameraToTarget = null;
 	}
 
 	@Override
 	public void initialize() {
-		SmartDashboard.putNumber("Yaw", cameraToTarget.getRotation().getZ());
+		if (vision.getHasTarget()) {
+			cameraToTarget = vision.getTargetWithID(0).getBestCameraToTarget();
+			SmartDashboard.putNumber("Yaw", cameraToTarget.getRotation().getZ());
+		}
 	}
 
 	@Override
