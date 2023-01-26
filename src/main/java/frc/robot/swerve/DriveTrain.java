@@ -169,6 +169,13 @@ public class DriveTrain extends SubsystemBase {
 
     public void drive(ChassisSpeeds chassisSpeeds) {
         chassisSpeeds = new ChassisSpeeds(chassisSpeeds.vxMetersPerSecond,chassisSpeeds.vyMetersPerSecond,chassisSpeeds.omegaRadiansPerSecond*-1);
+        // Check driver assist and drive
+        if (chassisSpeeds.omegaRadiansPerSecond == 0) {
+            chassisSpeeds.omegaRadiansPerSecond = this.getRotationSpeed();
+        } else {
+            Gyro.getInstance().updateRotation2D();
+            this.setTargetRotationAngle(gyro.getRotation2d().getDegrees());
+        }
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(chassisSpeeds);
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, MAX_SPEED);
 
