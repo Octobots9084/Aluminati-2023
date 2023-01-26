@@ -1,7 +1,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.Autonomous.PathPlannerAutos;
 import frc.robot.commands.BalanceChargeStation;
 import frc.robot.commands.RotateTo;
 import frc.robot.commands.SetDriverAssist;
