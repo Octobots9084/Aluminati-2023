@@ -67,6 +67,7 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
          var e = Executors.newScheduledThreadPool(2);
          e.scheduleWithFixedDelay(this::updateOdometry, 5, 15, TimeUnit.MILLISECONDS);
          robotPose.set(new Pose2d());
+         this.swerveDrivePoseEstimator.getEstimatedPosition();
      }
  
      public Pose2d getRobotPose() {

@@ -8,6 +8,9 @@
   },
   "NetworkTables": {
     "transitory": {
+      "Shuffleboard": {
+        "open": true
+      },
       "SmartDashboard": {
         "PPSwerveControllerCommand_field": {
           "open": true

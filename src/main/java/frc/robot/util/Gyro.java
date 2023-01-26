@@ -23,6 +23,7 @@ package frc.robot.util;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import java.util.concurrent.atomic.AtomicReference;
 public class Gyro {
@@ -61,6 +62,11 @@ public class Gyro {
     public void setAngleAdjustment(double angle) {
         navX.reset();
         navX.setAngleAdjustment(angle);
+    }
+
+    public double getRoll() {
+        SmartDashboard.putNumber("Gryo pitch", navX.getRoll());
+        return navX.getRoll();
     }
 
     public void resetGyro() {

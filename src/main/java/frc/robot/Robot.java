@@ -105,7 +105,8 @@ public class Robot extends TimedRobot {
 
         resetRobotPoseAndGyro();
         
-        CommandScheduler.getInstance().schedule(PathPlannerAutos.Onemeter());
+        //CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
+        CommandScheduler.getInstance().schedule(PathPlannerAutos.testPath());
         
         Robot.autoStartTime = Timer.getFPGATimestamp();
         try {

@@ -13,11 +13,14 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import java.util.HashMap;
 import java.util.Map;
 
+import frc.robot.commands.BalanceChargeStation;
 import frc.robot.swerve.DriveTrain;
+import frc.robot.util.Gyro;
 
 public final class PathPlannerAutos {
   private static final Map<String, Command> eventMap = new HashMap<>(Map.ofEntries(
-    Map.entry("testcommand", new WaitCommand(5))
+    Map.entry("testcommand", new WaitCommand(5)),
+    Map.entry("BalanceChargeStation", new BalanceChargeStation(DriveTrain.getInstance(), Gyro.getInstance()))
   ));
 
   private static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
@@ -30,13 +33,18 @@ public final class PathPlannerAutos {
     DriveTrain.getInstance()
   );
 
-  public static CommandBase exampleAuto() {
-    return autoBuilder.fullAuto(PathPlanner.loadPathGroup("New Path", new PathConstraints(4, 3)));
+  public static CommandBase testPath() {
+    return autoBuilder.fullAuto(PathPlanner.loadPathGroup("TestingPath", new PathConstraints(1, 0.5)));
   }
 
   public static CommandBase Onemeter() {
     DriveTrain.getInstance().setUseDriverAssist(true);
     return autoBuilder.fullAuto(PathPlanner.loadPathGroup("1m", new PathConstraints(1, 3)));
+  }
+
+  public static CommandBase BalanceChargeStation() {
+    DriveTrain.getInstance().setUseDriverAssist(true);
+    return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStation", new PathConstraints(3, 2)));
   }
 
 

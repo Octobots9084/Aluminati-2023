@@ -47,7 +47,6 @@ public class SwerveControl extends CommandBase {
     public void execute() {
         // Link joysticks
         var leftJoystick = ControlMap.DRIVER_LEFT;
-        var rightJoystick = ControlMap.DRIVER_RIGHT;
 
         // Get speeds from joysticks
         var xSpeed = MathUtil.fitDeadband(-leftJoystick.getY()) * DriveTrain.MAX_TURN_SPEED;

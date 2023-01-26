@@ -62,7 +62,7 @@ public class SwerveModule {
         MAX_TURN_VELOCITY, MIN_TURN_VELOCITY, MAX_TURN_ACCELERATION, ALLOWED_CLOSED_LOOP_ERROR
     );
     // P was 30
-    private static final PIDConfig TM_SM_PID = new PIDConfig(10, 0.000, 0, 0);
+    //private static final PIDConfig TM_SM_PID = new PIDConfig(10, 0.000, 0, 0);
 
     // Drive Motor Motion Magic
     private static final MotionMagicConfig DM_MM_CONFIG = new MotionMagicConfig(
@@ -71,8 +71,10 @@ public class SwerveModule {
         300, 2,
         TIMEOUT_MS, 10
     );
-    private static final PIDConfig DM_MM_PID = new PIDConfig(0.035, 0.0001, 0, 0.06);
+    //private static final PIDConfig DM_MM_PID = new PIDConfig(0.035, 0.0001, 0);
 
+    private static PIDConfig DM_MM_PID;
+    private static PIDConfig TM_SM_PID;
     // Motors
     private final WPI_TalonFX driveMotor;
     private final CANSparkMax steeringMotor;
@@ -87,8 +89,10 @@ public class SwerveModule {
      * @param driveMotorChannel    ID for the drive motor.
      * @param steeringMotorChannel ID for the turning motor.
      */
-    public SwerveModule(int driveMotorChannel, int steeringMotorChannel, boolean steerMotorInverted) {//, double zeroTicks) {
+    public SwerveModule(int driveMotorChannel, int steeringMotorChannel, boolean steerMotorInverted, PIDConfig turnPidConfig, PIDConfig drivePidConfig) {//, double zeroTicks) {
 
+        TM_SM_PID = turnPidConfig;
+        DM_MM_PID = drivePidConfig;
         // Steer Motor
         this.steeringMotor = new CANSparkMax(steeringMotorChannel, CANSparkMaxLowLevel.MotorType.kBrushless);
         TM_SM_PID.setTolerance(0);
