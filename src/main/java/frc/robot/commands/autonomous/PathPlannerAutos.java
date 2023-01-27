@@ -1,4 +1,4 @@
-package frc.robot.Autonomous;
+package frc.robot.commands.autonomous;
 
 import com.pathplanner.lib.PathConstraints;
 import com.pathplanner.lib.PathPlanner;
@@ -13,8 +13,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import java.util.HashMap;
 import java.util.Map;
 
-import frc.robot.commands.BalanceChargeStation;
-import frc.robot.swerve.DriveTrain;
+import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 
 public final class PathPlannerAutos {
