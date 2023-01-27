@@ -26,8 +26,9 @@
  import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
  import edu.wpi.first.wpilibj.Timer;
- import frc.robot.swerve.SwerveModule;
- import java.util.concurrent.Executors;
+import frc.robot.subsystems.swerve.SwerveModule;
+
+import java.util.concurrent.Executors;
  import java.util.concurrent.TimeUnit;
  import java.util.concurrent.atomic.AtomicReference;
  import java.util.concurrent.locks.ReentrantLock;
