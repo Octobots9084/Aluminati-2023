@@ -20,7 +20,6 @@
 
 package frc.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.ControlMap;
 import frc.subsystems.swerve.DriveTrain;
@@ -59,12 +58,13 @@ public class SwerveControl extends CommandBase {
         // Check driver assist and drive
 
         // if (rot == 0 && driveTrain.useDriverAssist()) {
-        //     driveTrain.drive(xSpeed, ySpeed, driveTrain.getRotationSpeed(), driveTrain.getFieldCentric());
+        // driveTrain.drive(xSpeed, ySpeed, driveTrain.getRotationSpeed(),
+        // driveTrain.getFieldCentric());
         // } else {
-        //     SmartDashboard.putNumber("rotation", rot);
-        //     driveTrain.drive(xSpeed, ySpeed, rot, driveTrain.getFieldCentric());
-        //     Gyro.getInstance().updateRotation2D();
-        //     driveTrain.setTargetRotationAngle(gyro.getRotation2d().getDegrees());
+        // SmartDashboard.putNumber("rotation", rot);
+        // driveTrain.drive(xSpeed, ySpeed, rot, driveTrain.getFieldCentric());
+        // Gyro.getInstance().updateRotation2D();
+        // driveTrain.setTargetRotationAngle(gyro.getRotation2d().getDegrees());
         // }
     }
 }
