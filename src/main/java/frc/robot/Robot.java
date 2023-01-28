@@ -43,6 +43,9 @@ public class Robot extends TimedRobot {
     private final Field2d field2d = new Field2d();
     private SendableChooser<Command> chooser;
     private boolean autoFlag = false;
+    // private final DifferentialDrivePoseEstimator poseEstimator = new
+    // DifferentialDrivePoseEstimator(m_kinematics, m_gyro.getRotation2d(), 0.0,
+    // 0.0, new Pose2d());
 
     @Override
     public void disabledPeriodic() {
@@ -52,7 +55,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
-        
+
         initializeAllSubsystems();
         initializeDefaultCommands();
 
@@ -66,7 +69,8 @@ public class Robot extends TimedRobot {
 
         resetRobotPoseAndGyro();
         var threader = Executors.newSingleThreadScheduledExecutor();
-        threader.scheduleWithFixedDelay(new Thread(() -> Gyro.getInstance().updateRotation2D()), 0, 5, TimeUnit.MILLISECONDS);
+        threader.scheduleWithFixedDelay(new Thread(() -> Gyro.getInstance().updateRotation2D()), 0, 5,
+                TimeUnit.MILLISECONDS);
         LiveWindow.disableAllTelemetry();
         LiveWindow.setEnabled(false);
         this.chooser = new SendableChooser<>();
@@ -74,7 +78,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotPeriodic() {
-        
+
     }
 
     @Override
@@ -96,7 +100,6 @@ public class Robot extends TimedRobot {
         }
         this.autoFlag = false;
 
-        
     }
 
     @Override
@@ -105,9 +108,9 @@ public class Robot extends TimedRobot {
         initializeAllSubsystems();
 
         resetRobotPoseAndGyro();
-        
+
         CommandScheduler.getInstance().schedule(PathPlannerAutos.Onemeter());
-        
+
         Robot.autoStartTime = Timer.getFPGATimestamp();
         try {
             var command = chooser.getSelected();

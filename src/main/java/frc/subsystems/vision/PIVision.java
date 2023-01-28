@@ -81,4 +81,8 @@ public class PIVision extends SubsystemBase {
 	public boolean getHasTarget() {
 		return hasTarget; // Returns whether a target was found
 	}
+
+	public PhotonCamera getCamera() {
+		return camera;
+	}
 }

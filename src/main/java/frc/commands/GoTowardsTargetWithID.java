@@ -43,7 +43,7 @@ public class GoTowardsTargetWithID extends CommandBase {
     public void initialize() {
         if (vision.getHasTarget()) {
             cameraToTarget = vision.getTargetWithID(0).getBestCameraToTarget();
-            SmartDashboard.putNumber("X", cameraToTarget.getX());
+
         }
     }
 
@@ -51,16 +51,25 @@ public class GoTowardsTargetWithID extends CommandBase {
     public void execute() {
         try {
             if (vision.getHasTarget()) {
-                driveTrain.drive(0, 0, cameraToTarget.getRotation().getZ() * 3, true);
-
-                if (MathUtil.isWithinTolerance(cameraToTarget.getRotation().getZ(), 0, 0.3)) {
-                    driveTrain.drive(cameraToTarget.getX() / 10, 0, 0, true);
-                    SmartDashboard.putNumber("X", cameraToTarget.getX());
+                double xSpeed = 0;
+                double ySpeed = 0;
+                double rot = 0;
+                cameraToTarget = vision.getTargetWithID(0).getBestCameraToTarget();
+                SmartDashboard.putNumber("X", cameraToTarget.getX());
+                SmartDashboard.putNumber("Y", cameraToTarget.getX());
+                SmartDashboard.putNumber("Rot", cameraToTarget.getRotation().getX());
+                if (!MathUtil.isWithinTolerance(cameraToTarget.getX(), 0, 0.3)) {
+                    // xSpeed = (cameraToTarget.getX() / Math.abs(cameraToTarget.getX())) / 5;
                 }
-
-                if (MathUtil.isWithinTolerance(cameraToTarget.getX(), 0, 0.5)) {
-                    driveTrain.drive(0, cameraToTarget.getY(), 0, true);
+                if (!MathUtil.isWithinTolerance(cameraToTarget.getY(), 0, 0.3)) {
+                    // ySpeed = (cameraToTarget.getY() / Math.abs(cameraToTarget.getY())) / 5;
                 }
+                if (!MathUtil.isWithinTolerance(cameraToTarget.getX(), 0, 0.05)) {
+                    rot = (-cameraToTarget.getRotation().getX());
+                    SmartDashboard.putNumber("Camera rotation", rot);
+
+                }
+                // driveTrain.drive(xSpeed, ySpeed, rot, true);
             } else {
                 isFinished();
             }

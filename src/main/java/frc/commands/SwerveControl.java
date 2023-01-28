@@ -57,13 +57,14 @@ public class SwerveControl extends CommandBase {
         var rot = MathUtil.fitDeadband(leftJoystick.getZ()) * DriveTrain.MAX_ANGULAR_SPEED;
 
         // Check driver assist and drive
-        if (rot == 0 && driveTrain.useDriverAssist()) {
-            driveTrain.drive(xSpeed, ySpeed, driveTrain.getRotationSpeed(), driveTrain.getFieldCentric());
-        } else {
-            SmartDashboard.putNumber("rotation", rot);
-            driveTrain.drive(xSpeed, ySpeed, rot, driveTrain.getFieldCentric());
-            Gyro.getInstance().updateRotation2D();
-            driveTrain.setTargetRotationAngle(gyro.getRotation2d().getDegrees());
-        }
+
+        // if (rot == 0 && driveTrain.useDriverAssist()) {
+        //     driveTrain.drive(xSpeed, ySpeed, driveTrain.getRotationSpeed(), driveTrain.getFieldCentric());
+        // } else {
+        //     SmartDashboard.putNumber("rotation", rot);
+        //     driveTrain.drive(xSpeed, ySpeed, rot, driveTrain.getFieldCentric());
+        //     Gyro.getInstance().updateRotation2D();
+        //     driveTrain.setTargetRotationAngle(gyro.getRotation2d().getDegrees());
+        // }
     }
 }
