@@ -83,7 +83,6 @@ import org.photonvision.EstimatedRobotPose;
      }
  
      public void updateOdometry() {
-        
          resetLock.lock();
          SwerveModulePosition[] swerveModulePositions = {
             swerveModules[0].getModulePosition(),
@@ -91,27 +90,30 @@ import org.photonvision.EstimatedRobotPose;
             swerveModules[2].getModulePosition(),
             swerveModules[3].getModulePosition()
         };
+        var pose2d = swerveDrivePoseEstimator.updateWithTime(
+                 Timer.getFPGATimestamp(),
+                 gyro.getRotation2d(),
+                 swerveModulePositions
+            );
+            robotPose.set(pose2d);
+            SmartDashboard.putNumber("XPosOd: ", robotPose.get().getX());
+            SmartDashboard.putNumber("YPoseOd: ", robotPose.get().getY());
+            SmartDashboard.putNumber("RotOd: ", robotPose.get().getRotation().getDegrees());
          try {
-            //  var pose2d = swerveDrivePoseEstimator.updateWithTime(
-            //      Timer.getFPGATimestamp(),
-            //      gyro.getRotation2d(),
-            //      swerveModulePositions
-            //  );
-            //  robotPose.set(pose2d);
-             Optional<EstimatedRobotPose> result = photonCameraWrapper.getEstimatedGlobalPose(getRobotPose());
-             if (result.isPresent()) {
-                robotPose.set(result.get().estimatedPose.toPose2d());
-                SmartDashboard.putNumber("XPos1: ", swerveDrivePoseEstimator.getEstimatedPosition().getX());
-                SmartDashboard.putNumber("YPose1: ", swerveDrivePoseEstimator.getEstimatedPosition().getY());
-                SmartDashboard.putNumber("Rot1: ", swerveDrivePoseEstimator.getEstimatedPosition().getRotation().getDegrees());
-                SmartDashboard.putNumber("XPos: ", result.get().estimatedPose.toPose2d().getX());
-                SmartDashboard.putNumber("YPose: ", result.get().estimatedPose.toPose2d().getY());
-                SmartDashboard.putNumber("Rot: ", result.get().estimatedPose.toPose2d().getRotation().getDegrees());
-             }
-             
-         } finally {
+            Optional<EstimatedRobotPose> result = photonCameraWrapper.getEstimatedGlobalPose(getRobotPose());
+            if (result.isPresent()) {
+                swerveDrivePoseEstimator.addVisionMeasurement(result.get().estimatedPose.toPose2d(), Timer.getFPGATimestamp());
+            }
+            SmartDashboard.putNumber("XPos: ", result.get().estimatedPose.toPose2d().getX());
+            SmartDashboard.putNumber("YPose: ", result.get().estimatedPose.toPose2d().getY());
+            SmartDashboard.putNumber("Rot: ", result.get().estimatedPose.toPose2d().getRotation().getDegrees());
+            
+         } catch(Exception e) {
+        //deez
+         }finally {
              resetLock.unlock();
          }
+                
      }
  
      public void resetPose() {

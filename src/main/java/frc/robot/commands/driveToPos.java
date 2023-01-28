@@ -54,35 +54,35 @@ public class driveToPos extends CommandBase {
     @Override
     public void execute() {
         Pose2d currentPose = driveTrain.getPoseEstimator().getRobotPose();
-        double ySpeed = (target.getY()-currentPose.getY())/5;
-        double xSpeed = (currentPose.getX()- target.getX())/5;
-        if (MathUtil.isWithinTolerance(xSpeed, 0, 0.05)) {
-            xSpeed = 0;
-        }
-        if (xSpeed>0.5) {
-            xSpeed = 0.5;
-        }
-        if (xSpeed<-0.5) {
-            xSpeed = -0.5;
-        }
-        if (MathUtil.isWithinTolerance(ySpeed, 0, 0.05)) {
-            ySpeed = 0;
-        }
+        double ySpeed = (target.getY()-currentPose.getY());
+        double xSpeed = (target.getX()-currentPose.getX());
+        // if (MathUtil.isWithinTolerance(xSpeed, 0, 0.05)) {
+        //     xSpeed = 0;
+        // }
+        // if (xSpeed>0.5) {
+        //     xSpeed = 0.5;
+        // }
+        // if (xSpeed<-0.5) {
+        //     xSpeed = -0.5;
+        // }
+        // if (MathUtil.isWithinTolerance(ySpeed, 0, 0.05)) {
+        //     ySpeed = 0;
+        // }
 
-        if (ySpeed>0.5) {
-            ySpeed = 0.5;
-        }
+        // if (ySpeed>0.5) {
+        //     ySpeed = 0.5;
+        // }
 
-        if (ySpeed<-0.5) {
-            ySpeed = -0.5;
-        }
+        // if (ySpeed<-0.5) {
+        //     ySpeed = -0.5;
+        // }
 
         SmartDashboard.putNumber("CurrentX", currentPose.getX());
         SmartDashboard.putNumber("CurrentY", currentPose.getY());
         SmartDashboard.putNumber("yspeed", xSpeed);
         SmartDashboard.putNumber("xspeed", ySpeed);
         double rotSpeed = 0;//turnPid.calculate(currentPose.getRotation().getRadians(), target.getRotation().getRadians());
-        driveTrain.drive(-xSpeed, -ySpeed, rotSpeed, true);
+        //driveTrain.drive(xSpeed, ySpeed, rotSpeed, true);
     }
 
     @Override

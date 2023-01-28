@@ -58,7 +58,7 @@ import java.io.IOException;
          // Create pose estimator
          photonPoseEstimator =
                  new PhotonPoseEstimator(
-                        fieldLayout, PoseStrategy.CLOSEST_TO_REFERENCE_POSE, photonCamera, VisionConstants.robotToCam);
+                        fieldLayout, PoseStrategy.LOWEST_AMBIGUITY, photonCamera, VisionConstants.robotToCam);
      }
  
      /**
@@ -67,7 +67,6 @@ import java.io.IOException;
       *     of the observation. Assumes a planar field and the robot is always firmly on the ground
       */
      public Optional<EstimatedRobotPose> getEstimatedGlobalPose(Pose2d prevEstimatedRobotPose) {
-         photonPoseEstimator.setReferencePose(prevEstimatedRobotPose);
          return photonPoseEstimator.update();
      }
  }
