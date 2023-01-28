@@ -23,14 +23,21 @@
  import edu.wpi.first.math.Nat;
  import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
  import edu.wpi.first.math.geometry.Pose2d;
- import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
+import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
  import edu.wpi.first.wpilibj.Timer;
- import frc.robot.swerve.SwerveModule;
- import java.util.concurrent.Executors;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.swerve.SwerveModule;
+import frc.robot.vision.PhotonCameraWrapper;
+
+import java.util.Optional;
+import java.util.concurrent.Executors;
  import java.util.concurrent.TimeUnit;
  import java.util.concurrent.atomic.AtomicReference;
  import java.util.concurrent.locks.ReentrantLock;
+
+import org.photonvision.EstimatedRobotPose;
  
  public class PoseEstimator {
      public final SwerveDrivePoseEstimator swerveDrivePoseEstimator;
@@ -38,8 +45,9 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
      private final ReentrantLock resetLock = new ReentrantLock();
      private final Gyro gyro;
      private final SwerveModule[] swerveModules;
- 
+     public PhotonCameraWrapper photonCameraWrapper;
      public PoseEstimator(Gyro gyro, SwerveDriveKinematics swerveDriveKinematics, SwerveModule[] swerveModules) {
+         this.photonCameraWrapper = new PhotonCameraWrapper();
          this.gyro = gyro;
          this.swerveModules = swerveModules;
          SwerveModulePosition[] swerveModulePositions = {
@@ -75,6 +83,7 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
      }
  
      public void updateOdometry() {
+        
          resetLock.lock();
          SwerveModulePosition[] swerveModulePositions = {
             swerveModules[0].getModulePosition(),
@@ -83,12 +92,23 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
             swerveModules[3].getModulePosition()
         };
          try {
-             var pose2d = swerveDrivePoseEstimator.updateWithTime(
-                 Timer.getFPGATimestamp(),
-                 gyro.getRotation2d(),
-                 swerveModulePositions
-             );
-             robotPose.set(pose2d);
+            //  var pose2d = swerveDrivePoseEstimator.updateWithTime(
+            //      Timer.getFPGATimestamp(),
+            //      gyro.getRotation2d(),
+            //      swerveModulePositions
+            //  );
+            //  robotPose.set(pose2d);
+             Optional<EstimatedRobotPose> result = photonCameraWrapper.getEstimatedGlobalPose(getRobotPose());
+             if (result.isPresent()) {
+                robotPose.set(result.get().estimatedPose.toPose2d());
+                SmartDashboard.putNumber("XPos1: ", swerveDrivePoseEstimator.getEstimatedPosition().getX());
+                SmartDashboard.putNumber("YPose1: ", swerveDrivePoseEstimator.getEstimatedPosition().getY());
+                SmartDashboard.putNumber("Rot1: ", swerveDrivePoseEstimator.getEstimatedPosition().getRotation().getDegrees());
+                SmartDashboard.putNumber("XPos: ", result.get().estimatedPose.toPose2d().getX());
+                SmartDashboard.putNumber("YPose: ", result.get().estimatedPose.toPose2d().getY());
+                SmartDashboard.putNumber("Rot: ", result.get().estimatedPose.toPose2d().getRotation().getDegrees());
+             }
+             
          } finally {
              resetLock.unlock();
          }
@@ -132,5 +152,7 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
              resetLock.unlock();
          }
      }
+
+
  }
  

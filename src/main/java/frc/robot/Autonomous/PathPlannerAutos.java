@@ -23,7 +23,7 @@ public final class PathPlannerAutos {
     Map.entry("BalanceChargeStation", new BalanceChargeStation(DriveTrain.getInstance(), Gyro.getInstance()))
   ));
 
-  private static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
+  public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
     DriveTrain.getInstance()::getPose2d,
     DriveTrain.getInstance().getPoseEstimator()::resetPose,
     new PIDConstants(0, 0, 0),
