@@ -48,7 +48,7 @@ public class Gyro {
     }
 
     public Rotation2d getRotation2d() {
-        return new Rotation2d(-1 * atomicReference.get().getRadians());
+        return new Rotation2d(-atomicReference.get().getRadians());
     }
 
     public void updateRotation2D() {

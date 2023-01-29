@@ -39,7 +39,7 @@ public class ButtonConfig {
             .onTrue(new BalanceChargeStation(DriveTrain.getInstance(), Gyro.getInstance()));
 
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 9) 
-            .onTrue(new driveToPos(new Pose2d(15, 0.7, new Rotation2d(0))));
+            .onTrue(new driveToPos(new Pose2d(14, 0.7, new Rotation2d(0))));
 
 
     }

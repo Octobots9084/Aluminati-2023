@@ -25,7 +25,9 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.swerve.DriveTrain;
+import frc.robot.util.Gyro;
 import frc.robot.util.MathUtil;
+import frc.robot.util.PIDConfig;
 import frc.robot.vision.PhotonCameraWrapper;
 
 /**
@@ -34,16 +36,23 @@ import frc.robot.vision.PhotonCameraWrapper;
 public class driveToPos extends CommandBase {
     private final DriveTrain driveTrain;
     private final Pose2d target;
-    private final PhotonCameraWrapper photonCameraWrapper;
-    private final PIDController drivePid;
-    private final PIDController turnPid;
 
+    private double xSpeed;
+    private double ySpeed;
+    private double rotSpeed;
+    private Pose2d currentPose;
+    private PIDController drivePids;
+    private PIDController turnPids;
     public driveToPos(Pose2d target) {
         this.driveTrain = DriveTrain.getInstance();
-        this.photonCameraWrapper = this.driveTrain.getPoseEstimator().photonCameraWrapper;
         this.target = target;
-        this.drivePid = new PIDController(0.08, 0, 0);
-        this.turnPid = new PIDController(0.08, 0, 0);
+        this.xSpeed = 0;
+        this.ySpeed = 0;
+        this.rotSpeed = 0;
+        this.currentPose = new Pose2d();
+        // P is a little high
+        this.drivePids = new PIDController(1, 0, 0.0000);
+        this.turnPids = new PIDController(0.5, 0, 0.00);
     }
 
     @Override
@@ -53,40 +62,61 @@ public class driveToPos extends CommandBase {
 
     @Override
     public void execute() {
-        Pose2d currentPose = driveTrain.getPoseEstimator().getRobotPose();
-        double ySpeed = (target.getY()-currentPose.getY());
-        double xSpeed = (target.getX()-currentPose.getX());
-        // if (MathUtil.isWithinTolerance(xSpeed, 0, 0.05)) {
-        //     xSpeed = 0;
-        // }
-        // if (xSpeed>0.5) {
-        //     xSpeed = 0.5;
-        // }
-        // if (xSpeed<-0.5) {
-        //     xSpeed = -0.5;
-        // }
-        // if (MathUtil.isWithinTolerance(ySpeed, 0, 0.05)) {
-        //     ySpeed = 0;
-        // }
+        currentPose = driveTrain.getPoseEstimator().getRobotPose();
+        SmartDashboard.putNumber("XPo2s: ", currentPose.getX());
+        SmartDashboard.putNumber("YPos2e1: ", currentPose.getY());
+        SmartDashboard.putNumber("Ro1t2: ", currentPose.getRotation().getDegrees());
+        ySpeed = drivePids.calculate(target.getY(),currentPose.getY());
+        xSpeed = drivePids.calculate(currentPose.getX(),target.getX());
+        rotSpeed = turnPids.calculate(target.getRotation().getRadians(),currentPose.getRotation().getRadians());
 
-        // if (ySpeed>0.5) {
-        //     ySpeed = 0.5;
-        // }
+        if (xSpeed>0.3) {
+            xSpeed = 0.3;
+        }
+        if (xSpeed<-0.3) {
+            xSpeed = -0.3;
+        }
+        if (MathUtil.isWithinTolerance(currentPose.getX(), target.getX(), 0.05)) {
+            ySpeed = 0;
+        }
 
-        // if (ySpeed<-0.5) {
-        //     ySpeed = -0.5;
-        // }
+        if (ySpeed>0.3) {
+            ySpeed = 0.3;
+        }
+        if (ySpeed<-0.3) {
+            ySpeed = -0.3;
+        }
+        if (MathUtil.isWithinTolerance(currentPose.getY(), target.getY(), 0.05)) {
+            ySpeed = 0;
+        }
 
-        SmartDashboard.putNumber("CurrentX", currentPose.getX());
-        SmartDashboard.putNumber("CurrentY", currentPose.getY());
-        SmartDashboard.putNumber("yspeed", xSpeed);
-        SmartDashboard.putNumber("xspeed", ySpeed);
-        double rotSpeed = 0;//turnPid.calculate(currentPose.getRotation().getRadians(), target.getRotation().getRadians());
-        //driveTrain.drive(xSpeed, ySpeed, rotSpeed, true);
+        if (rotSpeed>0.3) {
+            rotSpeed = 0.3;
+        }
+        if (rotSpeed<-0.3) {
+            rotSpeed = -0.3;
+        }
+        if (MathUtil.isWithinTolerance(MathUtil.wrapToCircle(currentPose.getRotation().getRadians()), MathUtil.wrapToCircle(target.getRotation().getRadians()), 0.03)) {
+            ySpeed = 0;
+        }
+
+        // Check driver assist and drive
+        if (rotSpeed == 0) {
+            driveTrain.drive(xSpeed, ySpeed, driveTrain.getRotationSpeed(), true);
+        } else {
+            driveTrain.drive(xSpeed, ySpeed, rotSpeed, true);
+            Gyro.getInstance().updateRotation2D();
+            driveTrain.setTargetRotationAngle(Gyro.getInstance().getRotation2d().getDegrees());
+        }
     }
 
     @Override
     public boolean isFinished() {
+        // tolerances are a bit low
+        if (MathUtil.isWithinTolerance(currentPose.getY(), target.getY(), 0.05) && MathUtil.isWithinTolerance(currentPose.getX(), target.getX(), 0.05) && MathUtil.isWithinTolerance(MathUtil.wrapToCircle(currentPose.getRotation().getRadians()), MathUtil.wrapToCircle(target.getRotation().getRadians()), 0.03)) {
+            return true;
+        }
+        
         return false;
     }
 

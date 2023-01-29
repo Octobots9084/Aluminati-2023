@@ -23,7 +23,7 @@
  import edu.wpi.first.math.Nat;
  import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
  import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Pose3d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
  import edu.wpi.first.wpilibj.Timer;
@@ -92,21 +92,20 @@ import org.photonvision.EstimatedRobotPose;
         };
         var pose2d = swerveDrivePoseEstimator.updateWithTime(
                  Timer.getFPGATimestamp(),
-                 gyro.getRotation2d(),
+                 new Rotation2d(Math.PI/2+gyro.getRotation2d().getRadians()),
                  swerveModulePositions
             );
-            robotPose.set(pose2d);
-            SmartDashboard.putNumber("XPosOd: ", robotPose.get().getX());
-            SmartDashboard.putNumber("YPoseOd: ", robotPose.get().getY());
-            SmartDashboard.putNumber("RotOd: ", robotPose.get().getRotation().getDegrees());
+        //pose2d = new Pose2d(pose2d.getX(), pose2d.getY(), pose2d.getRotation())
+        robotPose.set(pose2d);
+        SmartDashboard.putNumber("XPo1s: ", robotPose.get().getX());
+        SmartDashboard.putNumber("YPose1: ", robotPose.get().getY());
+        SmartDashboard.putNumber("Ro1t: ", robotPose.get().getRotation().getDegrees());
          try {
             Optional<EstimatedRobotPose> result = photonCameraWrapper.getEstimatedGlobalPose(getRobotPose());
             if (result.isPresent()) {
                 swerveDrivePoseEstimator.addVisionMeasurement(result.get().estimatedPose.toPose2d(), Timer.getFPGATimestamp());
             }
-            SmartDashboard.putNumber("XPos: ", result.get().estimatedPose.toPose2d().getX());
-            SmartDashboard.putNumber("YPose: ", result.get().estimatedPose.toPose2d().getY());
-            SmartDashboard.putNumber("Rot: ", result.get().estimatedPose.toPose2d().getRotation().getDegrees());
+            
             
          } catch(Exception e) {
         //deez
