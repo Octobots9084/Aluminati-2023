@@ -18,10 +18,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package frc.robot;
+package frc.robot.robot;
 
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -31,13 +29,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
-import frc.robot.commands.SwerveControl;
-import frc.robot.commands.driveToPos;
-import frc.robot.swerve.DriveTrain;
+import frc.robot.commands.swerve.SwerveControl;
+import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
-import frc.robot.vision.Constants.FieldConstants;
-import frc.robot.Autonomous.PathPlannerAutos;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 

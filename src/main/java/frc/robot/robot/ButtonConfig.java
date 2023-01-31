@@ -1,4 +1,4 @@
-package frc.robot;
+package frc.robot.robot;
 
 import com.fasterxml.jackson.databind.node.POJONode;
 
@@ -8,15 +8,13 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.Autonomous.PathPlannerAutos;
-import frc.robot.commands.BalanceChargeStation;
-import frc.robot.commands.driveToPos;
-import frc.robot.commands.RotateTo;
-import frc.robot.commands.SetDriverAssist;
-import frc.robot.commands.ZeroGyro;
-import frc.robot.swerve.DriveTrain;
+import frc.robot.commands.autonomous.BalanceChargeStation;
+import frc.robot.commands.autonomous.driveToPos;
+import frc.robot.commands.swerve.SetDriverAssist;
+import frc.robot.commands.swerve.ZeroGyro;
+import frc.robot.commands.vision.RotateTo;
+import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
-import frc.robot.vision.Constants.FieldConstants;
 
 public class ButtonConfig {
     public void initTeleop() {

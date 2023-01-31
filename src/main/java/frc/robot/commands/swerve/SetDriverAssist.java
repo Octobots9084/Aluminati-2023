@@ -18,16 +18,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package frc.robot;
+ package frc.robot.commands.swerve;
 
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.subsystems.swerve.DriveTrain;
 
-public class ControlMap {
-    public static final Joystick DRIVER_LEFT = new Joystick(0);
-    public static final Joystick DRIVER_RIGHT = new Joystick(1);
-    public static final Joystick DRIVER_BUTTONS = new Joystick(2);
+public class SetDriverAssist extends InstantCommand {
+    private boolean useDriverAssist;
 
-
-    private ControlMap() {
+    public SetDriverAssist(boolean useDriverAssist) {
+        this.useDriverAssist = useDriverAssist;
+    
     }
-}
+
+     @Override
+     public void initialize() {
+        SmartDashboard.putBoolean("Driver Assist: ", this.useDriverAssist);
+        DriveTrain.getInstance().setUseDriverAssist(this.useDriverAssist);
+     }  
+        
+ }
+ 
