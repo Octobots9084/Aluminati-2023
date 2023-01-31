@@ -18,17 +18,15 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package frc.robot.commands;
+package frc.robot.commands.autonomous;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.swerve.DriveTrain;
+import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 import frc.robot.util.MathUtil;
-import frc.robot.util.PIDConfig;
-import frc.robot.vision.PhotonCameraWrapper;
 
 /**
  * Represents a swerve drive style drivetrain.
