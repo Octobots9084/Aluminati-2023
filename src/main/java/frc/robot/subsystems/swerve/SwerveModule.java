@@ -20,6 +20,9 @@
 
 package frc.robot.subsystems.swerve;
 
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
+
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.StatorCurrentLimitConfiguration;
@@ -35,11 +38,12 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import frc.robot.util.*;
-
-import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicReference;
+import frc.robot.util.MotionMagicConfig;
+import frc.robot.util.MotorUtil;
+import frc.robot.util.PIDConfig;
+import frc.robot.util.SmartMotionConfig;
+import frc.robot.util.StatusFrameDemolisher;
+import frc.robot.util.SwerveUtil;
 
 public class SwerveModule {
     // Physical Constants
@@ -115,8 +119,8 @@ public class SwerveModule {
         StatusFrameDemolisher.demolishStatusFrames(driveMotor, false);
 
         // Current Limits
-        this.driveMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 60, 60, 0.05)); //How much current the motor can use (outputwise)
-        this.driveMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 63, 63, 0.05)); //How much current can be supplied to the motor
+        this.driveMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 50 * 0.4, 50 * 0.4, 0.05)); //How much current the motor can use (outputwise)
+        this.driveMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 53 * 0.4, 53 * 0.4, 0.05)); //How much current can be supplied to the motor
 
         this.steeringMotor.setSmartCurrentLimit(31, 30);
 
