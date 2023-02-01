@@ -92,10 +92,10 @@ public class DriveTrain extends SubsystemBase {
         turnPidConfigs[2] = new PIDConfig(10, 0, 0);
         turnPidConfigs[3] = new PIDConfig(10, 0, 0);
 
-        drivePidConfigs[0] = new PIDConfig(0.035, 0.0001, 0, 0.077);
-        drivePidConfigs[1] = new PIDConfig(0.035, 0.0001, 0, 0.06);
-        drivePidConfigs[2] = new PIDConfig(0.035, 0.0001, 0, 0.075);
-        drivePidConfigs[3] = new PIDConfig(0.035, 0.0001, 0, 0.06);
+        drivePidConfigs[0] = new PIDConfig(0.06, 0.0001, 0, 0.077);
+        drivePidConfigs[1] = new PIDConfig(0.06, 0.0001, 0, 0.06);
+        drivePidConfigs[2] = new PIDConfig(0.06, 0.0001, 0, 0.075);
+        drivePidConfigs[3] = new PIDConfig(0.06, 0.0001, 0, 0.06);
 
         //Position relative to center of robot -> (0,0) is the center (m)
         swervePosition[2] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER); 
@@ -167,23 +167,10 @@ public class DriveTrain extends SubsystemBase {
         
     }
 
-    public void drive(ChassisSpeeds chassisSpeeds) {
-        chassisSpeeds = new ChassisSpeeds(chassisSpeeds.vxMetersPerSecond,chassisSpeeds.vyMetersPerSecond,chassisSpeeds.omegaRadiansPerSecond*-1);
-        // Check driver assist and drive
-        if (chassisSpeeds.omegaRadiansPerSecond == 0) {
-            chassisSpeeds.omegaRadiansPerSecond = this.getRotationSpeed();
-        } else {
-            Gyro.getInstance().updateRotation2D();
-            this.setTargetRotationAngle(gyro.getRotation2d().getDegrees());
-        }
-        var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(chassisSpeeds);
-        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, MAX_SPEED);
-
-        for (int i = 0; i < swerveModuleStates.length; i++) {
-            swerveModules[i].setDesiredState(swerveModuleStates[i]);
-        }
-        
+    public void driveAutos(ChassisSpeeds chassisSpeeds) {
+        drive(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond, false);
     }
+
 
     public SwerveModuleState[] getModuleStates() {
     SwerveModuleState[] swerveModuleStates = new SwerveModuleState[4];

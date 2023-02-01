@@ -49,8 +49,8 @@ public class driveToPos extends CommandBase {
         this.rotSpeed = 0;
         this.currentPose = new Pose2d();
         // P is a little high
-        this.drivePids = new PIDController(1, 0, 0.0000);
-        this.turnPids = new PIDController(0.5, 0, 0.00);
+        this.drivePids = new PIDController(1.3, 0, 0.0000);
+        this.turnPids = new PIDController(0.8, 0, 0.00);
     }
 
     @Override
@@ -99,19 +99,19 @@ public class driveToPos extends CommandBase {
         }
 
         // Check driver assist and drive
-        if (rotSpeed == 0) {
-            driveTrain.drive(xSpeed, ySpeed, driveTrain.getRotationSpeed(), true);
-        } else {
-            driveTrain.drive(xSpeed, ySpeed, rotSpeed, true);
+        // if (rotSpeed == 0) {
+        //     driveTrain.drive(xSpeed, ySpeed, driveTrain.getRotationSpeed(), true);
+        // } else {
+            driveTrain.drive(xSpeed, ySpeed, 0,true);//rotSpeed, true);
             Gyro.getInstance().updateRotation2D();
-            driveTrain.setTargetRotationAngle(Gyro.getInstance().getRotation2d().getDegrees());
-        }
+            driveTrain.setTargetRotationAngle(Gyro.getInstance().getRotation2d().getDegrees()*-1);
+        // }
     }
 
     @Override
     public boolean isFinished() {
         // tolerances are a bit low
-        if (MathUtil.isWithinTolerance(currentPose.getY(), target.getY(), 0.05) && MathUtil.isWithinTolerance(currentPose.getX(), target.getX(), 0.05) && MathUtil.isWithinTolerance(MathUtil.wrapToCircle(currentPose.getRotation().getRadians()), MathUtil.wrapToCircle(target.getRotation().getRadians()), 0.03)) {
+        if (MathUtil.isWithinTolerance(currentPose.getY(), target.getY(), 0.1) && MathUtil.isWithinTolerance(currentPose.getX(), target.getX(), 0.1) && MathUtil.isWithinTolerance(MathUtil.wrapToCircle(currentPose.getRotation().getRadians()), MathUtil.wrapToCircle(target.getRotation().getRadians()), 0.09)) {
             return true;
         }
         

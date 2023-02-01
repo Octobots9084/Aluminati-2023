@@ -29,6 +29,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.autonomous.PathPlannerAutos;
 import frc.robot.commands.swerve.SwerveControl;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
@@ -105,7 +106,7 @@ public class Robot extends TimedRobot {
         resetRobotPoseAndGyro();
         
         //CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
-        //CommandScheduler.getInstance().schedule(PathPlannerAutos.testPath());
+        CommandScheduler.getInstance().schedule(PathPlannerAutos.testPath());
         //CommandScheduler.getInstance().schedule(new driveToPos(new Pose2d(0.0, FieldConstants.length/2, new Rotation2d(0,0))));
         
         Robot.autoStartTime = Timer.getFPGATimestamp();
