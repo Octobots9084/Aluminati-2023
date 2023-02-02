@@ -44,12 +44,13 @@ public class RotateTo extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return dt.getRotationSpeed() == 0;
+        return true;
+        //return dt.getRotationSpeed() == 0;
     }
 
     @Override
     public void execute() {
-        dt.drive(0, 0, dt.getRotationSpeed(), true);
+       // dt.drive(0, 0, dt.getRotationSpeed(), true);
     }
 
     @Override

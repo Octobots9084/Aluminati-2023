@@ -20,6 +20,7 @@
 
 package frc.robot.commands.swerve;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.robot.ControlMap;
@@ -30,17 +31,22 @@ import frc.robot.util.MathUtil;
 public class SwerveControl extends CommandBase {
     private final DriveTrain driveTrain;
     private final Gyro gyro;
+    private double currentTimestamp;
+    private double previousTimestamp;
 
     public SwerveControl() {
         // Initialization
         this.driveTrain = DriveTrain.getInstance();
         this.gyro = Gyro.getInstance();
+        this.currentTimestamp = Timer.getFPGATimestamp();
         addRequirements(this.driveTrain);
     }
 
     @Override
     public void initialize() {
-        driveTrain.setTargetRotationAngle(gyro.getRotation2d().getDegrees());
+        this.previousTimestamp = this.currentTimestamp;
+        this.currentTimestamp = Timer.getFPGATimestamp();
+        driveTrain.setTargetRotationAngle(gyro.getUnwrappedAngle());
     }
 
     @Override
@@ -55,13 +61,23 @@ public class SwerveControl extends CommandBase {
         // Calculate the deadband
         var rot = MathUtil.fitDeadband(leftJoystick.getZ()) * DriveTrain.MAX_ANGULAR_SPEED;
 
-        // Check driver assist and drive
-        if (rot == 0 && driveTrain.useDriverAssist()) {
-            driveTrain.drive(xSpeed, ySpeed, driveTrain.getRotationSpeed(), driveTrain.getFieldCentric());
+        
+
+        if (driveTrain.useDriverAssist()) {
+            driveTrain.setTargetRotationAngle(rot * (this.currentTimestamp-this.previousTimestamp));
+            driveTrain.drive(xSpeed, ySpeed, driveTrain.getRotationSpeed(this.currentTimestamp, this.previousTimestamp), driveTrain.getFieldCentric());
         } else {
             driveTrain.drive(xSpeed, ySpeed, rot, driveTrain.getFieldCentric());
-            Gyro.getInstance().updateRotation2D();
-            driveTrain.setTargetRotationAngle(gyro.getRotation2d().getDegrees());
         }
+        // // Check driver assist and drive
+        // if (rot == 0 && driveTrain.useDriverAssist()) {
+        //     driveTrain.drive(xSpeed, ySpeed, driveTrain.getRotationSpeed(), driveTrain.getFieldCentric());
+        // } else {
+        //     driveTrain.drive(xSpeed, ySpeed, rot, driveTrain.getFieldCentric());
+        //     Gyro.getInstance().updateRotation2D();
+        //     driveTrain.setTargetRotationAngle(gyro.getRotation2d().getDegrees());
+        // }
+        this.previousTimestamp = this.currentTimestamp;
+        this.currentTimestamp = Timer.getFPGATimestamp();
     }
 }

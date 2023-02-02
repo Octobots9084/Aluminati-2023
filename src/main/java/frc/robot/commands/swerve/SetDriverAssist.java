@@ -23,6 +23,7 @@
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.swerve.DriveTrain;
+import frc.robot.util.Gyro;
 
 public class SetDriverAssist extends InstantCommand {
     private boolean useDriverAssist;
@@ -36,6 +37,7 @@ public class SetDriverAssist extends InstantCommand {
      public void initialize() {
         SmartDashboard.putBoolean("Driver Assist: ", this.useDriverAssist);
         DriveTrain.getInstance().setUseDriverAssist(this.useDriverAssist);
+        DriveTrain.getInstance().setTargetRotationAngle(Gyro.getInstance().getUnwrappedAngle());
      }  
         
  }

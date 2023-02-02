@@ -30,12 +30,14 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.robot.MotorIDs;
 import frc.robot.util.Gyro;
 import frc.robot.util.MathUtil;
 import frc.robot.util.PIDConfig;
 import frc.robot.util.PoseEstimator;
+import frc.robot.util.SwerveUtil;
 
 
 
@@ -79,7 +81,7 @@ public class DriveTrain extends SubsystemBase {
     private double turnSpeedP = 0.05;
     private double minTurnSpeed = 0.42;
 
-
+    private PIDController driveAssistPidController = new PIDController(6.5, 0.06, 0);
     private final HolonomicDriveController holonomicDriveController;
 
     
@@ -185,22 +187,25 @@ public class DriveTrain extends SubsystemBase {
     return this.getPoseEstimator().getRobotPose();
     }
 
-    public double getRotationSpeed() {
-        double gyroAngle = MathUtil.wrapToCircle(gyro.getRotation2d().getDegrees());
-        if (MathUtil.isWithinTolerance(gyroAngle, targetRotationAngle, TOLERANCE)) {
+    public double getRotationSpeed(double currentTimestamp, double previousTimestamp) {
+        double gyroAngle = gyro.getUnwrappedAngle();
+        double minSpeed = 0.13;
+        if (MathUtil.isWithinTolerance(gyroAngle, targetRotationAngle, 0.03)) {
+            driveAssistPidController.reset();
             return 0.0;
         }
-        double targetAngle = MathUtil.wrapToCircle(targetRotationAngle);
-        var diff = targetAngle - gyroAngle;
-        if (Math.abs(diff) >= 180 && diff < 0) {
-            diff += 360;
-        }
-        if (Math.abs(diff) >= 180 && diff > 0) {
-            diff -= 360;
-        }
 
-        double vel = (turnSpeedP * (diff));
-        return Math.signum(diff) * (Math.min(Math.abs(vel), MAX_ANGULAR_SPEED) + minTurnSpeed);
+        double diff = SwerveUtil.getClosestAngle(targetRotationAngle, gyroAngle);
+
+        double vel = driveAssistPidController.calculate(diff);
+        if (vel<minSpeed && vel>0) {
+            vel = minSpeed;
+        } else if (vel>-minSpeed && vel<0) {
+            vel = minSpeed;
+        }
+        SmartDashboard.putNumber("velgfouhouygrocity", vel);
+   
+        return vel;
     }
 
     public void setSwerveModuleAngle(double angle) {
@@ -257,8 +262,9 @@ public class DriveTrain extends SubsystemBase {
         return targetRotationAngle;
     }
 
-    public void setTargetRotationAngle(double targetRotationAngle) {
-        this.targetRotationAngle = targetRotationAngle;
+    public void setTargetRotationAngle(double targetRotationAngleAddition) {
+        this.targetRotationAngle += targetRotationAngleAddition;
+        SmartDashboard.putNumber("targetRotation", this.targetRotationAngle);
     }
 
     public SwerveModule[] getSwerveModules() {
