@@ -20,6 +20,7 @@
 
 package frc.robot.commands.vision;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.swerve.DriveTrain;
 
@@ -30,27 +31,35 @@ import frc.robot.subsystems.swerve.DriveTrain;
 public class RotateTo extends CommandBase {
     private final DriveTrain dt;
     private final double angle;
+    private double currentTimestamp;
+    private double previousTimestamp;
 
     public RotateTo(double angle) {
         this.dt = DriveTrain.getInstance();
         this.angle = angle;
+        this.currentTimestamp = Timer.getFPGATimestamp();
         addRequirements(this.dt);
     }
 
     @Override
     public void initialize() {
+        this.previousTimestamp = this.currentTimestamp;
+        this.currentTimestamp = Timer.getFPGATimestamp();
         dt.setTargetRotationAngle(angle);
     }
 
     @Override
     public boolean isFinished() {
-        return true;
-        //return dt.getRotationSpeed() == 0;
+        return dt.getRotationSpeed(currentTimestamp, previousTimestamp)==0;
     }
 
     @Override
     public void execute() {
-       // dt.drive(0, 0, dt.getRotationSpeed(), true);
+        dt.setTargetRotationAngle(angle);
+        dt.drive(0, 0, dt.getRotationSpeed(currentTimestamp, previousTimestamp), true);
+
+        this.previousTimestamp = this.currentTimestamp;
+        this.currentTimestamp = Timer.getFPGATimestamp();
     }
 
     @Override

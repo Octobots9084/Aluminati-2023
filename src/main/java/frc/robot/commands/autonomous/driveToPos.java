@@ -22,6 +22,7 @@ package frc.robot.commands.autonomous;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.swerve.DriveTrain;
@@ -41,6 +42,9 @@ public class driveToPos extends CommandBase {
     private Pose2d currentPose;
     private PIDController drivePids;
     private PIDController turnPids;
+    private double currentTimestamp;
+    private double previousTimestamp;
+    
     public driveToPos(Pose2d target) {
         this.driveTrain = DriveTrain.getInstance();
         this.target = target;
@@ -48,14 +52,16 @@ public class driveToPos extends CommandBase {
         this.ySpeed = 0;
         this.rotSpeed = 0;
         this.currentPose = new Pose2d();
-        // P is a little high
         this.drivePids = new PIDController(1.3, 0, 0.0000);
         this.turnPids = new PIDController(0.8, 0, 0.00);
+        this.currentTimestamp = Timer.getFPGATimestamp();
     }
 
     @Override
     public void initialize() {
-
+        this.previousTimestamp = this.currentTimestamp;
+        this.currentTimestamp = Timer.getFPGATimestamp();
+        driveTrain.setTargetRotationAngle(Gyro.getInstance().getUnwrappedAngle());
     }
 
     @Override
@@ -98,14 +104,12 @@ public class driveToPos extends CommandBase {
             ySpeed = 0;
         }
 
-        // Check driver assist and drive
-        // if (rotSpeed == 0) {
-        //     driveTrain.drive(xSpeed, ySpeed, driveTrain.getRotationSpeed(), true);
-        // } else {
-            driveTrain.drive(xSpeed, ySpeed, 0,true);//rotSpeed, true);
-            Gyro.getInstance().updateRotation2D();
-            driveTrain.setTargetRotationAngle(Gyro.getInstance().getRotation2d().getDegrees()*-1);
-        // }
+
+        driveTrain.setTargetRotationAngle(rotSpeed*(this.currentTimestamp-this.previousTimestamp));
+        driveTrain.drive(xSpeed, ySpeed, driveTrain.getRotationSpeed(this.currentTimestamp, this.previousTimestamp),true);
+
+        this.previousTimestamp = this.currentTimestamp;
+        this.currentTimestamp = Timer.getFPGATimestamp();
     }
 
     @Override

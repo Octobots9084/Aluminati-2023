@@ -69,14 +69,7 @@ public class SwerveControl extends CommandBase {
         } else {
             driveTrain.drive(xSpeed, ySpeed, rot, driveTrain.getFieldCentric());
         }
-        // // Check driver assist and drive
-        // if (rot == 0 && driveTrain.useDriverAssist()) {
-        //     driveTrain.drive(xSpeed, ySpeed, driveTrain.getRotationSpeed(), driveTrain.getFieldCentric());
-        // } else {
-        //     driveTrain.drive(xSpeed, ySpeed, rot, driveTrain.getFieldCentric());
-        //     Gyro.getInstance().updateRotation2D();
-        //     driveTrain.setTargetRotationAngle(gyro.getRotation2d().getDegrees());
-        // }
+
         this.previousTimestamp = this.currentTimestamp;
         this.currentTimestamp = Timer.getFPGATimestamp();
     }

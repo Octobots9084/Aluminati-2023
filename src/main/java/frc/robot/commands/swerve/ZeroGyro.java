@@ -33,7 +33,7 @@ public class ZeroGyro extends InstantCommand {
     @Override
     public void initialize() {
         Gyro.getInstance().resetGyro();
-        DriveTrain.getInstance().setTargetRotationAngle(0);
+        DriveTrain.getInstance().setTargetRotationAngle(Gyro.getInstance().getUnwrappedAngle());
     }
 
 }
