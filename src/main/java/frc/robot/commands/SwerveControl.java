@@ -20,6 +20,8 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTableEntry;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.ControlMap;
@@ -27,15 +29,24 @@ import frc.robot.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 import frc.robot.util.MathUtil;
 
+import javax.naming.ldap.Control;
+
 public class SwerveControl extends CommandBase {
     private final DriveTrain driveTrain;
     private final Gyro gyro;
+    private final SendableChooser<Integer> sendable = new SendableChooser<>();
+
 
     public SwerveControl() {
         // Initialization
         this.driveTrain = DriveTrain.getInstance();
         this.gyro = Gyro.getInstance();
         addRequirements(this.driveTrain);
+
+        SmartDashboard.putData(sendable);
+        sendable.addOption("Old Controller", 1);
+        sendable.addOption("Xbox", 2);
+        sendable.addOption("HelicopterStick", 3);
     }
 
     @Override
@@ -48,13 +59,42 @@ public class SwerveControl extends CommandBase {
         // Link joysticks
         var leftJoystick = ControlMap.DRIVER_LEFT;
         var rightJoystick = ControlMap.DRIVER_RIGHT;
+        var xbox = ControlMap.XBOX;
+        var heliStick = ControlMap.HelicopterStick;
+        var xSpeed = 0.0;
+        var ySpeed = 0.0;
+        var rot = 0.0;
 
-        // Get speeds from joysticks
-        var xSpeed = MathUtil.fitDeadband(-leftJoystick.getY()) * DriveTrain.MAX_TURN_SPEED;
-        var ySpeed = MathUtil.fitDeadband(leftJoystick.getX()) * DriveTrain.MAX_TURN_SPEED;
+        if(sendable.getSelected() != null && sendable.getSelected().equals(2))
+        {
+            // Get speeds from joysticks
+            xSpeed = MathUtil.fitDeadband(-xbox.getLeftY()) * DriveTrain.MAX_TURN_SPEED;
+            ySpeed = MathUtil.fitDeadband(xbox.getLeftX()) * DriveTrain.MAX_TURN_SPEED;
 
-        // Calculate the deadband
-        var rot = MathUtil.fitDeadband(leftJoystick.getZ()) * DriveTrain.MAX_ANGULAR_SPEED;
+            // Calculate the deadband
+            rot = MathUtil.fitDeadband(xbox.getRightY()) * DriveTrain.MAX_ANGULAR_SPEED;
+        } else if(sendable.getSelected() != null && sendable.getSelected().equals(3))
+        {
+            // Get speeds from joysticks
+            xSpeed = MathUtil.fitDeadband(-heliStick.getY()) * DriveTrain.MAX_TURN_SPEED;
+            ySpeed = MathUtil.fitDeadband(heliStick.getX()) * DriveTrain.MAX_TURN_SPEED;
+
+            // Calculate the deadband
+            rot = MathUtil.fitDeadband(heliStick.getZ()) * DriveTrain.MAX_ANGULAR_SPEED;
+        } else if(sendable.getSelected() != null && sendable.getSelected().equals(1))
+        {
+            // Get speeds from joysticks
+            xSpeed = MathUtil.fitDeadband(-leftJoystick.getY()) * DriveTrain.MAX_TURN_SPEED;
+            ySpeed = MathUtil.fitDeadband(leftJoystick.getX()) * DriveTrain.MAX_TURN_SPEED;
+
+            // Calculate the deadband
+            rot = MathUtil.fitDeadband(leftJoystick.getZ()) * DriveTrain.MAX_ANGULAR_SPEED;
+        }
+        else{
+            xSpeed = 0.0;
+            ySpeed = 0.0;
+            rot = 0.0;
+        }
 
         // Check driver assist and drive
         if (rot == 0 && driveTrain.useDriverAssist()) {
