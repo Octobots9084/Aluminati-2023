@@ -2,7 +2,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.subsystems.swerve.CaliGirls;
+import frc.robot.subsystems.arm.CaliGirls;
 
 public class Arm extends InstantCommand{
     //private double output; // This is used when using initialize() to control movement
