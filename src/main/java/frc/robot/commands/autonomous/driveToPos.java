@@ -115,11 +115,17 @@ public class driveToPos extends CommandBase {
     @Override
     public boolean isFinished() {
         // tolerances are a bit low
-        if (MathUtil.isWithinTolerance(currentPose.getY(), target.getY(), 0.1) && MathUtil.isWithinTolerance(currentPose.getX(), target.getX(), 0.1) && MathUtil.isWithinTolerance(MathUtil.wrapToCircle(currentPose.getRotation().getRadians()), MathUtil.wrapToCircle(target.getRotation().getRadians()), 0.09)) {
+        if (endCase()) {
             return true;
         }
         
         return false;
+    }
+
+    private boolean endCase() {
+        return MathUtil.isWithinTolerance(currentPose.getY(), target.getY(), 0.1)
+        && MathUtil.isWithinTolerance(currentPose.getX(), target.getX(), 0.1)
+        && MathUtil.isWithinTolerance(MathUtil.wrapToCircle(currentPose.getRotation().getRadians()), MathUtil.wrapToCircle(target.getRotation().getRadians()), 0.09);
     }
 
     @Override
