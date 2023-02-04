@@ -28,6 +28,8 @@ public class CaliGirls {
     public CaliGirls() {
         this.motorTop = new CANSparkMax(0, MotorType.kBrushless);
         this.motorBottom = new CANSparkMax(0, MotorType.kBrushless);
+        this.caliEncoderTop = motorTop.getAbsoluteEncoder(Type.kDutyCycle);
+        this.caliEncoderBottom = motorBottom.getAbsoluteEncoder(Type.kDutyCycle);
         this.caliPIDControllerTop = motorTop.getPIDController();
         caliPIDControllerTop.setFeedbackDevice(caliEncoderTop);
         kPTop = 0.1;
