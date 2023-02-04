@@ -18,7 +18,7 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-package frc.robot.swerve;
+package frc.robot.subsystems.swerve;
 
 import edu.wpi.first.math.controller.HolonomicDriveController;
 import edu.wpi.first.math.controller.PIDController;
@@ -30,11 +30,11 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.MotorIDs;
+import frc.robot.robot.MotorIDs;
 import frc.robot.util.Gyro;
 import frc.robot.util.MathUtil;
+import frc.robot.util.PIDConfig;
 import frc.robot.util.PoseEstimator;
 
 
@@ -66,6 +66,8 @@ public class DriveTrain extends SubsystemBase {
     private final Gyro gyro;
     //Modules
     private final SwerveModule[] swerveModules = new SwerveModule[4];
+    private final PIDConfig[] turnPidConfigs = new PIDConfig[4];
+    private final PIDConfig[] drivePidConfigs = new PIDConfig[4];
     private final Translation2d[] swervePosition = new Translation2d[4];
     private final boolean[] steerMotorInverted = new boolean[4];
     //Drive Controllers
@@ -77,6 +79,7 @@ public class DriveTrain extends SubsystemBase {
     private double turnSpeedP = 0.05;
     private double minTurnSpeed = 0.42;
 
+
     private final HolonomicDriveController holonomicDriveController;
 
     
@@ -84,6 +87,16 @@ public class DriveTrain extends SubsystemBase {
     private final PoseEstimator swerveDrivePoseEstimator;
 
     private DriveTrain() {
+        turnPidConfigs[0] = new PIDConfig(10, 0, 0);
+        turnPidConfigs[1] = new PIDConfig(10, 0, 0);
+        turnPidConfigs[2] = new PIDConfig(10, 0, 0);
+        turnPidConfigs[3] = new PIDConfig(10, 0, 0);
+
+        drivePidConfigs[0] = new PIDConfig(0.06, 0.0001, 0, 0.077);
+        drivePidConfigs[1] = new PIDConfig(0.06, 0.0001, 0, 0.06);
+        drivePidConfigs[2] = new PIDConfig(0.06, 0.0001, 0, 0.075);
+        drivePidConfigs[3] = new PIDConfig(0.06, 0.0001, 0, 0.06);
+
         //Position relative to center of robot -> (0,0) is the center (m)
         swervePosition[2] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER); 
         swervePosition[0] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
@@ -94,12 +107,13 @@ public class DriveTrain extends SubsystemBase {
         steerMotorInverted[1] = false;
         steerMotorInverted[2] = false;
         steerMotorInverted[3] = false;
-        swerveModules[0] = new SwerveModule(MotorIDs.FRONT_LEFT_DRIVE, MotorIDs.FRONT_LEFT_STEER, steerMotorInverted[0]);
-        swerveModules[1] = new SwerveModule(MotorIDs.FRONT_RIGHT_DRIVE, MotorIDs.FRONT_RIGHT_STEER, steerMotorInverted[1]);
-        swerveModules[2] = new SwerveModule(MotorIDs.BACK_LEFT_DRIVE, MotorIDs.BACK_LEFT_STEER, steerMotorInverted[2]);
-        swerveModules[3] = new SwerveModule(MotorIDs.BACK_RIGHT_DRIVE, MotorIDs.BACK_RIGHT_STEER, steerMotorInverted[3]);
+        swerveModules[0] = new SwerveModule(MotorIDs.FRONT_LEFT_DRIVE, MotorIDs.FRONT_LEFT_STEER, steerMotorInverted[0], turnPidConfigs[0], drivePidConfigs[0]);
+        swerveModules[1] = new SwerveModule(MotorIDs.FRONT_RIGHT_DRIVE, MotorIDs.FRONT_RIGHT_STEER, steerMotorInverted[1], turnPidConfigs[1], drivePidConfigs[1]);
+        swerveModules[2] = new SwerveModule(MotorIDs.BACK_LEFT_DRIVE, MotorIDs.BACK_LEFT_STEER, steerMotorInverted[2], turnPidConfigs[2], drivePidConfigs[2]);
+        swerveModules[3] = new SwerveModule(MotorIDs.BACK_RIGHT_DRIVE, MotorIDs.BACK_RIGHT_STEER, steerMotorInverted[3], turnPidConfigs[3], drivePidConfigs[3]);
 
 
+        
 
         // Setup gyro
         this.gyro = Gyro.getInstance();
@@ -153,15 +167,10 @@ public class DriveTrain extends SubsystemBase {
         
     }
 
-    public void drive(ChassisSpeeds chassisSpeeds) {
-        var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(chassisSpeeds);
-        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, MAX_SPEED);
-
-        for (int i = 0; i < swerveModuleStates.length; i++) {
-            swerveModules[i].setDesiredState(swerveModuleStates[i]);
-        }
-        
+    public void driveAutos(ChassisSpeeds chassisSpeeds) {
+        drive(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond, false);
     }
+
 
     public SwerveModuleState[] getModuleStates() {
     SwerveModuleState[] swerveModuleStates = new SwerveModuleState[4];

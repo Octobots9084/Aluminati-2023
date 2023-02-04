@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package frc.robot.swerve;
+package frc.robot.subsystems.swerve;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
@@ -47,7 +47,8 @@ public class SwerveModule {
     private static final double ENCODER_RESOLUTION = 1;
     private static final double GEARING = 11.0 / 40.0;
     private static final double GEARING_TURN_MOTORS = 1.0 / 1.0;
-    private static final double STEER_MOTOR_TICK_TO_ANGLE = 2 * Math.PI / ENCODER_RESOLUTION / GEARING_TURN_MOTORS; // radians
+    private static final double STEER_MOTOR_TICK_TO_ANGLE = 2.0 * Math.PI / ENCODER_RESOLUTION / GEARING_TURN_MOTORS; // radians
+    private static final double DRIVE_MOTOR_TICK_TO_METERS = (GEARING * 2.0 * Math.PI * WHEEL_RADIUS)/2048.0;
     private static final double DRIVE_MOTOR_TICK_TO_SPEED = 10 * GEARING * (2 * Math.PI * WHEEL_RADIUS) / 2048; // m/s
     // Controller Constants
     private static final double MAX_TURN_ACCELERATION = 20000; // Rad/s
@@ -62,7 +63,7 @@ public class SwerveModule {
         MAX_TURN_VELOCITY, MIN_TURN_VELOCITY, MAX_TURN_ACCELERATION, ALLOWED_CLOSED_LOOP_ERROR
     );
     // P was 30
-    private static final PIDConfig TM_SM_PID = new PIDConfig(10, 0.000, 0, 0);
+    //private static final PIDConfig TM_SM_PID = new PIDConfig(10, 0.000, 0, 0);
 
     // Drive Motor Motion Magic
     private static final MotionMagicConfig DM_MM_CONFIG = new MotionMagicConfig(
@@ -71,8 +72,10 @@ public class SwerveModule {
         300, 2,
         TIMEOUT_MS, 10
     );
-    private static final PIDConfig DM_MM_PID = new PIDConfig(0.035, 0.0001, 0, 0.06);
+    //private static final PIDConfig DM_MM_PID = new PIDConfig(0.035, 0.0001, 0);
 
+    private static PIDConfig DM_MM_PID;
+    private static PIDConfig TM_SM_PID;
     // Motors
     private final WPI_TalonFX driveMotor;
     private final CANSparkMax steeringMotor;
@@ -87,8 +90,10 @@ public class SwerveModule {
      * @param driveMotorChannel    ID for the drive motor.
      * @param steeringMotorChannel ID for the turning motor.
      */
-    public SwerveModule(int driveMotorChannel, int steeringMotorChannel, boolean steerMotorInverted) {//, double zeroTicks) {
+    public SwerveModule(int driveMotorChannel, int steeringMotorChannel, boolean steerMotorInverted, PIDConfig turnPidConfig, PIDConfig drivePidConfig) {//, double zeroTicks) {
 
+        TM_SM_PID = turnPidConfig;
+        DM_MM_PID = drivePidConfig;
         // Steer Motor
         this.steeringMotor = new CANSparkMax(steeringMotorChannel, CANSparkMaxLowLevel.MotorType.kBrushless);
         TM_SM_PID.setTolerance(0);
@@ -110,8 +115,8 @@ public class SwerveModule {
         StatusFrameDemolisher.demolishStatusFrames(driveMotor, false);
 
         // Current Limits
-        this.driveMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 50, 50, 0.05)); //How much current the motor can use (outputwise)
-        this.driveMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 53, 53, 0.05)); //How much current can be supplied to the motor
+        this.driveMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 60, 60, 0.05)); //How much current the motor can use (outputwise)
+        this.driveMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 63, 63, 0.05)); //How much current can be supplied to the motor
 
         this.steeringMotor.setSmartCurrentLimit(31, 30);
 
@@ -131,7 +136,7 @@ public class SwerveModule {
     }
 
     public SwerveModulePosition getModulePosition() {
-        return new SwerveModulePosition(this.getDriveTicks(), new Rotation2d(this.getAbsoluteAngle()));
+        return new SwerveModulePosition(DRIVE_MOTOR_TICK_TO_METERS * this.getDriveTicks(), new Rotation2d(this.getAbsoluteAngle()*-1));
     }
 
     public double convertAngleToTick(double angleInRads) {
@@ -147,7 +152,7 @@ public class SwerveModule {
     }
 
     public double getDriveTicks() {
-        return driveMotor.getSelectedSensorPosition();
+        return driveMotor.getSensorCollection().getIntegratedSensorPosition();
     }
 
     public double getVelocity() {
