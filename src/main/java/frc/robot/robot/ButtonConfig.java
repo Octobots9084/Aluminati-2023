@@ -28,7 +28,7 @@ public class ButtonConfig {
             (new SetDriverAssist(false));
 
         new JoystickButton(ControlMap.DRIVER_LEFT, 1)
-            .onTrue(new RotateTo(0));
+            .onTrue(new RotateTo(0,0.3));
 
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 11)
             .onTrue(new ZeroGyro());
