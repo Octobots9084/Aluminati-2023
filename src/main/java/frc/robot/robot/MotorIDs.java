@@ -31,9 +31,13 @@ public class MotorIDs {
     public static final int BACK_RIGHT_DRIVE = 8;
     public static final int BACK_RIGHT_STEER = 7;
 
-    // claws
-    public static final int INTAKE_LEFT_CLAW=69;
-    public static final int INTAKE_RIGHT_CLAW=420;
+    //Arm
+    public static final int INTAKE_LEFT_CLAW = 0;
+    public static final int INTAKE_RIGHT_CLAW = 0;
+    public static final int INTAKE_EXTENSION = 0;
+    public static final int ARM_WRIST_ANGLE = 0;
+    public static final int ARM_PIVOT_ANGLE = 0;
+    
     
     private MotorIDs() {
     }
