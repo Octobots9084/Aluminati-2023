@@ -7,6 +7,7 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import frc.robot.robot.MotorIDs;
 import frc.robot.util.PIDConfig;
 
 public class ArmExtension {
@@ -24,7 +25,7 @@ public class ArmExtension {
         return armExtension;
     }
     public ArmExtension(){
-        this.motor = new CANSparkMax(0, MotorType.kBrushless);
+        this.motor = new CANSparkMax(MotorIDs.INTAKE_EXTENSION, MotorType.kBrushless);
         this.encoder = motor.getEncoder();
         this.pidController = motor.getPIDController();
         this.pidConfig = new PIDConfig(2, 0, 0);

@@ -7,6 +7,8 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
+import frc.robot.robot.MotorIDs;
+
 public class CaliGirls {
     private CANSparkMax motorTop;
     private CANSparkMax motorBottom;
@@ -26,8 +28,8 @@ public class CaliGirls {
     }
 
     public CaliGirls() {
-        this.motorTop = new CANSparkMax(0, MotorType.kBrushless);
-        this.motorBottom = new CANSparkMax(0, MotorType.kBrushless);
+        this.motorTop = new CANSparkMax(MotorIDs.ARM_WRIST_ANGLE, MotorType.kBrushless);
+        this.motorBottom = new CANSparkMax(MotorIDs.ARM_PIVOT_ANGLE, MotorType.kBrushless);
         this.caliEncoderTop = motorTop.getAbsoluteEncoder(Type.kDutyCycle);
         this.caliEncoderBottom = motorBottom.getAbsoluteEncoder(Type.kDutyCycle);
         this.caliPIDControllerTop = motorTop.getPIDController();
