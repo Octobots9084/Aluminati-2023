@@ -8,6 +8,6 @@ public class ArmExtensionTest extends InstantCommand{
     @Override
     public void initialize() {
         this.armExtension = ArmExtension.getInstance();
-        armExtension.SetPosition(1000);
+        armExtension.SetPosition(3500);
     }
 }

@@ -29,6 +29,7 @@ public class ArmExtension {
         this.motor = new CANSparkMax(MotorIDs.INTAKE_EXTENSION, MotorType.kBrushless);
         this.encoder = motor.getEncoder();
         this.pidController = motor.getPIDController();
+        this.motor.setSmartCurrentLimit(10, 10);
         this.pidConfig = new PIDConfig(2, 0, 0);
         encoder.setPosition(0);
         pidController.setFeedbackDevice(encoder);
@@ -39,6 +40,6 @@ public class ArmExtension {
     }
 
     public void SetPosition(double position){
-        pidController.setReference(gearing * position, ControlType.kPosition);
+        pidController.setReference(gearing * -position, ControlType.kPosition);
     }
 }

@@ -141,6 +141,8 @@ public class Robot extends TimedRobot {
         // CaliGirls.getInstance();
         // IntakeClaws.getInstance();
         DriveTrain.getInstance();
+        CaliGirls.getInstance();
+        IntakeClaws.getInstance();
         ArmExtension.getInstance();
     }
 
