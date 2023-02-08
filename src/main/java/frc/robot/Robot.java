@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package frc.robot.robot;
+package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -31,6 +31,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.autonomous.PathPlannerAutos;
 import frc.robot.commands.swerve.SwerveControl;
+import frc.robot.robot.ButtonConfig;
+import frc.robot.subsystems.arm.ArmExtension;
+import frc.robot.subsystems.arm.CaliGirls;
+import frc.robot.subsystems.arm.IntakeClaws;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 
@@ -133,7 +137,11 @@ public class Robot extends TimedRobot {
     }
 
     private void initializeAllSubsystems() {
+        
+        // CaliGirls.getInstance();
+        // IntakeClaws.getInstance();
         DriveTrain.getInstance();
+        ArmExtension.getInstance();
     }
 
     private void resetRobotPoseAndGyro() {

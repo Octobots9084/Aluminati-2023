@@ -32,11 +32,11 @@ public class MotorIDs {
     public static final int BACK_RIGHT_STEER = 7;
 
     //Arm
-    public static final int INTAKE_LEFT_CLAW = 0;
-    public static final int INTAKE_RIGHT_CLAW = 0;
-    public static final int INTAKE_EXTENSION = 0;
-    public static final int ARM_WRIST_ANGLE = 0;
-    public static final int ARM_PIVOT_ANGLE = 0;
+    public static final int INTAKE_LEFT_CLAW = 13;
+    public static final int INTAKE_RIGHT_CLAW = 12;
+    public static final int INTAKE_EXTENSION = 10;
+    public static final int ARM_WRIST_ANGLE = 11;
+    public static final int ARM_PIVOT_ANGLE = 9;
     
     
     private MotorIDs() {

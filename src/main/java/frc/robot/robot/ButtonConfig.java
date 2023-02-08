@@ -8,6 +8,7 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.ArmExtensionTest;
 import frc.robot.commands.autonomous.BalanceChargeStation;
 import frc.robot.commands.autonomous.driveToPos;
 import frc.robot.commands.swerve.SetDriverAssist;
@@ -38,6 +39,8 @@ public class ButtonConfig {
 
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 9) 
             .onTrue(new driveToPos(new Pose2d(14, 0.7, new Rotation2d(0))));
+            new JoystickButton(ControlMap.DRIVER_BUTTONS, 6) 
+            .onTrue(new ArmExtensionTest());
 
 
     }
