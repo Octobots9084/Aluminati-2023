@@ -39,7 +39,9 @@ public class ButtonConfig {
 
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 9) 
             .onTrue(new driveToPos(new Pose2d(14, 0.7, new Rotation2d(0))));
-            new JoystickButton(ControlMap.DRIVER_BUTTONS, 6) 
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 6) 
+            .onTrue(new ArmExtensionTest());
+            new JoystickButton(ControlMap.DRIVER_BUTTONS, 5) 
             .onTrue(new ArmExtensionTest());
 
 
