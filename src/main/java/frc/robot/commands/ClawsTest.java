@@ -9,6 +9,6 @@ public class ClawsTest extends InstantCommand{
     @Override
     public void initialize() {
         this.claws = IntakeClaws.getInstance();
-        claws.setClawVoltage(5);
+        claws.setClawVoltage(-1);
     }
 }

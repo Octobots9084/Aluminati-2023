@@ -8,7 +8,9 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.Arm;
 import frc.robot.commands.ArmExtensionTest;
+import frc.robot.commands.ClawsTest;
 import frc.robot.commands.autonomous.BalanceChargeStation;
 import frc.robot.commands.autonomous.driveToPos;
 import frc.robot.commands.swerve.SetDriverAssist;
@@ -42,7 +44,9 @@ public class ButtonConfig {
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 6) 
             .onTrue(new ArmExtensionTest());
             new JoystickButton(ControlMap.DRIVER_BUTTONS, 5) 
-            .onTrue(new ArmExtensionTest());
+            .onTrue(new ClawsTest());
+            new JoystickButton(ControlMap.DRIVER_BUTTONS, 4) 
+            .onTrue(new Arm());
 
 
     }
