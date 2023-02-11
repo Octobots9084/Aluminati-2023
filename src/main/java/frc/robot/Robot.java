@@ -155,7 +155,7 @@ public class Robot extends TimedRobot {
 
     private void initializeDefaultCommands() {
         CommandScheduler.getInstance().setDefaultCommand(DriveTrain.getInstance(), new SwerveControl());
-        // CommandScheduler.getInstance().setDefaultCommand(CaliGirls.getInstance(), new TiltControl());
+        CommandScheduler.getInstance().setDefaultCommand(CaliGirls.getInstance(), new TiltControl());
         CommandScheduler.getInstance().setDefaultCommand(ArmExtension.getInstance(), new ArmControl());
     }
 }

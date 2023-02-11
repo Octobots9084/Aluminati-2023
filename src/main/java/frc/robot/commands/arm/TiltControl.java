@@ -1,5 +1,6 @@
 package frc.robot.commands.arm;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.robot.ControlMap;
 import frc.robot.subsystems.arm.CaliGirls;
@@ -13,7 +14,8 @@ public class TiltControl extends CommandBase{
     }
     @Override
     public void execute() {
-        // caliGirls.setBottomPos(caliGirls.lastPosBottom + 0.01 * ControlMap.XBOX.getRightY());
+        SmartDashboard.putNumber("arm angle", caliGirls.lastPosBottom);
+        caliGirls.setBottomPos(caliGirls.lastPosBottom + 0.01 * ControlMap.XBOX.getRightY());
     }
     
 }

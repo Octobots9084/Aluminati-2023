@@ -16,7 +16,6 @@ public class Arm extends InstantCommand{
     public void initialize() {
         SmartDashboard.putNumber("Init", 1);
         double angle = 0;
-        caliGirls.setTopPos(angle);
         caliGirls.setBottomPos(-angle);
     }
 }

@@ -2,10 +2,12 @@
 package frc.robot.subsystems.arm;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
@@ -14,6 +16,7 @@ import frc.robot.util.MotorUtil;
 public class CaliGirls extends SubsystemBase{
     private CANSparkMax motorTop, motorBottom;
     public double lastPosTop, lastPosBottom;
+    private SparkMaxPIDController pidController;
 
     private static CaliGirls caliGirls;
     public static CaliGirls getInstance(){
@@ -24,28 +27,39 @@ public class CaliGirls extends SubsystemBase{
     }
 
     public CaliGirls() {
-        this.motorTop = new CANSparkMax(MotorIDs.ARM_WRIST_ANGLE, MotorType.kBrushless);
-        motorTop.setSmartCurrentLimit(Tuning.CALI_TOP_STALL, Tuning.CALI_TOP_FREE);
-        MotorUtil.setupSmartMotion(
-            Type.kDutyCycle, 
-            Tuning.CALI_TOP_PID, 
-            Tuning.CALI_TOP_SM, 
-            Tuning.CALI_TOP_ENCODER_RESOLUTION, 
-            motorTop
-        );
-        this.lastPosTop = motorTop.getAbsoluteEncoder(Type.kDutyCycle).getPosition();
+        // this.motorTop = new CANSparkMax(MotorIDs.ARM_WRIST_ANGLE, MotorType.kBrushless);
+        // motorTop.setSmartCurrentLimit(Tuning.CALI_TOP_STALL, Tuning.CALI_TOP_FREE);
+        // MotorUtil.setupSmartMotion(
+        //     Type.kDutyCycle, 
+        //     Tuning.CALI_TOP_PID, 
+        //     Tuning.CALI_TOP_SM, 
+        //     Tuning.CALI_TOP_ENCODER_RESOLUTION,
+        //     tee hee, my name is Lee! 
+        //     motorTop
+        // );
+        // this.lastPosTop = motorTop.getAbsoluteEncoder(Type.kDutyCycle).getPosition();
+        
         
         this.motorBottom = new CANSparkMax(MotorIDs.ARM_PIVOT_ANGLE, MotorType.kBrushless);
-        motorTop.setSmartCurrentLimit(Tuning.CALI_BOTTOM_STALL, Tuning.CALI_BOTTOM_FREE);
-        MotorUtil.setupSmartMotion(
-            Type.kDutyCycle, 
-            Tuning.CALI_BOTTOM_PID, 
-            Tuning.CALI_BOTTOM_SM, 
-            Tuning.CALI_BOTTOM_ENCODER_RESOLUTION, 
-            motorBottom
-        );
+        motorBottom.setSmartCurrentLimit(Tuning.CALI_BOTTOM_STALL, Tuning.CALI_BOTTOM_FREE);
         
+        // MotorUtil.setupSmartMotion(
+        //     Type.kDutyCycle, 
+        //     Tuning.CALI_BOTTOM_PID, 
+        //     Tuning.CALI_BOTTOM_SM, 
+        //     Tuning.CALI_BOTTOM_ENCODER_RESOLUTION, 
+        //     motorBottom
+        // );
+        
+        this.pidController = motorBottom.getPIDController();
+        pidController.setFeedbackDevice(motorBottom.getAbsoluteEncoder(Type.kDutyCycle));
+        pidController.setP(Tuning.CALI_BOTTOM_PID.getP());
+        pidController.setI(Tuning.CALI_BOTTOM_PID.getI());
+        pidController.setD(Tuning.CALI_BOTTOM_PID.getD());
+        pidController.setOutputRange(-1.0, 1.0);
         this.lastPosBottom = motorBottom.getAbsoluteEncoder(Type.kDutyCycle).getPosition();
+        setBottomPos(lastPosBottom);
+
     }
 
 
@@ -55,12 +69,20 @@ public class CaliGirls extends SubsystemBase{
     // }
 
     public void setBottomPos(double angle) {
-        motorBottom.getPIDController().setReference(angle, ControlType.kSmartMotion);
+        if (angle < 0.65) {
+            angle = 0.65;
+        }
+        if (angle > 0.9) {
+            angle = 0.9;
+        }
+        lastPosBottom = angle;
+        pidController.setReference(angle, ControlType.kPosition);
+        SmartDashboard.putNumber("Attempted drive", angle);
     }
 
     
-    public void setTopPos(double angle) {
-        motorTop.getPIDController().setReference(angle, ControlType.kSmartMotion);
-    }
+    // public void setTopPos(double angle) {
+    //     motorTop.getPIDController().setReference(angle, ControlType.kSmartMotion);
+    // }
 
 }
