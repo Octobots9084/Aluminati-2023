@@ -67,7 +67,6 @@ public class DriveTrain extends SubsystemBase {
     private final Gyro gyro;
     //Modules
     private final SwerveModule[] swerveModules = new SwerveModule[4];
-    private final PIDConfig[] turnPidConfigs = new PIDConfig[4];
     private final Translation2d[] swervePosition = new Translation2d[4];
     //Drive Controllers
     private final SwerveDriveKinematics swerveDriveKinematics;

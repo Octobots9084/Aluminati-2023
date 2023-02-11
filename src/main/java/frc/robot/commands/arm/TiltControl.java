@@ -1,6 +1,7 @@
 package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.robot.ControlMap;
 import frc.robot.subsystems.arm.CaliGirls;
 
 //CURRENTLY BROKEN REWRITE BEFORE USE!
@@ -12,7 +13,7 @@ public class TiltControl extends CommandBase{
     }
     @Override
     public void execute() {
-        // caliGirls.setBottomPos(caliGirls.refrence + ControlMap.XBOX.getRightY() * 0.2 );
+        // caliGirls.setBottomPos(caliGirls.lastPosBottom + 0.01 * ControlMap.XBOX.getRightY());
     }
     
 }

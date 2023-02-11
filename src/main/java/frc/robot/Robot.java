@@ -95,7 +95,7 @@ public class Robot extends TimedRobot {
         CommandScheduler.getInstance().cancelAll();
         initializeAllSubsystems();
         initializeDefaultCommands();
-
+        ArmExtension.getInstance().setOffset();
         if (!autoFlag) {
             resetRobotPoseAndGyro();
         }

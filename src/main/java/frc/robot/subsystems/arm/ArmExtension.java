@@ -21,7 +21,6 @@ public class ArmExtension extends SubsystemBase{
     //gear reduction 1:25
     private double gearing = 1.0/25.0;
     public double lastpos;
-    public double offset = 0;
 
     public static ArmExtension getInstance(){
         if(armExtension == null){
@@ -32,19 +31,21 @@ public class ArmExtension extends SubsystemBase{
     public ArmExtension(){
         this.motor = new CANSparkMax(MotorIDs.INTAKE_EXTENSION, MotorType.kBrushless);
         this.motor.setSmartCurrentLimit(Tuning.EXTENSION_STALL, Tuning.EXTENSION_FREE);
-        
-        pidController.setFeedbackDevice(motor.getAbsoluteEncoder(Type.kDutyCycle));
+        this.pidController = motor.getPIDController();
+        pidController.setFeedbackDevice(motor.getEncoder());
         pidController.setP(Tuning.EXTENSION_PID.getP());
         pidController.setI(Tuning.EXTENSION_PID.getI());
         pidController.setD(Tuning.EXTENSION_PID.getD());
         pidController.setOutputRange(Tuning.EXTENSION_MIN_OUT, Tuning.EXTENSION_MAX_OUT);
+
     }
     public void setOffset() {
-        this.offset = motor.getEncoder().getPosition();
+        motor.getEncoder().setPosition(0);
+        SetPosition(0);
     }
 
     public void SetPosition(double position){
         lastpos = position;
-        motor.getPIDController().setReference(gearing * -(position + offset), ControlType.kPosition);
+        motor.getPIDController().setReference(gearing * -position, ControlType.kPosition);
     }
 }

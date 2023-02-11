@@ -33,6 +33,7 @@ public class CaliGirls extends SubsystemBase{
             Tuning.CALI_TOP_ENCODER_RESOLUTION, 
             motorTop
         );
+        this.lastPosTop = motorTop.getAbsoluteEncoder(Type.kDutyCycle).getPosition();
         
         this.motorBottom = new CANSparkMax(MotorIDs.ARM_PIVOT_ANGLE, MotorType.kBrushless);
         motorTop.setSmartCurrentLimit(Tuning.CALI_BOTTOM_STALL, Tuning.CALI_BOTTOM_FREE);
@@ -44,15 +45,14 @@ public class CaliGirls extends SubsystemBase{
             motorBottom
         );
         
-        
-        
+        this.lastPosBottom = motorBottom.getAbsoluteEncoder(Type.kDutyCycle).getPosition();
     }
 
 
-    public void setOutput(double output){
-        motorTop.set(output);
-        motorBottom.set(-output);
-    }
+    // public void setOutput(double output){
+    //     motorTop.set(output);
+    //     motorBottom.set(-output);
+    // }
 
     public void setBottomPos(double angle) {
         motorBottom.getPIDController().setReference(angle, ControlType.kSmartMotion);

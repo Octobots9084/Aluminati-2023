@@ -18,8 +18,8 @@ public class Tuning {
     public static final int CALI_BOTTOM_FREE = 20;
     public static final int CALI_BOTTOM_STALL = 22;
     //Extension
-    public static final int EXTENSION_FREE = 10;
-    public static final int EXTENSION_STALL = 12;
+    public static final int EXTENSION_FREE = 20;
+    public static final int EXTENSION_STALL = 20;
     //Drive
     public static final StatorCurrentLimitConfiguration DRIVE_STATOR_LIMIT = new StatorCurrentLimitConfiguration(
         true,
@@ -61,7 +61,7 @@ public class Tuning {
     public static final double CALI_BOTTOM_ENCODER_RESOLUTION = 1.0;    
 
     //Extension
-    public static final PIDConfig EXTENSION_PID = new PIDConfig(2, 0, 0);
+    public static final PIDConfig EXTENSION_PID = new PIDConfig(5, 0, 0);
     public static final double EXTENSION_MAX_OUT = 1;
     public static final double EXTENSION_MIN_OUT = -1;
 
@@ -90,4 +90,6 @@ public class Tuning {
         0.1
     );
 
+    //Command Characteristics
+    //Autos
 }

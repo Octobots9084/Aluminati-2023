@@ -26,24 +26,24 @@ public class ButtonConfig {
     public void initTeleop() {
         // DRIVER LEFT
 
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
-            .whileTrue(new SetDriverAssist(true));
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
+        //     .whileTrue(new SetDriverAssist(true));
         
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
-            .whileFalse
-            (new SetDriverAssist(false));
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
+        //     .whileFalse
+        //     (new SetDriverAssist(false));
 
-        // new JoystickButton(ControlMap.DRIVER_LEFT, 1)
-        //     .onTrue(new RotateTo(0));
+        // // new JoystickButton(ControlMap.DRIVER_LEFT, 1)
+        // //     .onTrue(new RotateTo(0));
 
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 11)
-            .onTrue(new ZeroGyro());
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 11)
+        //     .onTrue(new ZeroGyro());
 
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 10) 
-            .onTrue(new BalanceChargeStation(DriveTrain.getInstance(), Gyro.getInstance()));
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 10) 
+        //     .onTrue(new BalanceChargeStation(DriveTrain.getInstance(), Gyro.getInstance()));
 
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 9) 
-            .onTrue(new driveToPos(new Pose2d(14, 0.7, new Rotation2d(0))));
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 9) 
+            // .onTrue(new driveToPos(new Pose2d(14, 0.7, new Rotation2d(0))));
         new JoystickButton(ControlMap.XBOX, 1) 
             .onTrue(new ArmExtensionTest());
         // new JoystickButton(ControlMap.DRIVER_BUTTONS, 5) 
