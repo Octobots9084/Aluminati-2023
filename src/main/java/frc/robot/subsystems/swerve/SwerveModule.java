@@ -35,7 +35,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+import frc.robot.robot.Tuning;
 import frc.robot.util.*;
 
 import java.util.ArrayList;
@@ -50,29 +50,7 @@ public class SwerveModule {
     private static final double STEER_MOTOR_TICK_TO_ANGLE = 2.0 * Math.PI / ENCODER_RESOLUTION / GEARING_TURN_MOTORS; // radians
     private static final double DRIVE_MOTOR_TICK_TO_METERS = (GEARING * 2.0 * Math.PI * WHEEL_RADIUS)/2048.0;
     private static final double DRIVE_MOTOR_TICK_TO_SPEED = 10 * GEARING * (2 * Math.PI * WHEEL_RADIUS) / 2048; // m/s
-    // Controller Constants
-    private static final double MAX_TURN_ACCELERATION = 20000; // Rad/s
-    private static final double MAX_TURN_VELOCITY = 20000; // Rad/s
-    private static final double MIN_TURN_VELOCITY = 18000; // Rad/s
-    private static final double ALLOWED_CLOSED_LOOP_ERROR = 0.1;
-    private static final int TIMEOUT_MS = 60;
-
-    // Turn Motor Smart Motion
-    private static final SmartMotionConfig TM_SM_CONFIG = new SmartMotionConfig(
-        true,
-        MAX_TURN_VELOCITY, MIN_TURN_VELOCITY, MAX_TURN_ACCELERATION, ALLOWED_CLOSED_LOOP_ERROR
-    );
     // P was 30
-    //private static final PIDConfig TM_SM_PID = new PIDConfig(10, 0.000, 0, 0);
-
-    // Drive Motor Motion Magic
-    private static final MotionMagicConfig DM_MM_CONFIG = new MotionMagicConfig(
-        new ArrayList<>(), true,
-        10000.0, 10000.0,
-        300, 2,
-        TIMEOUT_MS, 10
-    );
-    //private static final PIDConfig DM_MM_PID = new PIDConfig(0.035, 0.0001, 0);
 
     private static PIDConfig DM_MM_PID;
     private static PIDConfig TM_SM_PID;
@@ -98,7 +76,7 @@ public class SwerveModule {
         this.steeringMotor = new CANSparkMax(steeringMotorChannel, CANSparkMaxLowLevel.MotorType.kBrushless);
         TM_SM_PID.setTolerance(0);
         this.steeringMotor.restoreFactoryDefaults();
-        MotorUtil.setupSmartMotion(Type.kDutyCycle, TM_SM_PID, TM_SM_CONFIG ,ENCODER_RESOLUTION, steeringMotor);
+        MotorUtil.setupSmartMotion(Type.kDutyCycle, TM_SM_PID, Tuning.TM_SM_CONFIG ,ENCODER_RESOLUTION, steeringMotor);
         this.steeringMotor.getAbsoluteEncoder(Type.kDutyCycle).setInverted(false);
 
         // Initialize position of steering motor encoder to the same as the rio encoder
@@ -106,7 +84,7 @@ public class SwerveModule {
 
         // Drive Motor
         this.driveMotor = new WPI_TalonFX(driveMotorChannel);
-        MotorUtil.setupMotionMagic(FeedbackDevice.IntegratedSensor, DM_MM_PID, DM_MM_CONFIG, driveMotor);
+        MotorUtil.setupMotionMagic(FeedbackDevice.IntegratedSensor, DM_MM_PID, Tuning.DM_MM_CONFIG, driveMotor);
         driveMotor.configAllowableClosedloopError(0, 5);
         driveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         driveMotor.setStatusFramePeriod(21, 10);
@@ -115,10 +93,9 @@ public class SwerveModule {
         StatusFrameDemolisher.demolishStatusFrames(driveMotor, false);
 
         // Current Limits
-        this.driveMotor.configStatorCurrentLimit(new StatorCurrentLimitConfiguration(true, 60, 60, 0.05)); //How much current the motor can use (outputwise)
-        this.driveMotor.configSupplyCurrentLimit(new SupplyCurrentLimitConfiguration(true, 63, 63, 0.05)); //How much current can be supplied to the motor
-
-        this.steeringMotor.setSmartCurrentLimit(31, 30);
+        this.driveMotor.configStatorCurrentLimit(Tuning.DRIVE_STATOR_LIMIT); //How much current the motor can use (outputwise)
+        this.driveMotor.configSupplyCurrentLimit(Tuning.DRIVE_SUPPLY_LIMIT); //How much current the supply can give (inputwise)
+        this.steeringMotor.setSmartCurrentLimit(Tuning.TURN_MOTOR_STALL, Tuning.TURN_MOTOR_FREE);
 
         try {
             Thread.sleep(200);

@@ -32,6 +32,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.robot.MotorIDs;
+import frc.robot.robot.Tuning;
 import frc.robot.util.Gyro;
 import frc.robot.util.MathUtil;
 import frc.robot.util.PIDConfig;
@@ -67,9 +68,7 @@ public class DriveTrain extends SubsystemBase {
     //Modules
     private final SwerveModule[] swerveModules = new SwerveModule[4];
     private final PIDConfig[] turnPidConfigs = new PIDConfig[4];
-    private final PIDConfig[] drivePidConfigs = new PIDConfig[4];
     private final Translation2d[] swervePosition = new Translation2d[4];
-    private final boolean[] steerMotorInverted = new boolean[4];
     //Drive Controllers
     private final SwerveDriveKinematics swerveDriveKinematics;
     //Flags
@@ -87,30 +86,17 @@ public class DriveTrain extends SubsystemBase {
     private final PoseEstimator swerveDrivePoseEstimator;
 
     private DriveTrain() {
-        turnPidConfigs[0] = new PIDConfig(10, 0, 0);
-        turnPidConfigs[1] = new PIDConfig(10, 0, 0);
-        turnPidConfigs[2] = new PIDConfig(10, 0, 0);
-        turnPidConfigs[3] = new PIDConfig(10, 0, 0);
-
-        drivePidConfigs[0] = new PIDConfig(0.06, 0.0001, 0, 0.077);
-        drivePidConfigs[1] = new PIDConfig(0.06, 0.0001, 0, 0.06);
-        drivePidConfigs[2] = new PIDConfig(0.06, 0.0001, 0, 0.075);
-        drivePidConfigs[3] = new PIDConfig(0.06, 0.0001, 0, 0.06);
-
+        
         //Position relative to center of robot -> (0,0) is the center (m)
         swervePosition[2] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER); 
         swervePosition[0] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
         swervePosition[3] = new Translation2d(-WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
         swervePosition[1] = new Translation2d(WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER); 
 
-        steerMotorInverted[0] = false;
-        steerMotorInverted[1] = false;
-        steerMotorInverted[2] = false;
-        steerMotorInverted[3] = false;
-        swerveModules[0] = new SwerveModule(MotorIDs.FRONT_LEFT_DRIVE, MotorIDs.FRONT_LEFT_STEER, steerMotorInverted[0], turnPidConfigs[0], drivePidConfigs[0]);
-        swerveModules[1] = new SwerveModule(MotorIDs.FRONT_RIGHT_DRIVE, MotorIDs.FRONT_RIGHT_STEER, steerMotorInverted[1], turnPidConfigs[1], drivePidConfigs[1]);
-        swerveModules[2] = new SwerveModule(MotorIDs.BACK_LEFT_DRIVE, MotorIDs.BACK_LEFT_STEER, steerMotorInverted[2], turnPidConfigs[2], drivePidConfigs[2]);
-        swerveModules[3] = new SwerveModule(MotorIDs.BACK_RIGHT_DRIVE, MotorIDs.BACK_RIGHT_STEER, steerMotorInverted[3], turnPidConfigs[3], drivePidConfigs[3]);
+        swerveModules[0] = new SwerveModule(MotorIDs.FRONT_LEFT_DRIVE, MotorIDs.FRONT_LEFT_STEER, false, Tuning.FL_TURN_PID, Tuning.FL_DRIVE_PID);
+        swerveModules[1] = new SwerveModule(MotorIDs.FRONT_RIGHT_DRIVE, MotorIDs.FRONT_RIGHT_STEER, false, Tuning.FR_TURN_PID, Tuning.FR_DRIVE_PID);
+        swerveModules[2] = new SwerveModule(MotorIDs.BACK_LEFT_DRIVE, MotorIDs.BACK_LEFT_STEER, false, Tuning.BL_TURN_PID, Tuning.BL_DRIVE_PID);
+        swerveModules[3] = new SwerveModule(MotorIDs.BACK_RIGHT_DRIVE, MotorIDs.BACK_RIGHT_STEER, false, Tuning.BR_TURN_PID, Tuning.BR_DRIVE_PID);
 
 
         

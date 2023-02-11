@@ -7,11 +7,12 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.Arm;
-import frc.robot.commands.ArmExtensionTest;
-import frc.robot.commands.ClawsTest;
+import frc.robot.commands.arm.Arm;
+import frc.robot.commands.arm.ArmExtensionTest;
+import frc.robot.commands.arm.ArmZero;
+import frc.robot.commands.arm.ClawsTest;
+import frc.robot.commands.arm.SetArmAngle;
 import frc.robot.commands.autonomous.BalanceChargeStation;
 import frc.robot.commands.autonomous.driveToPos;
 import frc.robot.commands.swerve.SetDriverAssist;
@@ -21,7 +22,6 @@ import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 
 public class ButtonConfig {
-    private XboxController xboxController;
     public void initTeleop() {
         // DRIVER LEFT
 
@@ -41,15 +41,16 @@ public class ButtonConfig {
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 10) 
             .onTrue(new BalanceChargeStation(DriveTrain.getInstance(), Gyro.getInstance()));
 
-
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 9) 
             .onTrue(new driveToPos(new Pose2d(14, 0.7, new Rotation2d(0))));
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 6) 
+        new JoystickButton(ControlMap.XBOX, 1)
             .onTrue(new ArmExtensionTest());
-            new JoystickButton(ControlMap.DRIVER_BUTTONS, 5) 
-            .onTrue(new ClawsTest());
-            new JoystickButton(ControlMap.DRIVER_BUTTONS, 4) 
-            .onTrue(new Arm());
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 5)
+        //     .onTrue(new ClawsTest());
+        new JoystickButton(ControlMap.XBOX, 4)
+        .onTrue(new SetArmAngle(0.875));
+        new JoystickButton(ControlMap.XBOX, 2).onTrue(new ArmZero());
+
 
     }
 }
