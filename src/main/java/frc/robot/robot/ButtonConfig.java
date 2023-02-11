@@ -7,6 +7,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Arm;
 import frc.robot.commands.ArmExtensionTest;
@@ -20,6 +21,7 @@ import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 
 public class ButtonConfig {
+    private XboxController xboxController;
     public void initTeleop() {
         // DRIVER LEFT
 
@@ -39,6 +41,7 @@ public class ButtonConfig {
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 10) 
             .onTrue(new BalanceChargeStation(DriveTrain.getInstance(), Gyro.getInstance()));
 
+
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 9) 
             .onTrue(new driveToPos(new Pose2d(14, 0.7, new Rotation2d(0))));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 6) 
@@ -47,7 +50,6 @@ public class ButtonConfig {
             .onTrue(new ClawsTest());
             new JoystickButton(ControlMap.DRIVER_BUTTONS, 4) 
             .onTrue(new Arm());
-
 
     }
 }
