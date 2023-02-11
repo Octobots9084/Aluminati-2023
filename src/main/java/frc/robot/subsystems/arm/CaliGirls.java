@@ -56,8 +56,10 @@ public class CaliGirls extends SubsystemBase{
         pidController.setP(Tuning.CALI_BOTTOM_PID.getP());
         pidController.setI(Tuning.CALI_BOTTOM_PID.getI());
         pidController.setD(Tuning.CALI_BOTTOM_PID.getD());
+        pidController.setFF(Tuning.CALI_BOTTOM_PID.getF());
         pidController.setOutputRange(-1.0, 1.0);
-        this.lastPosBottom = motorBottom.getAbsoluteEncoder(Type.kDutyCycle).getPosition();
+        motorBottom.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(0.28);
+        this.lastPosBottom = 0.85;
         setBottomPos(lastPosBottom);
 
     }
@@ -69,15 +71,16 @@ public class CaliGirls extends SubsystemBase{
     // }
 
     public void setBottomPos(double angle) {
-        if (angle < 0.65) {
-            angle = 0.65;
+        if (angle < 0.585) {
+            angle = 0.585;
         }
-        if (angle > 0.9) {
-            angle = 0.9;
+        if (angle > 0.81) {
+            angle = 0.81;
         }
         lastPosBottom = angle;
         pidController.setReference(angle, ControlType.kPosition);
         SmartDashboard.putNumber("Attempted drive", angle);
+        SmartDashboard.putNumber("arm angle", motorBottom.getAbsoluteEncoder(Type.kDutyCycle).getPosition());
     }
 
     

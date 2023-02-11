@@ -14,7 +14,6 @@ public class TiltControl extends CommandBase{
     }
     @Override
     public void execute() {
-        SmartDashboard.putNumber("arm angle", caliGirls.lastPosBottom);
         caliGirls.setBottomPos(caliGirls.lastPosBottom + 0.01 * ControlMap.XBOX.getRightY());
     }
     
