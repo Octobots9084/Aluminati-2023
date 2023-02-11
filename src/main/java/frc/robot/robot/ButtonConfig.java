@@ -10,7 +10,7 @@ import edu.wpi.first.math.geometry.Rotation3d;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.arm.Arm;
-import frc.robot.commands.arm.ArmExtensionTest;
+import frc.robot.commands.arm.ArmExtensionPos;
 import frc.robot.commands.arm.ArmZero;
 import frc.robot.commands.arm.ClawsTest;
 import frc.robot.commands.arm.SetArmAngle;
@@ -45,12 +45,18 @@ public class ButtonConfig {
         // new JoystickButton(ControlMap.DRIVER_BUTTONS, 9) 
             // .onTrue(new driveToPos(new Pose2d(14, 0.7, new Rotation2d(0))));
         new JoystickButton(ControlMap.XBOX, 1) 
-            .onTrue(new ArmExtensionTest());
+            .onTrue(new ArmExtensionPos(100));
+        new JoystickButton(ControlMap.XBOX, 2) 
+            .onTrue(new ArmExtensionPos(697.5));
+        new JoystickButton(ControlMap.XBOX, 3) 
+            .onTrue(new ArmExtensionPos(814.7));
+        new JoystickButton(ControlMap.XBOX, 4) 
+            .onTrue(new ArmExtensionPos(3400));
         // new JoystickButton(ControlMap.DRIVER_BUTTONS, 5) 
         //     .onTrue(new ClawsTest());
-        new JoystickButton(ControlMap.XBOX, 4)
-        .onTrue(new SetArmAngle(0.875));
-        new JoystickButton(ControlMap.XBOX, 2).onTrue(new ArmZero());
+        // new JoystickButton(ControlMap.XBOX, 4)
+        // .onTrue(new SetArmAngle(0.875));
+        // new JoystickButton(ControlMap.XBOX, 2).onTrue(new ArmZero());
         
 
     }

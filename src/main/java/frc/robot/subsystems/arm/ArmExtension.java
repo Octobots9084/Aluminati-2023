@@ -45,6 +45,13 @@ public class ArmExtension extends SubsystemBase{
     }
 
     public void SetPosition(double position){
+        if (position > 3500) {
+            position = 3500;
+        }
+        if (position < 0) {
+            position = 0;
+        }
+        
         lastpos = position;
         motor.getPIDController().setReference(gearing * -position, ControlType.kPosition);
     }
