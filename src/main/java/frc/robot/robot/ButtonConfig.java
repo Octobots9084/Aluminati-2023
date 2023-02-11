@@ -7,10 +7,13 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Rotation3d;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Arm;
 import frc.robot.commands.ArmExtensionTest;
+import frc.robot.commands.ArmZero;
 import frc.robot.commands.ClawsTest;
+import frc.robot.commands.SetArmAngle;
 import frc.robot.commands.autonomous.BalanceChargeStation;
 import frc.robot.commands.autonomous.driveToPos;
 import frc.robot.commands.swerve.SetDriverAssist;
@@ -23,31 +26,32 @@ public class ButtonConfig {
     public void initTeleop() {
         // DRIVER LEFT
 
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
-            .whileTrue(new SetDriverAssist(true));
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
+        //     .whileTrue(new SetDriverAssist(true));
         
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
-            .whileFalse
-            (new SetDriverAssist(false));
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
+        //     .whileFalse
+        //     (new SetDriverAssist(false));
 
-        // new JoystickButton(ControlMap.DRIVER_LEFT, 1)
-        //     .onTrue(new RotateTo(0));
+        // // new JoystickButton(ControlMap.DRIVER_LEFT, 1)
+        // //     .onTrue(new RotateTo(0));
 
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 11)
-            .onTrue(new ZeroGyro());
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 11)
+        //     .onTrue(new ZeroGyro());
 
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 10) 
-            .onTrue(new BalanceChargeStation(DriveTrain.getInstance(), Gyro.getInstance()));
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 10) 
+        //     .onTrue(new BalanceChargeStation(DriveTrain.getInstance(), Gyro.getInstance()));
 
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 9) 
-            .onTrue(new driveToPos(new Pose2d(14, 0.7, new Rotation2d(0))));
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 6) 
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 9) 
+        //     .onTrue(new driveToPos(new Pose2d(14, 0.7, new Rotation2d(0))));
+        new JoystickButton(ControlMap.XBOX, 1) 
             .onTrue(new ArmExtensionTest());
-            new JoystickButton(ControlMap.DRIVER_BUTTONS, 5) 
-            .onTrue(new ClawsTest());
-            new JoystickButton(ControlMap.DRIVER_BUTTONS, 4) 
-            .onTrue(new Arm());
-
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 5) 
+        //     .onTrue(new ClawsTest());
+        new JoystickButton(ControlMap.XBOX, 4)
+        .onTrue(new SetArmAngle(0.875));
+        new JoystickButton(ControlMap.XBOX, 2).onTrue(new ArmZero());
+        
 
     }
 }

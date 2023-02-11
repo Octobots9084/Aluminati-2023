@@ -29,6 +29,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.ArmControl;
+import frc.robot.commands.TiltControl;
 import frc.robot.commands.autonomous.PathPlannerAutos;
 import frc.robot.commands.swerve.SwerveControl;
 import frc.robot.robot.ButtonConfig;
@@ -153,5 +155,7 @@ public class Robot extends TimedRobot {
 
     private void initializeDefaultCommands() {
         CommandScheduler.getInstance().setDefaultCommand(DriveTrain.getInstance(), new SwerveControl());
+        // CommandScheduler.getInstance().setDefaultCommand(CaliGirls.getInstance(), new TiltControl());
+        CommandScheduler.getInstance().setDefaultCommand(ArmExtension.getInstance(), new ArmControl());
     }
 }

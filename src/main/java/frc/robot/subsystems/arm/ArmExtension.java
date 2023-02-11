@@ -7,10 +7,11 @@ import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.robot.MotorIDs;
 import frc.robot.util.PIDConfig;
 
-public class ArmExtension {
+public class ArmExtension extends SubsystemBase{
     private CANSparkMax motor;
     private static ArmExtension armExtension;
     private RelativeEncoder encoder;
@@ -18,6 +19,8 @@ public class ArmExtension {
     private PIDConfig pidConfig;
     //gear reduction 1:25
     private double gearing = 1.0/25.0;
+    public double lastpos;
+    public double offset = 0;
 
     public static ArmExtension getInstance(){
         if(armExtension == null){
@@ -38,8 +41,12 @@ public class ArmExtension {
         pidController.setD(pidConfig.getD());
         pidController.setOutputRange(-1, 1);
     }
+    public void setOffset() {
+        this.offset = motor.getEncoder().getPosition();
+    }
 
     public void SetPosition(double position){
-        pidController.setReference(gearing * -position, ControlType.kPosition);
+        lastpos = position;
+        pidController.setReference(gearing * -(position + offset), ControlType.kPosition);
     }
 }

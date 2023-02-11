@@ -4,20 +4,23 @@ package frc.robot.subsystems.arm;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.SparkMaxAbsoluteEncoder;
 import com.revrobotics.SparkMaxPIDController;
+import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.robot.MotorIDs;
 
-public class CaliGirls {
+public class CaliGirls extends SubsystemBase{
     private CANSparkMax motorTop;
     private CANSparkMax motorBottom;
     public SparkMaxPIDController caliPIDControllerTop;
     private SparkMaxAbsoluteEncoder caliEncoderTop;
     public double kPTop, kITop, kDTop, kIzTop, kFFTop, kMaxOutputTop, kMinOutputTop;
     public SparkMaxPIDController caliPIDControllerBottom;
-    private SparkMaxAbsoluteEncoder caliEncoderBottom;
+    public SparkMaxAbsoluteEncoder caliEncoderBottom;
     public double kPBottom, kIBottom, kDBottom, kIzBottom, kFFBottom, kMaxOutputBottom, kMinOutputBottom;
+    public double refrence = 0;
 
     private static CaliGirls caliGirls;
     public static CaliGirls getInstance(){
@@ -35,8 +38,8 @@ public class CaliGirls {
         this.caliPIDControllerTop = motorTop.getPIDController();
         caliPIDControllerTop.setFeedbackDevice(caliEncoderTop);
         kPTop = 0.1;
-        kITop = 1e-4;
-        kDTop = 1;
+        kITop = 0;
+        kDTop = 0;
         kIzTop = 0;
         kFFTop = 0;
         kMaxOutputTop = 1;
@@ -49,13 +52,13 @@ public class CaliGirls {
         caliPIDControllerTop.setOutputRange(kMinOutputTop, kMaxOutputTop);
         this.caliPIDControllerBottom = motorBottom.getPIDController();
         caliPIDControllerBottom.setFeedbackDevice(caliEncoderBottom);
-        kPBottom = 0.1;
-        kIBottom = 1e-4;
-        kDBottom = 1;
+        kPBottom = 8;
+        kIBottom = 0;
+        kDBottom = 0;
         kIzBottom = 0;
         kFFBottom = 0;
-        kMaxOutputBottom = 1;
-        kMinOutputBottom = -1;
+        kMaxOutputBottom = 0.5;
+        kMinOutputBottom = -0.5;
         caliPIDControllerBottom.setP(kPBottom);
         caliPIDControllerBottom.setI(kIBottom);
         caliPIDControllerBottom.setD(kDBottom);
@@ -70,7 +73,10 @@ public class CaliGirls {
         motorBottom.set(-output);
     }
 
-    
+    public void setBottomPos(double x) {
+        this.refrence = x;
+        caliPIDControllerBottom.setReference(x, ControlType.kPosition);
+    }
 
 
     public double getRotation(){
