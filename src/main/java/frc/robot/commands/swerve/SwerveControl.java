@@ -20,7 +20,6 @@
 
 package frc.robot.commands.swerve;
 
-import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -29,13 +28,10 @@ import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 import frc.robot.util.MathUtil;
 
-import javax.naming.ldap.Control;
-
 public class SwerveControl extends CommandBase {
     private final DriveTrain driveTrain;
     private final Gyro gyro;
     private final SendableChooser<Integer> sendable = new SendableChooser<>();
-
 
     public SwerveControl() {
         // Initialization
@@ -83,12 +79,12 @@ public class SwerveControl extends CommandBase {
         //     rot = MathUtil.fitDeadband(heliStick.getZ()) * DriveTrain.MAX_ANGULAR_SPEED;
         // } else if(sendable.getSelected() != null && sendable.getSelected().equals(1))
         // {
-            // Get speeds from joysticks
-            xSpeed = MathUtil.fitDeadband(-leftJoystick.getY()) * DriveTrain.MAX_TURN_SPEED;
-            ySpeed = MathUtil.fitDeadband(leftJoystick.getX()) * DriveTrain.MAX_TURN_SPEED;
+        // Get speeds from joysticks
+        xSpeed = MathUtil.fitDeadband(-Math.pow(leftJoystick.getY(), 3)) * DriveTrain.MAX_TURN_SPEED;
+        ySpeed = MathUtil.fitDeadband(Math.pow(leftJoystick.getX(), 3)) * DriveTrain.MAX_TURN_SPEED;
 
-            // Calculate the deadband
-            rot = MathUtil.fitDeadband(leftJoystick.getZ()) * DriveTrain.MAX_ANGULAR_SPEED;
+        // Calculate the deadband
+        rot = MathUtil.fitDeadband(Math.pow(leftJoystick.getZ(), 3)) * DriveTrain.MAX_ANGULAR_SPEED;
         // }
         // else{
         //     xSpeed = 0.0;
