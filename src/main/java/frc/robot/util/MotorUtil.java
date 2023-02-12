@@ -29,8 +29,8 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.BaseTalon;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
+import com.revrobotics.SparkMaxPIDController;
 
 /**
  * Utility methods relating to robot motor movement.
@@ -42,7 +42,7 @@ public class MotorUtil {
     }
 
     public static void setupMotionMagic(FeedbackDevice sensor, PIDConfig pidConfig,
-                                        MotionMagicConfig mmConfig, BaseTalon... motors) {
+            MotionMagicConfig mmConfig, BaseTalon... motors) {
         setupMotionMagic(sensor, pidConfig, 0, mmConfig, motors);
     }
 
@@ -68,7 +68,7 @@ public class MotorUtil {
      * @since 0.1.0
      */
     public static void setupMotionMagic(FeedbackDevice sensor, PIDConfig pidConfig, int slotIdx,
-                                        MotionMagicConfig mmConfig, BaseTalon... motors) {
+            MotionMagicConfig mmConfig, BaseTalon... motors) {
         for (BaseTalon motor : motors) {
             if (mmConfig.doReset()) {
                 motor.configFactoryDefault();
@@ -114,7 +114,8 @@ public class MotorUtil {
         }
     }
 
-    public static void setupSmartMotion(Type encoderType, PIDConfig pidConfig, SmartMotionConfig smConfig, double kCPR, CANSparkMax... motors) {
+    public static void setupSmartMotion(Type encoderType, PIDConfig pidConfig, SmartMotionConfig smConfig, double kCPR,
+            CANSparkMax... motors) {
         for (CANSparkMax motor : motors) {
 
             // Reset config to factory defaults
@@ -174,7 +175,7 @@ public class MotorUtil {
      * @since 0.3.2
      */
     public static void setupSelectedSensor(FeedbackDevice sensor, int periodMs,
-                                           boolean setStatusFrame, BaseTalon... motors) {
+            boolean setStatusFrame, BaseTalon... motors) {
         int statusFrame = 0;
         if (setStatusFrame) {
             switch (sensor) {
@@ -254,4 +255,3 @@ public class MotorUtil {
         }
     }
 }
-

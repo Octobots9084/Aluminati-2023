@@ -20,10 +20,10 @@
 
 package frc.robot.util;
 
-import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 
 public class MotionMagicConfig {
     private final List<Integer> statusFrames;
@@ -51,9 +51,9 @@ public class MotionMagicConfig {
      * @since 0.3.0
      */
     public MotionMagicConfig(List<Integer> statusFrames, boolean reset,
-                             Double maxVel, Double maxAccel,
-                             Integer integralZone, Integer sCurveStrength,
-                             int timeoutMs, int periodMs) {
+            Double maxVel, Double maxAccel,
+            Integer integralZone, Integer sCurveStrength,
+            int timeoutMs, int periodMs) {
         this.statusFrames = statusFrames;
         this.reset = reset;
         this.maxVel = maxVel;

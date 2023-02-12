@@ -52,7 +52,8 @@ public class SwerveUtil {
         double diff;
         double positiveTarget = target + Math.PI;
         double negativeTarget = target - Math.PI;
-        if (Math.abs(getAngleDiff(clampedAngle, positiveTarget)) <= Math.abs(getAngleDiff(clampedAngle, negativeTarget))) {
+        if (Math.abs(getAngleDiff(clampedAngle, positiveTarget)) <= Math
+                .abs(getAngleDiff(clampedAngle, negativeTarget))) {
             diff = getAngleDiff(clampedAngle, positiveTarget);
         } else {
             diff = getAngleDiff(clampedAngle, negativeTarget);

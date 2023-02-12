@@ -20,6 +20,9 @@
 
 package frc.robot;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -40,9 +43,6 @@ import frc.robot.subsystems.arm.IntakeClaws;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
-
 public class Robot extends TimedRobot {
     public static double autoStartTime = 0.0;
     private final Field2d field2d = new Field2d();
@@ -57,7 +57,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotInit() {
-        
+
         initializeAllSubsystems();
         initializeDefaultCommands();
 
@@ -71,7 +71,8 @@ public class Robot extends TimedRobot {
 
         resetRobotPoseAndGyro();
         var threader = Executors.newSingleThreadScheduledExecutor();
-        threader.scheduleWithFixedDelay(new Thread(() -> Gyro.getInstance().updateRotation2D()), 0, 5, TimeUnit.MILLISECONDS);
+        threader.scheduleWithFixedDelay(new Thread(() -> Gyro.getInstance().updateRotation2D()), 0, 5,
+                TimeUnit.MILLISECONDS);
         LiveWindow.disableAllTelemetry();
         LiveWindow.setEnabled(false);
         this.chooser = new SendableChooser<>();
@@ -79,7 +80,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotPeriodic() {
-        
+
     }
 
     @Override
@@ -101,7 +102,6 @@ public class Robot extends TimedRobot {
         }
         this.autoFlag = false;
 
-        
     }
 
     @Override
@@ -110,11 +110,11 @@ public class Robot extends TimedRobot {
         initializeAllSubsystems();
 
         resetRobotPoseAndGyro();
-        
+
         //CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
         CommandScheduler.getInstance().schedule(PathPlannerAutos.testPath());
         //CommandScheduler.getInstance().schedule(new driveToPos(new Pose2d(0.0, FieldConstants.length/2, new Rotation2d(0,0))));
-        
+
         Robot.autoStartTime = Timer.getFPGATimestamp();
         try {
             var command = chooser.getSelected();
@@ -139,7 +139,7 @@ public class Robot extends TimedRobot {
     }
 
     private void initializeAllSubsystems() {
-        
+
         // CaliGirls.getInstance();
         // IntakeClaws.getInstance();
         DriveTrain.getInstance();

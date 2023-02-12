@@ -30,6 +30,7 @@ public class ControlMap {
     public static final XboxController XBOX = new XboxController(3);
     // public static final XboxController XBOX = new XboxController(3);
     public static final Joystick HelicopterStick = new Joystick(4);
+
     private ControlMap() {
     }
 }

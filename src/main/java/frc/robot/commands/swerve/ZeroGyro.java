@@ -24,7 +24,6 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 
-
 /**
  * Represents a swerve drive style drivetrain.
 */

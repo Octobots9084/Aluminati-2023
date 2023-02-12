@@ -28,7 +28,7 @@ public class SmartMotionConfig {
     private Double closedLoopAllowedError;
 
     public SmartMotionConfig(boolean reset,
-                             Double maxVel, Double minVel, Double maxAccel, Double closedLoopAllowedError) {
+            Double maxVel, Double minVel, Double maxAccel, Double closedLoopAllowedError) {
         this.reset = reset;
         this.maxVel = maxVel;
         this.minVel = minVel;

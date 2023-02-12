@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package frc.robot.commands.swerve;
+package frc.robot.commands.swerve;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -29,14 +29,13 @@ public class SetDriverAssist extends InstantCommand {
 
     public SetDriverAssist(boolean useDriverAssist) {
         this.useDriverAssist = useDriverAssist;
-    
+
     }
 
-     @Override
-     public void initialize() {
+    @Override
+    public void initialize() {
         SmartDashboard.putBoolean("Driver Assist: ", this.useDriverAssist);
         DriveTrain.getInstance().setUseDriverAssist(this.useDriverAssist);
-     }  
-        
- }
- 
+    }
+
+}

@@ -5,9 +5,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.arm.CaliGirls;
 
-public class Arm extends InstantCommand{
+public class Arm extends InstantCommand {
     //private double output; // This is used when using initialize() to control movement
     private CaliGirls caliGirls;
+
     public Arm() {
         this.caliGirls = CaliGirls.getInstance();
     }
@@ -19,4 +20,3 @@ public class Arm extends InstantCommand{
         caliGirls.setBottomPos(-angle);
     }
 }
- 
