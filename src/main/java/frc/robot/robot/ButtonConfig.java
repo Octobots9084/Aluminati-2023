@@ -30,25 +30,33 @@ public class ButtonConfig {
 
         // Xbox A Button
         new JoystickButton(ControlMap.XBOX, 1)
-                .onTrue(new ArmExtensionPos(1091));
+                .onTrue(new SetWristAngle(0.268));
         new JoystickButton(ControlMap.XBOX, 1)
                 .onTrue(new SetArmAngle(0.758));
+        new JoystickButton(ControlMap.XBOX, 1)
+                .onTrue(new ArmExtensionPos(1091));
 
         // Xbox B Button
+
         new JoystickButton(ControlMap.XBOX, 2)
-                .onTrue(new ArmExtensionPos(183));
+                .onTrue(new SetWristAngle(0.457));
         new JoystickButton(ControlMap.XBOX, 2)
                 .onTrue(new SetArmAngle(0.586));
+        new JoystickButton(ControlMap.XBOX, 2)
+                .onTrue(new ArmExtensionPos(183));
 
         // Xbox X  Button
         new JoystickButton(ControlMap.XBOX, 3)
                 .onTrue(new SetWristAngle(0.344));
 
         // Xbox Y Button
+
         new JoystickButton(ControlMap.XBOX, 4)
-                .onTrue(new ArmExtensionPos(3400));
+                .onTrue(new SetWristAngle(0.256));
         new JoystickButton(ControlMap.XBOX, 4)
                 .onTrue(new SetArmAngle(0.783));
+        new JoystickButton(ControlMap.XBOX, 4)
+                .onTrue(new ArmExtensionPos(3400));
         // new JoystickButton(ControlMap.DRIVER_BUTTONS, 5) 
         //     .onTrue(new ClawsTest());
         // new JoystickButton(ControlMap.XBOX, 4)
