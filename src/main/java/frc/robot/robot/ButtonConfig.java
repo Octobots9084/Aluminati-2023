@@ -3,6 +3,7 @@ package frc.robot.robot;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.arm.ArmExtensionPos;
 import frc.robot.commands.arm.SetArmAngle;
+import frc.robot.commands.arm.SetWristAngle;
 
 public class ButtonConfig {
     public void initTeleop() {
@@ -41,7 +42,7 @@ public class ButtonConfig {
 
         // Xbox X  Button
         new JoystickButton(ControlMap.XBOX, 3)
-                .onTrue(new ArmExtensionPos(814.7));
+                .onTrue(new SetWristAngle(0.344));
 
         // Xbox Y Button
         new JoystickButton(ControlMap.XBOX, 4)

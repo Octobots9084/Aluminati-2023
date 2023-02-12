@@ -11,15 +11,6 @@ import frc.robot.util.SmartMotionConfig;
 
 public class Tuning {
     //Currents
-    //Wrist
-    public static final int CALI_TOP_FREE = 10;
-    public static final int CALI_TOP_STALL = 12;
-    //Pivot
-    public static final int CALI_BOTTOM_FREE = 40;
-    public static final int CALI_BOTTOM_STALL = 40;
-    //Extension
-    public static final int EXTENSION_FREE = 20;
-    public static final int EXTENSION_STALL = 20;
     //Drive
     public static final StatorCurrentLimitConfiguration DRIVE_STATOR_LIMIT = new StatorCurrentLimitConfiguration(
             true,
@@ -32,16 +23,23 @@ public class Tuning {
             63,
             63,
             0.05);
-    //Turn
-    public static final int TURN_MOTOR_FREE = 30;
-    public static final int TURN_MOTOR_STALL = 31;
+
+    //Wrist
+    public static final int CALI_TOP_FREE = 10;
+    public static final int CALI_TOP_STALL = 12;
+    //Pivot
+    public static final int CALI_BOTTOM_FREE = 40;
+    public static final int CALI_BOTTOM_STALL = 40;
+    //Extension
+    public static final int EXTENSION_FREE = 20;
+    public static final int EXTENSION_STALL = 20;
 
     //Movement Characteristics
     //Wrist
-    public static final PIDConfig CALI_TOP_PID = new PIDConfig(0.1, 0, 0, 0);
+    public static final PIDConfig CALI_TOP_PID = new PIDConfig(3, 0.0005, 0.2, 0.0075);
     public static final SmartMotionConfig CALI_TOP_SM = new SmartMotionConfig(true,
-            10000.0,
-            10000.0,
+            10.0,
+            0.0,
             10000.0,
             0.1);
     public static final double CALI_TOP_ENCODER_RESOLUTION = 1.0;
@@ -70,6 +68,10 @@ public class Tuning {
             10000.0, 10000.0,
             300, 2,
             60, 10);
+
+    //Turn
+    public static final int TURN_MOTOR_FREE = 30;
+    public static final int TURN_MOTOR_STALL = 31;
 
     //Turn Motors
     public static final PIDConfig FL_TURN_PID = new PIDConfig(10, 0, 0);
