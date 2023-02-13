@@ -54,9 +54,9 @@ public class SwerveControl extends CommandBase {
     public void execute() {
         // Link joysticks
         var leftJoystick = ControlMap.DRIVER_LEFT;
-        var rightJoystick = ControlMap.DRIVER_RIGHT;
-        var xbox = ControlMap.XBOX;
-        var heliStick = ControlMap.HelicopterStick;
+        // var rightJoystick = ControlMap.DRIVER_RIGHT;
+        // var xbox = ControlMap.XBOX;
+        // var heliStick = ControlMap.HelicopterStick;
         var xSpeed = 0.0;
         var ySpeed = 0.0;
         var rot = 0.0;
