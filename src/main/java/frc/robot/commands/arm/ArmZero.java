@@ -12,11 +12,19 @@ public class ArmZero extends CommandBase {
     }
 
     @Override
-    public void initialize() {
-        armExtension.getInstance().zeroArm();
+    public void execute() {
+        armExtension.zeroArm();
     }
 
-    public boolean isFinished() {
-        return armExtension.getInstance().zeroDone();
+    // @Override
+    // public boolean isFinished() {
+    //     SmartDashboard.putBoolean("Finished", armExtension.zeroDone());
+    //     return armExtension.zeroDone();
+    // }
+
+    @Override
+    public void end(boolean interupted) {
+        armExtension.resetCurrent();
+        armExtension.setOffset();
     }
 }

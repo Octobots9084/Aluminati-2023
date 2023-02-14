@@ -67,7 +67,7 @@ public class ButtonConfig {
                 .onTrue(new OpenClaw());
 
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
-                .onTrue(new ArmZero());
+                .whileHeld(new ArmZero());
         // new JoystickButton(ControlMap.XBOX, 4)
         // .onTrue(new SetArmAngle(0.875));
         // new JoystickButton(ControlMap.XBOX, 2).onTrue(new ArmZero());
