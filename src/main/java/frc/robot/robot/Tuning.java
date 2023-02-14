@@ -34,6 +34,10 @@ public class Tuning {
     public static final int EXTENSION_FREE = 20;
     public static final int EXTENSION_STALL = 20;
 
+    //Extension Zeroing
+    public static final int EXTENSION_FREE_ZERO = 5;
+    public static final int EXTENSION_STALL_ZERO = 5;
+
     //Movement Characteristics
     //Wrist
     public static final PIDConfig CALI_TOP_PID = new PIDConfig(3, 0.0005, 0.2, 0.0075);

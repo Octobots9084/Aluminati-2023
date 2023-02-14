@@ -39,14 +39,14 @@ public class ArmExtension extends SubsystemBase {
 
     public void setOffset() {
         motor.getEncoder().setPosition(0);
-        SetPosition(0);
+        SetPosition(0, false);
     }
 
-    public void SetPosition(double position) {
+    public void SetPosition(double position, boolean override) {
         if (position > 3500) {
             position = 3500;
         }
-        if (position < 0) {
+        if (position < 0 && !override) {
             position = 0;
         }
 
@@ -56,5 +56,15 @@ public class ArmExtension extends SubsystemBase {
 
     public double GetPosition() {
         return motor.getEncoder().getPosition();
+    }
+
+    public void zeroArm() {
+        motor.setSmartCurrentLimit(Tuning.EXTENSION_STALL_ZERO, Tuning.EXTENSION_FREE_ZERO);
+        motor.setVoltage(3);
+        SetPosition(-3500, true);
+    }
+
+    public boolean zeroDone() {
+        return motor.getOutputCurrent() > 1 && motor.getEncoder().getVelocity() < 20;
     }
 }
