@@ -53,6 +53,10 @@ public class Robot extends TimedRobot {
     public void disabledPeriodic() {
         DriveTrain.getInstance().drive(0, 0, 0, true);
         CommandScheduler.getInstance().cancelAll();
+
+        SmartDashboard.putNumber("Extension", ArmExtension.getInstance().GetPosition());
+        SmartDashboard.putNumber("Arm Rotation", CaliGirls.getInstance().getTopPos());
+        SmartDashboard.putNumber("Claw Rotation", CaliGirls.getInstance().getBottomPos());
     }
 
     @Override

@@ -113,4 +113,12 @@ public class CaliGirls extends SubsystemBase {
     //     motorTop.getPIDController().setReference(angle, ControlType.kSmartMotion);
     // }
 
+    public double getTopPos() {
+        return motorTop.getAbsoluteEncoder(Type.kDutyCycle).getPosition();
+    }
+
+    public double getBottomPos() {
+        return motorBottom.getAbsoluteEncoder(Type.kDutyCycle).getPosition();
+    }
+
 }

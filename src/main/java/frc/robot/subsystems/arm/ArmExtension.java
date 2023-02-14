@@ -53,4 +53,8 @@ public class ArmExtension extends SubsystemBase {
         lastpos = position;
         motor.getPIDController().setReference(gearing * -position, ControlType.kSmartMotion);
     }
+
+    public double GetPosition() {
+        return motor.getEncoder().getPosition();
+    }
 }
