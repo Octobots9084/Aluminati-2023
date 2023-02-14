@@ -51,6 +51,8 @@ public class ButtonConfig {
         .onTrue(new SetArmAngle(0.875));
         new JoystickButton(ControlMap.XBOX, 2).onTrue(new ArmZero());
 
+        new JoystickButton(ControlMap.XBOX, 5).onTrue(new ZeroGyro());
+
 
     }
 }
