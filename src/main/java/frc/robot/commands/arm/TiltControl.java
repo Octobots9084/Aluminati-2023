@@ -16,7 +16,8 @@ public class TiltControl extends CommandBase {
     @Override
     public void execute() {
         //TOO MUCH DELAY
-        caliGirls.setBottomPos(caliGirls.lastPosBottom + 0.0025 * (-Math.pow(ControlMap.XBOX.getRightY(), 3)));
+        caliGirls.setBottomPos(caliGirls.lastPosBottom + 0.00025 * (-Math.pow(ControlMap.XBOX.getRightY(), 3)));
+        caliGirls.setTopPos(caliGirls.lastPosTop + 0.00025 * (-Math.pow(ControlMap.XBOX.getRightX(), 3)));
     }
 
 }
