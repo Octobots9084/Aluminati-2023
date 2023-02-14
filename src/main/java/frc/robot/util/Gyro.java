@@ -20,14 +20,17 @@
 
 package frc.robot.util;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import java.util.concurrent.atomic.AtomicReference;
 public class Gyro {
     private static Gyro INSTANCE;
+
     public static Gyro getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new Gyro();
@@ -44,7 +47,7 @@ public class Gyro {
     }
 
     private double getAngle() {
-        return MathUtil.wrapToCircle(navX.getAngle(),360);
+        return MathUtil.wrapToCircle(navX.getAngle(), 360);
     }
 
     public Rotation2d getRotation2d() {

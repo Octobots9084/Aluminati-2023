@@ -23,7 +23,6 @@ package frc.robot.commands.vision;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.swerve.DriveTrain;
 
-
 /**
  * Represents a swerve drive style drivetrain.
 */

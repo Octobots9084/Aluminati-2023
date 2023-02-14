@@ -41,6 +41,7 @@ public class driveToPos extends CommandBase {
     private Pose2d currentPose;
     private PIDController drivePids;
     private PIDController turnPids;
+
     public driveToPos(Pose2d target) {
         this.driveTrain = DriveTrain.getInstance();
         this.target = target;
@@ -64,37 +65,38 @@ public class driveToPos extends CommandBase {
         SmartDashboard.putNumber("XPo2s: ", currentPose.getX());
         SmartDashboard.putNumber("YPos2e1: ", currentPose.getY());
         SmartDashboard.putNumber("Ro1t2: ", currentPose.getRotation().getDegrees());
-        ySpeed = drivePids.calculate(target.getY(),currentPose.getY());
-        xSpeed = drivePids.calculate(currentPose.getX(),target.getX());
-        rotSpeed = turnPids.calculate(target.getRotation().getRadians(),currentPose.getRotation().getRadians());
+        ySpeed = drivePids.calculate(target.getY(), currentPose.getY());
+        xSpeed = drivePids.calculate(currentPose.getX(), target.getX());
+        rotSpeed = turnPids.calculate(target.getRotation().getRadians(), currentPose.getRotation().getRadians());
 
-        if (xSpeed>0.3) {
+        if (xSpeed > 0.3) {
             xSpeed = 0.3;
         }
-        if (xSpeed<-0.3) {
+        if (xSpeed < -0.3) {
             xSpeed = -0.3;
         }
         if (MathUtil.isWithinTolerance(currentPose.getX(), target.getX(), 0.05)) {
             ySpeed = 0;
         }
 
-        if (ySpeed>0.3) {
+        if (ySpeed > 0.3) {
             ySpeed = 0.3;
         }
-        if (ySpeed<-0.3) {
+        if (ySpeed < -0.3) {
             ySpeed = -0.3;
         }
         if (MathUtil.isWithinTolerance(currentPose.getY(), target.getY(), 0.05)) {
             ySpeed = 0;
         }
 
-        if (rotSpeed>0.3) {
+        if (rotSpeed > 0.3) {
             rotSpeed = 0.3;
         }
-        if (rotSpeed<-0.3) {
+        if (rotSpeed < -0.3) {
             rotSpeed = -0.3;
         }
-        if (MathUtil.isWithinTolerance(MathUtil.wrapToCircle(currentPose.getRotation().getRadians()), MathUtil.wrapToCircle(target.getRotation().getRadians()), 0.03)) {
+        if (MathUtil.isWithinTolerance(MathUtil.wrapToCircle(currentPose.getRotation().getRadians()),
+                MathUtil.wrapToCircle(target.getRotation().getRadians()), 0.03)) {
             ySpeed = 0;
         }
 
@@ -102,19 +104,22 @@ public class driveToPos extends CommandBase {
         // if (rotSpeed == 0) {
         //     driveTrain.drive(xSpeed, ySpeed, driveTrain.getRotationSpeed(), true);
         // } else {
-            driveTrain.drive(xSpeed, ySpeed, 0,true);//rotSpeed, true);
-            Gyro.getInstance().updateRotation2D();
-            driveTrain.setTargetRotationAngle(Gyro.getInstance().getRotation2d().getDegrees()*-1);
+        driveTrain.drive(xSpeed, ySpeed, 0, true);//rotSpeed, true);
+        Gyro.getInstance().updateRotation2D();
+        driveTrain.setTargetRotationAngle(Gyro.getInstance().getRotation2d().getDegrees() * -1);
         // }
     }
 
     @Override
     public boolean isFinished() {
         // tolerances are a bit low
-        if (MathUtil.isWithinTolerance(currentPose.getY(), target.getY(), 0.1) && MathUtil.isWithinTolerance(currentPose.getX(), target.getX(), 0.1) && MathUtil.isWithinTolerance(MathUtil.wrapToCircle(currentPose.getRotation().getRadians()), MathUtil.wrapToCircle(target.getRotation().getRadians()), 0.09)) {
+        if (MathUtil.isWithinTolerance(currentPose.getY(), target.getY(), 0.1)
+                && MathUtil.isWithinTolerance(currentPose.getX(), target.getX(), 0.1)
+                && MathUtil.isWithinTolerance(MathUtil.wrapToCircle(currentPose.getRotation().getRadians()),
+                        MathUtil.wrapToCircle(target.getRotation().getRadians()), 0.09)) {
             return true;
         }
-        
+
         return false;
     }
 

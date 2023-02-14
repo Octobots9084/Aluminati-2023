@@ -37,8 +37,7 @@ public class MotorIDs {
     public static final int INTAKE_EXTENSION = 10;
     public static final int ARM_WRIST_ANGLE = 11;
     public static final int ARM_PIVOT_ANGLE = 9;
-    
-    
+
     private MotorIDs() {
     }
 }

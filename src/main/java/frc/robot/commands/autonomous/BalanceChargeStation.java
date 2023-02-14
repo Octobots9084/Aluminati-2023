@@ -18,7 +18,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
- package frc.robot.commands.autonomous;
+package frc.robot.commands.autonomous;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -30,26 +30,24 @@ import frc.robot.util.MathUtil;
 public class BalanceChargeStation extends PIDCommand {
     DriveTrain driveTrain;
     Gyro gyro;
+
     public BalanceChargeStation(DriveTrain driveTrain, Gyro gyro) {
         super(
-            new PIDController(0.045, 0.00085, 0),
-            gyro::getRoll,
-            0,
-            output -> driveTrain.drive(output * 0.55,0, 0, true),
-            driveTrain
-        );
+                new PIDController(0.045, 0.00085, 0),
+                gyro::getRoll,
+                0,
+                output -> driveTrain.drive(output * 0.55, 0, 0, true),
+                driveTrain);
 
         getController().setTolerance(20, 20);
 
-        
     }
 
     @Override
     public boolean isFinished() {
-        SmartDashboard.putBoolean("Error", MathUtil.isWithinTolerance(getController().getPositionError(),0,2.5));
+        SmartDashboard.putBoolean("Error", MathUtil.isWithinTolerance(getController().getPositionError(), 0, 2.5));
         SmartDashboard.putNumber("POsition error", getController().getPositionError());
         return false;//(MathUtil.isWithinTolerance(getController().getPositionError(),0,3));
     }
-            
+
 }
- 

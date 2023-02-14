@@ -28,8 +28,9 @@ public class ControlMap {
     public static final Joystick DRIVER_RIGHT = new Joystick(1);
     public static final Joystick DRIVER_BUTTONS = new Joystick(2);
     public static final XboxController XBOX = new XboxController(3);
-    //public static final XboxController XBOX = new XboxController(3);
+    // public static final XboxController XBOX = new XboxController(3);
     public static final Joystick HelicopterStick = new Joystick(4);
+
     private ControlMap() {
     }
 }
