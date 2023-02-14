@@ -113,11 +113,11 @@ public class CaliGirls extends SubsystemBase {
     // }
 
     public double getTopPos() {
-        return lastPosTop;
+        return motorTop.getAbsoluteEncoder(Type.kDutyCycle).getPosition();
     }
 
     public double getBottomPos() {
-        return lastPosBottom;
+        return motorBottom.getAbsoluteEncoder(Type.kDutyCycle).getPosition();
     }
 
 }
