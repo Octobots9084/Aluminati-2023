@@ -3,7 +3,7 @@ package frc.robot.commands.arm;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.arm.IntakeClaws;
 
-public class ClawsTest extends InstantCommand {
+public class CloseClaw extends InstantCommand {
     IntakeClaws claws;
 
     @Override

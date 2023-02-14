@@ -2,6 +2,8 @@ package frc.robot.robot;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.arm.ArmExtensionPos;
+import frc.robot.commands.arm.CloseClaw;
+import frc.robot.commands.arm.OpenClaw;
 import frc.robot.commands.arm.SetArmAngle;
 import frc.robot.commands.arm.SetWristAngle;
 
@@ -29,20 +31,20 @@ public class ButtonConfig {
         // .onTrue(new driveToPos(new Pose2d(14, 0.7, new Rotation2d(0))));
 
         // Xbox A Button
-        new JoystickButton(ControlMap.XBOX, 1)
-                .onTrue(new SetWristAngle(0.268));
-        new JoystickButton(ControlMap.XBOX, 1)
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
+                .onTrue(new SetWristAngle(0.315));
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
                 .onTrue(new SetArmAngle(0.758));
-        new JoystickButton(ControlMap.XBOX, 1)
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
                 .onTrue(new ArmExtensionPos(1091));
 
         // Xbox B Button
 
-        new JoystickButton(ControlMap.XBOX, 2)
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
                 .onTrue(new SetWristAngle(0.457));
-        new JoystickButton(ControlMap.XBOX, 2)
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
                 .onTrue(new SetArmAngle(0.586));
-        new JoystickButton(ControlMap.XBOX, 2)
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
                 .onTrue(new ArmExtensionPos(183));
 
         // Xbox X  Button
@@ -51,14 +53,17 @@ public class ButtonConfig {
 
         // Xbox Y Button
 
-        new JoystickButton(ControlMap.XBOX, 4)
-                .onTrue(new SetWristAngle(0.256));
-        new JoystickButton(ControlMap.XBOX, 4)
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
+                .onTrue(new SetWristAngle(0.315));
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
                 .onTrue(new SetArmAngle(0.783));
-        new JoystickButton(ControlMap.XBOX, 4)
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
                 .onTrue(new ArmExtensionPos(3400));
-        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 5) 
-        //     .onTrue(new ClawsTest());
+
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 5) 
+            .onTrue(new CloseClaw());
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 6) 
+            .onTrue(new OpenClaw());
         // new JoystickButton(ControlMap.XBOX, 4)
         // .onTrue(new SetArmAngle(0.875));
         // new JoystickButton(ControlMap.XBOX, 2).onTrue(new ArmZero());
