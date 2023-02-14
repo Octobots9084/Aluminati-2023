@@ -3,6 +3,8 @@ package frc.robot.robot;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.arm.ArmExtensionPos;
 import frc.robot.commands.arm.ArmZero;
+import frc.robot.commands.arm.CloseClaw;
+import frc.robot.commands.arm.OpenClaw;
 import frc.robot.commands.arm.SetArmAngle;
 import frc.robot.commands.arm.SetWristAngle;
 
@@ -31,7 +33,7 @@ public class ButtonConfig {
 
         // Xbox A Button
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
-                .onTrue(new SetWristAngle(0.268));
+                .onTrue(new SetWristAngle(0.315));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
                 .onTrue(new SetArmAngle(0.758));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
@@ -53,16 +55,19 @@ public class ButtonConfig {
         // Xbox Y Button
 
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
-                .onTrue(new SetWristAngle(0.256));
+                .onTrue(new SetWristAngle(0.315));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
                 .onTrue(new SetArmAngle(0.783));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
                 .onTrue(new ArmExtensionPos(3400));
 
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 5)
+                .onTrue(new CloseClaw());
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
+                .onTrue(new OpenClaw());
+
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
                 .onTrue(new ArmZero());
-        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 5) 
-        //     .onTrue(new ClawsTest());
         // new JoystickButton(ControlMap.XBOX, 4)
         // .onTrue(new SetArmAngle(0.875));
         // new JoystickButton(ControlMap.XBOX, 2).onTrue(new ArmZero());

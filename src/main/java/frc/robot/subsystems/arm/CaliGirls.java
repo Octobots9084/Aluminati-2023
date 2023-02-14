@@ -66,7 +66,8 @@ public class CaliGirls extends SubsystemBase {
         pidControllerTop.setOutputRange(-1.0, 1.0);
         motorTop.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(0.54);
         this.lastPosTop = 0.510;
-        setTopPos(lastPosTop);
+        pidControllerTop.setSmartMotionAllowedClosedLoopError(0,0);
+        //setTopPos(lastPosTop);
 
         // Bottom Motor PID
         this.pidControllerBottom = motorBottom.getPIDController();
@@ -78,7 +79,7 @@ public class CaliGirls extends SubsystemBase {
         pidControllerBottom.setOutputRange(-1.0, 1.0);
         motorBottom.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(0.28);
         this.lastPosBottom = 0.85;
-        setBottomPos(lastPosBottom);
+        //setBottomPos(lastPosBottom);
 
     }
 

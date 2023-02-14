@@ -34,7 +34,7 @@ public class ArmExtension extends SubsystemBase {
         pidController.setI(Tuning.EXTENSION_PID.getI());
         pidController.setD(Tuning.EXTENSION_PID.getD());
         pidController.setOutputRange(Tuning.EXTENSION_MIN_OUT, Tuning.EXTENSION_MAX_OUT);
-
+        
     }
 
     public void setOffset() {
@@ -51,7 +51,7 @@ public class ArmExtension extends SubsystemBase {
         }
 
         lastpos = position;
-        motor.getPIDController().setReference(gearing * -position, ControlType.kPosition);
+        motor.getPIDController().setReference(gearing * -position, ControlType.kSmartMotion);
     }
 
     public double GetPosition() {
