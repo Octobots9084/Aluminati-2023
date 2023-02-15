@@ -1,18 +1,30 @@
 package frc.robot.commands.arm;
 
-import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.arm.ArmExtension;
 
-public class ArmZero extends InstantCommand {
+public class ArmZero extends CommandBase {
 
-    public ArmExtension armExtension;
+    ArmExtension armExtension;
 
     public ArmZero() {
-        armExtension = ArmExtension.getInstance();
+        this.armExtension = ArmExtension.getInstance();
     }
 
     @Override
-    public void initialize() {
+    public void execute() {
+        armExtension.zeroArm();
+    }
+
+    // @Override
+    // public boolean isFinished() {
+    //     SmartDashboard.putBoolean("Finished", armExtension.zeroDone());
+    //     return armExtension.zeroDone();
+    // }
+
+    @Override
+    public void end(boolean interupted) {
+        armExtension.resetCurrent();
         armExtension.setOffset();
     }
 }

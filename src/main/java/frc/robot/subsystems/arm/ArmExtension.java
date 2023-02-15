@@ -6,6 +6,7 @@ import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxPIDController;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
@@ -42,22 +43,39 @@ public class ArmExtension extends SubsystemBase {
 
     public void setOffset() {
         motor.getEncoder().setPosition(0);
-        SetPosition(0);
+        SetPosition(0, false);
     }
 
-    public void SetPosition(double position) {
+    public void SetPosition(double position, boolean override) {
         if (position > 3500) {
             position = 3500;
         }
-        if (position < 0) {
+        if (position < 0 && !override) {
             position = 0;
         }
 
         lastpos = position;
-        motor.getPIDController().setReference(gearing * -position, ControlType.kSmartMotion);
+        motor.getPIDController().setReference(gearing * -position, ControlType.kPosition);
     }
 
     public double GetPosition() {
         return motor.getEncoder().getPosition();
+    }
+
+    public void zeroArm() {
+        motor.setSmartCurrentLimit(Tuning.EXTENSION_STALL_ZERO, Tuning.EXTENSION_FREE_ZERO);
+        motor.setVoltage(3);
+        motor.setInverted(false);
+        SetPosition(-3500, true);
+        SmartDashboard.putNumber("Motor Velocity", motor.getEncoder().getVelocity());
+    }
+
+    // public boolean zeroDone() {
+    //     return motor.getOutputCurrent() > 1;
+    // }
+
+    public void resetCurrent() {
+        this.motor.setSmartCurrentLimit(Tuning.EXTENSION_STALL, Tuning.EXTENSION_FREE);
+        pidController.setOutputRange(Tuning.EXTENSION_MIN_OUT, Tuning.EXTENSION_MAX_OUT);
     }
 }
