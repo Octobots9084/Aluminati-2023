@@ -69,7 +69,7 @@ public class ButtonConfig {
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
                 .whileTrue(new ArmZero());
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 9)
-            .onTrue(new ArmExtensionPos(40 * 25));
+            .onTrue(new SetArmAngle(0.65));
         // new JoystickButton(ControlMap.XBOX, 4)
         // .onTrue(new SetArmAngle(0.875));
         // new JoystickButton(ControlMap.XBOX, 2).onTrue(new ArmZero());
