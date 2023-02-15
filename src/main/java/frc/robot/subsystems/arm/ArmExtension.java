@@ -17,7 +17,7 @@ public class ArmExtension extends SubsystemBase {
     private static ArmExtension armExtension;
     public SparkMaxPIDController pidController;
     //gear reduction 1:25
-    private double gearing = 1.0 / 25.0;
+    private double gearing = 1.0 / 1.0;
     public double lastpos;
 
     public static ArmExtension getInstance() {
@@ -55,7 +55,7 @@ public class ArmExtension extends SubsystemBase {
         }
 
         lastpos = position;
-        motor.getPIDController().setReference(gearing * -position, ControlType.kPosition);
+        motor.getPIDController().setReference(gearing * position, ControlType.kPosition);
     }
 
     public double GetPosition() {
