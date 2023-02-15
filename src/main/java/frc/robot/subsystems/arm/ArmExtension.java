@@ -9,6 +9,7 @@ import com.revrobotics.SparkMaxPIDController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
+import frc.robot.util.MotorUtil;
 
 public class ArmExtension extends SubsystemBase {
     private CANSparkMax motor;
@@ -34,7 +35,9 @@ public class ArmExtension extends SubsystemBase {
         pidController.setI(Tuning.EXTENSION_PID.getI());
         pidController.setD(Tuning.EXTENSION_PID.getD());
         pidController.setOutputRange(Tuning.EXTENSION_MIN_OUT, Tuning.EXTENSION_MAX_OUT);
-        
+        MotorUtil.setupSmartMotion(null, Tuning.EXTENSION_PID, Tuning.EXTENSION_SM, 1, motor);
+        pidController.setPositionPIDWrappingEnabled(false);
+        motor.setInverted(true);
     }
 
     public void setOffset() {

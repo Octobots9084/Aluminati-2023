@@ -54,7 +54,12 @@ public class Tuning {
     public static final double CALI_BOTTOM_ENCODER_RESOLUTION = 1.0;
 
     //Extension
-    public static final PIDConfig EXTENSION_PID = new PIDConfig(10, 0, 0.5);
+    public static final PIDConfig EXTENSION_PID = new PIDConfig(0.01, 0, 0);
+    public static final SmartMotionConfig EXTENSION_SM = new SmartMotionConfig(true,
+            0.01,
+            0.0,
+            0.1,
+            0.0);
     public static final double EXTENSION_MAX_OUT = 1;
     public static final double EXTENSION_MIN_OUT = -1;
 

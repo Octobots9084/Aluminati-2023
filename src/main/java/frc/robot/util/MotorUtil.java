@@ -29,7 +29,11 @@ import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.BaseTalon;
 import com.revrobotics.AbsoluteEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
+
+import edu.wpi.first.wpilibj.Encoder;
+
 import com.revrobotics.SparkMaxPIDController;
 
 /**
@@ -125,11 +129,15 @@ public class MotorUtil {
 
             // Get PID controller
             SparkMaxPIDController m_pidController = motor.getPIDController();
+            if (encoderType==null) {
+                RelativeEncoder m_encoder = motor.getEncoder();
+                m_pidController.setFeedbackDevice(m_encoder);
+            } else {
+                AbsoluteEncoder m_encoder = motor.getAbsoluteEncoder(encoderType);
+                m_pidController.setFeedbackDevice(m_encoder);
+            }
 
-            // Absolute encoder
-            AbsoluteEncoder m_encoder = motor.getAbsoluteEncoder(encoderType);
-
-            m_pidController.setFeedbackDevice(m_encoder);
+            
             m_pidController.setPositionPIDWrappingEnabled(true);
             m_pidController.setPositionPIDWrappingMinInput(0);
             m_pidController.setPositionPIDWrappingMaxInput(1);
