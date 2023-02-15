@@ -49,12 +49,12 @@ public class Tuning {
     public static final double CALI_TOP_ENCODER_RESOLUTION = 1.0;
 
     //Arm Pivot
-    public static final PIDConfig CALI_BOTTOM_PID = new PIDConfig(0.005, 0.0, 0.01, 0.0);
+    public static final PIDConfig CALI_BOTTOM_PID = new PIDConfig(0.005, 0.0, 0.01, 0.01);
     public static final SmartMotionConfig CALI_BOTTOM_SM = new SmartMotionConfig(true,
             200.0,
             0.0,
-            100.0,
-            0.001);
+            150.0,
+            0.0001);
     public static final double CALI_BOTTOM_ENCODER_RESOLUTION = 1.0;
 
     //Extension
