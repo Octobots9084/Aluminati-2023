@@ -14,6 +14,6 @@ public class ArmExtensionPos extends InstantCommand {
     @Override
     public void initialize() {
         this.armExtension = ArmExtension.getInstance();
-        armExtension.SetPosition(target);
+        armExtension.SetPosition(target, false);
     }
 }

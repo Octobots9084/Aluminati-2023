@@ -25,6 +25,6 @@ public class ArmControl extends CommandBase {
     public void execute() {
         var pos = armExtension.lastpos + 20 * xboxController.getLeftY();
         SmartDashboard.putNumber("armpos", armExtension.lastpos);
-        armExtension.SetPosition(pos);
+        armExtension.SetPosition(pos, false);
     }
 }

@@ -32,11 +32,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.arm.ArmControl;
-import frc.robot.commands.arm.TiltControl;
 import frc.robot.commands.autonomous.PathPlannerAutos;
 import frc.robot.commands.swerve.SwerveControl;
 import frc.robot.robot.ButtonConfig;
+import frc.robot.robot.ControlMap;
+import frc.robot.robot.DriverButtonConfig;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.CaliGirls;
 import frc.robot.subsystems.arm.IntakeClaws;
@@ -53,6 +53,10 @@ public class Robot extends TimedRobot {
     public void disabledPeriodic() {
         DriveTrain.getInstance().drive(0, 0, 0, true);
         CommandScheduler.getInstance().cancelAll();
+
+        SmartDashboard.putNumber("Extension", ArmExtension.getInstance().GetPosition());
+        SmartDashboard.putNumber("Arm Rotation", CaliGirls.getInstance().getTopPos());
+        SmartDashboard.putNumber("Claw Rotation", CaliGirls.getInstance().getBottomPos());
     }
 
     @Override
@@ -92,6 +96,11 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         SmartDashboard.putNumber("Initialized", 1);
+        if (ControlMap.DRIVER_BUTTONS.getRawButton(13)) {
+            new DriverButtonConfig().initTeleop();
+        } else {
+            new ButtonConfig().initTeleop();
+        }
         new ButtonConfig().initTeleop();
         CommandScheduler.getInstance().cancelAll();
         initializeAllSubsystems();
@@ -155,7 +164,7 @@ public class Robot extends TimedRobot {
 
     private void initializeDefaultCommands() {
         CommandScheduler.getInstance().setDefaultCommand(DriveTrain.getInstance(), new SwerveControl());
-        CommandScheduler.getInstance().setDefaultCommand(CaliGirls.getInstance(), new TiltControl());
-        CommandScheduler.getInstance().setDefaultCommand(ArmExtension.getInstance(), new ArmControl());
+        //CommandScheduler.getInstance().setDefaultCommand(CaliGirls.getInstance(), new TiltControl());
+        //CommandScheduler.getInstance().setDefaultCommand(ArmExtension.getInstance(), new ArmControl());
     }
 }

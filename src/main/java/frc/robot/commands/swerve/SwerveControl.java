@@ -54,7 +54,7 @@ public class SwerveControl extends CommandBase {
     public void execute() {
         // Link joysticks
         var leftJoystick = ControlMap.DRIVER_LEFT;
-        // var rightJoystick = ControlMap.DRIVER_RIGHT;
+        var rightJoystick = ControlMap.DRIVER_RIGHT;
         // var xbox = ControlMap.XBOX;
         // var heliStick = ControlMap.HelicopterStick;
         var xSpeed = 0.0;
@@ -80,11 +80,11 @@ public class SwerveControl extends CommandBase {
         // } else if(sendable.getSelected() != null && sendable.getSelected().equals(1))
         // {
         // Get speeds from joysticks
-        xSpeed = MathUtil.fitDeadband(-Math.pow(leftJoystick.getY(), 3)) * DriveTrain.MAX_TURN_SPEED;
-        ySpeed = MathUtil.fitDeadband(Math.pow(leftJoystick.getX(), 3)) * DriveTrain.MAX_TURN_SPEED;
+        xSpeed = MathUtil.fitDeadband(-leftJoystick.getY()) * DriveTrain.MAX_TURN_SPEED;
+        ySpeed = MathUtil.fitDeadband(leftJoystick.getX()) * DriveTrain.MAX_TURN_SPEED;
 
         // Calculate the deadband
-        rot = MathUtil.fitDeadband(Math.pow(leftJoystick.getZ(), 3)) * DriveTrain.MAX_ANGULAR_SPEED;
+        rot = MathUtil.fitDeadband(rightJoystick.getX()) * DriveTrain.MAX_ANGULAR_SPEED;
         // }
         // else{
         //     xSpeed = 0.0;
