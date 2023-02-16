@@ -8,6 +8,7 @@ import frc.robot.commands.arm.OpenClaw;
 import frc.robot.commands.arm.SetArmAngle;
 import frc.robot.commands.arm.SetWristAngle;
 import frc.robot.commands.swerve.SetDriverAssist;
+import frc.robot.subsystems.arm.ArmPositions;
 
 public class ButtonConfig {
     public void initTeleop() {
@@ -33,11 +34,11 @@ public class ButtonConfig {
         // .onTrue(new driveToPos(new Pose2d(14, 0.7, new Rotation2d(0))));
 
         // Xbox A Button
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
-                .onTrue(new SetWristAngle(0.315));
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
+        new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
+                .onTrue(new SetWristAngle(ArmPositions.MIDDLE_CONE.wrist));
+        new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
                 .onTrue(new SetArmAngle(0.758));
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
+        new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
                 .onTrue(new ArmExtensionPos(1091/25));
 
         // Xbox B Button
