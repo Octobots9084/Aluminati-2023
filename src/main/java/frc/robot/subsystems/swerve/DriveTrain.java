@@ -144,8 +144,8 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void driveAutos(ChassisSpeeds chassisSpeeds) {
-        drive(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond,
-                false);
+         drive(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond,
+                 false);
     }
 
     public SwerveModuleState[] getModuleStates() {

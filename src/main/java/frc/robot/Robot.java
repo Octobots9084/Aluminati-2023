@@ -96,7 +96,7 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         SmartDashboard.putNumber("Initialized", 1);
-        if (ControlMap.DRIVER_BUTTONS.getRawButton(13)) {
+        if (ControlMap.DRIVER_BUTTONS.getRawButton(14)) {
             new DriverButtonConfig().initTeleop();
         } else {
             new ButtonConfig().initTeleop();
