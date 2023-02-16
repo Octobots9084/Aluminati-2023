@@ -45,6 +45,11 @@ public final class PathPlannerAutos {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("1m", new PathConstraints(1, 3)));
     }
 
+    public static CommandBase OneMeterSpin() {
+        DriveTrain.getInstance().setUseDriverAssist(true);
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("TestingPath", new PathConstraints(1, 1)));
+    }
+
     public static CommandBase BalanceChargeStation() {
         DriveTrain.getInstance().setUseDriverAssist(true);
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStation", new PathConstraints(3, 2)));

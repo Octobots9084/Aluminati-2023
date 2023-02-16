@@ -7,17 +7,18 @@ import frc.robot.commands.arm.CloseClaw;
 import frc.robot.commands.arm.OpenClaw;
 import frc.robot.commands.arm.SetArmAngle;
 import frc.robot.commands.arm.SetWristAngle;
+import frc.robot.commands.swerve.SetDriverAssist;
 
 public class ButtonConfig {
     public void initTeleop() {
         // DRIVER LEFT
 
-        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
-        //     .whileTrue(new SetDriverAssist(true));
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
+            .whileTrue(new SetDriverAssist(true));
 
-        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
-        //     .whileFalse
-        //     (new SetDriverAssist(false));
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
+            .whileFalse
+            (new SetDriverAssist(false));
 
         // // new JoystickButton(ControlMap.DRIVER_LEFT, 1)
         // //     .onTrue(new RotateTo(0));
