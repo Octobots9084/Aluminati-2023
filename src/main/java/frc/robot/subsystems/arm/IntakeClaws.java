@@ -10,6 +10,7 @@ import frc.robot.robot.MotorIDs;
 public class IntakeClaws extends SubsystemBase {
     private static IntakeClaws INSTANCE;
 
+
     public static IntakeClaws getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new IntakeClaws();
@@ -17,17 +18,13 @@ public class IntakeClaws extends SubsystemBase {
         return INSTANCE;
     }
 
-    private final CANSparkMax leftMoter;
-    private final CANSparkMax rightMoter;
+    private final CANSparkMax moter;
 
     public IntakeClaws() {
-        this.leftMoter = new CANSparkMax(MotorIDs.INTAKE_LEFT_CLAW, CANSparkMaxLowLevel.MotorType.kBrushless);
-        this.rightMoter = new CANSparkMax(MotorIDs.INTAKE_RIGHT_CLAW, CANSparkMaxLowLevel.MotorType.kBrushless);
-        leftMoter.setInverted(true);
+        this.moter = new CANSparkMax(MotorIDs.INTAKE_LEFT_CLAW, CANSparkMaxLowLevel.MotorType.kBrushless);
     }
 
     public void setClawVoltage(double v) {
-        leftMoter.setVoltage(v);
-        rightMoter.setVoltage(v);
+        moter.setVoltage(v);
     }
 }

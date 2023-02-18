@@ -94,6 +94,10 @@ public class Tuning {
             20000.0,
             0.1);
 
+    //Claw
+    public static final double defaultConeCollectingVoltage = -0.15;
+    public static final double defaultCubeCollectingVoltage = -0.2;
+
     //Command Characteristics
     //Autos
 }
