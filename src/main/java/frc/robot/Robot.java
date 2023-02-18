@@ -151,8 +151,8 @@ public class Robot extends TimedRobot {
 
     private void initializeAllSubsystems() {
 
-        CaliGirls.getInstance();
-        IntakeClaws.getInstance();
+        // CaliGirls.getInstance();
+        // IntakeClaws.getInstance();
         DriveTrain.getInstance();
         CaliGirls.getInstance();
         IntakeClaws.getInstance();
