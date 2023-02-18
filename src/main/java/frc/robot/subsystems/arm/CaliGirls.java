@@ -13,7 +13,7 @@ import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
 
 public class CaliGirls extends SubsystemBase {
-    private CANSparkMax motorTop, motorBottom;
+    private CANSparkMax motorTop, motorBottom, motorBottomFollower;
     public double lastPosTop, lastPosBottom;
     private SparkMaxPIDController pidControllerTop;
     private SparkMaxPIDController pidControllerBottom;
@@ -50,8 +50,8 @@ public class CaliGirls extends SubsystemBase {
         this.motorTop.getPIDController().setPositionPIDWrappingEnabled(false);
         this.motorTop.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(0.3);
         pidControllerTop.setSmartMotionAllowedClosedLoopError(0.1,0);
-        this.motorTop.setSmartCurrentLimit(10,10);
         //setTopPos(lastPosTop);
+
 
         // Bottom Motor PID
         this.pidControllerBottom = motorBottom.getPIDController();
@@ -67,9 +67,14 @@ public class CaliGirls extends SubsystemBase {
         motorBottom.getAbsoluteEncoder(Type.kDutyCycle).setInverted(true);
         motorBottom.setInverted(false);
     
-        this.lastPosBottom = 0.85;
+        this.lastPosBottom = 0.722;
         //setBottomPos(lastPosBottom);
 
+
+
+        this.motorBottomFollower = new CANSparkMax(MotorIDs.ARM_PIVOT_ANGLE_FOLLOWER, MotorType.kBrushless);
+        this.motorBottomFollower.setSmartCurrentLimit(Tuning.CALI_TOP_FOLLOWER_STALL,Tuning.CALI_TOP_FOLLOWER_FREE);
+        this.motorBottomFollower.follow(motorBottom, true);
     }
 
     public void setTopPos(double angle) {

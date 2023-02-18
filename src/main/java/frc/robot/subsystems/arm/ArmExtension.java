@@ -18,7 +18,7 @@ public class ArmExtension extends SubsystemBase {
     public SparkMaxPIDController pidController;
     //gear reduction 1:25
     private double gearing = 1.0 / 1.0;
-    public double lastpos;
+    public double lastpos = 0;
 
     public static ArmExtension getInstance() {
         if (armExtension == null) {
