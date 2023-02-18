@@ -1,15 +1,10 @@
 package frc.robot.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.arm.ArmExtensionPos;
 import frc.robot.commands.arm.GoToFull;
-import frc.robot.commands.arm.SetArmAngle;
-import frc.robot.commands.arm.SetWristAngle;
 import frc.robot.commands.swerve.SetDriverAssist;
 import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.subsystems.arm.ArmPositions;
-import frc.robot.subsystems.arm.IntakeClaws;
 
 public class DriverButtonConfig {
     public void initTeleop() {
