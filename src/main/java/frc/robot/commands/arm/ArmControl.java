@@ -22,7 +22,7 @@ public class ArmControl extends CommandBase {
 
     @Override
     public void execute() {
-        var pos = armExtension.lastpos + 20 * ControlMap.CO_DRIVER_RIGHT.getX();
+        var pos = armExtension.lastpos + ControlMap.CO_DRIVER_RIGHT.getX();
         SmartDashboard.putNumber("armpos", armExtension.lastpos);
         armExtension.SetPosition(pos, false);
     }
