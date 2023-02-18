@@ -1,12 +1,7 @@
 package frc.robot.robot;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.arm.ArmExtensionPos;
-import frc.robot.commands.arm.ArmZero;
-import frc.robot.commands.arm.CloseClaw;
-import frc.robot.commands.arm.OpenClaw;
-import frc.robot.commands.arm.SetArmAngle;
-import frc.robot.commands.arm.SetWristAngle;
+import frc.robot.commands.arm.*;
 import frc.robot.subsystems.arm.ArmPositions;
 
 public class ButtonConfig {
@@ -71,6 +66,9 @@ public class ButtonConfig {
                 .whileTrue(new ArmZero());
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 9)
             .onTrue(new SetArmAngle(0.65));
+
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 12)
+                .onTrue(new Intake(Tuning.defaultConeCollectingVoltage));
         // new JoystickButton(ControlMap.XBOX, 4)
         // .onTrue(new SetArmAngle(0.875));
         // new JoystickButton(ControlMap.XBOX, 2).onTrue(new ArmZero());
