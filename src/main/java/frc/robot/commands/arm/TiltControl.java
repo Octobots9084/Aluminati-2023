@@ -3,6 +3,7 @@ package frc.robot.commands.arm;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.robot.ControlMap;
 import frc.robot.subsystems.arm.CaliGirls;
+import frc.robot.util.MathUtil;
 
 //CURRENTLY BROKEN REWRITE BEFORE USE!
 public class TiltControl extends CommandBase {
@@ -16,8 +17,10 @@ public class TiltControl extends CommandBase {
     @Override
     public void execute() {
         //TOO MUCH DELAY
-        caliGirls.setBottomPos(caliGirls.lastPosBottom + 0.00025 * (-Math.pow(ControlMap.CO_DRIVER_RIGHT.getY(), 3)));
-        caliGirls.setTopPos(caliGirls.lastPosTop + 0.00025 * (-Math.pow(ControlMap.CO_DRIVER_RIGHT.getX(), 3)));
+        caliGirls.setBottomPos(caliGirls.lastPosBottom
+                + 0.025 * MathUtil.fitDeadband((-Math.pow(ControlMap.CO_DRIVER_RIGHT.getY(), 3))));
+        caliGirls.setTopPos(caliGirls.lastPosTop
+                + 0.025 * MathUtil.fitDeadband((-Math.pow(ControlMap.CO_DRIVER_LEFT.getY(), 3))));
     }
 
 }
