@@ -98,7 +98,6 @@ public class Tuning {
     public static final double defaultConeCollectingVoltage = -0.15;
     public static final double defaultCubeCollectingVoltage = -0.2;
 
-
     //Command Characteristics
     //Autos
 }
