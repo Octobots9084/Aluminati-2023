@@ -21,7 +21,7 @@ public class ArmControl extends CommandBase {
         // SmartDashboard.putNumber("lastarmpos", armExtension.lastpos);
         // SmartDashboard.putNumber("armpos", pos);
         armExtension.SetPosition(
-                armExtension.lastpos + 0.025 * MathUtil.fitDeadband(Math.pow(ControlMap.CO_DRIVER_RIGHT.getX(), 3)),
+                armExtension.lastpos + 0.5 * MathUtil.fitDeadband(Math.pow(ControlMap.CO_DRIVER_RIGHT.getX(), 3)),
                 false);
     }
 }
