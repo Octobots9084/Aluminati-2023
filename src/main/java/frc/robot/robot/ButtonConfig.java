@@ -5,6 +5,7 @@ import frc.robot.commands.arm.ArmExtensionPos;
 import frc.robot.commands.arm.ArmZero;
 import frc.robot.commands.arm.CloseClaw;
 import frc.robot.commands.arm.Grab;
+import frc.robot.commands.arm.MoveArmToPosition;
 import frc.robot.commands.arm.OpenClaw;
 import frc.robot.commands.arm.SetArmAngle;
 import frc.robot.commands.arm.SetIntakeVoltage;
@@ -82,6 +83,10 @@ public class ButtonConfig {
 
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 12)
                 .onTrue(new SetIntakeVoltage(Tuning.defaultConeCollectingVoltage));
+// Example movearmtoposition
+// new JoystickButton(ControlMap.DRIVER_BUTTONS, 0)
+// .onTrue(new MoveArmToPosition(ArmPositions.TOP_CUBE));
+
 
         // new JoystickButton(ControlMap.XBOX, 4)
         // .onTrue(new SetArmAngle(0.875));
