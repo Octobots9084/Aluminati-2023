@@ -2,18 +2,25 @@ package frc.robot.robot;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.arm.*;
+import frc.robot.commands.arm.ArmExtensionPos;
+import frc.robot.commands.arm.ArmZero;
+import frc.robot.commands.arm.CloseClaw;
+import frc.robot.commands.arm.OpenClaw;
+import frc.robot.commands.arm.SetArmAngle;
+import frc.robot.commands.arm.SetWristAngle;
+import frc.robot.commands.swerve.SetDriverAssist;
 import frc.robot.subsystems.arm.ArmPositions;
 
 public class ButtonConfig {
     public void initTeleop() {
         // DRIVER LEFT
 
-        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
-        //     .whileTrue(new SetDriverAssist(true));
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
+            .whileTrue(new SetDriverAssist(true));
 
-        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
-        //     .whileFalse
-        //     (new SetDriverAssist(false));
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
+            .whileFalse
+            (new SetDriverAssist(false));
 
         // // new JoystickButton(ControlMap.DRIVER_LEFT, 1)
         // //     .onTrue(new RotateTo(0));

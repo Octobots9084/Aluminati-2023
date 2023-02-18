@@ -96,7 +96,7 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         SmartDashboard.putNumber("Initialized", 1);
-        if (ControlMap.DRIVER_BUTTONS.getRawButton(13)) {
+        if (ControlMap.DRIVER_BUTTONS.getRawButton(14)) {
             new DriverButtonConfig().initTeleop();
         } else {
             new ButtonConfig().initTeleop();
@@ -121,7 +121,7 @@ public class Robot extends TimedRobot {
         resetRobotPoseAndGyro();
 
         //CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
-        CommandScheduler.getInstance().schedule(PathPlannerAutos.testPath());
+        CommandScheduler.getInstance().schedule(PathPlannerAutos.OneMeterSpin());
         //CommandScheduler.getInstance().schedule(new driveToPos(new Pose2d(0.0, FieldConstants.length/2, new Rotation2d(0,0))));
 
         Robot.autoStartTime = Timer.getFPGATimestamp();

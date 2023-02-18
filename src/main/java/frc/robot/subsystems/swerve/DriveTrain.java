@@ -144,8 +144,8 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void driveAutos(ChassisSpeeds chassisSpeeds) {
-        drive(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond,
-                false);
+         drive(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond,
+                 false);
     }
 
     public SwerveModuleState[] getModuleStates() {
@@ -167,7 +167,7 @@ public class DriveTrain extends SubsystemBase {
             return 0.0;
         }
         double targetAngle = MathUtil.wrapToCircle(targetRotationAngle);
-        var diff = targetAngle - gyroAngle;
+        var diff = gyroAngle-targetAngle;
         if (Math.abs(diff) >= 180 && diff < 0) {
             diff += 360;
         }

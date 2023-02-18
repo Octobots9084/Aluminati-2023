@@ -84,7 +84,7 @@ public class SwerveControl extends CommandBase {
         ySpeed = MathUtil.fitDeadband(leftJoystick.getX()) * DriveTrain.MAX_TURN_SPEED;
 
         // Calculate the deadband
-        rot = MathUtil.fitDeadband(rightJoystick.getX()) * DriveTrain.MAX_ANGULAR_SPEED;
+        rot = MathUtil.fitDeadband(-rightJoystick.getX()) * DriveTrain.MAX_ANGULAR_SPEED;
         // }
         // else{
         //     xSpeed = 0.0;
