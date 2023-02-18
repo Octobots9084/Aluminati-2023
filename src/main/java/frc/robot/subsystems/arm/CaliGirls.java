@@ -71,7 +71,7 @@ public class CaliGirls extends SubsystemBase {
         this.motorTop.getPIDController().setPositionPIDWrappingEnabled(false);
         this.motorTop.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(0.3);
         pidControllerTop.setSmartMotionAllowedClosedLoopError(0.1,0);
-        this.motorTop.setSmartCurrentLimit(5,5);
+        this.motorTop.setSmartCurrentLimit(10,10);
         //setTopPos(lastPosTop);
 
         // Bottom Motor PID
@@ -84,7 +84,6 @@ public class CaliGirls extends SubsystemBase {
         pidControllerBottom.setOutputRange(-1.0, 1.0);
         motorBottom.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(0.28);
         
-        MotorUtil.setupSmartMotion(Type.kDutyCycle, Tuning.CALI_BOTTOM_PID, Tuning.CALI_BOTTOM_SM, 1, motorBottom);
         pidControllerBottom.setPositionPIDWrappingEnabled(false);
         motorBottom.getAbsoluteEncoder(Type.kDutyCycle).setInverted(true);
         motorBottom.setInverted(false);
@@ -103,7 +102,7 @@ public class CaliGirls extends SubsystemBase {
     public void setBottomPos(double angle) {
   
         lastPosBottom = angle;
-        pidControllerBottom.setReference(angle, ControlType.kSmartMotion);
+        pidControllerBottom.setReference(angle, ControlType.kPosition);
         SmartDashboard.putNumber("Arm Set Angle", angle);
     }
 

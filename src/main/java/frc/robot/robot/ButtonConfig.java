@@ -5,7 +5,8 @@ import frc.robot.commands.arm.ArmExtensionPos;
 import frc.robot.commands.arm.ArmZero;
 import frc.robot.commands.arm.CloseClaw;
 import frc.robot.commands.arm.Grab;
-import frc.robot.commands.arm.MoveArmToPosition;
+import frc.robot.commands.arm.MoveArmToPositionGoingDown;
+import frc.robot.commands.arm.MoveArmToPositionGoingUp;
 import frc.robot.commands.arm.OpenClaw;
 import frc.robot.commands.arm.SetArmAngle;
 import frc.robot.commands.arm.SetIntakeVoltage;
@@ -66,11 +67,11 @@ public class ButtonConfig {
         //         .onTrue(new ArmExtensionPos(3400 / 25));
 
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
-                .onTrue(new MoveArmToPosition(ArmPositions.CONE_PLACE_HIGH));
+                .onTrue(new MoveArmToPositionGoingUp(ArmPositions.CONE_PLACE_HIGH));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
-                .onTrue(new MoveArmToPosition(ArmPositions.CONE_PLACE_MID));
+                .onTrue(new MoveArmToPositionGoingUp(ArmPositions.CONE_PLACE_MID));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
-                .onTrue(new MoveArmToPosition(ArmPositions.FLOOR_INTAKE_CONE));
+                .onTrue(new MoveArmToPositionGoingDown(ArmPositions.FLOOR_INTAKE_CONE));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 5)
                 .onTrue(new CloseClaw());
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
