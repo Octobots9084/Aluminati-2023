@@ -57,8 +57,8 @@ public class Robot extends TimedRobot {
         CommandScheduler.getInstance().cancelAll();
 
         SmartDashboard.putNumber("Extension", ArmExtension.getInstance().GetPosition());
-        SmartDashboard.putNumber("Arm Rotation", CaliGirls.getInstance().getTopPos());
-        SmartDashboard.putNumber("Claw Rotation", CaliGirls.getInstance().getBottomPos());
+        SmartDashboard.putNumber("Claw Rotation", CaliGirls.getInstance().getTopPos());
+        SmartDashboard.putNumber("Arm Rotation", CaliGirls.getInstance().getBottomPos());
     }
 
     @Override
