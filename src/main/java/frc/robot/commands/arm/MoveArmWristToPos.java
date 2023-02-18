@@ -22,6 +22,6 @@ public class MoveArmWristToPos extends CommandBase{
 
     @Override
     public boolean isFinished() {
-        return (MathUtil.isWithinTolerance(caliGirls.getTopPos(),target,0.5));
+        return (MathUtil.isWithinTolerance(caliGirls.getTopPos(),target,0.01));
     }
 }

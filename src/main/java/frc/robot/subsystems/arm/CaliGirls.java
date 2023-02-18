@@ -65,13 +65,12 @@ public class CaliGirls extends SubsystemBase {
         pidControllerTop.setD(Tuning.CALI_TOP_PID.getD());
         pidControllerTop.setFF(Tuning.CALI_TOP_PID.getF());
         pidControllerTop.setOutputRange(-1.0, 1.0);
-        motorTop.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(0.54);
         this.lastPosTop = 0.510;
         this.motorTop.getAbsoluteEncoder(Type.kDutyCycle).setInverted(false);
         this.motorTop.setInverted(true);
         this.motorTop.getPIDController().setPositionPIDWrappingEnabled(false);
         this.motorTop.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(0.3);
-        pidControllerTop.setSmartMotionAllowedClosedLoopError(0,0);
+        pidControllerTop.setSmartMotionAllowedClosedLoopError(0.1,0);
         this.motorTop.setSmartCurrentLimit(5,5);
         //setTopPos(lastPosTop);
 
@@ -96,12 +95,6 @@ public class CaliGirls extends SubsystemBase {
     }
 
     public void setTopPos(double angle) {
-        if (angle < 0.02) {
-            angle = 0.02;
-        }
-        if (angle > 0.55) {
-            angle = 0.55;
-        }
         lastPosTop = angle;
         pidControllerTop.setReference(angle, ControlType.kPosition);
         SmartDashboard.putNumber("Wrist Attempted Drive", angle);
@@ -109,12 +102,7 @@ public class CaliGirls extends SubsystemBase {
     }
 
     public void setBottomPos(double angle) {
-        if (angle < 0.585) {
-            angle = 0.585;
-        }
-        if (angle > 0.81) {
-            angle = 0.81;
-        }
+  
         lastPosBottom = angle;
         pidControllerBottom.setReference(angle, ControlType.kSmartMotion);
         SmartDashboard.putNumber("Arm Attempted Drive", angle);

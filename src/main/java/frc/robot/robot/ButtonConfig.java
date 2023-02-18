@@ -35,36 +35,39 @@ public class ButtonConfig {
         // new JoystickButton(ControlMap.DRIVER_BUTTONS, 9) 
         // .onTrue(new driveToPos(new Pose2d(14, 0.7, new Rotation2d(0))));
 
-        // Xbox A Button
+        // // Xbox A Button
+        // new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
+        //         .onTrue(new SetWristAngle(0.66));//ArmPositions.MIDDLE_CONE.wrist));
+        // new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
+        //         .onTrue(new SetArmAngle(0.758));
+        // new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
+        //         .onTrue(new ArmExtensionPos(1091 / 25));
+
+        // // Xbox B Button
+
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
+        //         .onTrue(new SetWristAngle(0.457));
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
+        //         .onTrue(new SetArmAngle(0.586));
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
+        //         .onTrue(new ArmExtensionPos(183 / 25));
+
+        // // Xbox X  Button
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
+        //         .onTrue(new SetWristAngle(0.344));
+
+        // // Xbox Y Button
+
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
+        //         .onTrue(new SetWristAngle(0.315));
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
+        //         .onTrue(new SetArmAngle(0.783));
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
+        //         .onTrue(new ArmExtensionPos(3400 / 25));
+
+
         new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
-                .onTrue(new SetWristAngle(0.66));//ArmPositions.MIDDLE_CONE.wrist));
-        new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
-                .onTrue(new SetArmAngle(0.758));
-        new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
-                .onTrue(new ArmExtensionPos(1091 / 25));
-
-        // Xbox B Button
-
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
-                .onTrue(new SetWristAngle(0.457));
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
-                .onTrue(new SetArmAngle(0.586));
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
-                .onTrue(new ArmExtensionPos(183 / 25));
-
-        // Xbox X  Button
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
-                .onTrue(new SetWristAngle(0.344));
-
-        // Xbox Y Button
-
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
-                .onTrue(new SetWristAngle(0.315));
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
-                .onTrue(new SetArmAngle(0.783));
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
-                .onTrue(new ArmExtensionPos(3400 / 25));
-
+                .onTrue(new MoveArmToPosition(ArmPositions.CONE_PLACE_MID));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 5)
                 .onTrue(new CloseClaw());
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)

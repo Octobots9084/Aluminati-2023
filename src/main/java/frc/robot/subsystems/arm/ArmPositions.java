@@ -11,8 +11,9 @@ public enum ArmPositions {
     //TIPPED_CONE(0,0,0),
     //TIPPED_CONE_SETUP(0,0,0),
     FLOOR_INTAKE_CONE(.7038,49.52,.5620),
-    CONE_PLACE_MID(.8893,24.24,.7677),
-    CONE_PLACE_HIGH(.8892,134.55,.7825);
+    CONE_PLACE_MID(.75,24.24,.71),
+    CONE_PLACE_HIGH(.8892,134.55,.7825),
+    START_POSITION(.806,0.55,.457);
     
     
     public double angle,extension,wrist;
