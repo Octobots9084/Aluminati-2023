@@ -41,7 +41,7 @@ import frc.robot.robot.ControlMap;
 import frc.robot.robot.DriverButtonConfig;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.CaliGirls;
-import frc.robot.subsystems.arm.IntakeClaws;
+import frc.robot.subsystems.arm.Roller;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 
@@ -57,8 +57,8 @@ public class Robot extends TimedRobot {
         CommandScheduler.getInstance().cancelAll();
 
         SmartDashboard.putNumber("Extension", ArmExtension.getInstance().GetPosition());
-        SmartDashboard.putNumber("Claw Rotation", CaliGirls.getInstance().getTopPos());
-        SmartDashboard.putNumber("Arm Rotation", CaliGirls.getInstance().getBottomPos());
+        SmartDashboard.putNumber("Arm Rotation", CaliGirls.getInstance().getTopPos());
+        SmartDashboard.putNumber("Claw Rotation", CaliGirls.getInstance().getBottomPos());
     }
 
     @Override
@@ -86,7 +86,9 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotPeriodic() {
-
+        SmartDashboard.putNumber("Extension", ArmExtension.getInstance().GetPosition());
+        SmartDashboard.putNumber("Claw Rotation", CaliGirls.getInstance().getTopPos());
+        SmartDashboard.putNumber("Arm Rotation", CaliGirls.getInstance().getBottomPos());
     }
 
     @Override
@@ -112,7 +114,7 @@ public class Robot extends TimedRobot {
             resetRobotPoseAndGyro();
         }
         this.autoFlag = false;
-
+        
     }
 
     @Override
@@ -155,8 +157,9 @@ public class Robot extends TimedRobot {
         // IntakeClaws.getInstance();
         DriveTrain.getInstance();
         CaliGirls.getInstance();
-        IntakeClaws.getInstance();
         ArmExtension.getInstance();
+        Roller.getInstance();
+       //new GoToFull(ArmPositions.START_POSITION);
     }
 
     private void resetRobotPoseAndGyro() {

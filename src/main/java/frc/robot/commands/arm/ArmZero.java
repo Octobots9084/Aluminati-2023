@@ -16,12 +16,6 @@ public class ArmZero extends CommandBase {
         armExtension.zeroArm();
     }
 
-    // @Override
-    // public boolean isFinished() {
-    //     SmartDashboard.putBoolean("Finished", armExtension.zeroDone());
-    //     return armExtension.zeroDone();
-    // }
-
     @Override
     public void end(boolean interupted) {
         armExtension.resetCurrent();

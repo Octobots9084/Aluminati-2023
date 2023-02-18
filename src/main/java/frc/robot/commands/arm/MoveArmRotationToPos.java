@@ -22,6 +22,7 @@ public class MoveArmRotationToPos extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return (MathUtil.isWithinTolerance(caliGirls.getBottomPos(), target, 0.5));
+        
+        return (MathUtil.isWithinTolerance(caliGirls.getBottomPos(),target,0.01));
     }
 }

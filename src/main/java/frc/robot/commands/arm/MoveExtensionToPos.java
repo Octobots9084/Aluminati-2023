@@ -22,6 +22,6 @@ public class MoveExtensionToPos extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return (MathUtil.isWithinTolerance(armExtension.GetPosition(), target, 0.5));
+        return (MathUtil.isWithinTolerance(armExtension.GetPosition(),target,5));
     }
 }

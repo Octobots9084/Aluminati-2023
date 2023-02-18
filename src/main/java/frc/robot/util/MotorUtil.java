@@ -32,8 +32,6 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
-import edu.wpi.first.wpilibj.Encoder;
-
 import com.revrobotics.SparkMaxPIDController;
 
 /**
