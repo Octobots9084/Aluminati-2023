@@ -5,12 +5,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.util.MathUtil;
 
-public class MoveExtensionToPos extends CommandBase{
+public class MoveExtensionToPos extends CommandBase {
     double target;
 
     ArmExtension armExtension;
+
     public MoveExtensionToPos(double pos) {
-        
+
         this.target = pos;
     }
 
@@ -22,7 +23,6 @@ public class MoveExtensionToPos extends CommandBase{
 
     @Override
     public boolean isFinished() {
-        SmartDashboard.putBoolean("ArmExtensionHitPos", (MathUtil.isWithinTolerance(armExtension.GetPosition(),target,0.5)));
         return (MathUtil.isWithinTolerance(armExtension.GetPosition(),target,5));
     }
 }

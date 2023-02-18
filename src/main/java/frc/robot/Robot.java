@@ -33,6 +33,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.arm.GoToFull;
+import frc.robot.commands.arm.ArmControl;
+import frc.robot.commands.arm.TiltControl;
 import frc.robot.commands.autonomous.PathPlannerAutos;
 import frc.robot.commands.swerve.SwerveControl;
 import frc.robot.robot.ButtonConfig;
@@ -56,7 +58,9 @@ public class Robot extends TimedRobot {
         DriveTrain.getInstance().drive(0, 0, 0, true);
         CommandScheduler.getInstance().cancelAll();
 
-        
+        SmartDashboard.putNumber("Extension", ArmExtension.getInstance().GetPosition());
+        SmartDashboard.putNumber("Arm Rotation", CaliGirls.getInstance().getTopPos());
+        SmartDashboard.putNumber("Claw Rotation", CaliGirls.getInstance().getBottomPos());
     }
 
     @Override
@@ -167,7 +171,7 @@ public class Robot extends TimedRobot {
 
     private void initializeDefaultCommands() {
         CommandScheduler.getInstance().setDefaultCommand(DriveTrain.getInstance(), new SwerveControl());
-        //CommandScheduler.getInstance().setDefaultCommand(CaliGirls.getInstance(), new TiltControl());
-        //CommandScheduler.getInstance().setDefaultCommand(ArmExtension.getInstance(), new ArmControl());
+        CommandScheduler.getInstance().setDefaultCommand(CaliGirls.getInstance(), new TiltControl());
+        CommandScheduler.getInstance().setDefaultCommand(ArmExtension.getInstance(), new ArmControl());
     }
 }
