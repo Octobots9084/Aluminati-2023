@@ -97,16 +97,14 @@ public class CaliGirls extends SubsystemBase {
     public void setTopPos(double angle) {
         lastPosTop = angle;
         pidControllerTop.setReference(angle, ControlType.kPosition);
-        SmartDashboard.putNumber("Wrist Attempted Drive", angle);
-        SmartDashboard.putNumber("Wrist Angle", motorTop.getAbsoluteEncoder(Type.kDutyCycle).getPosition());
+        SmartDashboard.putNumber("Wrist Set Angle", angle);
     }
 
     public void setBottomPos(double angle) {
   
         lastPosBottom = angle;
         pidControllerBottom.setReference(angle, ControlType.kSmartMotion);
-        SmartDashboard.putNumber("Arm Attempted Drive", angle);
-        SmartDashboard.putNumber("Arm Angle", motorBottom.getAbsoluteEncoder(Type.kDutyCycle).getPosition());
+        SmartDashboard.putNumber("Arm Set Angle", angle);
     }
 
     // public void setTopPos(double angle) {

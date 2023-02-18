@@ -7,9 +7,9 @@ import frc.robot.subsystems.arm.ArmPositions;
 public class GoToFull extends ParallelCommandGroup{
     public GoToFull(ArmPositions armPositions) {
         addCommands(
-            new ArmExtensionPos(armPositions.extension), 
-            new SetArmAngle(armPositions.angle),
-            new SetWristAngle(armPositions.wrist)
+            new MoveExtensionToPos(armPositions.extension), 
+            new MoveArmRotationToPos(armPositions.angle),
+            new MoveArmWristToPos(armPositions.wrist)
         );
     }
     

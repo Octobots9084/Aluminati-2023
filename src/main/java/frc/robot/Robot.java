@@ -116,7 +116,7 @@ public class Robot extends TimedRobot {
             resetRobotPoseAndGyro();
         }
         this.autoFlag = false;
-        CommandScheduler.getInstance().schedule(new GoToFull(ArmPositions.START_POSITION));
+        
     }
 
     @Override
@@ -161,7 +161,7 @@ public class Robot extends TimedRobot {
         CaliGirls.getInstance();
         IntakeClaws.getInstance();
         ArmExtension.getInstance();
-        
+       //new GoToFull(ArmPositions.START_POSITION);
     }
 
     private void resetRobotPoseAndGyro() {

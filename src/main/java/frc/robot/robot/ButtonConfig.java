@@ -5,11 +5,13 @@ import frc.robot.commands.arm.ArmExtensionPos;
 import frc.robot.commands.arm.ArmZero;
 import frc.robot.commands.arm.CloseClaw;
 import frc.robot.commands.arm.Grab;
+import frc.robot.commands.arm.MoveArmToPosition;
 import frc.robot.commands.arm.OpenClaw;
 import frc.robot.commands.arm.SetArmAngle;
 import frc.robot.commands.arm.SetIntakeVoltage;
 import frc.robot.commands.arm.SetWristAngle;
 import frc.robot.commands.swerve.SetDriverAssist;
+import frc.robot.subsystems.arm.ArmPositions;
 
 public class ButtonConfig {
     public void initTeleop() {
@@ -63,9 +65,12 @@ public class ButtonConfig {
         // new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
         //         .onTrue(new ArmExtensionPos(3400 / 25));
 
-
-        new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
+                .onTrue(new MoveArmToPosition(ArmPositions.CONE_PLACE_HIGH));
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
                 .onTrue(new MoveArmToPosition(ArmPositions.CONE_PLACE_MID));
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
+                .onTrue(new MoveArmToPosition(ArmPositions.FLOOR_INTAKE_CONE));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 5)
                 .onTrue(new CloseClaw());
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
