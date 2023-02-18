@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
-import frc.robot.util.MotorUtil;
 
 public class CaliGirls extends SubsystemBase {
     private CANSparkMax motorTop, motorBottom;
@@ -29,18 +28,6 @@ public class CaliGirls extends SubsystemBase {
     }
 
     public CaliGirls() {
-        // this.motorTop = new CANSparkMax(MotorIDs.ARM_WRIST_ANGLE, MotorType.kBrushless);
-        // motorTop.setSmartCurrentLimit(Tuning.CALI_TOP_STALL, Tuning.CALI_TOP_FREE);
-        // MotorUtil.setupSmartMotion(
-        //     Type.kDutyCycle, 
-        //     Tuning.CALI_TOP_PID, 
-        //     Tuning.CALI_TOP_SM, 
-        //     Tuning.CALI_TOP_ENCODER_RESOLUTION,
-        //     tee hee, my name is Lee! 
-        //     motorTop
-        // );
-        // this.lastPosTop = motorTop.getAbsoluteEncoder(Type.kDutyCycle).getPosition();
-
         //Up Motor
         this.motorTop = new CANSparkMax(MotorIDs.ARM_WRIST_ANGLE, MotorType.kBrushless);
         motorTop.setSmartCurrentLimit(Tuning.CALI_TOP_STALL, Tuning.CALI_TOP_FREE);
@@ -48,14 +35,6 @@ public class CaliGirls extends SubsystemBase {
         //Bottom Motor
         this.motorBottom = new CANSparkMax(MotorIDs.ARM_PIVOT_ANGLE, MotorType.kBrushless);
         motorBottom.setSmartCurrentLimit(Tuning.CALI_BOTTOM_STALL, Tuning.CALI_BOTTOM_FREE);
-
-        // MotorUtil.setupSmartMotion(
-        //     Type.kDutyCycle, 
-        //     Tuning.CALI_BOTTOM_PID, 
-        //     Tuning.CALI_BOTTOM_SM, 
-        //     Tuning.CALI_BOTTOM_ENCODER_RESOLUTION, 
-        //     motorBottom
-        // );
 
         // Top Motor PID
         this.pidControllerTop = motorTop.getPIDController();
@@ -105,10 +84,6 @@ public class CaliGirls extends SubsystemBase {
         pidControllerBottom.setReference(angle, ControlType.kPosition);
         SmartDashboard.putNumber("Arm Set Angle", angle);
     }
-
-    // public void setTopPos(double angle) {
-    //     motorTop.getPIDController().setReference(angle, ControlType.kSmartMotion);
-    // }
 
     public double getTopPos() {
         return motorTop.getAbsoluteEncoder(Type.kDutyCycle).getPosition();
