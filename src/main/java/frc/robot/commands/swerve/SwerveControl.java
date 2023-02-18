@@ -31,18 +31,12 @@ import frc.robot.util.MathUtil;
 public class SwerveControl extends CommandBase {
     private final DriveTrain driveTrain;
     private final Gyro gyro;
-    private final SendableChooser<Integer> sendable = new SendableChooser<>();
 
     public SwerveControl() {
         // Initialization
         this.driveTrain = DriveTrain.getInstance();
         this.gyro = Gyro.getInstance();
         addRequirements(this.driveTrain);
-
-        SmartDashboard.putData(sendable);
-        sendable.addOption("Old Controller", 1);
-        sendable.addOption("Xbox", 2);
-        sendable.addOption("HelicopterStick", 3);
     }
 
     @Override
