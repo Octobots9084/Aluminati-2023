@@ -25,8 +25,8 @@ public class Tuning {
             0.05);
 
     //Wrist
-    public static final int CALI_TOP_FREE = 5;
-    public static final int CALI_TOP_STALL = 5;
+    public static final int CALI_TOP_FREE = 10;
+    public static final int CALI_TOP_STALL = 10;
     //Pivot
     public static final int CALI_BOTTOM_FREE = 20;
     public static final int CALI_BOTTOM_STALL = 20;
@@ -42,16 +42,16 @@ public class Tuning {
 
     //Movement Characteristics
     //Wrist
-    public static final PIDConfig CALI_TOP_PID = new PIDConfig(3, 0.0005, 0.2, 0.0075);
+    public static final PIDConfig CALI_TOP_PID = new PIDConfig(3, 0.00, 0, 0.02);
     public static final SmartMotionConfig CALI_TOP_SM = new SmartMotionConfig(true,
-            10.0,
+            10000.0,
             0.0,
             10000.0,
             0.1);
     public static final double CALI_TOP_ENCODER_RESOLUTION = 1.0;
 
     //Arm Pivot
-    public static final PIDConfig CALI_BOTTOM_PID = new PIDConfig(13, 0.0, 2.5, 0.0003);
+    public static final PIDConfig CALI_BOTTOM_PID = new PIDConfig(13, 0.0002, 2.5, 0.0003);
     public static final SmartMotionConfig CALI_BOTTOM_SM = new SmartMotionConfig(true,
             10000.0,
             0.0,
@@ -62,9 +62,9 @@ public class Tuning {
     //Extension
     public static final PIDConfig EXTENSION_PID = new PIDConfig(0.01, 0, 0);
     public static final SmartMotionConfig EXTENSION_SM = new SmartMotionConfig(true,
-            0.01,
+            0.04,
             0.0,
-            0.1,
+            0.2,
             0.0);
     public static final double EXTENSION_MAX_OUT = 1;
     public static final double EXTENSION_MIN_OUT = -1;

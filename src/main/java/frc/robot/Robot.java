@@ -56,9 +56,9 @@ public class Robot extends TimedRobot {
         DriveTrain.getInstance().drive(0, 0, 0, true);
         CommandScheduler.getInstance().cancelAll();
 
-        SmartDashboard.putNumber("Extension", ArmExtension.getInstance().GetPosition());
-        SmartDashboard.putNumber("Arm Rotation", CaliGirls.getInstance().getTopPos());
-        SmartDashboard.putNumber("Claw Rotation", CaliGirls.getInstance().getBottomPos());
+        SmartDashboard.putNumber("Extensio2n", ArmExtension.getInstance().GetPosition());
+        SmartDashboard.putNumber("Arm Rotat2ion", CaliGirls.getInstance().getTopPos());
+        SmartDashboard.putNumber("Claw Rot2ation", CaliGirls.getInstance().getBottomPos());
     }
 
     @Override
@@ -86,9 +86,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotPeriodic() {
-        SmartDashboard.putNumber("Extension", ArmExtension.getInstance().GetPosition());
-        SmartDashboard.putNumber("Claw Rotation", CaliGirls.getInstance().getTopPos());
-        SmartDashboard.putNumber("Arm Rotation", CaliGirls.getInstance().getBottomPos());
+        
     }
 
     @Override

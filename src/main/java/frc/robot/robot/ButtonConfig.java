@@ -26,17 +26,17 @@ public class ButtonConfig {
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
                 .onTrue(new MoveArmToPositionGoingDown(ArmPositions.FLOOR_INTAKE_CONE));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 4)
-                .onTrue(new SetWristAngle(0.6));
+                .onTrue(new MoveArmToPositionGoingUp(ArmPositions.DRIVE_WITH_PIECE));
 
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
                 .whileTrue(new ArmZero());
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 9)
                 .onTrue(new SetArmAngle(0.65));
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 10)
-                .onTrue(new Grab(7));
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 11)
-                .onTrue(new Grab(-7));
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 12)
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 5)
+                .onTrue(new Grab(10));
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
+                .onTrue(new Grab(-10));
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 8)
                 .onTrue(new Grab(0));
 
 

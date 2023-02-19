@@ -10,10 +10,11 @@ public enum ArmPositions {
     //STATION(0,0,0),
     //TIPPED_CONE(0,0,0),
     //TIPPED_CONE_SETUP(0,0,0),
-    FLOOR_INTAKE_CONE(.559,39.7,.71),
+    FLOOR_INTAKE_CONE(.57,50.7,.693),
     CONE_PLACE_MID(.75,24.24,.89),
     CONE_PLACE_HIGH(.77,124.77,.89),
-    START_POSITION(.806,0.55,.6);
+    START_POSITION(.806,0.55,.6),
+    DRIVE_WITH_PIECE(.75,0,.61);
     
     
     public double angle,extension,wrist;
