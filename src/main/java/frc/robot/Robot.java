@@ -33,6 +33,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.arm.ArmControl;
+import frc.robot.commands.arm.MoveArmRotationToPos;
+import frc.robot.commands.arm.ParallalMoveArm;
 import frc.robot.commands.arm.TiltControl;
 import frc.robot.commands.autonomous.PathPlannerAutos;
 import frc.robot.commands.swerve.SwerveControl;
@@ -40,6 +42,7 @@ import frc.robot.robot.ButtonConfig;
 import frc.robot.robot.ControlMap;
 import frc.robot.robot.DriverButtonConfig;
 import frc.robot.subsystems.arm.ArmExtension;
+import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
 import frc.robot.subsystems.arm.Roller;
 import frc.robot.subsystems.swerve.DriveTrain;
@@ -157,7 +160,7 @@ public class Robot extends TimedRobot {
         CaliGirls.getInstance();
         ArmExtension.getInstance();
         Roller.getInstance();
-       //new GoToFull(ArmPositions.START_POSITION);
+       new ParallalMoveArm(ArmPositions.START_POSITION);
     }
 
     private void resetRobotPoseAndGyro() {

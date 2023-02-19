@@ -10,7 +10,7 @@ public enum ArmPositions {
     //STATION(0,0,0),
     //TIPPED_CONE(0,0,0),
     //TIPPED_CONE_SETUP(0,0,0),
-    FLOOR_INTAKE_CONE(.57,50.7,.693),
+    FLOOR_INTAKE_CONE(.57,50.7,.7),
     CONE_PLACE_MID(.75,24.24,.89),
     CONE_PLACE_HIGH(.77,124.77,.89),
     START_POSITION(.806,0.55,.6),

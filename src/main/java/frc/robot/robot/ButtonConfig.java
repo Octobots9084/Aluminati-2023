@@ -2,13 +2,16 @@ package frc.robot.robot;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.arm.ArmZero;
-import frc.robot.commands.arm.Grab;
+import frc.robot.commands.arm.IntakeIn;
+import frc.robot.commands.arm.IntakeNone;
+import frc.robot.commands.arm.IntakeOut;
 import frc.robot.commands.arm.MoveArmToPositionGoingDown;
 import frc.robot.commands.arm.MoveArmToPositionGoingUp;
 import frc.robot.commands.arm.SetArmAngle;
 import frc.robot.commands.arm.SetWristAngle;
 import frc.robot.commands.swerve.SetDriverAssist;
 import frc.robot.subsystems.arm.ArmPositions;
+import frc.robot.commands.advanced.CollectCone;
 
 public class ButtonConfig {
     public void initTeleop() {
@@ -33,11 +36,15 @@ public class ButtonConfig {
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 9)
                 .onTrue(new SetArmAngle(0.65));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 5)
-                .onTrue(new Grab(10));
+                .onTrue(new IntakeIn());
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
-                .onTrue(new Grab(-10));
+                .onTrue(new IntakeOut());
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 8)
-                .onTrue(new Grab(0));
+                .onTrue(new IntakeNone());
+        new JoystickButton(ControlMap.DRIVER_RIGHT, 2)
+                .onTrue(new CollectCone());
+        new JoystickButton(ControlMap.CO_DRIVER_RIGHT, 2)
+                .onTrue(new CollectCone());
 
 
     }
