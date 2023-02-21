@@ -58,7 +58,7 @@ public class Robot extends TimedRobot {
         DriveTrain.getInstance().drive(0, 0, 0, true);
         CommandScheduler.getInstance().cancelAll();
 
-        SmartDashboard.putNumber("Extensio2n", ArmExtension.getInstance().GetPosition());
+        SmartDashboard.putNumber("Extensi6o2n", ArmExtension.getInstance().GetPosition());
         SmartDashboard.putNumber("Arm Rotat2ion", CaliGirls.getInstance().getTopPos());
         SmartDashboard.putNumber("Claw Rot2ation", CaliGirls.getInstance().getBottomPos());
     }
@@ -95,6 +95,9 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         DriveTrain.getInstance().updateSwerveStates();
         CommandScheduler.getInstance().run();
+        SmartDashboard.putNumber("Extensi6o2n", ArmExtension.getInstance().GetPosition());
+        SmartDashboard.putNumber("Arm Rotat2ion", CaliGirls.getInstance().getTopPos());
+        SmartDashboard.putNumber("Claw Rot2ation", CaliGirls.getInstance().getBottomPos());
     }
 
     @Override
