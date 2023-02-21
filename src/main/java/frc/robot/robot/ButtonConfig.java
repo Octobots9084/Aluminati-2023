@@ -43,7 +43,6 @@ public class ButtonConfig {
                 .onTrue(new IntakeOut());
         new JoystickButton(ControlMap.DRIVER_RIGHT, 1)
                 .onTrue(new IntakeNone());
-        
         new JoystickButton(ControlMap.DRIVER_RIGHT, 2)
                 .whileTrue(new ArmZero());
 

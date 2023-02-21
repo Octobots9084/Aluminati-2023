@@ -17,11 +17,11 @@ public class ArmControl extends CommandBase {
 
     @Override
     public void execute() {
-        // var pos = armExtension.lastpos + 0.025 * MathUtil.fitDeadband(Math.pow(ControlMap.CO_DRIVER_RIGHT.getX(), 3));
+         var pos = armExtension.lastpos + 0.025 * MathUtil.fitDeadband(Math.pow(ControlMap.CO_DRIVER_RIGHT.getX(), 3));
         // SmartDashboard.putNumber("lastarmpos", armExtension.lastpos);
         // SmartDashboard.putNumber("armpos", pos);
         armExtension.SetPosition(
-                armExtension.lastpos + (0.5 * Math.signum(ControlMap.CO_DRIVER_RIGHT.getX()) * MathUtil.fitDeadband(Math.pow(ControlMap.CO_DRIVER_RIGHT.getX(), 2),0.01)),
+                armExtension.lastpos + (6 * Math.signum(ControlMap.CO_DRIVER_RIGHT.getX()) * MathUtil.fitDeadband(Math.pow(ControlMap.CO_DRIVER_RIGHT.getX(), 2),0.01)),
                 false);
     }
 }
