@@ -100,8 +100,8 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("Claw Rot2ation", CaliGirls.getInstance().getBottomPos());
     }
 
-    @Override
-    public void teleopInit() {
+        @Override
+        public void teleopInit() {
         SmartDashboard.putNumber("Initialized", 1);
         if (ControlMap.DRIVER_BUTTONS.getRawButton(14)) {
             new DriverButtonConfig().initTeleop();
