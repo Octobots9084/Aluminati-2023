@@ -73,5 +73,20 @@
   "maxVelocity": 7.0,
   "maxAcceleration": 5.0,
   "isReversed": null,
-  "markers": []
+  "markers": [
+    {
+      "position": 0.0,
+      "names": [
+        "RaiseArm",
+        "PlacePieceTop",
+        "LowerArm"
+      ]
+    },
+    {
+      "position": 1.0,
+      "names": [
+        "Balance"
+      ]
+    }
+  ]
 }
