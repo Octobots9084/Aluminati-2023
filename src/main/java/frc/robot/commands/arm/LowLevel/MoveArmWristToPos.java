@@ -14,7 +14,6 @@ public class MoveArmWristToPos extends CommandBase{
     public MoveArmWristToPos(double pos) {
         this.caliGirls = CaliGirls.getInstance();
         this.target = pos;
-        this.addRequirements(caliGirls);
     }
 
     @Override

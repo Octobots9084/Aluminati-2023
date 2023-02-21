@@ -10,7 +10,6 @@ public class SetArmExtension extends InstantCommand {
     public SetArmExtension(double pos) {
         this.armExtension = ArmExtension.getInstance();
         this.target = pos;
-        this.addRequirements(armExtension);
     }
 
     @Override

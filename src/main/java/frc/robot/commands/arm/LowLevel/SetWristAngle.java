@@ -10,7 +10,6 @@ public class SetWristAngle extends InstantCommand {
     public SetWristAngle(double angle) {
         this.caliGirls = CaliGirls.getInstance();
         this.angle = angle;
-        this.addRequirements(caliGirls);
     }
 
     @Override

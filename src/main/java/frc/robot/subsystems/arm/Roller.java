@@ -17,7 +17,7 @@ public class Roller {
 
     public Roller() {
         this.motor = new CANSparkMax(MotorIDs.ARM_ROLLER, CANSparkMaxLowLevel.MotorType.kBrushless);
-        this.motor.setSmartCurrentLimit(1, 1);
+        this.motor.setSmartCurrentLimit(25, 25);
         setRollerVoltage(0);
     }
 

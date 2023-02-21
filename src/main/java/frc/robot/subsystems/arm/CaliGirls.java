@@ -44,7 +44,7 @@ public class CaliGirls extends SubsystemBase {
         pidControllerTop.setD(Tuning.CALI_TOP_PID.getD());
         pidControllerTop.setFF(Tuning.CALI_TOP_PID.getF());
         pidControllerTop.setOutputRange(-1.0, 1.0);
-        this.lastPosTop = 0.510;
+        this.lastPosTop = 0.5;
         this.motorTop.getAbsoluteEncoder(Type.kDutyCycle).setInverted(false);
         this.motorTop.setInverted(true);
         this.motorTop.getPIDController().setPositionPIDWrappingEnabled(false);

@@ -9,6 +9,6 @@ import frc.robot.subsystems.arm.CaliGirls;
 public class CollectCone extends SequentialCommandGroup{
 
     public CollectCone() {
-        addCommands(new MoveArmToPositionGoingDown(ArmPositions.FLOOR_INTAKE_CONE), new IntakeIn());
+        addCommands(new MoveArmToPositionGoingDown(ArmPositions.COLLECT_POSITION), new IntakeIn());
     }
 }

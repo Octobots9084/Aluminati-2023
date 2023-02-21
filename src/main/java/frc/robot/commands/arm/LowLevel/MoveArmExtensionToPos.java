@@ -18,7 +18,6 @@ public class MoveArmExtensionToPos extends CommandBase {
         
         this.target = pos;
         this.armExtension = ArmExtension.getInstance();
-        this.addRequirements(this.armExtension);
     }
 
     @Override

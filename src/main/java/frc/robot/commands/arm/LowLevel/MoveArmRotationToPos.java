@@ -14,7 +14,6 @@ public class MoveArmRotationToPos extends CommandBase {
     public MoveArmRotationToPos(double pos) {
         this.caliGirls = CaliGirls.getInstance();
         this.target = pos;
-        this.addRequirements(caliGirls);
     }
 
     @Override

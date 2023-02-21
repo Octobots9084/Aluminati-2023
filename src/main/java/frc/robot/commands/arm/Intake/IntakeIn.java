@@ -7,6 +7,6 @@ public class IntakeIn extends InstantCommand {
 
     @Override
     public void initialize() {
-        Roller.getInstance().setRollerVoltage(-10);
+        Roller.getInstance().setRollerVoltage(-8);
     }
 }
