@@ -21,7 +21,7 @@ public class ButtonConfig {
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
                 .onTrue(new SafeMoveArmGoingDown(ArmPositions.DRIVE_WITH_PIECE));
                 new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
-                .onTrue(new SafeMoveArmGoingDown(ArmPositions.COLLECT_POSITION));
+                .onTrue(new SafeMoveArmGoingDown(ArmPositions.CONE_INTAKE_GROUND));
 
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
                 .onTrue(new SafeMoveArmGoingDown(ArmPositions.CUBE_PLACE_HIGH));
@@ -36,6 +36,7 @@ public class ButtonConfig {
                 .onTrue(new SafeMoveArmGoingUp(ArmPositions.CONE_PLACE_MID));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 12)
                 .onTrue(new SafeMoveArmGoingDown(ArmPositions.CONE_PLACE_LOW));
+
 
         new JoystickButton(ControlMap.DRIVER_LEFT, 1)
                 .onTrue(new IntakeIn());

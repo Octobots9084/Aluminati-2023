@@ -20,7 +20,7 @@ public class DriverButtonConfig {
                 new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
                         .onTrue(new SafeMoveArmGoingDown(ArmPositions.DRIVE_WITH_PIECE));
                 new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
-                        .onTrue(new SafeMoveArmGoingDown(ArmPositions.COLLECT_POSITION));
+                        .onTrue(new SafeMoveArmGoingDown(ArmPositions.CONE_INTAKE_GROUND));
 
                 new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
                         .onTrue(new SafeMoveArmGoingUp(ArmPositions.CUBE_PLACE_HIGH));
@@ -46,8 +46,8 @@ public class DriverButtonConfig {
                         .onTrue(new IntakeOut());
                 new JoystickButton(ControlMap.DRIVER_RIGHT, 1)
                         .onTrue(new IntakeNone());
-//                new JoystickButton(ControlMap.DRIVER_RIGHT, 2)
-//                        .whileTrue(new ArmZero());
+                new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
+                        .onTrue(new SafeMoveArmGoingDown(ArmPositions.DRIVE_WITHOUT_PIECE));
 
                 ////END DRIVER 1//////////////////////////
 
@@ -77,6 +77,8 @@ public class DriverButtonConfig {
                          .whileTrue(new TiltControl());
                 new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
                         .onTrue(new ZeroGyro());
+                new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 6)
+                        .onTrue(new SafeMoveArmGoingDown(ArmPositions.DRIVE_WITHOUT_PIECE));
 
 
                 ////END CO-DRIVER//////////////////////////
