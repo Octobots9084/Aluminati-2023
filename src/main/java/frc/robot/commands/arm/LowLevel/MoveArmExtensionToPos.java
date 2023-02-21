@@ -1,24 +1,29 @@
-package frc.robot.commands.arm;
+package frc.robot.commands.arm.LowLevel;
+
+import java.lang.module.ModuleDescriptor.Requires;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.util.MathUtil;
 
-public class MoveExtensionToPos extends CommandBase {
+public class MoveArmExtensionToPos extends CommandBase {
     double target;
 
     ArmExtension armExtension;
     double startTime = Timer.getFPGATimestamp();
     double currentTime;
-    public MoveExtensionToPos(double pos) {
+    public MoveArmExtensionToPos(double pos) {
 
+        
         this.target = pos;
+        this.armExtension = ArmExtension.getInstance();
+        this.addRequirements(this.armExtension);
     }
 
     @Override
     public void initialize() {
-        this.armExtension = ArmExtension.getInstance();
+        
         armExtension.SetPosition(target, false);
     }
 
