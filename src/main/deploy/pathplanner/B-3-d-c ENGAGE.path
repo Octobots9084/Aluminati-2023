@@ -249,12 +249,12 @@
     },
     {
       "anchorPoint": {
-        "x": 3.8738768075826755,
-        "y": 3.437169609381954
+        "x": 3.885295975720156,
+        "y": 3.391492936832028
       },
       "prevControl": {
-        "x": 3.439948418358375,
-        "y": 3.5285229544818066
+        "x": 3.325756736983558,
+        "y": 3.4371696093819537
       },
       "nextControl": null,
       "holonomicAngle": 180.0,
@@ -263,7 +263,9 @@
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "Balance"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -273,5 +275,51 @@
   "maxVelocity": 6.0,
   "maxAcceleration": 7.0,
   "isReversed": null,
-  "markers": []
+  "markers": [
+    {
+      "position": 0.0,
+      "names": [
+        "PlacePieceTop",
+        "LowerArm"
+      ]
+    },
+    {
+      "position": 1.2363636363636283,
+      "names": [
+        "OpenClaw"
+      ]
+    },
+    {
+      "position": 2.036363636363681,
+      "names": [
+        "CloseClaw",
+        "RaiseArm"
+      ]
+    },
+    {
+      "position": 4.072727272727084,
+      "names": [
+        "PlacePieceTop"
+      ]
+    },
+    {
+      "position": 4.945454545454613,
+      "names": [
+        "OpenClaw"
+      ]
+    },
+    {
+      "position": 6.1,
+      "names": [
+        "CloseClaw",
+        "RaiseArm"
+      ]
+    },
+    {
+      "position": 9.0,
+      "names": [
+        "PlacePieceTop"
+      ]
+    }
+  ]
 }

@@ -329,39 +329,36 @@
   "isReversed": null,
   "markers": [
     {
-      "position": 2.0,
+      "position": 1.1345454545455371,
       "names": [
-        "PickUp"
+        "OpenClaw"
       ]
     },
     {
       "position": 5.0,
       "names": [
-        "Placement"
+        "PlacePieceTop",
+        "LowerArm"
       ]
     },
     {
       "position": 7.0,
       "names": [
-        "PickUp"
+        "CloseClaw",
+        "RaiseArm"
       ]
     },
     {
       "position": 0.0,
       "names": [
-        "event"
+        "PlacePieceTop",
+        "LowerArm"
       ]
     },
     {
       "position": 11.0,
       "names": [
-        "Placement",
-        "LowerArm"
-      ]
-    },
-    {
-      "position": 0.34909090909096374,
-      "names": [
+        "PlacePieceTop",
         "LowerArm"
       ]
     },
@@ -372,15 +369,22 @@
       ]
     },
     {
-      "position": 5.2,
-      "names": [
-        "LowerArm"
-      ]
-    },
-    {
       "position": 8.0,
       "names": [
         "RaiseArm"
+      ]
+    },
+    {
+      "position": 2.0,
+      "names": [
+        "CloseClaw",
+        "RaiseArm"
+      ]
+    },
+    {
+      "position": 6.02181818181789,
+      "names": [
+        "OpenClaw"
       ]
     }
   ]

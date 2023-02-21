@@ -16,7 +16,10 @@
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "PlacePieceTop",
+          "LowerArm"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -288,7 +291,10 @@
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "PlacePieceTop",
+          "LowerArm"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -298,5 +304,38 @@
   "maxVelocity": 5.0,
   "maxAcceleration": 7.0,
   "isReversed": null,
-  "markers": []
+  "markers": [
+    {
+      "position": 0.7999999999999775,
+      "names": [
+        "OpenClaw"
+      ]
+    },
+    {
+      "position": 2.0,
+      "names": [
+        "CloseClaw",
+        "RaiseArm"
+      ]
+    },
+    {
+      "position": 5.0,
+      "names": [
+        "PlacePieceTop"
+      ]
+    },
+    {
+      "position": 7.0,
+      "names": [
+        "CloseClaw",
+        "RaiseArm"
+      ]
+    },
+    {
+      "position": 6.0,
+      "names": [
+        "OpenClaw"
+      ]
+    }
+  ]
 }
