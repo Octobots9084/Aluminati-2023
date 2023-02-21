@@ -7,7 +7,7 @@ public enum ArmPositions {
     CONE_PLACE_MID(.59,0,.365),
     // Cone place low values are placeholder
     CONE_PLACE_LOW(.51,0,.64),
-    CONE_INTAKE_GROUND(.59,0,.365),
+    CONE_INTAKE_GROUND(.52,70.36,.57),
     CONE_INTAKE_SUBSTATION(.59,0,.365),
     TIPPED_CONE_SETUP(.59,0,.365),
     TIPPED_CONE_INTAKE(.59,0,.365),
@@ -16,7 +16,7 @@ public enum ArmPositions {
     CUBE_PLACE_HIGH(.59,0,.365),
     CUBE_PLACE_MID(.59,0,.365),
     CUBE_PLACE_LOW(.59,0,.365),
-    CUBE_INTAKE_FLOOR(.59,0,.365),
+    CUBE_INTAKE_FLOOR(.52,70.36,.57),
     CUBE_INTAKE_SUBSTATION(.59,0,.365),
 
     START_POSITION(.806,0.55,.365),
