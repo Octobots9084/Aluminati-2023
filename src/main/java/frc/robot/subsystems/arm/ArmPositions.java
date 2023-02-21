@@ -21,7 +21,7 @@ public enum ArmPositions {
 
     START_POSITION(.806,0.55,.365),
     DRIVE_WITH_PIECE(.59,0,.365),
-    DRIVE_WITHOUT_PIECE(.261,1.47,.487);
+    DRIVE_WITHOUT_PIECE(.487,1.47,.261);
 
 
 
