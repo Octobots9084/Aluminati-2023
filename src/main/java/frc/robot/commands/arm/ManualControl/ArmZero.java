@@ -17,10 +17,6 @@ public class ArmZero extends CommandBase {
     }
 
     @Override
-    public  boolean isFinished() {
-        return  armExtension.zeroDone();
-    }
-    @Override
     public void end(boolean interupted) {
         armExtension.resetCurrent();
         armExtension.setOffset();

@@ -38,7 +38,7 @@ public class DriverButtonConfig {
                 new JoystickButton(ControlMap.DRIVER_BUTTONS, 4)
                         .onTrue(new ZeroGyro());
                 new JoystickButton(ControlMap.DRIVER_BUTTONS, 5)
-                        .onTrue(new ArmZero());
+                        .whileTrue(new ArmZero());
 
                 new JoystickButton(ControlMap.DRIVER_LEFT, 1)
                         .onTrue(new IntakeIn());
@@ -58,7 +58,7 @@ public class DriverButtonConfig {
                 //new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
                          //.onTrue(null);
                 new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 5)
-                         .onTrue(new ArmZero());
+                         .whileTrue(new ArmZero());
                 new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 7)
                          .onTrue(new SafeMoveArmGoingUp(ArmPositions.CUBE_PLACE_HIGH));
                 new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 8)
