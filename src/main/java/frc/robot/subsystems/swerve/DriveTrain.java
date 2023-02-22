@@ -35,6 +35,7 @@ import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
 import frc.robot.util.Gyro;
 import frc.robot.util.MathUtil;
+import frc.robot.util.PIDConfig;
 import frc.robot.util.PoseEstimator;
 
 /**
@@ -175,8 +176,13 @@ public class DriveTrain extends SubsystemBase {
             diff -= 360;
         }
 
+        
         double vel = (turnSpeedP * (diff));
-        return Math.signum(diff) * (Math.min(Math.abs(vel), MAX_ANGULAR_SPEED) + minTurnSpeed);
+        
+        double turnSpeed = (Math.signum(diff) * (Math.min(Math.abs(vel), MAX_ANGULAR_SPEED) + minTurnSpeed));
+
+
+        return turnSpeed;
     }
 
     public void setSwerveModuleAngle(double angle) {
