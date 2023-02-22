@@ -7,7 +7,7 @@ public enum ArmPositions {
     CONE_PLACE_MID(.59,0,.365),// placeholder
 
     CONE_PLACE_LOW(.51,0,.64), //unknown
-    CONE_INTAKE_GROUND(.539,85.408,.577),//feb 20 adr, dash was questionable 
+    CONE_INTAKE_GROUND(.573,70.67,.485),//feb 20 adr, dash was questionable 
     CONE_INTAKE_SUBSTATION(.59,0,.365),// placeholder
     TIPPED_CONE_SETUP(.59,0,.365),// placeholder
     TIPPED_CONE_INTAKE(.59,0,.365),// placeholder

@@ -20,7 +20,7 @@ public class TiltControl extends CommandBase {
         caliGirls.setBottomPos(caliGirls.lastPosBottom
                 + -0.025 * Math.signum(ControlMap.CO_DRIVER_RIGHT.getY()) *MathUtil.fitDeadband((Math.pow(ControlMap.CO_DRIVER_RIGHT.getY(), 2)),0.01));
         caliGirls.setTopPos(caliGirls.lastPosTop
-                + 0.025 * Math.signum(ControlMap.CO_DRIVER_LEFT.getY()) * MathUtil.fitDeadband((-Math.pow(ControlMap.CO_DRIVER_LEFT.getY(), 2)),0.01));
+                - 0.025 * Math.signum(ControlMap.CO_DRIVER_LEFT.getY()) * MathUtil.fitDeadband((-Math.pow(ControlMap.CO_DRIVER_LEFT.getY(), 2)),0.01));
     }
 
 }

@@ -57,6 +57,11 @@ public class DriverButtonConfig {
                          //.onTrue(null);
                 //new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
                          //.onTrue(null);
+                new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 1)
+                         .onTrue(new SafeMoveArmGoingDown(ArmPositions.DRIVE_WITH_PIECE));
+                 new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
+                         .onTrue(new SafeMoveArmGoingDown(ArmPositions.CONE_INTAKE_GROUND));
+ 
                 new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 5)
                          .whileTrue(new ArmZero());
                 new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 7)
