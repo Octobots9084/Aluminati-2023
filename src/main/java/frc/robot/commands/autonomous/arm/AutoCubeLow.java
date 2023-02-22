@@ -8,21 +8,21 @@ import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
 
-public class AutoConeLow extends SequentialCommandGroup{
+public class AutoCubeLow extends SequentialCommandGroup{
     ArmPositions aPosition;
     CaliGirls caliGirls;
     ArmExtension armExtension;
 
-    public AutoConeLow() {
-        this.aPosition = ArmPositions.DRIVE_WITH_PIECE;
+    public AutoCubeLow() {
+        this.aPosition = ArmPositions.CUBE_PLACE_HIGH;
         this.caliGirls = CaliGirls.getInstance();
         this.armExtension = ArmExtension.getInstance();
         //aPosition.angle was erroring (on 2/21, wasn't on 2/20), so I changed to aPosition.armAngle because it seemed to do the same thing in ArmPositions.java
         //if it's behaving unexpectedly, that may be why
         addCommands(new MoveArmRotationToPos(aPosition.armAngle), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension));
-        this.aPosition = ArmPositions.CONE_PLACE_LOW;
+
         addCommands(new MoveArmRotationToPos(aPosition.armAngle), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension));
-        this.aPosition = ArmPositions.DRIVE_WITHOUT_PIECE;
+        this.aPosition = ArmPositions.CONE_INTAKE_GROUND;
         addCommands(new MoveArmRotationToPos(aPosition.armAngle), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension));
     }
 }

@@ -16,13 +16,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.commands.autonomous.arm.AutoConeLow;
+import frc.robot.commands.autonomous.arm.AutoConeMid;
+import frc.robot.commands.autonomous.arm.AutoConeTop;
+import frc.robot.commands.autonomous.arm.AutoCubeLow;
+import frc.robot.commands.autonomous.arm.AutoCubeMid;
+import frc.robot.commands.autonomous.arm.AutoCubeTop;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 
 public final class PathPlannerAutos {
     private static final Map<String, Command> eventMap = new HashMap<>(Map.ofEntries(
             Map.entry("driveToPos", new driveToPos(new Pose2d(14, 0.7, new Rotation2d(0)))),
-            Map.entry("BalanceChargeStation", new BalanceChargeStation(DriveTrain.getInstance(), Gyro.getInstance()))));
+            Map.entry("BalanceChargeStation", new BalanceChargeStation(DriveTrain.getInstance(), Gyro.getInstance())),
+            Map.entry("ConeTop", new AutoConeTop()),
+            Map.entry("ConeMid", new AutoConeMid()),
+            Map.entry("ConeLow", new AutoConeLow()),
+            Map.entry("CubeTop", new AutoCubeTop()),
+            Map.entry("CubeMid", new AutoCubeMid()),
+            Map.entry("CubeLow", new AutoCubeLow())
+            ));
 
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
             DriveTrain.getInstance()::getPose2d,

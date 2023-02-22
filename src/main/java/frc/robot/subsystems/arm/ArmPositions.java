@@ -1,7 +1,9 @@
 package frc.robot.subsystems.arm;
 
 public enum ArmPositions {
+    CONE_PLACE_HIGH_PREP(.59,0,.365),// placeholder
     CONE_PLACE_HIGH(.77,124.77,.69),// feb 20 alex
+    CONE_PLACE_MID_PREP(.59,0,.365),// placeholder
     CONE_PLACE_MID(.75,24.24,.69),// feb 20 alex
     CONE_PLACE_LOW(.598,0,.693), //unknown
     
