@@ -78,13 +78,23 @@ public class CaliGirls extends SubsystemBase {
     }
 
     public void setTopPos(double angle) {
+        if (angle> 0.7) {
+            angle = 0.7;
+        } else if (angle< 0.26) {
+            angle = 0.26;
+        }
         lastPosTop = angle;
         pidControllerTop.setReference(angle, ControlType.kPosition);
         SmartDashboard.putNumber("Wrist Set Angle", angle);
     }
 
     public void setBottomPos(double angle) {
-  
+        if (angle> 0.84) {
+            angle = 0.84;
+        } else if (angle< 0.5) {
+            angle = 0.5;
+        }
+        
         lastPosBottom = angle;
         pidControllerBottom.setReference(angle, ControlType.kPosition);
         SmartDashboard.putNumber("Arm Set Angle", angle);

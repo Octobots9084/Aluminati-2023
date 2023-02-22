@@ -47,8 +47,8 @@ public class ArmExtension extends SubsystemBase {
     }
 
     public void SetPosition(double position, boolean override) {
-        if (position > 3500 && !override) {
-            position = 3500;
+        if (position > 142 && !override) {
+            position = 142;
         }
         if (position < 0 && !override) {
             position = 0;
