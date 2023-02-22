@@ -108,7 +108,6 @@ public class Robot extends TimedRobot {
         } else {
             new ButtonConfig().initTeleop();
         }
-        new ButtonConfig().initTeleop();
         CommandScheduler.getInstance().cancelAll();
         initializeAllSubsystems();
         initializeDefaultCommands();

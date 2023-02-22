@@ -62,11 +62,11 @@ public class DriverButtonConfig {
                 new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 7)
                          .onTrue(new SafeMoveArmGoingUp(ArmPositions.CUBE_PLACE_HIGH));
                 new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 8)
-                          .onTrue(new SafeMoveArmGoingUp(ArmPositions.CONE_PLACE_HIGH));
+                          .onTrue(new SafeMoveArmGoingUp(ArmPositions.CONE_PLACE_HIGH_SETUP));
                 new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 9)
                          .onTrue(new SafeMoveArmGoingUp(ArmPositions.CUBE_PLACE_MID));
                 new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 10)
-                        .onTrue(new SafeMoveArmGoingUp(ArmPositions.CONE_PLACE_MID));
+                        .onTrue(new SafeMoveArmGoingUp(ArmPositions.CONE_PLACE_MID_SETUP));
                 new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 11)
                          .onTrue(new SafeMoveArmGoingDown(ArmPositions.CUBE_PLACE_LOW));
                  //Cube Place Low
