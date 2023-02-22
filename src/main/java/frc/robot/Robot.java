@@ -88,16 +88,16 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotPeriodic() {
-        
+        SmartDashboard.putNumber("Arm Extention", ArmExtension.getInstance().GetPosition());
+        SmartDashboard.putNumber("Arm Rotation", CaliGirls.getInstance().getBottomPos());
+        SmartDashboard.putNumber("Intake Rotation", CaliGirls.getInstance().getTopPos());
     }
 
     @Override
     public void teleopPeriodic() {
         DriveTrain.getInstance().updateSwerveStates();
         CommandScheduler.getInstance().run();
-        SmartDashboard.putNumber("Arm Extention", ArmExtension.getInstance().GetPosition());
-        SmartDashboard.putNumber("Arm Rotation", CaliGirls.getInstance().getBottomPos());
-        SmartDashboard.putNumber("Intake Rotation", CaliGirls.getInstance().getTopPos());
+        
     }
 
         @Override

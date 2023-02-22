@@ -21,6 +21,8 @@ public class DriverButtonConfig {
                         .onTrue(new SafeMoveArmGoingDown(ArmPositions.DRIVE_WITH_PIECE));
                 new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
                         .onTrue(new SafeMoveArmGoingDown(ArmPositions.CONE_INTAKE_GROUND));
+                new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
+                        .onTrue(new SafeMoveArmGoingDown(ArmPositions.INTAKE_SUBSTATION));
 
                 new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
                         .onTrue(new SafeMoveArmGoingUp(ArmPositions.CUBE_PLACE_HIGH));
@@ -30,9 +32,9 @@ public class DriverButtonConfig {
                         .onTrue(new SafeMoveArmGoingDown(ArmPositions.CUBE_PLACE_LOW));
 
                 new JoystickButton(ControlMap.DRIVER_BUTTONS, 8)
-                        .onTrue(new SafeMoveArmGoingUp(ArmPositions.CONE_PLACE_HIGH_SETUP));
+                        .onTrue(new SafeMoveArmGoingUp(ArmPositions.CONE_PLACE_HIGH));
                 new JoystickButton(ControlMap.DRIVER_BUTTONS, 10)
-                        .onTrue(new SafeMoveArmGoingUp(ArmPositions.CONE_PLACE_MID_SETUP));
+                        .onTrue(new SafeMoveArmGoingUp(ArmPositions.CONE_PLACE_MID));
                 new JoystickButton(ControlMap.DRIVER_BUTTONS, 12)
                         .onTrue(new SafeMoveArmGoingDown(ArmPositions.CONE_PLACE_LOW));
                 new JoystickButton(ControlMap.DRIVER_BUTTONS, 4)
@@ -49,6 +51,11 @@ public class DriverButtonConfig {
                 new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
                         .onTrue(new SafeMoveArmGoingDown(ArmPositions.DRIVE_WITHOUT_PIECE));
 
+                new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
+                        .whileTrue(new SetDriverAssist(true));
+                new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
+                        .whileFalse(new SetDriverAssist(false));
+
                 ////END DRIVER 1//////////////////////////
 
                 ////CO DRIVER////////////////
@@ -61,17 +68,19 @@ public class DriverButtonConfig {
                          .onTrue(new SafeMoveArmGoingDown(ArmPositions.DRIVE_WITH_PIECE));
                  new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
                          .onTrue(new SafeMoveArmGoingDown(ArmPositions.CONE_INTAKE_GROUND));
+                new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 3)
+                        .onTrue(new SafeMoveArmGoingDown(ArmPositions.INTAKE_SUBSTATION));
  
                 new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 5)
                          .whileTrue(new ArmZero());
                 new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 7)
                          .onTrue(new SafeMoveArmGoingUp(ArmPositions.CUBE_PLACE_HIGH));
                 new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 8)
-                          .onTrue(new SafeMoveArmGoingUp(ArmPositions.CONE_PLACE_HIGH_SETUP));
+                          .onTrue(new SafeMoveArmGoingUp(ArmPositions.CONE_PLACE_HIGH));
                 new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 9)
                          .onTrue(new SafeMoveArmGoingUp(ArmPositions.CUBE_PLACE_MID));
                 new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 10)
-                        .onTrue(new SafeMoveArmGoingUp(ArmPositions.CONE_PLACE_MID_SETUP));
+                        .onTrue(new SafeMoveArmGoingUp(ArmPositions.CONE_PLACE_MID));
                 new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 11)
                          .onTrue(new SafeMoveArmGoingDown(ArmPositions.CUBE_PLACE_LOW));
                  //Cube Place Low
