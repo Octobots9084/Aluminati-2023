@@ -23,6 +23,7 @@ import frc.robot.commands.autonomous.arm.AutoCubeLow;
 import frc.robot.commands.autonomous.arm.AutoCubeMid;
 import frc.robot.commands.autonomous.arm.AutoCubeTop;
 import frc.robot.commands.autonomous.arm.AutoGroundIntakeCone;
+import frc.robot.commands.autonomous.arm.AutoGroundIntakeCube;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 

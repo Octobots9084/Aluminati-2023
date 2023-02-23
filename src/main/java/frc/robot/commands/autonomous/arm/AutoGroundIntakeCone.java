@@ -18,7 +18,7 @@ public class AutoGroundIntakeCone extends SequentialCommandGroup{
     ArmExtension armExtension;
 
     public AutoGroundIntakeCone() {
-        this.aPosition = ArmPositions.CONE_INTAKE_GROUND;
+        this.aPosition = ArmPositions.CUBE_INTAKE_FLOOR;
         this.caliGirls = CaliGirls.getInstance();
         addCommands(new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension), new MoveArmRotationToPos(aPosition.armAngle));
         new IntakeIn();

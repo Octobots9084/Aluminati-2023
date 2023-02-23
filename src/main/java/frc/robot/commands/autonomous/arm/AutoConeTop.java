@@ -1,6 +1,9 @@
 package frc.robot.commands.autonomous.arm;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.arm.Intake.IntakeIn;
+import frc.robot.commands.arm.Intake.IntakeNone;
 import frc.robot.commands.arm.LowLevel.MoveArmExtensionToPos;
 import frc.robot.commands.arm.LowLevel.MoveArmRotationToPos;
 import frc.robot.commands.arm.LowLevel.MoveArmWristToPos;
@@ -14,16 +17,18 @@ public class AutoConeTop extends SequentialCommandGroup{
     ArmExtension armExtension;
 
     public AutoConeTop() {
-        this.aPosition = ArmPositions.CONE_PLACE_HIGH_PREP;
+        this.aPosition = ArmPositions.PRE_CONE_PLACE_HIGH;
         this.caliGirls = CaliGirls.getInstance();
         this.armExtension = ArmExtension.getInstance();
-        //aPosition.angle was erroring (on 2/21, wasn't on 2/20), so I changed to aPosition.armAngle because it seemed to do the same thing in ArmPositions.java
-        //if it's behaving unexpectedly, that may be why
         addCommands(new MoveArmRotationToPos(aPosition.armAngle), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension));
         this.aPosition = ArmPositions.CONE_PLACE_HIGH;
         addCommands(new MoveArmRotationToPos(aPosition.armAngle), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension));
-  
-        this.aPosition = ArmPositions.CONE_INTAKE_GROUND;
+        new IntakeIn();
+        new WaitCommand(.1);
+        new IntakeNone();
+        this.aPosition = ArmPositions.PRE_CONE_PLACE_HIGH;
+        addCommands(new MoveArmRotationToPos(aPosition.armAngle), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension));
+        this.aPosition = ArmPositions.DRIVE_WITHOUT_PIECE;
         addCommands(new MoveArmRotationToPos(aPosition.armAngle), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension));
     }
 }
