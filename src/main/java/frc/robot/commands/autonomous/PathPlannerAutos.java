@@ -22,6 +22,7 @@ import frc.robot.commands.autonomous.arm.AutoConeTop;
 import frc.robot.commands.autonomous.arm.AutoCubeLow;
 import frc.robot.commands.autonomous.arm.AutoCubeMid;
 import frc.robot.commands.autonomous.arm.AutoCubeTop;
+import frc.robot.commands.autonomous.arm.AutoGroundIntakeCone;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 
@@ -34,7 +35,9 @@ public final class PathPlannerAutos {
             Map.entry("ConeLow", new AutoConeLow()),
             Map.entry("CubeTop", new AutoCubeTop()),
             Map.entry("CubeMid", new AutoCubeMid()),
-            Map.entry("CubeLow", new AutoCubeLow())
+            Map.entry("CubeLow", new AutoCubeLow()),
+            Map.entry("IntakeCone", new AutoGroundIntakeCone()),
+            Map.entry("IntakeCube", new AutoGroundIntakeCube())
             ));
 
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
