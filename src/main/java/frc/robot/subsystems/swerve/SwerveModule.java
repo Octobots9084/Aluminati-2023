@@ -166,7 +166,7 @@ public class SwerveModule {
     public void setDesiredState(SwerveModuleState state) {
         // Optimize the swerve state and set it
         var optimizedAngle = SwerveUtil.optimizeSwerveStates(state, getAngle());
-        SmartDashboard.putNumber("Angle", convertAngleToTick(optimizedAngle.angle.getRadians()));
+        //SmartDashboard.putNumber("Angle", convertAngleToTick(optimizedAngle.angle.getRadians()));
         setDriveMotorVelocity(optimizedAngle.speedMetersPerSecond);
         setSteeringMotorAngle(convertAngleToTick(optimizedAngle.angle.getRadians()));
     }

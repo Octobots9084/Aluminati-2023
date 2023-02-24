@@ -68,7 +68,7 @@ public class Gyro {
     }
 
     public double getRoll() {
-        SmartDashboard.putNumber("Gryo pitch", navX.getRoll());
+        //SmartDashboard.putNumber("Gryo pitch", navX.getRoll());
         return navX.getRoll();
     }
 

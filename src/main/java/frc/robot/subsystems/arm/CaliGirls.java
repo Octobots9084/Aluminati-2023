@@ -85,7 +85,7 @@ public class CaliGirls extends SubsystemBase {
         }
         lastPosTop = angle;
         pidControllerTop.setReference(angle, ControlType.kPosition);
-        SmartDashboard.putNumber("Wrist Set Angle", angle);
+        // SmartDashboard.putNumber("Wrist Set Angle", angle);
     }
 
     public void setBottomPos(double angle) {
@@ -97,7 +97,7 @@ public class CaliGirls extends SubsystemBase {
         
         lastPosBottom = angle;
         pidControllerBottom.setReference(angle, ControlType.kPosition);
-        SmartDashboard.putNumber("Arm Set Angle", angle);
+        // SmartDashboard.putNumber("Arm Set Angle", angle);
     }
 
     public double getTopPos() {
