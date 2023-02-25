@@ -168,6 +168,9 @@ public class Robot extends TimedRobot {
     }
 
     private void initializeDefaultCommands() {
+        CaliGirls.getInstance().lastPosBottom = ArmPositions.START_POSITION.armAngle;
+        CaliGirls.getInstance().lastPosTop = ArmPositions.START_POSITION.wrist;
+        ArmExtension.getInstance().lastpos = ArmPositions.START_POSITION.extension;
         CommandScheduler.getInstance().setDefaultCommand(DriveTrain.getInstance(), new SwerveControl());
          CommandScheduler.getInstance().setDefaultCommand(CaliGirls.getInstance(), new TiltControl());
          CommandScheduler.getInstance().setDefaultCommand(ArmExtension.getInstance(), new ArmControl());

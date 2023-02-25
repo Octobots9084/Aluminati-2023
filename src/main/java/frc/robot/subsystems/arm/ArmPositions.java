@@ -17,7 +17,7 @@ public enum ArmPositions {
     CUBE_INTAKE_FLOOR(.539,0.03,85.408,.577),//feb 20 adr, dash was questionable
     CUBE_INTAKE_SUBSTATION(.59,0,0,.365),// placeholder
 
-    START_POSITION(.806,0,0.55,.365),// placeholder
+    START_POSITION(.493,0,0,.242),// placeholder
     DRIVE_WITH_PIECE(.59,0.03,0,.365),// placeholder
     DRIVE_WITHOUT_PIECE(.261,0.02,1.47,.487);//feb 20 adr, dash was less questionable
 

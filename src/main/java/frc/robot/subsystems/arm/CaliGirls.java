@@ -80,8 +80,8 @@ public class CaliGirls extends SubsystemBase {
     public void setTopPos(double angle) {
         if (angle> 0.7) {
             angle = 0.7;
-        } else if (angle< 0.26) {
-            angle = 0.26;
+        } else if (angle< 0.242) {
+            angle = 0.242;
         }
         lastPosTop = angle;
         pidControllerTop.setReference(angle, ControlType.kPosition);
