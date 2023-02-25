@@ -1,0 +1,67 @@
+{
+  "waypoints": [
+    {
+      "anchorPoint": {
+        "x": 1.9475653789638414,
+        "y": 2.2136234608092464
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.921818654710264,
+        "y": 2.2136234608092464
+      },
+      "holonomicAngle": 180.0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 3.898447413640608,
+        "y": 2.21
+      },
+      "prevControl": {
+        "x": 3.6067206616589584,
+        "y": 2.21
+      },
+      "nextControl": null,
+      "holonomicAngle": -179.65063982049722,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [
+          "BalanceChargeStation"
+        ],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    }
+  ],
+  "maxVelocity": 7.0,
+  "maxAcceleration": 5.0,
+  "isReversed": null,
+  "markers": [
+    {
+      "position": 0.0,
+      "names": [
+        "ConeTop"
+      ]
+    },
+    {
+      "position": 1.0,
+      "names": [
+        "BalanceChargeStation"
+      ]
+    }
+  ]
+}
