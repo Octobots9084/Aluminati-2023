@@ -70,9 +70,9 @@ public class ArmExtension extends SubsystemBase {
         SmartDashboard.putNumber("Motor Velocity", motor.getEncoder().getVelocity());
     }
 
-     public boolean zeroDone() {
-         return motor.getOutputCurrent() > 3;
-     }
+    public boolean zeroDone() {
+        return motor.getOutputCurrent() > 3;
+    }
 
     public void resetCurrent() {
         this.motor.setSmartCurrentLimit(Tuning.EXTENSION_STALL, Tuning.EXTENSION_FREE);
