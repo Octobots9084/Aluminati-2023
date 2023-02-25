@@ -11,14 +11,17 @@ public class MoveArmRotationToPos extends CommandBase {
     CaliGirls caliGirls;
     double startTime = Timer.getFPGATimestamp();
     double currentTime;
-    public MoveArmRotationToPos(double pos) {
+
+    private double kf;
+    public MoveArmRotationToPos(double pos, double kf) {
         this.caliGirls = CaliGirls.getInstance();
         this.target = pos;
+        this.kf = kf;
     }
 
     @Override
     public void initialize() {
-        
+        caliGirls.setBottomKf(kf);
         caliGirls.setBottomPos(target);
     }
 

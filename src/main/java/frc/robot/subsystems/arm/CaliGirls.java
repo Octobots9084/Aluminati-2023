@@ -100,6 +100,10 @@ public class CaliGirls extends SubsystemBase {
         SmartDashboard.putNumber("Arm Set Angle", angle);
     }
 
+    public void setBottomKf(double kf) {
+        pidControllerBottom.setFF(kf);
+    }
+
     public double getTopPos() {
         return motorTop.getAbsoluteEncoder(Type.kDutyCycle).getPosition();
     }
