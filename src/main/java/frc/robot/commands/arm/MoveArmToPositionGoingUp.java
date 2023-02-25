@@ -17,6 +17,6 @@ public class MoveArmToPositionGoingUp extends SequentialCommandGroup{
         this.aPosition = aPosition;
         this.caliGirls = CaliGirls.getInstance();
         this.armExtension = ArmExtension.getInstance();
-        addCommands(new MoveArmExtensionToPos(0),new MoveArmRotationToPos(aPosition.armAngle), new MoveArmExtensionToPos(aPosition.extension), new MoveArmWristToPos(aPosition.wrist));
+        addCommands(new MoveArmExtensionToPos(0),new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmExtensionToPos(aPosition.extension), new MoveArmWristToPos(aPosition.wrist));
     }
 }

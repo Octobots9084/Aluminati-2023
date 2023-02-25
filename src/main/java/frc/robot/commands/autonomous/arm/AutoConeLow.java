@@ -25,6 +25,6 @@ public class AutoConeLow extends SequentialCommandGroup{
         new WaitCommand(.1);       
         new IntakeNone();
         this.aPosition = ArmPositions.DRIVE_WITHOUT_PIECE;
-        addCommands(new MoveArmRotationToPos(aPosition.armAngle), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension));
+        addCommands(new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension));
     }
 }

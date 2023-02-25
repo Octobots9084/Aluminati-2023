@@ -10,7 +10,7 @@ public class ParallalMoveArm extends ParallelCommandGroup{
     public ParallalMoveArm(ArmPositions armPositions) {
         addCommands(
             new MoveArmExtensionToPos(armPositions.extension), 
-            new MoveArmRotationToPos(armPositions.armAngle),
+            new MoveArmRotationToPos(armPositions.armAngle, armPositions.angleHold),
             new MoveArmWristToPos(armPositions.wrist)
         );
     }

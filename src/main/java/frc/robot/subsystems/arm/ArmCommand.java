@@ -10,7 +10,7 @@ public class ArmCommand {
     public ArmCommand(ArmMovement[] armMovements, ArmPositions armPositions) {
         for (int i=0; i<2; i++) {
             if (armMovements[i]==ArmMovement.angle) {
-                commands[i] = new MoveArmRotationToPos(armPositions.armAngle);
+                commands[i] = new MoveArmRotationToPos(armPositions.armAngle, armPositions.angleHold);
             } else if (armMovements[i]==ArmMovement.extension) {
                 commands[i] = new MoveArmExtensionToPos(armPositions.extension);
             } else if (armMovements[i]==ArmMovement.wrist) {
