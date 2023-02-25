@@ -48,8 +48,9 @@ public final class PathPlannerAutos {
             new PIDConstants(0, 0, 0),
             DriveTrain.getInstance()::driveAutos,
             eventMap,
+            true,
             DriveTrain.getInstance());
-
+    
     public static CommandBase testPath() {
         List<PathPlannerTrajectory> pathgroup = PathPlanner.loadPathGroup("New New Path", new PathConstraints(1, 0.5));
         SmartDashboard.putString("TEST", "Test");
@@ -58,17 +59,15 @@ public final class PathPlannerAutos {
     }
 
     public static CommandBase Onemeter() {
-        DriveTrain.getInstance().setUseDriverAssist(true);
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("1m", new PathConstraints(1, 3)));
     }
 
     public static CommandBase OneMeterSpin() {
-        DriveTrain.getInstance().setUseDriverAssist(true);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("TestingPath", new PathConstraints(0.2, 0.2)));
+        DriveTrain.getInstance().setTargetRotationAngle(0);
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("TestingPath", new PathConstraints(1, 1)));
     }
 
     public static CommandBase BalanceChargeStation() {
-        DriveTrain.getInstance().setUseDriverAssist(true);
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStation", new PathConstraints(3, 2)));
     }
 

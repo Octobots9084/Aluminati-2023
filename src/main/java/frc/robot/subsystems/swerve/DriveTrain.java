@@ -30,7 +30,9 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.commands.autonomous.driveToPos;
 import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
 import frc.robot.util.Gyro;
@@ -83,10 +85,10 @@ public class DriveTrain extends SubsystemBase {
     private DriveTrain() {
 
         //Position relative to center of robot -> (0,0) is the center (m)
-        swervePosition[2] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
-        swervePosition[0] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
-        swervePosition[3] = new Translation2d(-WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
-        swervePosition[1] = new Translation2d(WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
+        swervePosition[1] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
+        swervePosition[3] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
+        swervePosition[0] = new Translation2d(-WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
+        swervePosition[2] = new Translation2d(WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
 
         swerveModules[0] = new SwerveModule(MotorIDs.FRONT_LEFT_DRIVE, MotorIDs.FRONT_LEFT_STEER, false,
                 Tuning.FL_TURN_PID, Tuning.FL_DRIVE_PID);
@@ -145,8 +147,15 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void driveAutos(ChassisSpeeds chassisSpeeds) {
-         drive(chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond,
-                 false);
+        SmartDashboard.putNumber("xSppedpath", chassisSpeeds.vxMetersPerSecond);
+        SmartDashboard.putNumber("ySppedpath", chassisSpeeds.vyMetersPerSecond);
+        SmartDashboard.putNumber("rotpoath", chassisSpeeds.omegaRadiansPerSecond);
+        this.targetRotationAngle = this.targetRotationAngle - ((Math.toDegrees(chassisSpeeds.omegaRadiansPerSecond)*0.02));
+        var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(new ChassisSpeeds(-chassisSpeeds.vyMetersPerSecond,chassisSpeeds.vxMetersPerSecond, this.getRotationSpeed()));
+        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, MAX_SPEED);
+        for (int i = 0; i < swerveModuleStates.length; i++) {
+            swerveModules[i].setDesiredState(swerveModuleStates[i]);
+        }
     }
 
     public SwerveModuleState[] getModuleStates() {

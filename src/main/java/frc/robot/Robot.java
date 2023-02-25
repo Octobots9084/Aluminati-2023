@@ -88,9 +88,6 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotPeriodic() {
-        SmartDashboard.putNumber("Arm Extention", ArmExtension.getInstance().GetPosition());
-        SmartDashboard.putNumber("Arm Rotation", CaliGirls.getInstance().getBottomPos());
-        SmartDashboard.putNumber("Intake Rotation", CaliGirls.getInstance().getTopPos());
     }
 
     @Override
@@ -166,6 +163,7 @@ public class Robot extends TimedRobot {
 
     private void resetRobotPoseAndGyro() {
         Gyro.getInstance().resetGyro();
+        DriveTrain.getInstance().setTargetRotationAngle(0);
         DriveTrain.getInstance().drive(0, 0, 0, true);
     }
 

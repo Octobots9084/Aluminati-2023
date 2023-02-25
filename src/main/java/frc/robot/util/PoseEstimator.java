@@ -98,9 +98,9 @@ public class PoseEstimator {
                 swerveModulePositions);
         //pose2d = new Pose2d(pose2d.getX(), pose2d.getY(), pose2d.getRotation())
         robotPose.set(pose2d);
-        SmartDashboard.putNumber("XPo1s: ", robotPose.get().getX());
-        SmartDashboard.putNumber("YPose1: ", robotPose.get().getY());
-        SmartDashboard.putNumber("Ro1t: ", robotPose.get().getRotation().getDegrees());
+        SmartDashboard.putNumber("XPo31s: ", robotPose.get().getX());
+        SmartDashboard.putNumber("YP3ose1: ", robotPose.get().getY());
+        SmartDashboard.putNumber("Ro31t: ", robotPose.get().getRotation().getDegrees());
         try {
             Optional<EstimatedRobotPose> result = photonCameraWrapper.getEstimatedGlobalPose(getRobotPose());
             if (result.isPresent()) {
