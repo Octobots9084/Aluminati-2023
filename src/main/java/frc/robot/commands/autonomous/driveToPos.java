@@ -71,9 +71,19 @@ public class driveToPos extends CommandBase {
 
         if (xSpeed > 0.3) {
             xSpeed = 0.3;
-        }
+        } 
+        
         if (xSpeed < -0.3) {
             xSpeed = -0.3;
+        } 
+
+
+        if (MathUtil.isWithinTolerance(xSpeed, 0, 0.1) && xSpeed < 0.1) {
+            xSpeed = 0.1;
+        }
+
+        if (MathUtil.isWithinTolerance(xSpeed, 0, 0.1) && xSpeed > -0.1) {
+            xSpeed = -0.1;
         }
         if (MathUtil.isWithinTolerance(currentPose.getX(), target.getX(), 0.05)) {
             ySpeed = 0;
@@ -81,10 +91,19 @@ public class driveToPos extends CommandBase {
 
         if (ySpeed > 0.3) {
             ySpeed = 0.3;
-        }
+        } 
         if (ySpeed < -0.3) {
             ySpeed = -0.3;
+        } 
+
+        if (MathUtil.isWithinTolerance(ySpeed, 0, 0.1) && ySpeed < 0.1) {
+            ySpeed = 0.1;
         }
+
+        if (MathUtil.isWithinTolerance(ySpeed, 0, 0.1) && ySpeed > -0.1) {
+            ySpeed = -0.1;
+        }
+
         if (MathUtil.isWithinTolerance(currentPose.getY(), target.getY(), 0.05)) {
             ySpeed = 0;
         }

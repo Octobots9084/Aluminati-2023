@@ -70,13 +70,20 @@ public class DriveToPosBB extends CommandBase {
             SmartDashboard.putBoolean("Y Good?", true);
         }
 
-        driveTrain.drive(xSpeed, ySpeed, 0, true);//rotSpeed, true);
+        if (target.getX()-currentPose.getX()<0) {
+            xSpeed = -xSpeed;
+        }
+
+        if (target.getY()-currentPose.getY()<0) {
+            ySpeed = -ySpeed;
+        }
+        driveTrain.drive(xSpeed,ySpeed,0, true);//rotSpeed, true);
         Gyro.getInstance().updateRotation2D();
     }
 
     @Override
     public boolean isFinished() {
-        return yDone && xDone;
+       return false;// return yDone && xDone;
     }
 
     @Override
