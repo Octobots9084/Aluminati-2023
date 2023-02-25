@@ -2,13 +2,13 @@
   "waypoints": [
     {
       "anchorPoint": {
-        "x": 1.8983607197983627,
-        "y": 2.748
+        "x": 1.94,
+        "y": 3.3
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.8689900114842963,
-        "y": 2.8319536980954307
+        "x": 2.9142532757464226,
+        "y": 3.3
       },
       "holonomicAngle": 180.0,
       "isReversal": false,
@@ -24,37 +24,12 @@
     },
     {
       "anchorPoint": {
-        "x": 3.9,
-        "y": 2.8
+        "x": 3.898447413640608,
+        "y": 3.3
       },
       "prevControl": {
-        "x": 3.899778183676159,
-        "y": 2.818420868071649
-      },
-      "nextControl": {
-        "x": 3.908436868428392,
-        "y": 2.0993552612973723
-      },
-      "holonomicAngle": 180.0,
-      "isReversal": false,
-      "velOverride": null,
-      "isLocked": false,
-      "isStopPoint": false,
-      "stopEvent": {
-        "names": [],
-        "executionBehavior": "parallel",
-        "waitBehavior": "none",
-        "waitTime": 0
-      }
-    },
-    {
-      "anchorPoint": {
-        "x": 3.8967151438576377,
-        "y": 2.1239652735715735
-      },
-      "prevControl": {
-        "x": 3.8967151438576377,
-        "y": 2.415692025553223
+        "x": 3.6067206616589584,
+        "y": 3.3
       },
       "nextControl": null,
       "holonomicAngle": -179.65063982049722,
@@ -63,7 +38,9 @@
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "BalanceChargeStation"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -77,15 +54,13 @@
     {
       "position": 0.0,
       "names": [
-        "RaiseArm",
-        "PlacePieceTop",
-        "LowerArm"
+        "ConeTop"
       ]
     },
     {
       "position": 1.0,
       "names": [
-        "Balance"
+        "BalanceChargeStation"
       ]
     }
   ]

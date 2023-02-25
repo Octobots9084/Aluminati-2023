@@ -64,7 +64,6 @@ public class ArmExtension extends SubsystemBase {
 
     public void zeroArm() {
         motor.setSmartCurrentLimit(Tuning.EXTENSION_STALL_ZERO, Tuning.EXTENSION_FREE_ZERO);
-        motor.setVoltage(-3);
         motor.setInverted(true);
         SetPosition(-3500, true);
         SmartDashboard.putNumber("Motor Velocity", motor.getEncoder().getVelocity());
