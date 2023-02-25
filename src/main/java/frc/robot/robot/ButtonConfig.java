@@ -52,6 +52,8 @@ public class ButtonConfig {
         new JoystickButton(ControlMap.DRIVER_RIGHT, 2)
                 .whileTrue(new ArmZero());
 
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
+                .onTrue(new driveToPos(new Pose2d(13.8,0.5,new Rotation2d(0,0))));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
                 .whileTrue(new SetDriverAssist(true));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
