@@ -26,6 +26,7 @@ import frc.robot.robot.Logging;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 import frc.robot.util.MathUtil;
+import frc.robot.util.shuffleboard.RSTab;
 
 /**
  * Represents a swerve drive style drivetrain.
@@ -38,6 +39,8 @@ public class DriveToPosBB extends CommandBase {
     private double xSpeed, ySpeed;
     private boolean xDone, yDone;
 
+    private final RSTab autoDashboard;
+
     public DriveToPosBB(Pose2d target, double speed) {
         this.driveTrain = DriveTrain.getInstance();
         this.target = target;
@@ -45,10 +48,12 @@ public class DriveToPosBB extends CommandBase {
         this.ySpeed = speed;
         this.currentPose = new Pose2d();
 
+        this.autoDashboard = Logging.autoDashboard;
+
         // SmartDashboard.putBoolean("X Good?", false);
         // SmartDashboard.putBoolean("Y Good?", false);
-        Logging.driveDashboard.setEntry("X Good?", false);
-        Logging.driveDashboard.setEntry("Y Good?", false);
+        autoDashboard.setEntry("X Good?", false);
+        autoDashboard.setEntry("Y Good?", false);
     }
 
     @Override
@@ -63,14 +68,14 @@ public class DriveToPosBB extends CommandBase {
             xSpeed = 0;
             xDone = true;
             // SmartDashboard.putBoolean("X Good?", xDone);
-            Logging.driveDashboard.setEntry("X Good?", xDone);
+            autoDashboard.setEntry("X Good?", xDone);
         }
 
         if (yDone || MathUtil.isWithinTolerance(currentPose.getY(), target.getY(), 0.05)) {
             ySpeed = 0;
             yDone = true;
             // SmartDashboard.putBoolean("Y Good?", true);
-            Logging.driveDashboard.setEntry("Y Good?", true);
+            autoDashboard.setEntry("Y Good?", true);
         }
 
         if (target.getX() - currentPose.getX() < 0) {

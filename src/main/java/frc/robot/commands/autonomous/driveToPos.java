@@ -27,6 +27,7 @@ import frc.robot.robot.Logging;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 import frc.robot.util.MathUtil;
+import frc.robot.util.shuffleboard.RSTab;
 
 /**
  * Represents a swerve drive style drivetrain.
@@ -42,6 +43,8 @@ public class driveToPos extends CommandBase {
     private PIDController drivePids;
     private PIDController turnPids;
 
+    private final RSTab autoDashboard;
+
     public driveToPos(Pose2d target) {
         this.driveTrain = DriveTrain.getInstance();
         this.target = target;
@@ -49,6 +52,8 @@ public class driveToPos extends CommandBase {
         this.ySpeed = 0;
         this.rotSpeed = 0;
         this.currentPose = new Pose2d();
+        this.autoDashboard = Logging.autoDashboard;
+
         // P is a little high
         this.drivePids = new PIDController(1.3, 0, 0.0000);
         this.turnPids = new PIDController(0.8, 0, 0.00);
@@ -65,9 +70,9 @@ public class driveToPos extends CommandBase {
         // SmartDashboard.putNumber("XPo2s: ", currentPose.getX());
         // SmartDashboard.putNumber("YPos2e1: ", currentPose.getY());
         // SmartDashboard.putNumber("Ro1t2: ", currentPose.getRotation().getDegrees());
-        Logging.driveDashboard.setEntry("X-Pos", currentPose.getX());
-        Logging.driveDashboard.setEntry("Y-Pos", currentPose.getY());
-        Logging.driveDashboard.setEntry("Rot Deg", currentPose.getRotation().getDegrees());
+        autoDashboard.setEntry("X-Pos", currentPose.getX());
+        autoDashboard.setEntry("Y-Pos", currentPose.getY());
+        autoDashboard.setEntry("Rot Deg", currentPose.getRotation().getDegrees());
 
         ySpeed = drivePids.calculate(target.getY(), currentPose.getY());
         xSpeed = drivePids.calculate(currentPose.getX(), target.getX());

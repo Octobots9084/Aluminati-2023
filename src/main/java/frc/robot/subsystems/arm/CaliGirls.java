@@ -83,7 +83,7 @@ public class CaliGirls extends SubsystemBase {
         lastPosTop = angle;
         pidControllerTop.setReference(angle, ControlType.kPosition);
         // SmartDashboard.putNumber("Wrist Set Angle", angle);
-        Logging.driveDashboard.setEntry("Wrist Set Angle", angle);
+        Logging.armDashboard.setEntry("Wrist Set Angle", angle);
     }
 
     public void setBottomPos(double angle) {
@@ -96,6 +96,8 @@ public class CaliGirls extends SubsystemBase {
         lastPosBottom = angle;
         pidControllerBottom.setReference(angle, ControlType.kPosition);
         // SmartDashboard.putNumber("Arm Set Angle", angle);
+        Logging.armDashboard.setEntry("Arm Set Angle", angle);
+
     }
 
     public void setBottomKf(double kf) {

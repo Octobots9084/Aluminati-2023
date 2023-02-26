@@ -34,7 +34,7 @@ import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.robot.Logging;
 import frc.robot.robot.Tuning;
 import frc.robot.util.MotorUtil;
 import frc.robot.util.PIDConfig;
@@ -166,7 +166,8 @@ public class SwerveModule {
     public void setDesiredState(SwerveModuleState state) {
         // Optimize the swerve state and set it
         var optimizedAngle = SwerveUtil.optimizeSwerveStates(state, getAngle());
-        SmartDashboard.putNumber("Angle", convertAngleToTick(optimizedAngle.angle.getRadians()));
+        // SmartDashboard.putNumber("Angle", convertAngleToTick(optimizedAngle.angle.getRadians()));
+        Logging.driveDashboard.setEntry("Angle", convertAngleToTick(optimizedAngle.angle.getRadians()));
         setDriveMotorVelocity(optimizedAngle.speedMetersPerSecond);
         setSteeringMotorAngle(convertAngleToTick(optimizedAngle.angle.getRadians()));
     }

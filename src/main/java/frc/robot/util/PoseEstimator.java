@@ -36,9 +36,10 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.robot.Logging;
 import frc.robot.subsystems.swerve.SwerveModule;
 import frc.robot.subsystems.vision.PhotonCameraWrapper;
+import frc.robot.util.shuffleboard.RSTab;
 
 public class PoseEstimator {
     public final SwerveDrivePoseEstimator swerveDrivePoseEstimator;
@@ -47,6 +48,8 @@ public class PoseEstimator {
     private final Gyro gyro;
     private final SwerveModule[] swerveModules;
     public PhotonCameraWrapper photonCameraWrapper;
+
+    private final RSTab driveDashboard;
 
     public PoseEstimator(Gyro gyro, SwerveDriveKinematics swerveDriveKinematics, SwerveModule[] swerveModules) {
         this.photonCameraWrapper = new PhotonCameraWrapper();
@@ -78,6 +81,8 @@ public class PoseEstimator {
         e.scheduleWithFixedDelay(this::updateOdometry, 5, 15, TimeUnit.MILLISECONDS);
         robotPose.set(new Pose2d());
         this.swerveDrivePoseEstimator.getEstimatedPosition();
+
+        this.driveDashboard = Logging.driveDashboard;
     }
 
     public Pose2d getRobotPose() {
@@ -98,9 +103,14 @@ public class PoseEstimator {
                 swerveModulePositions);
         //pose2d = new Pose2d(pose2d.getX(), pose2d.getY(), pose2d.getRotation())
         robotPose.set(pose2d);
-        SmartDashboard.putNumber("XPo31s: ", robotPose.get().getX());
-        SmartDashboard.putNumber("YP3ose1: ", robotPose.get().getY());
-        SmartDashboard.putNumber("Ro31t: ", robotPose.get().getRotation().getDegrees());
+        // SmartDashboard.putNumber("XPo31s: ", robotPose.get().getX());
+        // SmartDashboard.putNumber("YP3ose1: ", robotPose.get().getY());
+        // SmartDashboard.putNumber("Ro31t: ", robotPose.get().getRotation().getDegrees());
+
+        driveDashboard.setEntry("X-Pos", robotPose.get().getX());
+        driveDashboard.setEntry("Y-Pos", robotPose.get().getY());
+        driveDashboard.setEntry("Rot Deg", robotPose.get().getRotation().getDegrees());
+
         try {
             Optional<EstimatedRobotPose> result = photonCameraWrapper.getEstimatedGlobalPose(getRobotPose());
             if (result.isPresent()) {
