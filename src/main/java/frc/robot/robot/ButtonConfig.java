@@ -36,7 +36,7 @@ public class ButtonConfig {
                 .onTrue(new SafeMoveArmGoingDown(ArmPositions.CUBE_PLACE_LOW));
         
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 8)
-                .onTrue(new SafeMoveArmGoingUp(ArmPositions.CONE_PLACE_HIGH));
+                .onTrue(new SafeMoveArmGoingUp(ArmPositions.PRE_CONE_PLACE_HIGH));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 10)
                 .onTrue(new SafeMoveArmGoingUp(ArmPositions.CONE_PLACE_MID));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 12)

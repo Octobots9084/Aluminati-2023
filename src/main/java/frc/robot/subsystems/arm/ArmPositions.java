@@ -1,25 +1,25 @@
 package frc.robot.subsystems.arm;
 
 public enum ArmPositions {
-    PRE_CONE_PLACE_HIGH(.705,0.09,123.8,.63),// placeholder
-    CONE_PLACE_HIGH(.7835,0.09,123.8,.69),// feb 20 alex
-    PRE_CONE_PLACE_MID(.806,0.06,0.55,.365),// placeholder
-    CONE_PLACE_MID(.75,0.06,24.24,.69),// feb 20 alex
-    CONE_PLACE_LOW(.598,0.03,0,.693), //unknown
+    // All values updated Feb 25th - Alex
+    PRE_CONE_PLACE_HIGH(.7317,0.09,75.55,.469),
+    PRE_CONE_PLACE_MID(.7745,0.06,22.47,.69),
+    CONE_PLACE_MID(.7,0.06,20.64,.655),
+    CONE_PLACE_LOW(.514,0.03,70.67,.4746), 
     
-    CONE_INTAKE_GROUND(.573,0.03,70.67,.485),//feb 20 adr, dash was questionable 
-    INTAKE_SUBSTATION(.75,0,0,.6639),// placeholder, 
+    CONE_INTAKE_GROUND(.5746,0.03,32.71,.51),
+    INTAKE_SUBSTATION(.756,0,0,.69), 
 
-    CUBE_PLACE_HIGH(.75,0.09,83.0,.664),// placeholder
-    CUBE_PLACE_MID(.699,0.06,0,.695),// placeholder
-    CUBE_PLACE_LOW(.573,0.03,70.67,.485),// placeholder
+    CUBE_PLACE_HIGH(.763,0.09,19.9,.69),
+    CUBE_PLACE_MID(0.71,0.06,0,.69),
+    CUBE_PLACE_LOW(.514,0.03,70.67,.4746),
 
-    CUBE_INTAKE_FLOOR(.539,0.03,85.408,.577),//feb 20 adr, dash was questionable
-    CUBE_INTAKE_SUBSTATION(.59,0,0,.365),// placeholder
+    CUBE_INTAKE_FLOOR(.5746,0.03,32.71,.51),
+    CUBE_INTAKE_SUBSTATION(.756,0,0,.69),
 
-    START_POSITION(.493,0,0,.242),// placeholder
-    DRIVE_WITH_PIECE(.59,0.03,0,.365),// placeholder
-    DRIVE_WITHOUT_PIECE(.261,0.02,1.47,.487);//feb 20 adr, dash was less questionable
+    START_POSITION(.5,0,0,.242),
+    DRIVE_WITH_PIECE(.512,0.03,0,.322),
+    DRIVE_WITHOUT_PIECE(.5,0,0,.242);
 
 
 

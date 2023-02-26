@@ -87,7 +87,7 @@ public class SwerveControl extends CommandBase {
 
         // Check driver assist and drive
         if (rot == 0 && driveTrain.useDriverAssist()) {
-            driveTrain.drive(xSpeed, ySpeed, driveTrain.getRotationSpeed(), driveTrain.getFieldCentric());
+            driveTrain.drive(xSpeed, ySpeed, -driveTrain.getRotationSpeed(), driveTrain.getFieldCentric());
         } else {
             SmartDashboard.putNumber("rotation", rot);
             driveTrain.drive(xSpeed, ySpeed, rot, driveTrain.getFieldCentric());
