@@ -2,7 +2,7 @@ package frc.robot.subsystems.arm;
 
 public enum ArmPositions {
     // All values updated Feb 25th - Alex
-    PRE_CONE_PLACE_HIGH(.7317,0.09,75.55,.469),
+    PRE_CONE_PLACE_HIGH(.763,0.09,75.55,.542),
     PRE_CONE_PLACE_MID(.7745,0.06,22.47,.69),
     CONE_PLACE_MID(.7,0.06,20.64,.655),
     CONE_PLACE_LOW(.514,0.03,70.67,.4746), 
@@ -18,7 +18,7 @@ public enum ArmPositions {
     CUBE_INTAKE_SUBSTATION(.756,0,0,.69),
 
     START_POSITION(.5,0,0,.242),
-    DRIVE_WITH_PIECE(.512,0.03,0,.322),
+    DRIVE_WITH_PIECE(.581,0.03,7.35,.324),
     DRIVE_WITHOUT_PIECE(.5,0,0,.242);
 
 

@@ -28,10 +28,10 @@ public class Tuning {
     public static final int CALI_TOP_FREE = 10;
     public static final int CALI_TOP_STALL = 10;
     //Pivot
-    public static final int CALI_BOTTOM_FREE = 20;
-    public static final int CALI_BOTTOM_STALL = 20;
-    public static final int CALI_TOP_FOLLOWER_STALL = 5;
-    public static final int CALI_TOP_FOLLOWER_FREE = 5;
+    public static final int CALI_BOTTOM_FREE = 30;
+    public static final int CALI_BOTTOM_STALL = 30;
+    public static final int CALI_TOP_FOLLOWER_STALL = 30;
+    public static final int CALI_TOP_FOLLOWER_FREE = 30;
     //Extension
     public static final int EXTENSION_FREE = 20;
     public static final int EXTENSION_STALL = 20;
@@ -51,19 +51,20 @@ public class Tuning {
     public static final double CALI_TOP_ENCODER_RESOLUTION = 1.0;
 
     //Arm Pivot
-    // public static final PIDConfig CALI_BOTTOM_PID = new PIDConfig(13, 0.0002, 2.5, 0.0003);
-    // public static final SmartMotionConfig CALI_BOTTOM_SM = new SmartMotionConfig(true,
-    //         10000.0,
-    //         0.0,
-    //         10000.0,
-    //         0.0);
+//     public static final PIDConfig CALI_BOTTOM_PID = new PIDConfig(13, 0.0002, 2.5, 0.0003);
+//     public static final SmartMotionConfig CALI_BOTTOM_SM = new SmartMotionConfig(true,
+//             10000.0,
+//             0.0,
+//             10000.0,
+//             0.0);
 
-    public static final PIDConfig CALI_BOTTOM_PID = new PIDConfig(3, 0.0005, 0.2, 0);
+//     public static final PIDConfig CALI_BOTTOM_PID = new PIDConfig(3, 0.0005, 0.2, 0.03);
+public static final PIDConfig CALI_BOTTOM_PID = new PIDConfig(4, 0.0, 0.5, 0.03);
     public static final SmartMotionConfig CALI_BOTTOM_SM = new SmartMotionConfig(true,
             10.0,
             0.0,
             10000.0,
-            0.01);
+            0.0);
     public static final double CALI_BOTTOM_ENCODER_RESOLUTION = 1.0;
 
     //Extension

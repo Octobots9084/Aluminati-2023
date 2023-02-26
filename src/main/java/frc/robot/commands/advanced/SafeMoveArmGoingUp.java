@@ -12,6 +12,6 @@ import frc.robot.subsystems.arm.ArmPositions;
 public class SafeMoveArmGoingUp extends SequentialCommandGroup{
 
     public SafeMoveArmGoingUp(ArmPositions armPositions) {
-        addCommands(new MoveArmWristToPos(ArmPositions.DRIVE_WITH_PIECE.wrist),new MoveArmExtensionToPos(ArmPositions.DRIVE_WITH_PIECE.extension), new MoveArmToPositionGoingUp(armPositions));
+        addCommands(new MoveArmWristToPos(ArmPositions.DRIVE_WITH_PIECE.wrist),new MoveArmExtensionToPos(0), new MoveArmToPositionGoingUp(armPositions));
     }
 }

@@ -10,7 +10,7 @@ public class SetArmAngle extends InstantCommand {
     public SetArmAngle(double angle, double kf) {
         this.caliGirls = CaliGirls.getInstance();
         this.angle = angle;
-        this.kf = kf;
+        //this.kf = kf;
     }
 
     @Override

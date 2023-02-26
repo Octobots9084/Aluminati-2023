@@ -12,6 +12,6 @@ public class SafeMoveArmGoingDown extends SequentialCommandGroup{
 
     public SafeMoveArmGoingDown(ArmPositions armPositions) {
         
-        addCommands(new MoveArmWristToPos(ArmPositions.DRIVE_WITH_PIECE.wrist),new MoveArmExtensionToPos(ArmPositions.DRIVE_WITH_PIECE.extension), new MoveArmToPositionGoingDown(armPositions));
+        addCommands(new MoveArmWristToPos(ArmPositions.DRIVE_WITH_PIECE.wrist),new MoveArmExtensionToPos(0), new MoveArmToPositionGoingDown(armPositions));
     }
 }
