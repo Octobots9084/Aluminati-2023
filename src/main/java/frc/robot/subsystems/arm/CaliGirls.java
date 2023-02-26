@@ -7,8 +7,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 import com.revrobotics.SparkMaxPIDController;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.robot.Logging;
 import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
 
@@ -49,9 +49,8 @@ public class CaliGirls extends SubsystemBase {
         this.motorTop.setInverted(true);
         this.motorTop.getPIDController().setPositionPIDWrappingEnabled(false);
         this.motorTop.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(0.3);
-        pidControllerTop.setSmartMotionAllowedClosedLoopError(0.1,0);
+        pidControllerTop.setSmartMotionAllowedClosedLoopError(0.1, 0);
         //setTopPos(lastPosTop);
-
 
         // Bottom Motor PID
         this.pidControllerBottom = motorBottom.getPIDController();
@@ -62,42 +61,41 @@ public class CaliGirls extends SubsystemBase {
         pidControllerBottom.setFF(Tuning.CALI_BOTTOM_PID.getF());
         pidControllerBottom.setOutputRange(-1.0, 1.0);
         motorBottom.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(0.28);
-        
+
         pidControllerBottom.setPositionPIDWrappingEnabled(false);
         motorBottom.getAbsoluteEncoder(Type.kDutyCycle).setInverted(true);
         motorBottom.setInverted(false);
-    
+
         this.lastPosBottom = 0.722;
         //setBottomPos(lastPosBottom);
 
-
-
         this.motorBottomFollower = new CANSparkMax(MotorIDs.ARM_PIVOT_ANGLE_FOLLOWER, MotorType.kBrushless);
-        this.motorBottomFollower.setSmartCurrentLimit(Tuning.CALI_TOP_FOLLOWER_STALL,Tuning.CALI_TOP_FOLLOWER_FREE);
+        this.motorBottomFollower.setSmartCurrentLimit(Tuning.CALI_TOP_FOLLOWER_STALL, Tuning.CALI_TOP_FOLLOWER_FREE);
         this.motorBottomFollower.follow(motorBottom, true);
     }
 
     public void setTopPos(double angle) {
-        if (angle> 0.7) {
+        if (angle > 0.7) {
             angle = 0.7;
-        } else if (angle< 0.242) {
+        } else if (angle < 0.242) {
             angle = 0.242;
         }
         lastPosTop = angle;
         pidControllerTop.setReference(angle, ControlType.kPosition);
-        SmartDashboard.putNumber("Wrist Set Angle", angle);
+        // SmartDashboard.putNumber("Wrist Set Angle", angle);
+        Logging.driveDashboard.setEntry("Wrist Set Angle", angle);
     }
 
     public void setBottomPos(double angle) {
-        if (angle> 0.84) {
+        if (angle > 0.84) {
             angle = 0.84;
-        } else if (angle< 0.5) {
+        } else if (angle < 0.5) {
             angle = 0.5;
         }
-        
+
         lastPosBottom = angle;
         pidControllerBottom.setReference(angle, ControlType.kPosition);
-        SmartDashboard.putNumber("Arm Set Angle", angle);
+        // SmartDashboard.putNumber("Arm Set Angle", angle);
     }
 
     public void setBottomKf(double kf) {

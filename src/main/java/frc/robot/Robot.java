@@ -26,7 +26,6 @@ import java.util.concurrent.TimeUnit;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -40,6 +39,7 @@ import frc.robot.commands.swerve.SwerveControl;
 import frc.robot.robot.ButtonConfig;
 import frc.robot.robot.ControlMap;
 import frc.robot.robot.DriverButtonConfig;
+import frc.robot.robot.Logging;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
@@ -58,9 +58,12 @@ public class Robot extends TimedRobot {
         DriveTrain.getInstance().drive(0, 0, 0, true);
         CommandScheduler.getInstance().cancelAll();
 
-        SmartDashboard.putNumber("Extensi6o2n", ArmExtension.getInstance().GetPosition());
-        SmartDashboard.putNumber("Arm Rotat2ion", CaliGirls.getInstance().getTopPos());
-        SmartDashboard.putNumber("Claw Rot2ation", CaliGirls.getInstance().getBottomPos());
+        // SmartDashboard.putNumber("Extens2ion", ArmExtension.getInstance().GetPosition());
+        // SmartDashboard.putNumber("Arm Rotat2ion", CaliGirls.getInstance().getTopPos());
+        // SmartDashboard.putNumber("Claw Rot2ation", CaliGirls.getInstance().getBottomPos());
+        Logging.armDashboard.setEntry("Arm Extension", ArmExtension.getInstance().GetPosition());
+        Logging.armDashboard.setEntry("Claw Rotation", CaliGirls.getInstance().getTopPos());
+        Logging.armDashboard.setEntry("Arm Rotation", CaliGirls.getInstance().getBottomPos());
     }
 
     @Override
@@ -69,11 +72,11 @@ public class Robot extends TimedRobot {
         initializeAllSubsystems();
         initializeDefaultCommands();
 
-        var drive = Shuffleboard.getTab("Drive");
-        drive.add(field2d)
-                .withSize(6, 4)
-                .withPosition(0, 0)
-                .withWidget("Field");
+        // var drive = Shuffleboard.getTab("Drive");
+        // drive.add(field2d)
+        //         .withSize(6, 4)
+        //         .withPosition(0, 0)
+        //         .withWidget("Field");
 
         // Initialize custom loops
 
@@ -94,12 +97,13 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         DriveTrain.getInstance().updateSwerveStates();
         CommandScheduler.getInstance().run();
-        
+
     }
 
-        @Override
-        public void teleopInit() {
+    @Override
+    public void teleopInit() {
         SmartDashboard.putNumber("Initialized", 1);
+
         if (!ControlMap.DRIVER_BUTTONS.getRawButton(14)) {
             new DriverButtonConfig().initTeleop();
         } else {
@@ -113,7 +117,7 @@ public class Robot extends TimedRobot {
             resetRobotPoseAndGyro();
         }
         this.autoFlag = false;
-        
+
     }
 
     @Override
@@ -158,7 +162,7 @@ public class Robot extends TimedRobot {
         CaliGirls.getInstance();
         ArmExtension.getInstance();
         Roller.getInstance();
-       new ParallalMoveArm(ArmPositions.DRIVE_WITH_PIECE);
+        new ParallalMoveArm(ArmPositions.DRIVE_WITH_PIECE);
     }
 
     private void resetRobotPoseAndGyro() {
@@ -172,7 +176,7 @@ public class Robot extends TimedRobot {
         CaliGirls.getInstance().lastPosTop = ArmPositions.DRIVE_WITH_PIECE.wrist;
         ArmExtension.getInstance().lastpos = ArmPositions.DRIVE_WITH_PIECE.extension;
         CommandScheduler.getInstance().setDefaultCommand(DriveTrain.getInstance(), new SwerveControl());
-         CommandScheduler.getInstance().setDefaultCommand(CaliGirls.getInstance(), new TiltControl());
-         CommandScheduler.getInstance().setDefaultCommand(ArmExtension.getInstance(), new ArmControl());
+        CommandScheduler.getInstance().setDefaultCommand(CaliGirls.getInstance(), new TiltControl());
+        CommandScheduler.getInstance().setDefaultCommand(ArmExtension.getInstance(), new ArmControl());
     }
 }

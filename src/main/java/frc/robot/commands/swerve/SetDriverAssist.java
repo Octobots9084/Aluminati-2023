@@ -20,8 +20,8 @@
 
 package frc.robot.commands.swerve;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.robot.Logging;
 import frc.robot.subsystems.swerve.DriveTrain;
 
 public class SetDriverAssist extends InstantCommand {
@@ -34,7 +34,8 @@ public class SetDriverAssist extends InstantCommand {
 
     @Override
     public void initialize() {
-        SmartDashboard.putBoolean("Driver Assist: ", this.useDriverAssist);
+        // SmartDashboard.putBoolean("Driver Assist: ", this.useDriverAssist);
+        Logging.driveDashboard.setEntry("Driver Assist: ", this.useDriverAssist);
         DriveTrain.getInstance().setUseDriverAssist(this.useDriverAssist);
     }
 

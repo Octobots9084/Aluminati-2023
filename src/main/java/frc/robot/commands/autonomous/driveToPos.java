@@ -22,8 +22,8 @@ package frc.robot.commands.autonomous;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.robot.Logging;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 import frc.robot.util.MathUtil;
@@ -62,9 +62,13 @@ public class driveToPos extends CommandBase {
     @Override
     public void execute() {
         currentPose = driveTrain.getPoseEstimator().getRobotPose();
-        SmartDashboard.putNumber("XPo2s: ", currentPose.getX());
-        SmartDashboard.putNumber("YPos2e1: ", currentPose.getY());
-        SmartDashboard.putNumber("Ro1t2: ", currentPose.getRotation().getDegrees());
+        // SmartDashboard.putNumber("XPo2s: ", currentPose.getX());
+        // SmartDashboard.putNumber("YPos2e1: ", currentPose.getY());
+        // SmartDashboard.putNumber("Ro1t2: ", currentPose.getRotation().getDegrees());
+        Logging.driveDashboard.setEntry("X-Pos", currentPose.getX());
+        Logging.driveDashboard.setEntry("Y-Pos", currentPose.getY());
+        Logging.driveDashboard.setEntry("Rot Deg", currentPose.getRotation().getDegrees());
+
         ySpeed = drivePids.calculate(target.getY(), currentPose.getY());
         xSpeed = drivePids.calculate(currentPose.getX(), target.getX());
         rotSpeed = turnPids.calculate(target.getRotation().getRadians(), currentPose.getRotation().getRadians());

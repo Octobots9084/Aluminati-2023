@@ -20,10 +20,9 @@
 
 package frc.robot.commands.autonomous;
 
-import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.robot.Logging;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 import frc.robot.util.MathUtil;
@@ -45,9 +44,11 @@ public class DriveToPosBB extends CommandBase {
         this.xSpeed = speed;
         this.ySpeed = speed;
         this.currentPose = new Pose2d();
-        
-        SmartDashboard.putBoolean("X Good?", false);
-        SmartDashboard.putBoolean("Y Good?", false);
+
+        // SmartDashboard.putBoolean("X Good?", false);
+        // SmartDashboard.putBoolean("Y Good?", false);
+        Logging.driveDashboard.setEntry("X Good?", false);
+        Logging.driveDashboard.setEntry("Y Good?", false);
     }
 
     @Override
@@ -61,29 +62,31 @@ public class DriveToPosBB extends CommandBase {
         if (xDone || MathUtil.isWithinTolerance(currentPose.getX(), target.getX(), 0.05)) {
             xSpeed = 0;
             xDone = true;
-            SmartDashboard.putBoolean("X Good?", xDone);
+            // SmartDashboard.putBoolean("X Good?", xDone);
+            Logging.driveDashboard.setEntry("X Good?", xDone);
         }
 
         if (yDone || MathUtil.isWithinTolerance(currentPose.getY(), target.getY(), 0.05)) {
             ySpeed = 0;
             yDone = true;
-            SmartDashboard.putBoolean("Y Good?", true);
+            // SmartDashboard.putBoolean("Y Good?", true);
+            Logging.driveDashboard.setEntry("Y Good?", true);
         }
 
-        if (target.getX()-currentPose.getX()<0) {
+        if (target.getX() - currentPose.getX() < 0) {
             xSpeed = -xSpeed;
         }
 
-        if (target.getY()-currentPose.getY()<0) {
+        if (target.getY() - currentPose.getY() < 0) {
             ySpeed = -ySpeed;
         }
-        driveTrain.drive(xSpeed,ySpeed,0, true);//rotSpeed, true);
+        driveTrain.drive(xSpeed, ySpeed, 0, true);//rotSpeed, true);
         Gyro.getInstance().updateRotation2D();
     }
 
     @Override
     public boolean isFinished() {
-       return false;// return yDone && xDone;
+        return false;// return yDone && xDone;
     }
 
     @Override

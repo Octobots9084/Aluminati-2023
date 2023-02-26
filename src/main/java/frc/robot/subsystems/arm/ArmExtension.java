@@ -6,8 +6,8 @@ import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxPIDController;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.robot.Logging;
 import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
 import frc.robot.util.MotorUtil;
@@ -66,7 +66,8 @@ public class ArmExtension extends SubsystemBase {
         motor.setSmartCurrentLimit(Tuning.EXTENSION_STALL_ZERO, Tuning.EXTENSION_FREE_ZERO);
         motor.setInverted(true);
         SetPosition(-3500, true);
-        SmartDashboard.putNumber("Motor Velocity", motor.getEncoder().getVelocity());
+        // SmartDashboard.putNumber("Motor Velocity", motor.getEncoder().getVelocity());
+        Logging.armDashboard.setEntry("Motor Velocity", motor.getEncoder().getVelocity());
     }
 
     public boolean zeroDone() {
