@@ -17,6 +17,9 @@ public class ArmTrig {
         this.angleW = angleW;
     }
 
+    public double kfCalc() {
+        return distE * (1/Math.cos(angleP - 0.0)) / 4000;
+    }
     public double[] armTrig() {
         horizDistB = distE*Math.cos(angleP) + distC*Math.cos(angleP + angleW);
         vertDistB = distE*Math.sin(angleP) + distC*Math.sin(angleP + angleW);
