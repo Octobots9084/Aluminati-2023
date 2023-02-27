@@ -100,6 +100,10 @@ public class CaliGirls extends SubsystemBase {
 
     }
 
+    public double getBottomKf() {
+        return pidControllerBottom.getFF();
+    }
+
     public void setBottomKf(double kf) {
         pidControllerBottom.setFF(kf);
     }

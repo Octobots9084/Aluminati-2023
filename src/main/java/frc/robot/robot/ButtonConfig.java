@@ -8,6 +8,7 @@ import frc.robot.commands.advanced.SafeMoveArmGoingUp;
 import frc.robot.commands.arm.Intake.IntakeIn;
 import frc.robot.commands.arm.Intake.IntakeNone;
 import frc.robot.commands.arm.Intake.IntakeOut;
+import frc.robot.commands.arm.LowLevel.SetWristAngle;
 import frc.robot.commands.arm.ManualControl.ArmZero;
 import frc.robot.commands.autonomous.driveToPos;
 import frc.robot.commands.swerve.SetDriverAssist;
@@ -17,9 +18,11 @@ public class ButtonConfig {
     public void initTeleop() {
         // DRIVER LEFT
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
-                .onTrue(new SafeMoveArmGoingDown(ArmPositions.DRIVE_WITH_PIECE));
+                .onTrue(new SetWristAngle(0.29));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
-                .onTrue(new SafeMoveArmGoingDown(ArmPositions.CONE_INTAKE_GROUND));
+                .onTrue(new SetWristAngle(0.7));
+        new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
+                .onTrue(new SetWristAngle(0.43));
 
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
                 .onTrue(new SafeMoveArmGoingDown(ArmPositions.CUBE_PLACE_HIGH));
@@ -44,8 +47,8 @@ public class ButtonConfig {
         new JoystickButton(ControlMap.DRIVER_RIGHT, 2)
                 .whileTrue(new ArmZero());
 
-        new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
-                .onTrue(new driveToPos(new Pose2d(13.8, 0.5, new Rotation2d(0, 0))));
+        // new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
+        //         .onTrue(new driveToPos(new Pose2d(13.8, 0.5, new Rotation2d(0, 0))));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
                 .whileTrue(new SetDriverAssist(true));
         new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)

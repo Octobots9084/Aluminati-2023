@@ -3,7 +3,7 @@ package frc.robot.robot;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.advanced.SafeMoveArmGoingDown;
 import frc.robot.commands.advanced.SafeMoveArmGoingUp;
-import frc.robot.commands.arm.ParallalMoveArm;
+import frc.robot.commands.arm.Intake.ConeInject;
 import frc.robot.commands.arm.Intake.IntakeIn;
 import frc.robot.commands.arm.Intake.IntakeNone;
 import frc.robot.commands.arm.Intake.IntakeOut;
@@ -65,22 +65,23 @@ public class DriverButtonConfig {
 				.onTrue(new SafeMoveArmGoingDown(ArmPositions.DRIVE_WITHOUT_PIECE));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 7)
-				.onTrue(new SafeMoveArmGoingUp(ArmPositions.PRE_CONE_PLACE_MID));
+				.onTrue(new SafeMoveArmGoingUp(ArmPositions.CUBE_PLACE_HIGH));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 8)
 				.onTrue(new SafeMoveArmGoingUp(ArmPositions.PRE_CONE_PLACE_HIGH));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 9)
-				.onTrue(new ParallalMoveArm(ArmPositions.CONE_PLACE_MID));
+				.onTrue(new SafeMoveArmGoingUp(ArmPositions.CUBE_PLACE_MID));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 10)
-				.onTrue(new ParallalMoveArm(ArmPositions.CONE_PLACE_HIGH));
+				.onTrue(new SafeMoveArmGoingUp(ArmPositions.PRE_CONE_PLACE_MID));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 11)
-				.onTrue(new SafeMoveArmGoingDown(ArmPositions.CUBE_PLACE_MID));
-		//Cube Place Low
+				.onTrue(new IntakeOut());
+
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 12)
-				.onTrue(new SafeMoveArmGoingDown(ArmPositions.CUBE_PLACE_HIGH));
+				.whileTrue(new ConeInject());
+
 		//Arm Override Enable
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 15)
 				.whileTrue(new TiltControl());
