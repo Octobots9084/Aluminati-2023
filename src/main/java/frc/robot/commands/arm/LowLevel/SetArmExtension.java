@@ -14,6 +14,6 @@ public class SetArmExtension extends InstantCommand {
 
     @Override
     public void initialize() {
-        armExtension.SetPosition(target, false);
+        armExtension.setPosition(target, false);
     }
 }

@@ -1,7 +1,5 @@
 package frc.robot.commands.arm.LowLevel;
 
-import java.lang.module.ModuleDescriptor.Requires;
-
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.arm.ArmExtension;
@@ -13,17 +11,17 @@ public class MoveArmExtensionToPos extends CommandBase {
     ArmExtension armExtension;
     double startTime = Timer.getFPGATimestamp();
     double currentTime;
+
     public MoveArmExtensionToPos(double pos) {
 
-        
         this.target = pos;
         this.armExtension = ArmExtension.getInstance();
     }
 
     @Override
     public void initialize() {
-        
-        armExtension.SetPosition(target, false);
+
+        armExtension.setPosition(target, false);
     }
 
     @Override
@@ -34,6 +32,6 @@ public class MoveArmExtensionToPos extends CommandBase {
     @Override
     public boolean isFinished() {
         boolean timeout = !MathUtil.isWithinTolerance(startTime, currentTime, 3);
-        return (timeout || MathUtil.isWithinTolerance(armExtension.GetPosition(),target,5));
+        return (timeout || MathUtil.isWithinTolerance(armExtension.getPosition(), target, 5));
     }
 }

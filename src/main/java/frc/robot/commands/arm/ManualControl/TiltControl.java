@@ -2,6 +2,7 @@ package frc.robot.commands.arm.ManualControl;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.robot.ControlMap;
+import frc.robot.robot.Logging;
 import frc.robot.subsystems.arm.CaliGirls;
 import frc.robot.util.MathUtil;
 
@@ -17,10 +18,16 @@ public class TiltControl extends CommandBase {
     @Override
     public void execute() {
         //TOO MUCH DELAY
-        caliGirls.setBottomPos(caliGirls.lastPosBottom
-                + -0.025 *.75 * Math.signum(ControlMap.CO_DRIVER_RIGHT.getY()) *MathUtil.fitDeadband((Math.pow(ControlMap.CO_DRIVER_RIGHT.getY(), 2)),0.01));
-        caliGirls.setTopPos(caliGirls.lastPosTop
-                - 0.025 * Math.signum(ControlMap.CO_DRIVER_LEFT.getY()) * MathUtil.fitDeadband((-Math.pow(ControlMap.CO_DRIVER_LEFT.getY(), 2)),0.01));
+        var topPos = 0.025 * Math.signum(ControlMap.CO_DRIVER_LEFT.getY())
+                * MathUtil.fitDeadband((-Math.pow(ControlMap.CO_DRIVER_LEFT.getY(), 2)), 0.01);
+        var bottomPos = -0.025 * .75 * Math.signum(ControlMap.CO_DRIVER_RIGHT.getY())
+                * MathUtil.fitDeadband((Math.pow(ControlMap.CO_DRIVER_RIGHT.getY(), 2)), 0.01);
+
+        caliGirls.setTopPos(caliGirls.lastPosTop - topPos);
+        caliGirls.setBottomPos(caliGirls.lastPosBottom + bottomPos);
+
+        Logging.armDashboard.setEntry("Claw Rotation", caliGirls.getTopPos());
+        Logging.armDashboard.setEntry("Arm Rotation", caliGirls.getBottomPos());
     }
 
 }

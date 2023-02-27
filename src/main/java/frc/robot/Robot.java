@@ -58,10 +58,10 @@ public class Robot extends TimedRobot {
         DriveTrain.getInstance().drive(0, 0, 0, true);
         CommandScheduler.getInstance().cancelAll();
 
-        // SmartDashboard.putNumber("Extens2ion", ArmExtension.getInstance().GetPosition());
+        // SmartDashboard.putNumber("Extens2ion", ArmExtension.getInstance().getPosition());
         // SmartDashboard.putNumber("Arm Rotat2ion", CaliGirls.getInstance().getTopPos());
         // SmartDashboard.putNumber("Claw Rot2ation", CaliGirls.getInstance().getBottomPos());
-        Logging.armDashboard.setEntry("Arm Extension", ArmExtension.getInstance().GetPosition());
+        Logging.armDashboard.setEntry("Arm Extension", ArmExtension.getInstance().getPosition());
         Logging.armDashboard.setEntry("Claw Rotation", CaliGirls.getInstance().getTopPos());
         Logging.armDashboard.setEntry("Arm Rotation", CaliGirls.getInstance().getBottomPos());
     }
@@ -117,6 +117,10 @@ public class Robot extends TimedRobot {
             resetRobotPoseAndGyro();
         }
         this.autoFlag = false;
+
+        Logging.armDashboard.setEntry("Arm Extension", ArmExtension.getInstance().getPosition());
+        Logging.armDashboard.setEntry("Claw Rotation", CaliGirls.getInstance().getTopPos());
+        Logging.armDashboard.setEntry("Arm Rotation", CaliGirls.getInstance().getBottomPos());
 
     }
 

@@ -43,10 +43,10 @@ public class ArmExtension extends SubsystemBase {
 
     public void setOffset() {
         motor.getEncoder().setPosition(0);
-        SetPosition(0, false);
+        setPosition(0, false);
     }
 
-    public void SetPosition(double position, boolean override) {
+    public void setPosition(double position, boolean override) {
         if (position > 142 && !override) {
             position = 142;
         }
@@ -58,14 +58,15 @@ public class ArmExtension extends SubsystemBase {
         motor.getPIDController().setReference(gearing * position, ControlType.kPosition);
     }
 
-    public double GetPosition() {
+    public double getPosition() {
         return motor.getEncoder().getPosition();
     }
 
     public void zeroArm() {
         motor.setSmartCurrentLimit(Tuning.EXTENSION_STALL_ZERO, Tuning.EXTENSION_FREE_ZERO);
         motor.setInverted(true);
-        SetPosition(-3500, true);
+        motor.setVoltage(-4);
+        setPosition(-3500, true);
         // SmartDashboard.putNumber("Motor Velocity", motor.getEncoder().getVelocity());
         Logging.armDashboard.setEntry("Motor Velocity", motor.getEncoder().getVelocity());
     }
