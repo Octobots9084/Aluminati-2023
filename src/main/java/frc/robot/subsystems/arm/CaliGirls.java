@@ -97,7 +97,15 @@ public class CaliGirls extends SubsystemBase {
         pidControllerBottom.setReference(angle, ControlType.kPosition);
         // SmartDashboard.putNumber("Arm Set Angle", angle);
         Logging.armDashboard.setEntry("Arm Set Angle", angle);
+    }
 
+    public double getLowerBounding() {
+        return ArmExtension.getInstance().lastpos / 12000.0;
+    }
+    @Override
+    public void periodic() {
+        // pidControllerBottom();
+        Logging.armDashboard.setEntry("Adjust", getLowerBounding());                                                                                                                                                                                                             
     }
 
     public double getBottomKf() {
