@@ -21,17 +21,21 @@ public class AutoConeTop extends SequentialCommandGroup{
     ArmExtension armExtension;
 
     public AutoConeTop() {
-        this.aPosition = ArmPositions.CONE_PLACE_HIGH;
+        this.aPosition = ArmPositions.PRE_CONE_PLACE_HIGH;
         this.drivePosition = ArmPositions.DRIVE_WITH_PIECE;
         this.caliGirls = CaliGirls.getInstance();
         this.armExtension = ArmExtension.getInstance();
         addCommands(
             new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension),
+            new WaitCommand(2),
             new CaliGirlsBottomMoveDownALittle(),
-            new IntakeOut(),
-            new WaitCommand(5),
+            new WaitCommand(2),
             new IntakeNone(),
-            new MoveArmExtensionToPos(aPosition.extension), new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmWristToPos(aPosition.wrist),
+            new WaitCommand(2),
+            new MoveArmExtensionToPos(ArmExtension.getInstance().lastpos-10),
+            new WaitCommand(2),
+            new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold),
+            new WaitCommand(2),
             new MoveArmExtensionToPos(drivePosition.extension),new MoveArmRotationToPos(drivePosition.armAngle, drivePosition.angleHold), new MoveArmWristToPos(drivePosition.wrist)
         );
     
