@@ -1,5 +1,6 @@
 package frc.robot.robot;
 
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.advanced.IntakeOutWithTimeout;
 import frc.robot.commands.advanced.SafeMoveArmGoingDown;
@@ -10,6 +11,7 @@ import frc.robot.commands.arm.Intake.ConeInject;
 import frc.robot.commands.arm.Intake.IntakeIn;
 import frc.robot.commands.arm.Intake.IntakeNone;
 import frc.robot.commands.arm.Intake.IntakeOut;
+import frc.robot.commands.arm.Intake.SetItemMode;
 import frc.robot.commands.arm.ManualControl.ArmZero;
 import frc.robot.commands.arm.ManualControl.TiltControl;
 import frc.robot.commands.swerve.SetDriverAssist;
@@ -68,16 +70,16 @@ public class DriverButtonConfig {
 				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.DRIVE_WITHOUT_PIECE));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 7)
-				.onTrue(new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_HIGH));
+				.onTrue(new SequentialCommandGroup(new  SetItemMode(false), new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_HIGH)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 8)
-				.onTrue(new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_HIGH));
+				.onTrue(new SequentialCommandGroup(new  SetItemMode(true), new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_HIGH)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 9)
-				.onTrue(new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_MID));
+				.onTrue(new SequentialCommandGroup(new  SetItemMode(false), new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_MID)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 10)
-				.onTrue(new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_MID));
+				.onTrue(new SequentialCommandGroup(new  SetItemMode(true), new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_MID)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 11)
 				.onTrue(new IntakeOut());

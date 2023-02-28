@@ -14,11 +14,21 @@ public class Roller {
     }
 
     private final CANSparkMax motor;
+    //true is cone, false is cube
+    private boolean itemMode;
 
     public Roller() {
         this.motor = new CANSparkMax(MotorIDs.ARM_ROLLER, CANSparkMaxLowLevel.MotorType.kBrushless);
         this.motor.setSmartCurrentLimit(25, 25);
         setRollerVoltage(0);
+    }
+
+    public void SetItemMode(boolean itemMode) {
+        this.itemMode = itemMode;
+    }
+
+    public boolean getItemMode() {
+        return itemMode;
     }
 
     public void setRollerVoltage(double v) {
