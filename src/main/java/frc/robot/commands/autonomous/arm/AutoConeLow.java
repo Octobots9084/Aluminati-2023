@@ -1,5 +1,6 @@
 package frc.robot.commands.autonomous.arm;
 
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.arm.CaliGirlsBottomMoveDownALittle;
@@ -13,22 +14,6 @@ import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
 
-// public class AutoConeLow extends SequentialCommandGroup{
-//     ArmPositions aPosition;
-//     CaliGirls caliGirls;
-//     ArmExtension armExtension;
-
-//     public AutoConeLow() {
-//         this.aPosition = ArmPositions.CONE_PLACE_LOW;
-//         this.caliGirls = CaliGirls.getInstance();
-//         this.armExtension = ArmExtension.getInstance();
-//         new IntakeIn();
-//         new WaitCommand(.1);       
-//         new IntakeNone();
-//         this.aPosition = ArmPositions.DRIVE_WITHOUT_PIECE;
-//         addCommands(new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension));
-//     }
-// }
 public class AutoConeLow extends SequentialCommandGroup{
     ArmPositions aPosition;
     ArmPositions drivePosition;
@@ -36,18 +21,22 @@ public class AutoConeLow extends SequentialCommandGroup{
     ArmExtension armExtension;
 
     public AutoConeLow() {
-        this.aPosition = ArmPositions.CONE_PLACE_HIGH;
+        this.aPosition = ArmPositions.PRE_CONE_PLACE_HIGH;
         this.drivePosition = ArmPositions.DRIVE_WITH_PIECE;
         this.caliGirls = CaliGirls.getInstance();
         this.armExtension = ArmExtension.getInstance();
         addCommands(
             new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension),
+            new WaitCommand(2),
             new CaliGirlsBottomMoveDownALittle(),
-            new IntakeOut(),
-            new WaitCommand(5),
+            new WaitCommand(2),
             new IntakeNone(),
-            new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension),
-            new MoveArmRotationToPos(drivePosition.armAngle, drivePosition.angleHold), new MoveArmWristToPos(drivePosition.wrist), new MoveArmExtensionToPos(drivePosition.extension)
+            new WaitCommand(2),
+            new MoveArmExtensionToPos(ArmExtension.getInstance().lastpos-10),
+            new WaitCommand(2),
+            new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold),
+            new WaitCommand(2),
+            new MoveArmExtensionToPos(drivePosition.extension),new MoveArmRotationToPos(drivePosition.armAngle, drivePosition.angleHold), new MoveArmWristToPos(drivePosition.wrist)
         );
     
     }
