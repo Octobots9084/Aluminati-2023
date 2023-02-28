@@ -105,7 +105,7 @@ public class CaliGirls extends SubsystemBase {
     @Override
     public void periodic() {
         // pidControllerBottom();
-        Logging.armDashboard.setEntry("Adjust", getLowerBounding());
+        Logging.armDashboard.setEntry("Adjust", getLowerBounding());                                                                                                                                                                                                             
     }
 
     public double getBottomKf() {
