@@ -1,6 +1,7 @@
 package frc.robot.robot;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.advanced.IntakeOutWithTimeout;
 import frc.robot.commands.advanced.SafeMoveArmGoingDown;
 import frc.robot.commands.advanced.SafeMoveArmGoingUp;
 import frc.robot.commands.arm.MoveArmToPositionGoingDown;
@@ -36,11 +37,11 @@ public class DriverButtonConfig {
 		new JoystickButton(ControlMap.DRIVER_LEFT, 1)
 				.onTrue(new IntakeIn());
 		new JoystickButton(ControlMap.DRIVER_LEFT, 2)
-				.onTrue(new IntakeOut());
+				.onTrue(new IntakeOutWithTimeout());
 
 		//Driver Joystick Right
 		new JoystickButton(ControlMap.DRIVER_RIGHT, 1)
-				.onTrue(new IntakeNone());
+				.onTrue(new ConeInject());
 		new JoystickButton(ControlMap.DRIVER_RIGHT, 2)
 				.onTrue(new MoveArmToPositionGoingUp(ArmPositions.CONE_INTAKE_GROUND));
 
@@ -82,7 +83,7 @@ public class DriverButtonConfig {
 				.onTrue(new IntakeOut());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 12)
-				.whileTrue(new ConeInject());
+				.onTrue(new ConeInject());
 
 		//Arm Override Enable
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 15)
