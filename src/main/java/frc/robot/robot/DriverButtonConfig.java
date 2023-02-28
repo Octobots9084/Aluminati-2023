@@ -3,6 +3,8 @@ package frc.robot.robot;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.advanced.SafeMoveArmGoingDown;
 import frc.robot.commands.advanced.SafeMoveArmGoingUp;
+import frc.robot.commands.arm.MoveArmToPositionGoingDown;
+import frc.robot.commands.arm.MoveArmToPositionGoingUp;
 import frc.robot.commands.arm.Intake.ConeInject;
 import frc.robot.commands.arm.Intake.IntakeIn;
 import frc.robot.commands.arm.Intake.IntakeNone;
@@ -17,13 +19,13 @@ public class DriverButtonConfig {
 	public void initTeleop() {
 		// DRIVER LEFT
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
-				.onTrue(new SafeMoveArmGoingDown(ArmPositions.DRIVE_WITH_PIECE));
+				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.DRIVE_WITH_PIECE));
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 4)
 				.onTrue(new ZeroGyro());
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
-				.onTrue(new SafeMoveArmGoingDown(ArmPositions.DRIVE_WITHOUT_PIECE));
+				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.DRIVE_WITHOUT_PIECE));
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
 				.whileTrue(new SetDriverAssist(true));
@@ -40,20 +42,20 @@ public class DriverButtonConfig {
 		new JoystickButton(ControlMap.DRIVER_RIGHT, 1)
 				.onTrue(new IntakeNone());
 		new JoystickButton(ControlMap.DRIVER_RIGHT, 2)
-				.onTrue(new SafeMoveArmGoingUp(ArmPositions.CONE_INTAKE_GROUND));
+				.onTrue(new MoveArmToPositionGoingUp(ArmPositions.CONE_INTAKE_GROUND));
 
 		////END DRIVER 1//////////////////////////
 
 		////CO DRIVER////////////////
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 1)
-				.onTrue(new SafeMoveArmGoingDown(ArmPositions.DRIVE_WITH_PIECE));
+				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.DRIVE_WITH_PIECE));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
-				.onTrue(new SafeMoveArmGoingDown(ArmPositions.CONE_INTAKE_GROUND));
+				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.CONE_INTAKE_GROUND));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 3)
-				.onTrue(new SafeMoveArmGoingDown(ArmPositions.INTAKE_SUBSTATION));
+				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.INTAKE_SUBSTATION));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
 				.onTrue(new ZeroGyro());
@@ -62,19 +64,19 @@ public class DriverButtonConfig {
 				.whileTrue(new ArmZero());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 6)
-				.onTrue(new SafeMoveArmGoingDown(ArmPositions.DRIVE_WITHOUT_PIECE));
+				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.DRIVE_WITHOUT_PIECE));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 7)
-				.onTrue(new SafeMoveArmGoingUp(ArmPositions.CUBE_PLACE_HIGH));
+				.onTrue(new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_HIGH));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 8)
-				.onTrue(new SafeMoveArmGoingUp(ArmPositions.PRE_CONE_PLACE_HIGH));
+				.onTrue(new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_HIGH));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 9)
-				.onTrue(new SafeMoveArmGoingUp(ArmPositions.CUBE_PLACE_MID));
+				.onTrue(new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_MID));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 10)
-				.onTrue(new SafeMoveArmGoingUp(ArmPositions.PRE_CONE_PLACE_MID));
+				.onTrue(new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_MID));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 11)
 				.onTrue(new IntakeOut());

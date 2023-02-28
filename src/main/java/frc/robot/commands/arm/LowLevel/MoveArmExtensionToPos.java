@@ -9,7 +9,7 @@ public class MoveArmExtensionToPos extends CommandBase {
     double target;
 
     ArmExtension armExtension;
-    double startTime = Timer.getFPGATimestamp();
+    double startTime;
     double currentTime;
 
     public MoveArmExtensionToPos(double pos) {
@@ -20,7 +20,7 @@ public class MoveArmExtensionToPos extends CommandBase {
 
     @Override
     public void initialize() {
-
+        startTime = Timer.getFPGATimestamp();
         armExtension.setPosition(target, false);
     }
 
@@ -31,7 +31,7 @@ public class MoveArmExtensionToPos extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        boolean timeout = !MathUtil.isWithinTolerance(startTime, currentTime, 3);
-        return (timeout || MathUtil.isWithinTolerance(armExtension.getPosition(), target, 5));
+        boolean timeout = !MathUtil.isWithinTolerance(startTime, currentTime, 0.2);
+        return (timeout);
     }
 }
