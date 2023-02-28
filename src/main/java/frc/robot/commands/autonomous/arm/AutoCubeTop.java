@@ -13,6 +13,7 @@ import frc.robot.subsystems.arm.CaliGirls;
 
 public class AutoCubeTop extends SequentialCommandGroup{
     ArmPositions aPosition;
+    ArmPositions drivePosition;
     CaliGirls caliGirls;
     ArmExtension armExtension;
 
@@ -20,11 +21,12 @@ public class AutoCubeTop extends SequentialCommandGroup{
         this.aPosition = ArmPositions.CUBE_PLACE_HIGH;
         this.caliGirls = CaliGirls.getInstance();
         this.armExtension = ArmExtension.getInstance();
-        addCommands(new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension));
-        new IntakeIn();
-        new WaitCommand(.1);
-        new IntakeNone();
-        this.aPosition = ArmPositions.DRIVE_WITHOUT_PIECE;
-        addCommands(new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension));
+        addCommands(new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension),
+        new IntakeIn(),
+        new WaitCommand(.1),
+        new IntakeNone(),
+        new MoveArmRotationToPos(drivePosition.armAngle, drivePosition.angleHold), new MoveArmWristToPos(drivePosition.wrist), new MoveArmExtensionToPos(drivePosition.extension)
+        );
+  
     }
 }

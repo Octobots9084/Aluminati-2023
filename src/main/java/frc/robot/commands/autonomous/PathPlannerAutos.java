@@ -12,6 +12,7 @@ import com.pathplanner.lib.auto.SwerveAutoBuilder;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -23,7 +24,6 @@ import frc.robot.commands.autonomous.arm.AutoCubeMid;
 import frc.robot.commands.autonomous.arm.AutoCubeTop;
 import frc.robot.commands.autonomous.arm.AutoGroundIntakeCone;
 import frc.robot.commands.autonomous.arm.AutoGroundIntakeCube;
-import frc.robot.robot.Logging;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 
@@ -38,7 +38,8 @@ public final class PathPlannerAutos {
             Map.entry("CubeMid", new AutoCubeMid()),
             Map.entry("CubeLow", new AutoCubeLow()),
             Map.entry("IntakeCone", new AutoGroundIntakeCone()),
-            Map.entry("IntakeCube", new AutoGroundIntakeCube())));
+            Map.entry("IntakeCube", new AutoGroundIntakeCube())
+            ));
 
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
             DriveTrain.getInstance()::getPose2d,
@@ -47,27 +48,27 @@ public final class PathPlannerAutos {
             new PIDConstants(0, 0, 0),
             DriveTrain.getInstance()::driveAutos,
             eventMap,
-            true,
             DriveTrain.getInstance());
 
     public static CommandBase testPath() {
         List<PathPlannerTrajectory> pathgroup = PathPlanner.loadPathGroup("New New Path", new PathConstraints(1, 0.5));
-        Logging.autoDashboard.setEntry("Test", "Test");
-        Logging.autoDashboard.setEntry("P654375ath", pathgroup.get(0).getEndState().toString());
-        // SmartDashboard.putString("P654375ath", pathgroup.get(0).getEndState().toString());
+        SmartDashboard.putString("TEST", "Test");
+        SmartDashboard.putString("P654375ath", pathgroup.get(0).getEndState().toString());
         return autoBuilder.fullAuto(pathgroup);
     }
 
     public static CommandBase Onemeter() {
+        DriveTrain.getInstance().setUseDriverAssist(true);
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("1m", new PathConstraints(1, 3)));
     }
 
     public static CommandBase OneMeterSpin() {
-        DriveTrain.getInstance().setTargetRotationAngle(0);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("TestingPath", new PathConstraints(1, 1)));
+        DriveTrain.getInstance().setUseDriverAssist(true);
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("TestingPath", new PathConstraints(0.2, 0.2)));
     }
 
     public static CommandBase BalanceChargeStation() {
+        DriveTrain.getInstance().setUseDriverAssist(true);
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStation", new PathConstraints(3, 2)));
     }
 
