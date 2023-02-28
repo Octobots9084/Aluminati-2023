@@ -14,7 +14,7 @@ public class CaliGirlsBottomMoveDownALittle extends InstantCommand {
 
     @Override
     public void initialize() {
-        double pos = CaliGirls.getInstance().lastPosBottom-0.035;
+        double pos = CaliGirls.getInstance().lastPosBottom-0.03;
         System.out.println(pos);
         CommandScheduler.getInstance().schedule(new MoveArmRotationToPos(pos, CaliGirls.getInstance().getBottomKf()));
     }
