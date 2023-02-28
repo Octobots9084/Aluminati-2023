@@ -64,6 +64,8 @@ public class Robot extends TimedRobot {
         Logging.armDashboard.setEntry("Arm Extension", ArmExtension.getInstance().getPosition());
         Logging.armDashboard.setEntry("Claw Rotation", CaliGirls.getInstance().getTopPos());
         Logging.armDashboard.setEntry("Arm Rotation", CaliGirls.getInstance().getBottomPos());
+        Logging.armDashboard.setEntry("xpos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getX());
+        Logging.armDashboard.setEntry("ypos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getY());
     }
 
     @Override

@@ -22,6 +22,7 @@ package frc.robot.commands.autonomous;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.robot.Logging;
 import frc.robot.subsystems.swerve.DriveTrain;
@@ -42,7 +43,8 @@ public class driveToPos extends CommandBase {
     private Pose2d currentPose;
     private PIDController drivePids;
     private PIDController turnPids;
-
+    private double startTime;
+    private double currentTime;
     private final RSTab autoDashboard;
 
     public driveToPos(Pose2d target) {
@@ -61,11 +63,12 @@ public class driveToPos extends CommandBase {
 
     @Override
     public void initialize() {
-
+        startTime = Timer.getFPGATimestamp();
     }
 
     @Override
     public void execute() {
+        currentTime = Timer.getFPGATimestamp();
         currentPose = driveTrain.getPoseEstimator().getRobotPose();
         // SmartDashboard.putNumber("XPo2s: ", currentPose.getX());
         // SmartDashboard.putNumber("YPos2e1: ", currentPose.getY());
@@ -106,6 +109,22 @@ public class driveToPos extends CommandBase {
             ySpeed = 0;
         }
 
+
+        if (xSpeed>0.3) {
+            xSpeed = 0.3;
+        }
+        if (xSpeed<-0.3) {
+            xSpeed = -0.3;
+        }
+
+        if (ySpeed>0.3) {
+            ySpeed = 0.3;
+        }
+
+        if (ySpeed<-0.3) {
+            ySpeed = -0.3;
+        }
+
         // Check driver assist and drive
         // if (rotSpeed == 0) {
         //     driveTrain.drive(xSpeed, ySpeed, driveTrain.getRotationSpeed(), true);
@@ -119,10 +138,10 @@ public class driveToPos extends CommandBase {
     @Override
     public boolean isFinished() {
         // tolerances are a bit low
-        if (MathUtil.isWithinTolerance(currentPose.getY(), target.getY(), 0.1)
-                && MathUtil.isWithinTolerance(currentPose.getX(), target.getX(), 0.1)
+        if ((MathUtil.isWithinTolerance(currentPose.getY(), target.getY(), 0.2)
+                && MathUtil.isWithinTolerance(currentPose.getX(), target.getX(), 0.2)
                 && MathUtil.isWithinTolerance(MathUtil.wrapToCircle(currentPose.getRotation().getRadians()),
-                        MathUtil.wrapToCircle(target.getRotation().getRadians()), 0.09)) {
+                        MathUtil.wrapToCircle(target.getRotation().getRadians()), 0.1)) || (!(MathUtil.isWithinTolerance(startTime, currentTime, 5)))) {
             return true;
         }
 
