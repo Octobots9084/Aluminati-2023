@@ -12,8 +12,10 @@ import frc.robot.commands.arm.Intake.IntakeIn;
 import frc.robot.commands.arm.Intake.IntakeNone;
 import frc.robot.commands.arm.Intake.IntakeOut;
 import frc.robot.commands.arm.Intake.SetItemMode;
+import frc.robot.commands.arm.Intake.SmartEject;
 import frc.robot.commands.arm.ManualControl.ArmZero;
 import frc.robot.commands.arm.ManualControl.TiltControl;
+import frc.robot.commands.swerve.SetDriveAngle;
 import frc.robot.commands.swerve.SetDriverAssist;
 import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.subsystems.arm.ArmPositions;
@@ -29,6 +31,11 @@ public class DriverButtonConfig {
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
 				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.DRIVE_WITHOUT_PIECE));
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
+				.onTrue(new SetDriveAngle(0));
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 8)
+				.onTrue(new SetDriveAngle(Math.PI));
+		
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
 				.whileTrue(new SetDriverAssist(true));
@@ -43,7 +50,7 @@ public class DriverButtonConfig {
 
 		//Driver Joystick Right
 		new JoystickButton(ControlMap.DRIVER_RIGHT, 1)
-				.onTrue(new ConeInject());
+				.onTrue(new SmartEject());
 		new JoystickButton(ControlMap.DRIVER_RIGHT, 2)
 				.onTrue(new MoveArmToPositionGoingUp(ArmPositions.CONE_INTAKE_GROUND));
 

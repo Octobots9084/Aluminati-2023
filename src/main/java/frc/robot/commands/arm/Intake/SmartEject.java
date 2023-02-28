@@ -13,7 +13,7 @@ public class SmartEject extends SequentialCommandGroup{
         this.roller = Roller.getInstance();
         this.itemMode = roller.getItemMode();
         if (itemMode) {
-            addCommands(new CaliGirlsBottomMoveDownALittle());
+            addCommands(new ConeInject());
         } else {
             addCommands(new IntakeOut().withTimeout(2));
         }
