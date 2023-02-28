@@ -7,6 +7,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 import com.revrobotics.SparkMaxPIDController;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.robot.Logging;
 import frc.robot.robot.MotorIDs;
@@ -87,10 +88,11 @@ public class CaliGirls extends SubsystemBase {
     }
 
     public void setBottomPos(double angle) {
+        double lower = getLowerBounding();
         if (angle > 0.84) {
             angle = 0.84;
-        } else if (angle < 0.5) {
-            angle = 0.5;
+        } else if (angle < lower) {
+            angle = lower;
         }
 
         lastPosBottom = angle;
@@ -100,12 +102,13 @@ public class CaliGirls extends SubsystemBase {
     }
 
     public double getLowerBounding() {
-        return ArmExtension.getInstance().lastpos / 12000.0;
+        return ((ArmExtension.getInstance().lastpos / 500) + 0.5);
     }
+
     @Override
     public void periodic() {
         // pidControllerBottom();
-        Logging.armDashboard.setEntry("Adjust", getLowerBounding());                                                                                                                                                                                                             
+        SmartDashboard.putNumber("bruh", getLowerBounding());                                                                                                                                                                                                             
     }
 
     public double getBottomKf() {
