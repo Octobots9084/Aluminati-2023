@@ -20,8 +20,7 @@ public class MoveArmToPositionGoingDown extends SequentialCommandGroup {
         this.armExtension = ArmExtension.getInstance();
         addCommands(
                 new MoveArmExtensionToPos(0),
-                new MoveArmWristToPos(aPosition.wrist), 
-                new WaitCommand(0.5),
+                new MoveArmWristToPos(aPosition.wrist),
                 new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold),
                 new MoveArmExtensionToPos(aPosition.extension));
     }

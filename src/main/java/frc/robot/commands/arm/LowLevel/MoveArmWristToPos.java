@@ -9,7 +9,7 @@ public class MoveArmWristToPos extends CommandBase{
     double target;
 
     CaliGirls caliGirls;
-    double startTime = Timer.getFPGATimestamp();
+    double startTime;
     double currentTime;
     public MoveArmWristToPos(double pos) {
         this.caliGirls = CaliGirls.getInstance();
@@ -18,6 +18,7 @@ public class MoveArmWristToPos extends CommandBase{
 
     @Override
     public void initialize() {
+        startTime = Timer.getFPGATimestamp();
         caliGirls.setTopPos(target);
     }
 
@@ -28,7 +29,7 @@ public class MoveArmWristToPos extends CommandBase{
 
     @Override
     public boolean isFinished() {
-        boolean timeout = !MathUtil.isWithinTolerance(startTime, currentTime, 3);
-        return (timeout || MathUtil.isWithinTolerance(caliGirls.getTopPos(),target,0.01));
+        boolean timeout = !MathUtil.isWithinTolerance(startTime, currentTime, 0.2);
+        return (timeout);
     }
 }

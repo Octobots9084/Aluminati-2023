@@ -21,7 +21,6 @@ public class MoveArmToPositionGoingUp extends SequentialCommandGroup {
         addCommands(
                 new MoveArmExtensionToPos(0),
                 new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold),
-                new WaitCommand(0.5),
                 new MoveArmExtensionToPos(aPosition.extension), 
                 new MoveArmWristToPos(aPosition.wrist));
     }
