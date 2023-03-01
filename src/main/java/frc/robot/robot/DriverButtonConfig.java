@@ -3,6 +3,8 @@ package frc.robot.robot;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.advanced.IntakeOutWithTimeout;
+import frc.robot.commands.advanced.MagicButtonV1Cone;
+import frc.robot.commands.advanced.MagicButtonV1Cube;
 import frc.robot.commands.advanced.SafeMoveArmGoingDown;
 import frc.robot.commands.advanced.SafeMoveArmGoingUp;
 import frc.robot.commands.arm.MoveArmToPositionGoingDown;
@@ -34,7 +36,11 @@ public class DriverButtonConfig {
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
 				.onTrue(new SetDriveAngle(0));
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 8)
-				.onTrue(new SetDriveAngle(Math.PI));
+				.onTrue(new SetDriveAngle(180));
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 9)
+				.onTrue(new MagicButtonV1Cone());
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 10)
+				.onTrue(new MagicButtonV1Cube());
 		
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)

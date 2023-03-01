@@ -11,9 +11,11 @@ import frc.robot.commands.autonomous.arm.AutoCubeTop;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
-public class MagicButtonV1 extends SequentialCommandGroup{
+public class MagicButtonV1Cone extends SequentialCommandGroup{
 
-    public MagicButtonV1() {
-        addCommands(new driveToPos(new Pose2d(12.48,0, new Rotation2d())), new WaitCommand(5),new AutoCubeTop());
+    public MagicButtonV1Cone() {
+
+        addCommands(new driveToPos(new Pose2d(13, -0.5, new Rotation2d())));
+        //addCommands(new driveToPos(new Pose2d(12,0, new Rotation2d())));//, new WaitCommand(5),new AutoCubeTop());
     }
 }

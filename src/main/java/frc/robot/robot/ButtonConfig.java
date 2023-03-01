@@ -2,7 +2,8 @@ package frc.robot.robot;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.advanced.IntakeOutWithTimeout;
-import frc.robot.commands.advanced.MagicButtonV1;
+import frc.robot.commands.advanced.MagicButtonV1Cone;
+import frc.robot.commands.advanced.MagicButtonV1Cube;
 import frc.robot.commands.advanced.SafeMoveArmGoingDown;
 import frc.robot.commands.advanced.SafeMoveArmGoingUp;
 import frc.robot.commands.arm.MoveArmToPositionGoingDown;
@@ -26,8 +27,10 @@ public class ButtonConfig {
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 4)
 				.onTrue(new ZeroGyro());
-                new JoystickButton(ControlMap.DRIVER_BUTTONS, 5)
-				.onTrue(new MagicButtonV1());
+                new JoystickButton(ControlMap.DRIVER_BUTTONS, 9)
+				.onTrue(new MagicButtonV1Cone());
+				new JoystickButton(ControlMap.DRIVER_BUTTONS, 10)
+				.onTrue(new MagicButtonV1Cube());
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
 				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.DRIVE_WITHOUT_PIECE));

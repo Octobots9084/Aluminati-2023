@@ -99,7 +99,7 @@ public class PoseEstimator {
         };
         var pose2d = swerveDrivePoseEstimator.updateWithTime(
                 Timer.getFPGATimestamp(),
-                new Rotation2d(Math.PI / 2 + gyro.getRotation2d().getRadians()),
+                new Rotation2d(Math.PI / 2 + (Math.PI*2) + gyro.getRotation2d().getRadians()),
                 swerveModulePositions);
         //pose2d = new Pose2d(pose2d.getX(), pose2d.getY(), pose2d.getRotation())
         robotPose.set(pose2d);

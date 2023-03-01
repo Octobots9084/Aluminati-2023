@@ -104,31 +104,44 @@ public class driveToPos extends CommandBase {
             ySpeed = 0;
         }
 
+        if (MathUtil.isWithinTolerance(rotSpeed, 0, 0.1) && rotSpeed < 0.1) {
+            rotSpeed = 0.1;
+        }
+
+        if (MathUtil.isWithinTolerance(rotSpeed, 0, 0.1) && rotSpeed > -0.1) {
+            rotSpeed = -0.1;
+        }
+
+        if (MathUtil.isWithinTolerance(currentPose.getRotation().getRadians(), target.getRotation().getRadians(), 0.05)) {
+            rotSpeed = 0;
+        }
+
         if (MathUtil.isWithinTolerance(MathUtil.wrapToCircle(currentPose.getRotation().getRadians()),
                 MathUtil.wrapToCircle(target.getRotation().getRadians()), 0.03)) {
             ySpeed = 0;
         }
 
 
-        if (xSpeed>0.3) {
-            xSpeed = 0.3;
+        if (xSpeed>1) {
+            xSpeed = 1;
         }
-        if (xSpeed<-0.3) {
-            xSpeed = -0.3;
-        }
-
-        if (ySpeed>0.3) {
-            ySpeed = 0.3;
+        if (xSpeed<-1) {
+            xSpeed = -1;
         }
 
-        if (ySpeed<-0.3) {
-            ySpeed = -0.3;
+        if (ySpeed>1) {
+            ySpeed = 1;
+        }
+
+        if (ySpeed<-1) {
+            ySpeed = -1;
         }
 
         // Check driver assist and drive
         // if (rotSpeed == 0) {
         //     driveTrain.drive(xSpeed, ySpeed, driveTrain.getRotationSpeed(), true);
         // } else {
+        
         driveTrain.drive(xSpeed, ySpeed, 0, true);//rotSpeed, true);
         Gyro.getInstance().updateRotation2D();
         driveTrain.setTargetRotationAngle(Gyro.getInstance().getRotation2d().getDegrees() * -1);
@@ -138,10 +151,11 @@ public class driveToPos extends CommandBase {
     @Override
     public boolean isFinished() {
         // tolerances are a bit low
-        if ((MathUtil.isWithinTolerance(currentPose.getY(), target.getY(), 0.2)
-                && MathUtil.isWithinTolerance(currentPose.getX(), target.getX(), 0.2)
+        if ((MathUtil.isWithinTolerance(currentPose.getY(), target.getY(), 0.05)
+                && MathUtil.isWithinTolerance(currentPose.getX(), target.getX(), 0.05)
                 && MathUtil.isWithinTolerance(MathUtil.wrapToCircle(currentPose.getRotation().getRadians()),
                         MathUtil.wrapToCircle(target.getRotation().getRadians()), 0.1)) || (!(MathUtil.isWithinTolerance(startTime, currentTime, 5)))) {
+                            driveTrain.setTargetRotationAngle(Gyro.getInstance().getRotation2d().getDegrees());
             return true;
         }
 
