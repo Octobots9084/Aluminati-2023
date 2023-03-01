@@ -72,7 +72,7 @@ public class DriverButtonConfig {
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
 				.onTrue(new CollectCone());
 
-		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 3)
+		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 1)
 				.onTrue(new CollectConeSubstation());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
