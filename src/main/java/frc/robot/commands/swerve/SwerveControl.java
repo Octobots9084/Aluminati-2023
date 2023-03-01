@@ -48,42 +48,18 @@ public class SwerveControl extends CommandBase {
         // Link joysticks
         var leftJoystick = ControlMap.DRIVER_LEFT;
         var rightJoystick = ControlMap.DRIVER_RIGHT;
-        // var xbox = ControlMap.XBOX;
-        // var heliStick = ControlMap.HelicopterStick;
+
         var xSpeed = 0.0;
         var ySpeed = 0.0;
         var rot = 0.0;
 
-        // if(sendable.getSelected() != null && sendable.getSelected().equals(2))
-        // {
-        //     // Get speeds from joysticks
-        //     xSpeed = MathUtil.fitDeadband(-xbox.getLeftY()) * DriveTrain.MAX_TURN_SPEED;
-        //     ySpeed = MathUtil.fitDeadband(xbox.getLeftX()) * DriveTrain.MAX_TURN_SPEED;
 
-        //     // Calculate the deadband
-        //     rot = MathUtil.fitDeadband(xbox.getRightY()) * DriveTrain.MAX_ANGULAR_SPEED;
-        // } else if(sendable.getSelected() != null && sendable.getSelected().equals(3))
-        // {
-        //     // Get speeds from joysticks
-        //     xSpeed = MathUtil.fitDeadband(-heliStick.getY()) * DriveTrain.MAX_TURN_SPEED;
-        //     ySpeed = MathUtil.fitDeadband(heliStick.getX()) * DriveTrain.MAX_TURN_SPEED;
-
-        //     // Calculate the deadband
-        //     rot = MathUtil.fitDeadband(heliStick.getZ()) * DriveTrain.MAX_ANGULAR_SPEED;
-        // } else if(sendable.getSelected() != null && sendable.getSelected().equals(1))
-        // {
         // Get speeds from joysticks
         xSpeed = MathUtil.fitDeadband(-leftJoystick.getY()) * DriveTrain.MAX_TURN_SPEED;
         ySpeed = MathUtil.fitDeadband(leftJoystick.getX()) * DriveTrain.MAX_TURN_SPEED;
 
         // Calculate the deadband
         rot = MathUtil.fitDeadband(rightJoystick.getX()) * DriveTrain.MAX_ANGULAR_SPEED;
-        // }
-        // else{
-        //     xSpeed = 0.0;
-        //     ySpeed = 0.0;
-        //     rot = 0.0;
-        // }
 
         // Check driver assist and drive
         if (rot == 0 && driveTrain.useDriverAssist()) {
