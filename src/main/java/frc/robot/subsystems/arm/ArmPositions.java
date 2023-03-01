@@ -3,7 +3,7 @@ package frc.robot.subsystems.arm;
 public enum ArmPositions {
     // All values updated Feb 26th - Aayush and Annie
     PRE_CONE_PLACE_HIGH(.763, 0.09, 75.55, .542),
-    PRE_CONE_PLACE_MID(.7745, 0.06, 28, .69),
+    PRE_CONE_PLACE_MID(.754, 0.06, 28, .69),
 
     CONE_PLACE_HIGH(.74, 0.09, 75.55, .542),
     CONE_PLACE_MID(.7, 0.06, 20.64, .655),

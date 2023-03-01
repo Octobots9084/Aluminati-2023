@@ -22,7 +22,6 @@ public class SetDriveAngle extends CommandBase {
         this.angle = angle;
         this.currentAngle = Gyro.getInstance().getRotation2d().getDegrees();
         this.angleDiff = angle-currentAngle;
-        addRequirements(this.dt);
     }
 
     @Override
@@ -45,6 +44,7 @@ public class SetDriveAngle extends CommandBase {
             rotationSpeed= dt.MAX_ANGULAR_SPEED;
         }
         dt.drive(0, 0, rotationSpeed, true);
+        dt.setTargetRotationAngle(Gyro.getInstance().getRotation2d().getDegrees());
     }
 
     @Override

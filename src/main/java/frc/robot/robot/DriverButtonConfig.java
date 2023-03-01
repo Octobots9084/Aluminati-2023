@@ -2,6 +2,8 @@ package frc.robot.robot;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.advanced.CollectCone;
+import frc.robot.commands.advanced.CollectConeSubstation;
 import frc.robot.commands.advanced.IntakeOutWithTimeout;
 import frc.robot.commands.advanced.MagicButtonV1Cone;
 import frc.robot.commands.advanced.MagicButtonV1Cube;
@@ -58,20 +60,20 @@ public class DriverButtonConfig {
 		new JoystickButton(ControlMap.DRIVER_RIGHT, 1)
 				.onTrue(new SmartEject());
 		new JoystickButton(ControlMap.DRIVER_RIGHT, 2)
-				.onTrue(new MoveArmToPositionGoingUp(ArmPositions.CONE_INTAKE_GROUND));
+				.onTrue(new CollectCone());
 
 		////END DRIVER 1//////////////////////////
 
 		////CO DRIVER////////////////
 
-		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 1)
+		new JoystickButton(ControlMap.CO_DRIVER_RIGHT, 1)
 				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.DRIVE_WITH_PIECE));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
-				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.CONE_INTAKE_GROUND));
+				.onTrue(new CollectCone());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 3)
-				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.INTAKE_SUBSTATION));
+				.onTrue(new CollectConeSubstation());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
 				.onTrue(new ZeroGyro());
