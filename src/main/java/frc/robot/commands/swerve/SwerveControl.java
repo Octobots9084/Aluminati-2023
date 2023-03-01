@@ -62,7 +62,7 @@ public class SwerveControl extends CommandBase {
         rot = MathUtil.fitDeadband(rightJoystick.getX()) * DriveTrain.MAX_ANGULAR_SPEED;
 
         //just drive lol
-        driveTrain.drive(xSpeed, ySpeed, -driveTrain.getRotationSpeed(), driveTrain.getFieldCentric());
+        driveTrain.drive(xSpeed, ySpeed, rot, driveTrain.getFieldCentric());
 
         // Check driver assist and drive
         // if (rot == 0 && driveTrain.useDriverAssist()) {

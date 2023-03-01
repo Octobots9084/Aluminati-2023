@@ -192,7 +192,7 @@ public class DriveTrain extends SubsystemBase {
             return 0.0;
         }
         double targetAngle = MathUtil.wrapToCircle(targetRotationAngle);
-        var diff = gyroAngle - targetAngle;
+        var diff = targetAngle - gyroAngle;
         if (Math.abs(diff) >= 180 && diff < 0) {
             diff += 360;
         }
