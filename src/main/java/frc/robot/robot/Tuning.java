@@ -42,7 +42,7 @@ public class Tuning {
 
     //Movement Characteristics
     //Wrist
-    public static final PIDConfig CALI_TOP_PID = new PIDConfig(2, 0.0, 0.0, 0.0);
+    public static final PIDConfig CALI_TOP_PID = new PIDConfig(8, 0.0, 0.0, 0.01);
     public static final SmartMotionConfig CALI_TOP_SM = new SmartMotionConfig(true,
             10000.0,
             0.0,
