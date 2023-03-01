@@ -129,6 +129,11 @@ public class DriveTrain extends SubsystemBase {
     * @param fieldRelative Whether the provided x and y speeds are relative to the field.
     */
     public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
+        //driver assist """implimentation"""
+        if (useDriverAssist) {
+            this.targetRotationAngle = targetRotationAngle + rot * 2;
+            rot = getRotationSpeed();
+        }
         // Calculate swerve states
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(
                 fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, -rot, gyro.getRotation2d())
@@ -149,6 +154,7 @@ public class DriveTrain extends SubsystemBase {
 
     }
 
+    
     public void driveAutos(ChassisSpeeds chassisSpeeds) {
         // SmartDashboard.putNumber("xSppedpath", chassisSpeeds.vxMetersPerSecond);
         // SmartDashboard.putNumber("ySppedpath", chassisSpeeds.vyMetersPerSecond);

@@ -61,16 +61,19 @@ public class SwerveControl extends CommandBase {
         // Calculate the deadband
         rot = MathUtil.fitDeadband(rightJoystick.getX()) * DriveTrain.MAX_ANGULAR_SPEED;
 
-        // Check driver assist and drive
-        if (rot == 0 && driveTrain.useDriverAssist()) {
-            driveTrain.drive(xSpeed, ySpeed, -driveTrain.getRotationSpeed(), driveTrain.getFieldCentric());
-        } else {
-            // SmartDashboard.putNumber("rotation", rot);
-            Logging.driveDashboard.setEntry("rotation", rot);
+        //just drive lol
+        driveTrain.drive(xSpeed, ySpeed, -driveTrain.getRotationSpeed(), driveTrain.getFieldCentric());
 
-            driveTrain.drive(xSpeed, ySpeed, rot, driveTrain.getFieldCentric());
-            Gyro.getInstance().updateRotation2D();
-            driveTrain.setTargetRotationAngle(gyro.getRotation2d().getDegrees());
-        }
+        // Check driver assist and drive
+        // if (rot == 0 && driveTrain.useDriverAssist()) {
+        // driveTrain.drive(xSpeed, ySpeed, -driveTrain.getRotationSpeed(), driveTrain.getFieldCentric());
+        // } else {
+        //     // SmartDashboard.putNumber("rotation", rot);
+        //     Logging.driveDashboard.setEntry("rotation", rot);
+
+        //     driveTrain.drive(xSpeed, ySpeed, rot, driveTrain.getFieldCentric());
+        //     Gyro.getInstance().updateRotation2D();
+        //     driveTrain.setTargetRotationAngle(gyro.getRotation2d().getDegrees());
+        // }
     }
 }
