@@ -36,9 +36,9 @@ public class DriverButtonConfig {
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
 				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.DRIVE_WITHOUT_PIECE));
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
-				.onTrue(new SetDriveAngle(0));
+				.onTrue(new SetDriveAngle(0).withTimeout(1));
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 8)
-				.onTrue(new SetDriveAngle(180));
+				.onTrue(new SetDriveAngle(180).withTimeout(1));
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 9)
 				.onTrue(new MagicButtonV1Cone());
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 10)
