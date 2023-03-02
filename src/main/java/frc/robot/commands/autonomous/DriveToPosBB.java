@@ -52,8 +52,8 @@ public class DriveToPosBB extends CommandBase {
 
         // SmartDashboard.putBoolean("X Good?", false);
         // SmartDashboard.putBoolean("Y Good?", false);
-        autoDashboard.setEntry("X Good?", false);
-        autoDashboard.setEntry("Y Good?", false);
+        // autoDashboard.setEntry("X Good?", false);
+        // autoDashboard.setEntry("Y Good?", false);
     }
 
     @Override
@@ -68,14 +68,14 @@ public class DriveToPosBB extends CommandBase {
             xSpeed = 0;
             xDone = true;
             // SmartDashboard.putBoolean("X Good?", xDone);
-            autoDashboard.setEntry("X Good?", xDone);
+            // autoDashboard.setEntry("X Good?", xDone);
         }
 
         if (yDone || MathUtil.isWithinTolerance(currentPose.getY(), target.getY(), 0.05)) {
             ySpeed = 0;
             yDone = true;
             // SmartDashboard.putBoolean("Y Good?", true);
-            autoDashboard.setEntry("Y Good?", true);
+            // autoDashboard.setEntry("Y Good?", true);
         }
 
         if (target.getX() - currentPose.getX() < 0) {

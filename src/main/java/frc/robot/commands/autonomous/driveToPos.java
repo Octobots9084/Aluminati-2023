@@ -73,9 +73,7 @@ public class driveToPos extends CommandBase {
         // SmartDashboard.putNumber("XPo2s: ", currentPose.getX());
         // SmartDashboard.putNumber("YPos2e1: ", currentPose.getY());
         // SmartDashboard.putNumber("Ro1t2: ", currentPose.getRotation().getDegrees());
-        autoDashboard.setEntry("X-Pos", currentPose.getX());
-        autoDashboard.setEntry("Y-Pos", currentPose.getY());
-        autoDashboard.setEntry("Rot Deg", currentPose.getRotation().getDegrees());
+        
 
         ySpeed = drivePids.calculate(target.getY(), currentPose.getY());
         xSpeed = drivePids.calculate(currentPose.getX(), target.getX());

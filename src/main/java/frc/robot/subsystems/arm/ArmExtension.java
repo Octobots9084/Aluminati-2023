@@ -68,7 +68,6 @@ public class ArmExtension extends SubsystemBase {
         motor.setVoltage(-4);
         setPosition(-3500, true);
         // SmartDashboard.putNumber("Motor Velocity", motor.getEncoder().getVelocity());
-        Logging.armDashboard.setEntry("Motor Velocity", motor.getEncoder().getVelocity());
     }
 
     public boolean zeroDone() {

@@ -23,6 +23,6 @@ public class ArmControl extends CommandBase {
 
         armExtension.setPosition(armExtension.lastpos + pos, false);
 
-        Logging.armDashboard.setEntry("Arm Extension", armExtension.getPosition());
+        
     }
 }
