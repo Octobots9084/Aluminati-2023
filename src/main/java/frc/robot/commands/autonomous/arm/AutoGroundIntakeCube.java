@@ -14,18 +14,20 @@ import frc.robot.subsystems.arm.CaliGirls;
 
 public class AutoGroundIntakeCube extends SequentialCommandGroup{
     ArmPositions aPosition;
+    ArmPositions drivePosition;
     CaliGirls caliGirls;
     ArmExtension armExtension;
 
     public AutoGroundIntakeCube() {
         this.aPosition = ArmPositions.CUBE_INTAKE_FLOOR;
+        this.drivePosition = ArmPositions.DRIVE_WITH_PIECE;
         this.caliGirls = CaliGirls.getInstance();
-        addCommands(new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension), new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold));
-        new IntakeIn();
-        new WaitCommand(0.1);
-        new IntakeNone();
-        this.aPosition = ArmPositions.DRIVE_WITH_PIECE;
-        addCommands(new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension));
-    }
+        addCommands(new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension), new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold),
+        new IntakeIn(),
+        new WaitCommand(0.1),
+        new IntakeNone(),
+        new MoveArmRotationToPos(drivePosition.armAngle, drivePosition.angleHold), new MoveArmWristToPos(drivePosition.wrist), new MoveArmExtensionToPos(drivePosition.extension)
+        );
+            }
 }
 

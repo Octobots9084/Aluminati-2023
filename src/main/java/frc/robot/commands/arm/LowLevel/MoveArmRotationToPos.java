@@ -33,7 +33,7 @@ public class MoveArmRotationToPos extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        boolean timeout = !MathUtil.isWithinTolerance(startTime, currentTime, 0.2);
+        boolean timeout = !MathUtil.isWithinTolerance(startTime, currentTime, 0.5);
         return (timeout);
     }
 }

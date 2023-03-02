@@ -7,6 +7,7 @@ import frc.robot.commands.arm.CaliGirlsBottomMoveDownALittle;
 import frc.robot.commands.arm.Intake.IntakeIn;
 import frc.robot.commands.arm.Intake.IntakeNone;
 import frc.robot.commands.arm.Intake.IntakeOut;
+import frc.robot.commands.arm.Intake.IntakeOutALittle;
 import frc.robot.commands.arm.LowLevel.MoveArmExtensionToPos;
 import frc.robot.commands.arm.LowLevel.MoveArmRotationToPos;
 import frc.robot.commands.arm.LowLevel.MoveArmWristToPos;
@@ -26,17 +27,21 @@ public class AutoConeTop extends SequentialCommandGroup{
         this.caliGirls = CaliGirls.getInstance();
         this.armExtension = ArmExtension.getInstance();
         addCommands(
-            new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension),
-            new WaitCommand(2),
+            new IntakeIn(),
+            new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmWristToPos(aPosition.wrist), 
+            new WaitCommand(.2),
+            new MoveArmExtensionToPos(aPosition.extension),
+            new WaitCommand(0.4),
             new CaliGirlsBottomMoveDownALittle(),
-            new WaitCommand(2),
+            new WaitCommand(.25),
+            new IntakeOutALittle(),
+            new WaitCommand(0.05),
             new IntakeNone(),
-            new WaitCommand(2),
             new MoveArmExtensionToPos(ArmExtension.getInstance().lastpos-10),
-            new WaitCommand(2),
+            new WaitCommand(.25),
             new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold),
-            new WaitCommand(2),
-            new MoveArmExtensionToPos(drivePosition.extension),new MoveArmRotationToPos(drivePosition.armAngle, drivePosition.angleHold), new MoveArmWristToPos(drivePosition.wrist)
+            new WaitCommand(.25),
+            new MoveArmWristToPos(drivePosition.wrist), new MoveArmExtensionToPos(drivePosition.extension),new MoveArmRotationToPos(drivePosition.armAngle, drivePosition.angleHold)
         );
     
     }
