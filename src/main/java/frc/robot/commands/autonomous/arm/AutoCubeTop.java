@@ -1,7 +1,9 @@
 package frc.robot.commands.autonomous.arm;
 
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.arm.CaliGirlsBottomMoveDownALittle;
 import frc.robot.commands.arm.Intake.IntakeIn;
 import frc.robot.commands.arm.Intake.IntakeNone;
 import frc.robot.commands.arm.Intake.IntakeOut;
@@ -25,10 +27,10 @@ public class AutoCubeTop extends SequentialCommandGroup{
         this.armExtension = ArmExtension.getInstance();
         addCommands(new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension),
         new IntakeOut(),
-        new WaitCommand(2),
+        new WaitCommand(.5),
         new IntakeNone(),
-        new MoveArmExtensionToPos(drivePosition.extension), new MoveArmRotationToPos(drivePosition.armAngle, drivePosition.angleHold), new MoveArmWristToPos(drivePosition.wrist)
+        new MoveArmExtensionToPos(drivePosition.extension), new MoveArmWristToPos(drivePosition.wrist), new MoveArmRotationToPos(drivePosition.armAngle, drivePosition.angleHold)
         );
-  
+    
     }
 }

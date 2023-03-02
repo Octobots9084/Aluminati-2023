@@ -159,9 +159,9 @@ public class DriveTrain extends SubsystemBase {
         // SmartDashboard.putNumber("xSppedpath", chassisSpeeds.vxMetersPerSecond);
         // SmartDashboard.putNumber("ySppedpath", chassisSpeeds.vyMetersPerSecond);
         // SmartDashboard.putNumber("rotpoath", chassisSpeeds.omegaRadiansPerSecond);
-        driveDashboard.setEntry("X-Speed Path", chassisSpeeds.vxMetersPerSecond);
-        driveDashboard.setEntry("Y-Speed Path", chassisSpeeds.vyMetersPerSecond);
-        driveDashboard.setEntry("Rot Path", chassisSpeeds.omegaRadiansPerSecond);
+        // driveDashboard.setEntry("X-Speed Path", chassisSpeeds.vxMetersPerSecond);
+        // driveDashboard.setEntry("Y-Speed Path", chassisSpeeds.vyMetersPerSecond);
+        // driveDashboard.setEntry("Rot Path", chassisSpeeds.omegaRadiansPerSecond);
 
         this.targetRotationAngle = this.targetRotationAngle
                 - ((Math.toDegrees(chassisSpeeds.omegaRadiansPerSecond) * 0.02));

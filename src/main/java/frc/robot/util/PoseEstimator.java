@@ -114,10 +114,9 @@ public class PoseEstimator {
         // SmartDashboard.putNumber("YP3ose1: ", robotPose.get().getY());
         // SmartDashboard.putNumber("Ro31t: ", robotPose.get().getRotation().getDegrees());
 
-        driveDashboard.setEntry("X-Pos", robotPose.get().getX());
-        driveDashboard.setEntry("Y-Pos", robotPose.get().getY());
-        driveDashboard.setEntry("Rot Rad", robotPose.get().getRotation().getRadians());
-        driveDashboard.setEntry("imposter rotation", gyro.getRotation2d().getRadians());
+        // driveDashboard.setEntry("X-Pos", robotPose.get().getX());
+        // driveDashboard.setEntry("Y-Pos", robotPose.get().getY());
+        // driveDashboard.setEntry("Rot Deg", robotPose.get().getRotation().getDegrees());
 
         try {
             Optional<EstimatedRobotPose> result = photonCameraWrapper.getEstimatedGlobalPose(getRobotPose());

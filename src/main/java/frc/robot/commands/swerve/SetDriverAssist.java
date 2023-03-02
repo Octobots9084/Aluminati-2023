@@ -35,7 +35,7 @@ public class SetDriverAssist extends InstantCommand {
     @Override
     public void initialize() {
         // SmartDashboard.putBoolean("Driver Assist: ", this.useDriverAssist);
-        Logging.driveDashboard.setEntry("Driver Assist: ", this.useDriverAssist);
+        Logging.driveDashboard.setEntry("Driver Assist", this.useDriverAssist);
         DriveTrain.getInstance().setUseDriverAssist(this.useDriverAssist);
     }
 

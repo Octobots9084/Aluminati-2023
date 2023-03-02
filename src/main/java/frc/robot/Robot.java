@@ -58,14 +58,12 @@ public class Robot extends TimedRobot {
         DriveTrain.getInstance().drive(0, 0, 0, true);
         CommandScheduler.getInstance().cancelAll();
 
+        Logging.updateLogging();
+
         // SmartDashboard.putNumber("Extens2ion", ArmExtension.getInstance().getPosition());
         // SmartDashboard.putNumber("Arm Rotat2ion", CaliGirls.getInstance().getTopPos());
         // SmartDashboard.putNumber("Claw Rot2ation", CaliGirls.getInstance().getBottomPos());
-        Logging.armDashboard.setEntry("Arm Extension", ArmExtension.getInstance().getPosition());
-        Logging.armDashboard.setEntry("Claw Rotation", CaliGirls.getInstance().getTopPos());
-        Logging.armDashboard.setEntry("Arm Rotation", CaliGirls.getInstance().getBottomPos());
-        Logging.armDashboard.setEntry("xpos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getX());
-        Logging.armDashboard.setEntry("ypos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getY());
+
     }
 
     @Override
@@ -100,6 +98,7 @@ public class Robot extends TimedRobot {
         DriveTrain.getInstance().updateSwerveStates();
         CommandScheduler.getInstance().run();
 
+        // Logging.updateLogging();
     }
 
     @Override
@@ -120,9 +119,7 @@ public class Robot extends TimedRobot {
         }
         this.autoFlag = false;
 
-        Logging.armDashboard.setEntry("Arm Extension", ArmExtension.getInstance().getPosition());
-        Logging.armDashboard.setEntry("Claw Rotation", CaliGirls.getInstance().getTopPos());
-        Logging.armDashboard.setEntry("Arm Rotation", CaliGirls.getInstance().getBottomPos());
+        Logging.updateLogging();
 
     }
 
@@ -168,6 +165,7 @@ public class Robot extends TimedRobot {
         CaliGirls.getInstance();
         ArmExtension.getInstance();
         Roller.getInstance();
+        Logging.getInstance();
         new ParallalMoveArm(ArmPositions.DRIVE_WITH_PIECE);
     }
 
