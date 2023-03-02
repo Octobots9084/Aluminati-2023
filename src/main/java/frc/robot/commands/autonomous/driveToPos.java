@@ -81,22 +81,22 @@ public class driveToPos extends CommandBase {
         xSpeed = drivePids.calculate(currentPose.getX(), target.getX());
         rotSpeed = turnPids.calculate(target.getRotation().getRadians(), currentPose.getRotation().getRadians());
 
-        if (MathUtil.isWithinTolerance(xSpeed, 0, 0.1) && xSpeed < 0.1) {
+        if (xSpeed>0 && xSpeed < 0.1) {
             xSpeed = 0.1;
         }
 
-        if (MathUtil.isWithinTolerance(xSpeed, 0, 0.1) && xSpeed > -0.1) {
+        if (xSpeed<0 && xSpeed > -0.1) {
             xSpeed = -0.1;
         }
         if (MathUtil.isWithinTolerance(currentPose.getX(), target.getX(), 0.05)) {
             ySpeed = 0;
         }
 
-        if (MathUtil.isWithinTolerance(ySpeed, 0, 0.1) && ySpeed < 0.1) {
+        if (ySpeed>0 && ySpeed < 0.1) {
             ySpeed = 0.1;
         }
 
-        if (MathUtil.isWithinTolerance(ySpeed, 0, 0.1) && ySpeed > -0.1) {
+        if (ySpeed<0 && ySpeed > -0.1) {
             ySpeed = -0.1;
         }
 
@@ -104,12 +104,12 @@ public class driveToPos extends CommandBase {
             ySpeed = 0;
         }
 
-        if (MathUtil.isWithinTolerance(rotSpeed, 0, 0.1) && rotSpeed < 0.1) {
-            rotSpeed = 0.1;
+        if (rotSpeed>0 && rotSpeed < 0.2) {
+            rotSpeed = 0.2;
         }
 
-        if (MathUtil.isWithinTolerance(rotSpeed, 0, 0.1) && rotSpeed > -0.1) {
-            rotSpeed = -0.1;
+        if (rotSpeed<0 && rotSpeed > -0.2) {
+            rotSpeed = -0.2;
         }
 
         if (MathUtil.isWithinTolerance(currentPose.getRotation().getRadians(), target.getRotation().getRadians(), 0.05)) {
@@ -122,19 +122,19 @@ public class driveToPos extends CommandBase {
         }
 
 
-        if (xSpeed>1) {
-            xSpeed = 1;
+        if (xSpeed>0.5) {
+            xSpeed = 0.5;
         }
-        if (xSpeed<-1) {
-            xSpeed = -1;
-        }
-
-        if (ySpeed>1) {
-            ySpeed = 1;
+        if (xSpeed<-0.5) {
+            xSpeed = -0.5;
         }
 
-        if (ySpeed<-1) {
-            ySpeed = -1;
+        if (ySpeed>0.2) {
+            ySpeed = 0.2;
+        }
+
+        if (ySpeed<-0.2) {
+            ySpeed = -0.2;
         }
 
         // Check driver assist and drive
@@ -154,7 +154,7 @@ public class driveToPos extends CommandBase {
         if ((MathUtil.isWithinTolerance(currentPose.getY(), target.getY(), 0.05)
                 && MathUtil.isWithinTolerance(currentPose.getX(), target.getX(), 0.05)
                 && MathUtil.isWithinTolerance(MathUtil.wrapToCircle(currentPose.getRotation().getRadians()),
-                        MathUtil.wrapToCircle(target.getRotation().getRadians()), 0.1)) || (!(MathUtil.isWithinTolerance(startTime, currentTime, 5)))) {
+                        MathUtil.wrapToCircle(target.getRotation().getRadians()), 0.1)) || (!(MathUtil.isWithinTolerance(startTime, currentTime, 10)))) {
                             driveTrain.setTargetRotationAngle(Gyro.getInstance().getRotation2d().getDegrees());
             return true;
         }

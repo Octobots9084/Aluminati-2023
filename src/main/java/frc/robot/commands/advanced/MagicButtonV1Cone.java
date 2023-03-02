@@ -15,7 +15,7 @@ public class MagicButtonV1Cone extends SequentialCommandGroup{
 
     public MagicButtonV1Cone() {
 
-        addCommands(new driveToPos(new Pose2d(13, -0.5, new Rotation2d())));
+        addCommands(new driveToPos(new Pose2d(13, 2.5, new Rotation2d())));
         //addCommands(new driveToPos(new Pose2d(12,0, new Rotation2d())));//, new WaitCommand(5),new AutoCubeTop());
     }
 }
