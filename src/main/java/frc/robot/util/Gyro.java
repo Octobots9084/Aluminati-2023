@@ -26,7 +26,6 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.SPI;
-import frc.robot.robot.Logging;
 
 public class Gyro {
     private static Gyro INSTANCE;
@@ -69,7 +68,7 @@ public class Gyro {
 
     public double getRoll() {
         // SmartDashboard.putNumber("Gryo pitch", navX.getRoll());
-        Logging.driveDashboard.setEntry("Gyro Pitch", navX.getRoll());
+        // Logging.driveDashboard.setEntry("Gyro Pitch", navX.getRoll());
         return navX.getRoll();
     }
 

@@ -168,6 +168,7 @@ public class SwerveModule {
         var optimizedAngle = SwerveUtil.optimizeSwerveStates(state, getAngle());
         // SmartDashboard.putNumber("Angle", convertAngleToTick(optimizedAngle.angle.getRadians()));
         Logging.driveDashboard.setEntry("Angle", convertAngleToTick(optimizedAngle.angle.getRadians()));
+
         setDriveMotorVelocity(optimizedAngle.speedMetersPerSecond);
         setSteeringMotorAngle(convertAngleToTick(optimizedAngle.angle.getRadians()));
     }

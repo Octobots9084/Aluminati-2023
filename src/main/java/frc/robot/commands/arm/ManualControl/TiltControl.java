@@ -26,8 +26,7 @@ public class TiltControl extends CommandBase {
         caliGirls.setTopPos(caliGirls.lastPosTop - topPos);
         caliGirls.setBottomPos(caliGirls.lastPosBottom + bottomPos);
 
-        Logging.armDashboard.setEntry("Claw Rotation", caliGirls.getTopPos());
-        Logging.armDashboard.setEntry("Arm Rotation", caliGirls.getBottomPos());
+        
     }
 
 }

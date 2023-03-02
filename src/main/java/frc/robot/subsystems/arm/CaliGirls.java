@@ -108,7 +108,7 @@ public class CaliGirls extends SubsystemBase {
     @Override
     public void periodic() {
         // pidControllerBottom();
-        SmartDashboard.putNumber("bruh", getLowerBounding());                                                                                                                                                                                                             
+        SmartDashboard.putNumber("bruh", getLowerBounding());
     }
 
     public double getBottomKf() {
