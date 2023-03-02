@@ -4,11 +4,12 @@ import com.ctre.phoenix.led.CANdle;
 import com.ctre.phoenix.led.StrobeAnimation;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.robot.MotorIDs;
 
 public class Light extends SubsystemBase{
     private CANdle candle;
     private static Light light;
-    public static Light GetInstance() {
+    public static Light getInstance() {
         if (light == null) {
             light = new Light();
         }
@@ -17,7 +18,7 @@ public class Light extends SubsystemBase{
     private StrobeAnimation strobeAnimation = new StrobeAnimation(0, 0, 0);
     
     public Light() {
-        this.candle = new CANdle(13);
+        this.candle = new CANdle(MotorIDs.CANDLE_ID);
     }
 
     public void test(int a, int b, int c) {

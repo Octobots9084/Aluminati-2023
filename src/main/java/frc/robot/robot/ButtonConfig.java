@@ -15,6 +15,7 @@ import frc.robot.commands.arm.Intake.IntakeOut;
 import frc.robot.commands.arm.ManualControl.ArmZero;
 import frc.robot.commands.arm.ManualControl.TiltControl;
 import frc.robot.commands.autonomous.arm.AutoConeTop;
+import frc.robot.commands.lights.SetLightMode;
 import frc.robot.commands.swerve.SetDriverAssist;
 import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.subsystems.arm.ArmPositions;
@@ -91,11 +92,13 @@ public class ButtonConfig {
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 12)
 				.onTrue(new ConeInject());
-
+		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
+				.onTrue(new SetLightMode(false));
+		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 14)
+				.onTrue(new SetLightMode(true));
 		//Arm Override Enable
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 15)
 				.whileTrue(new TiltControl());
-
 		new JoystickButton(ControlMap.CO_DRIVER_RIGHT, 2)
 				.whileTrue(new ArmZero());
 
