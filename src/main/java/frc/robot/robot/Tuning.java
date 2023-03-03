@@ -42,7 +42,7 @@ public class Tuning {
 
     //Movement Characteristics
     //Wrist
-    public static final PIDConfig CALI_TOP_PID = new PIDConfig(3, 0.0, 0.0, 0.02);
+    public static final PIDConfig CALI_TOP_PID = new PIDConfig(3, 0.0, 0.3, 0.02);
     public static final SmartMotionConfig CALI_TOP_SM = new SmartMotionConfig(true,
             10000.0,
             0.0,
@@ -59,7 +59,7 @@ public class Tuning {
     //             0.0);
 
     //     public static final PIDConfig CALI_BOTTOM_PID = new PIDConfig(3, 0.0005, 0.2, 0.03);
-    public static final PIDConfig CALI_BOTTOM_PID = new PIDConfig(4, 0.0, 0.5, 0.03);
+    public static final PIDConfig CALI_BOTTOM_PID = new PIDConfig(4, 0.0, 0, 0.1);
     public static final SmartMotionConfig CALI_BOTTOM_SM = new SmartMotionConfig(true,
             10000.0,
             0.0,
@@ -68,7 +68,7 @@ public class Tuning {
     public static final double CALI_BOTTOM_ENCODER_RESOLUTION = 1.0;
 
     //Extension
-    public static final PIDConfig EXTENSION_PID = new PIDConfig(0.03, 0, 0);
+    public static final PIDConfig EXTENSION_PID = new PIDConfig(0.1, 0, 0);
     public static final SmartMotionConfig EXTENSION_SM = new SmartMotionConfig(true,
             0.12,
             0.0,
