@@ -23,6 +23,8 @@ package frc.robot;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -35,6 +37,7 @@ import frc.robot.commands.arm.ParallalMoveArm;
 import frc.robot.commands.arm.ManualControl.ArmControl;
 import frc.robot.commands.arm.ManualControl.TiltControl;
 import frc.robot.commands.autonomous.PathPlannerAutos;
+import frc.robot.commands.autonomous.driveToPos;
 import frc.robot.commands.swerve.SwerveControl;
 import frc.robot.robot.ButtonConfig;
 import frc.robot.robot.ControlMap;
@@ -133,7 +136,7 @@ public class Robot extends TimedRobot {
         initializeAllSubsystems();
 
         resetRobotPoseAndGyro();
-
+        new driveToPos(new Pose2d(14.16, 1.4, new Rotation2d()));
         //CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
         CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
         //CommandScheduler.getInstance().schedule(new driveToPos(new Pose2d(0.0, FieldConstants.length/2, new Rotation2d(0,0))));
