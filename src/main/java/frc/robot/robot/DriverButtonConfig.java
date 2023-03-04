@@ -9,6 +9,7 @@ import frc.robot.commands.advanced.MagicButtonV1Cone;
 import frc.robot.commands.advanced.MagicButtonV1Cube;
 import frc.robot.commands.advanced.SafeMoveArmGoingDown;
 import frc.robot.commands.advanced.SafeMoveArmGoingUp;
+import frc.robot.commands.arm.Arm2PosStow;
 import frc.robot.commands.arm.MoveArmToPositionGoingDown;
 import frc.robot.commands.arm.MoveArmToPositionGoingUp;
 import frc.robot.commands.arm.Intake.ConeInject;
@@ -34,7 +35,7 @@ public class DriverButtonConfig {
 				.onTrue(new ZeroGyro());
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
-				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.DRIVE_WITHOUT_PIECE));
+				.onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITHOUT_PIECE));
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
 				.onTrue(new SetDriveAngle(0).withTimeout(1));
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 8)
@@ -67,7 +68,7 @@ public class DriverButtonConfig {
 		////CO DRIVER////////////////
 
 		new JoystickButton(ControlMap.CO_DRIVER_RIGHT, 1)
-				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.DRIVE_WITH_PIECE));
+				.onTrue(new MoveArmToPositionGoingUp(ArmPositions.DRIVE_WITHOUT_PIECE));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
 				.onTrue(new CollectCone());
