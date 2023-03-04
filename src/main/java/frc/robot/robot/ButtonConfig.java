@@ -1,5 +1,6 @@
 package frc.robot.robot;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.advanced.IntakeOutWithTimeout;
 import frc.robot.commands.advanced.MagicButtonV1Cone;
@@ -18,6 +19,7 @@ import frc.robot.commands.autonomous.arm.AutoConeTop;
 import frc.robot.commands.lights.SetLightMode;
 import frc.robot.commands.swerve.SetDriverAssist;
 import frc.robot.commands.swerve.ZeroGyro;
+import frc.robot.subsystems.Light;
 import frc.robot.subsystems.arm.ArmPositions;
 
 public class ButtonConfig {
@@ -93,9 +95,13 @@ public class ButtonConfig {
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 12)
 				.onTrue(new ConeInject());
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
-				.onTrue(new SetLightMode(false));
+				.onTrue(new InstantCommand(() -> Light.getInstance().setStrobeAnimationPurple()));
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 14)
-				.onTrue(new SetLightMode(true));
+				.onTrue(new InstantCommand(() -> Light.getInstance().setStrobeAnimationYellow()));
+				new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
+				.onFalse(new InstantCommand(() -> Light.getInstance().setStrobeAnimationRed()));
+				new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 14)
+				.onFalse(new InstantCommand(() -> Light.getInstance().setStrobeAnimationRed()));
 		//Arm Override Enable
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 15)
 				.whileTrue(new TiltControl());

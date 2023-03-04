@@ -26,15 +26,29 @@ public class Light extends SubsystemBase{
     } 
 
     public void setStrobeAnimationPurple() {
-        strobeAnimation.setR(200);
+        strobeAnimation.setR(255);
         strobeAnimation.setG(0);
         strobeAnimation.setB(255);
+        candle.animate(strobeAnimation);
     }
 
     public void setStrobeAnimationYellow() {
-        strobeAnimation.setR(200);
+        strobeAnimation.setR(255);
         strobeAnimation.setG(255);
         strobeAnimation.setB(0);
+        candle.animate(strobeAnimation);
+    }
+
+    public void setStrobeAnimationRed() {
+        strobeAnimation.setR(255);
+        strobeAnimation.setG(255);
+        strobeAnimation.setB(255);
+        candle.animate(strobeAnimation);
+    }
+    @Override
+    public void periodic() {
+        candle.animate(strobeAnimation);
+        
     }
 
 }

@@ -25,8 +25,8 @@ public class Tuning {
             0.05);
 
     //Wrist
-    public static final int CALI_TOP_FREE = 25;
-    public static final int CALI_TOP_STALL = 25;
+    public static final int CALI_TOP_FREE = 35;
+    public static final int CALI_TOP_STALL = 35;
     //Pivot
     public static final int CALI_BOTTOM_FREE = 30;
     public static final int CALI_BOTTOM_STALL = 30;
@@ -42,7 +42,7 @@ public class Tuning {
 
     //Movement Characteristics
     //Wrist
-    public static final PIDConfig CALI_TOP_PID = new PIDConfig(3, 0.0, 0.3, 0.02);
+    public static final PIDConfig CALI_TOP_PID = new PIDConfig(3, 0.000, 0.3, 0.02);
     public static final SmartMotionConfig CALI_TOP_SM = new SmartMotionConfig(true,
             10000.0,
             0.0,

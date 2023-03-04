@@ -49,7 +49,7 @@ public class CaliGirls extends SubsystemBase {
         this.motorTop.getAbsoluteEncoder(Type.kDutyCycle).setInverted(false);
         this.motorTop.setInverted(true);
         this.motorTop.getPIDController().setPositionPIDWrappingEnabled(false);
-        this.motorTop.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(0.3);
+        this.motorTop.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(0.636);
         pidControllerTop.setSmartMotionAllowedClosedLoopError(0.1, 0);
         //setTopPos(lastPosTop);
 
@@ -76,8 +76,8 @@ public class CaliGirls extends SubsystemBase {
     }
 
     public void setTopPos(double angle) {
-        if (angle > 0.7) {
-            angle = 0.7;
+        if (angle > 0.67) {
+            angle = 0.67;
         } else if (angle < 0.252) {
             angle = 0.252;
         }
@@ -102,7 +102,7 @@ public class CaliGirls extends SubsystemBase {
     }
 
     public double getLowerBounding() {
-        return ((ArmExtension.getInstance().lastpos / 500) + 0.5);
+        return ((ArmExtension.getInstance().lastpos / 600) + 0.5);
     }
 
     @Override
