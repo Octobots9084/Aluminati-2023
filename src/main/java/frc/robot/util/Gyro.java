@@ -72,6 +72,13 @@ public class Gyro {
         return navX.getRoll();
     }
 
+
+    public double getPitch() {
+        // SmartDashboard.putNumber("Gryo pitch", navX.getRoll());
+        // Logging.driveDashboard.setEntry("Gyro Pitch", navX.getRoll());
+        return navX.getPitch();
+    }
+
     public void resetGyro() {
         navX.reset();
     }

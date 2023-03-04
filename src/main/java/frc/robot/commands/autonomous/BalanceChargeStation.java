@@ -29,13 +29,13 @@ public class BalanceChargeStation extends PIDCommand {
     DriveTrain driveTrain;
     Gyro gyro;
 
-    public BalanceChargeStation(DriveTrain driveTrain, Gyro gyro) {
+    public BalanceChargeStation() {
         super(
-                new PIDController(0.045, 0.00085, 0),
-                gyro::getRoll,
+                new PIDController(0.04, 0.000, 0.01),
+                Gyro.getInstance()::getPitch,
                 0,
-                output -> driveTrain.drive(output * 0.55, 0, 0, true),
-                driveTrain);
+                output -> DriveTrain.getInstance().drive(output * 0.55/*0.55*/, 0, 0, true),
+                DriveTrain.getInstance());
 
         getController().setTolerance(20, 20);
 

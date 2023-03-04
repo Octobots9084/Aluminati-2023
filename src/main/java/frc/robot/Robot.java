@@ -98,6 +98,7 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         DriveTrain.getInstance().updateSwerveStates();
         CommandScheduler.getInstance().run();
+        Logging.updateLogging();
 
         // Logging.updateLogging();
     }
@@ -105,10 +106,12 @@ public class Robot extends TimedRobot {
     @Override
     public void teleopInit() {
         SmartDashboard.putNumber("Initialized", 1);
-
+        SmartDashboard.putBoolean("14actual", ControlMap.DRIVER_BUTTONS.getRawButton(14));
         if (!ControlMap.DRIVER_BUTTONS.getRawButton(14)) {
+            SmartDashboard.putBoolean("14",true);
             new DriverButtonConfig().initTeleop();
         } else {
+            SmartDashboard.putBoolean("14",false);
             new ButtonConfig().initTeleop();
         }
         CommandScheduler.getInstance().cancelAll();
@@ -132,19 +135,19 @@ public class Robot extends TimedRobot {
         resetRobotPoseAndGyro();
 
         //CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
-        CommandScheduler.getInstance().schedule(PathPlannerAutos.OneMeterSpin());
+        CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
         //CommandScheduler.getInstance().schedule(new driveToPos(new Pose2d(0.0, FieldConstants.length/2, new Rotation2d(0,0))));
 
         Robot.autoStartTime = Timer.getFPGATimestamp();
-        try {
-            var command = chooser.getSelected();
-            if (command != null) {
-                CommandScheduler.getInstance().schedule(command);
-            }
-        } catch (Exception ignored) {
-            // If this fails we need robot code to still try to work in teleop,
-            // so unless debugging there is no case where we want this to throw anything.
-        }
+        // try {
+        //     var command = chooser.getSelected();
+        //     if (command != null) {
+        //         CommandScheduler.getInstance().schedule(command);
+        //     }
+        // } catch (Exception ignored) {
+        //     // If this fails we need robot code to still try to work in teleop,
+        //     // so unless debugging there is no case where we want this to throw anything.
+        // }
 
     }
 

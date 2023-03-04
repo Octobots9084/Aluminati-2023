@@ -30,7 +30,7 @@ import frc.robot.util.Gyro;
 public final class PathPlannerAutos {
     private static final Map<String, Command> eventMap = new HashMap<>(Map.ofEntries(
             Map.entry("driveToPos", new driveToPos(new Pose2d(14, 0.7, new Rotation2d(0)))),
-            Map.entry("BalanceChargeStation", new BalanceChargeStation(DriveTrain.getInstance(), Gyro.getInstance())),
+            Map.entry("BalanceChargeStation", new BalanceChargeStation()),
             Map.entry("ConeTop", new AutoConeTop()),
             Map.entry("ConeMid", new AutoConeMid()),
             Map.entry("ConeLow", new AutoConeLow()),
@@ -48,6 +48,7 @@ public final class PathPlannerAutos {
             new PIDConstants(0, 0, 0),
             DriveTrain.getInstance()::driveAutos,
             eventMap,
+            true,
             DriveTrain.getInstance());
 
     public static CommandBase testPath() {
@@ -62,14 +63,14 @@ public final class PathPlannerAutos {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("1m", new PathConstraints(1, 3)));
     }
 
+    
+
     public static CommandBase OneMeterSpin() {
-        DriveTrain.getInstance().setUseDriverAssist(true);
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("TestingPath", new PathConstraints(0.2, 0.2)));
     }
 
     public static CommandBase BalanceChargeStation() {
-        DriveTrain.getInstance().setUseDriverAssist(true);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStation", new PathConstraints(3, 2)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStationMove", new PathConstraints(3, 2)));
     }
 
     public static CommandBase none() {

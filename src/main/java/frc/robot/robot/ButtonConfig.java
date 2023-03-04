@@ -15,12 +15,16 @@ import frc.robot.commands.arm.Intake.IntakeNone;
 import frc.robot.commands.arm.Intake.IntakeOut;
 import frc.robot.commands.arm.ManualControl.ArmZero;
 import frc.robot.commands.arm.ManualControl.TiltControl;
+import frc.robot.commands.autonomous.BalanceChargeStation;
+import frc.robot.commands.autonomous.driveToPos;
 import frc.robot.commands.autonomous.arm.AutoConeTop;
 import frc.robot.commands.lights.SetLightMode;
 import frc.robot.commands.swerve.SetDriverAssist;
 import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.subsystems.Light;
 import frc.robot.subsystems.arm.ArmPositions;
+import frc.robot.subsystems.swerve.DriveTrain;
+import frc.robot.util.Gyro;
 
 public class ButtonConfig {
 	public void initTeleop() {
@@ -30,8 +34,6 @@ public class ButtonConfig {
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 4)
 				.onTrue(new ZeroGyro());
-                new JoystickButton(ControlMap.DRIVER_BUTTONS, 9)
-				.onTrue(new MagicButtonV1Cone());
 				new JoystickButton(ControlMap.DRIVER_BUTTONS, 10)
 				.onTrue(new MagicButtonV1Cube());
 
@@ -68,11 +70,9 @@ public class ButtonConfig {
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 3)
 				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.INTAKE_SUBSTATION));
 
-		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
-				.onTrue(new ZeroGyro());
+		// new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
+		// 		.onTrue(new ZeroGyro());
 
-		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 5)
-				.whileTrue(new ArmZero());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 6)
 				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.DRIVE_WITHOUT_PIECE));
@@ -109,5 +109,9 @@ public class ButtonConfig {
 				.whileTrue(new ArmZero());
 
 		////END CO-DRIVER//////////////////////////
+
+	
+		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
+				.onTrue(new BalanceChargeStation());
 	}
 }
