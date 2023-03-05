@@ -12,18 +12,18 @@ import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
 
-public class Arm2PosHalfways extends SequentialCommandGroup {
+public class Arm2PosFull extends SequentialCommandGroup {
     ArmPositions aPosition;
     CaliGirls caliGirls;
     ArmExtension armExtension;
 
-    public Arm2PosHalfways(ArmPositions aPosition) {
+    public Arm2PosFull(ArmPositions aPosition) {
         this.aPosition = aPosition;
         this.caliGirls = CaliGirls.getInstance();
         this.armExtension = ArmExtension.getInstance();
         addCommands(
                 new SetWristAngle(aPosition.wrist),
-                new SetArmAngle(aPosition.armAngle, aPosition.armAngle),
+                new SetArmAngle(ArmPositions.DRIVE_WITH_PIECE.armAngle, ArmPositions.DRIVE_WITH_PIECE.armAngle),
                 new WaitCommand(0.5),
                 new SetArmExtension(aPosition.extension));
 
