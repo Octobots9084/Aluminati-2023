@@ -95,6 +95,9 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotPeriodic() {
+        SmartDashboard.putNumber("X-Pos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getX());
+        SmartDashboard.putNumber("Y-Pos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getY());
+        SmartDashboard.putNumber("Rot Deg", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getRotation().getDegrees());
     }
 
     @Override
@@ -136,21 +139,21 @@ public class Robot extends TimedRobot {
         initializeAllSubsystems();
 
         resetRobotPoseAndGyro();
-        new driveToPos(new Pose2d(14.16, 1.4, new Rotation2d()));
+        //new driveToPos(new Pose2d(14.16, 1.4, new Rotation2d()));
         //CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
-        // CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
+        CommandScheduler.getInstance().schedule(PathPlannerAutos.TestAutoOne());
         //CommandScheduler.getInstance().schedule(new driveToPos(new Pose2d(0.0, FieldConstants.length/2, new Rotation2d(0,0))));
 
         Robot.autoStartTime = Timer.getFPGATimestamp();
-        try {
-            var command = chooser.getSelected();
-            if (command != null) {
-                CommandScheduler.getInstance().schedule(command);
-            }
-        } catch (Exception ignored) {
-            // If this fails we need robot code to still try to work in teleop,
-            // so unless debugging there is no case where we want this to throw anything.
-        }
+        // try {
+        //     var command = chooser.getSelected();
+        //     if (command != null) {
+        //         CommandScheduler.getInstance().schedule(command);
+        //     }
+        // } catch (Exception ignored) {
+        //     // If this fails we need robot code to still try to work in teleop,
+        //     // so unless debugging there is no case where we want this to throw anything.
+        // }
 
     }
 

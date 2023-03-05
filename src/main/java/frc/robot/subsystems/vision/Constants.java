@@ -44,14 +44,25 @@
          public static final double width = Units.feetToMeters(27);
      }
  
-     public static class VisionConstants {
+     public static class LeftCameraVisionConstants {
         public static final Transform3d robotToCam =
                  new Transform3d(
-                         new Translation3d(0, 0.9271, 0.127),
+                         new Translation3d(0.0508, -0.1143, 1.0414),
                          new Rotation3d(
-                                 0, 0,
-                                 0)); // Cam mounted facing forward, half a meter forward of center, half a meter up
+                                 0, -0.349,
+                                 -0.2617)); // Cam mounted facing forward, half a meter forward of center, half a meter up
          // from center.
-         public static final String cameraName = "Arducam_OV9281_USB_Camera";
+         public static final String cameraName = "Left_Camera";
+     }
+
+     public static class RightCameraVisionConstants {
+        public static final Transform3d robotToCam =
+                 new Transform3d(
+                         new Translation3d(0.0794,0.1302, 1.0382),
+                         new Rotation3d(
+                                 0, -0.349,
+                                 0.2617)); // Cam mounted facing forward, half a meter forward of center, half a meter up
+         // from center.
+         public static final String cameraName = "Right_Camera";
      }
  }

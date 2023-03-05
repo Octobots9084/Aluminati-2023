@@ -2,6 +2,7 @@ package frc.robot.commands.autonomous.arm;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.advanced.CollectCone;
 import frc.robot.commands.arm.basic.MoveArmExtensionToPos;
 import frc.robot.commands.arm.basic.MoveArmRotationToPos;
 import frc.robot.commands.arm.basic.MoveArmWristToPos;
@@ -18,14 +19,9 @@ public class AutoGroundIntakeCone extends SequentialCommandGroup{
     ArmExtension armExtension;
 
     public AutoGroundIntakeCone() {
-        this.aPosition = ArmPositions.CUBE_INTAKE_FLOOR;
-        this.caliGirls = CaliGirls.getInstance();
-        addCommands(new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension), new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold));
-        new IntakeIn();
-        new WaitCommand(0.1);
-        new IntakeNone();
         this.aPosition = ArmPositions.DRIVE_WITH_PIECE;
-        addCommands(new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension));
+        addCommands(new CollectCone(), new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmExtensionToPos(aPosition.extension), new MoveArmWristToPos(aPosition.wrist));
+        
     }
 }
 
