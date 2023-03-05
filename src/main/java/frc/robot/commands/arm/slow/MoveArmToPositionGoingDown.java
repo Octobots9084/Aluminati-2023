@@ -2,9 +2,9 @@ package frc.robot.commands.arm.slow;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.arm.lowLevel.MoveArmExtensionToPos;
-import frc.robot.commands.arm.lowLevel.MoveArmRotationToPos;
-import frc.robot.commands.arm.lowLevel.MoveArmWristToPos;
+import frc.robot.commands.arm.basic.MoveArmExtensionToPos;
+import frc.robot.commands.arm.basic.MoveArmRotationToPos;
+import frc.robot.commands.arm.basic.MoveArmWristToPos;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;

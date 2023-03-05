@@ -1,9 +1,9 @@
 package frc.robot.commands.arm;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.commands.arm.lowLevel.MoveArmExtensionToPos;
-import frc.robot.commands.arm.lowLevel.MoveArmRotationToPos;
-import frc.robot.commands.arm.lowLevel.MoveArmWristToPos;
+import frc.robot.commands.arm.basic.MoveArmExtensionToPos;
+import frc.robot.commands.arm.basic.MoveArmRotationToPos;
+import frc.robot.commands.arm.basic.MoveArmWristToPos;
 import frc.robot.subsystems.arm.ArmPositions;
 
 public class ParallalMoveArm extends ParallelCommandGroup{
