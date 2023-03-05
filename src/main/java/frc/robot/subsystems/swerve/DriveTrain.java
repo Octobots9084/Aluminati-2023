@@ -198,7 +198,7 @@ public class DriveTrain extends SubsystemBase {
         if (Math.abs(diff) >= 180 && diff > 0) {
             diff -= 360;
         }
-        // double vel = daController.calculate(gyroAngle, targetAngle);
+        double vel = daController.calculate(gyroAngle, targetAngle);
         // // double vel = (turnSpeedP * (diff));
 
         double turnSpeed = (Math.signum(diff) * (Math.min(Math.abs(vel), MAX_ANGULAR_SPEED) + minTurnSpeed));
