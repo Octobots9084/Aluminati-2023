@@ -145,7 +145,7 @@ public class DriveTrain extends SubsystemBase {
         // Set states
         if (Math.abs(xSpeed) <= 0.05 && Math.abs(ySpeed) <= 0.05 && rot == 0) {
             for (int i = 0; i < swerveModuleStates.length; i++) {
-                swerveModules[i].setDesiredState(new SwerveModuleState(0, new Rotation2d(swerveModules[i].getAngle())));
+                swerveModules[i].setDesiredState(new SwerveModuleState(0, new Rotation2d(0/*swerveModules[i].getAngle()*/)));
             }
         } else {
             for (int i = 0; i < swerveModuleStates.length; i++) {

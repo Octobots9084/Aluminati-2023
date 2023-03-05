@@ -79,9 +79,9 @@ public class Tuning {
 
     //Drive Motors
     public static final PIDConfig FL_DRIVE_PID = new PIDConfig(0.06, 0.0001, 0, 0.06);
-    public static final PIDConfig FR_DRIVE_PID = new PIDConfig(0.06, 0.0001, 0, 0.1);
+    public static final PIDConfig FR_DRIVE_PID = new PIDConfig(0.07, 0.0001, 0, 0.06);
     public static final PIDConfig BL_DRIVE_PID = new PIDConfig(0.06, 0.0001, 0, 0.06);
-    public static final PIDConfig BR_DRIVE_PID = new PIDConfig(0.06, 0.0001, 0, 0.1);
+    public static final PIDConfig BR_DRIVE_PID = new PIDConfig(0.05, 0.0001, 0, 0.06);
     public static final MotionMagicConfig DM_MM_CONFIG = new MotionMagicConfig(
             new ArrayList<>(), true,
             10000.0, 10000.0,
