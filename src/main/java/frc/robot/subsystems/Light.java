@@ -41,8 +41,8 @@ public class Light extends SubsystemBase{
 
     public void setStrobeAnimationRed() {
         strobeAnimation.setR(255);
-        strobeAnimation.setG(255);
-        strobeAnimation.setB(255);
+        strobeAnimation.setG(0);
+        strobeAnimation.setB(0);
         candle.animate(strobeAnimation);
     }
     @Override

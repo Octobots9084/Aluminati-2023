@@ -2,12 +2,12 @@ package frc.robot.commands.arm.yeet;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.arm.lowLevel.MoveArmExtensionToPos;
-import frc.robot.commands.arm.lowLevel.MoveArmRotationToPos;
-import frc.robot.commands.arm.lowLevel.MoveArmWristToPos;
-import frc.robot.commands.arm.lowLevel.SetArmAngle;
-import frc.robot.commands.arm.lowLevel.SetArmExtension;
-import frc.robot.commands.arm.lowLevel.SetWristAngle;
+import frc.robot.commands.arm.LowLevel.MoveArmExtensionToPos;
+import frc.robot.commands.arm.LowLevel.MoveArmRotationToPos;
+import frc.robot.commands.arm.LowLevel.MoveArmWristToPos;
+import frc.robot.commands.arm.LowLevel.SetArmAngle;
+import frc.robot.commands.arm.LowLevel.SetArmExtension;
+import frc.robot.commands.arm.LowLevel.SetWristAngle;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;

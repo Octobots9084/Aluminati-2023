@@ -1,8 +1,8 @@
 package frc.robot.commands.arm.slow;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.arm.lowLevel.MoveArmExtensionToPos;
-import frc.robot.commands.arm.lowLevel.MoveArmWristToPos;
+import frc.robot.commands.arm.LowLevel.MoveArmExtensionToPos;
+import frc.robot.commands.arm.LowLevel.MoveArmWristToPos;
 import frc.robot.subsystems.arm.ArmPositions;
 
 public class SafeMoveArmGoingDown extends SequentialCommandGroup {
