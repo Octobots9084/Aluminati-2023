@@ -85,7 +85,7 @@ public class DriveTrain extends SubsystemBase {
     private final RSTab driveDashboard;
 
     private DriveTrain() {
-        this.daController = new PIDController(0.2, 0, 0);
+        this.daController = new PIDController(0.05, 0, 0);
         //Position relative to center of robot -> (0,0) is the center (m)
         swervePosition[1] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
         swervePosition[3] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
@@ -198,11 +198,11 @@ public class DriveTrain extends SubsystemBase {
         if (Math.abs(diff) >= 180 && diff > 0) {
             diff -= 360;
         }
-        double vel = daController.calculate(gyroAngle, targetAngle);
-        // double vel = (turnSpeedP * (diff));
+        // double vel = daController.calculate(gyroAngle, targetAngle);
+        // // double vel = (turnSpeedP * (diff));
 
-        // double turnSpeed = (Math.signum(diff) * (Math.min(Math.abs(vel), MAX_ANGULAR_SPEED) + minTurnSpeed));
-        double turnSpeed = (Math.signum(diff) * (Math.min(Math.abs(vel), MAX_ANGULAR_SPEED)));
+        double turnSpeed = (Math.signum(diff) * (Math.min(Math.abs(vel), MAX_ANGULAR_SPEED) + minTurnSpeed));
+        // double turnSpeed = (Math.signum(diff) * (Math.min(Math.abs(vel), MAX_ANGULAR_SPEED)));
 
 
         return turnSpeed;
