@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
+import frc.robot.commands.advanced.CollectCone;
 import frc.robot.commands.autonomous.arm.AutoConeLow;
 import frc.robot.commands.autonomous.arm.AutoConeMid;
 import frc.robot.commands.autonomous.arm.AutoConeTop;
@@ -45,7 +46,7 @@ public final class PathPlannerAutos {
             DriveTrain.getInstance()::getPose2d,
             DriveTrain.getInstance().getPoseEstimator()::resetPose,
             new PIDConstants(0, 0, 0),
-            new PIDConstants(0, 0, 0),
+            new PIDConstants(2, 0, 0),
             DriveTrain.getInstance()::driveAutos,
             eventMap,
             true,
@@ -71,6 +72,10 @@ public final class PathPlannerAutos {
 
     public static CommandBase BalanceChargeStation() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStationMove", new PathConstraints(3, 2)));
+    }
+
+    public static CommandBase TestAutoOne() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("MoveAndGrabCone", new PathConstraints(1, 1)));
     }
 
     public static CommandBase none() {
