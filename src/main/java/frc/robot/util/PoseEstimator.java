@@ -39,7 +39,8 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.robot.Logging;
 import frc.robot.subsystems.swerve.SwerveModule;
-import frc.robot.subsystems.vision.PhotonCameraWrapper;
+import frc.robot.subsystems.vision.LeftCameraWrapper;
+import frc.robot.subsystems.vision.RightCameraWrapper;
 import frc.robot.util.shuffleboard.RSTab;
 
 public class PoseEstimator {
@@ -48,12 +49,14 @@ public class PoseEstimator {
     private final ReentrantLock resetLock = new ReentrantLock();
     private final Gyro gyro;
     private final SwerveModule[] swerveModules;
-    public PhotonCameraWrapper photonCameraWrapper;
+    public LeftCameraWrapper leftCameraWrapper;
+    public RightCameraWrapper rightCameraWrapper;
 
     private final RSTab driveDashboard;
 
     public PoseEstimator(Gyro gyro, SwerveDriveKinematics swerveDriveKinematics, SwerveModule[] swerveModules) {
-        this.photonCameraWrapper = new PhotonCameraWrapper();
+        this.leftCameraWrapper = new LeftCameraWrapper();
+        this.rightCameraWrapper = new RightCameraWrapper();
         this.gyro = gyro;
         this.swerveModules = swerveModules;
         SwerveModulePosition[] swerveModulePositions = {
@@ -119,7 +122,7 @@ public class PoseEstimator {
         // driveDashboard.setEntry("Rot Deg", robotPose.get().getRotation().getDegrees());
 
         try {
-            Optional<EstimatedRobotPose> result = photonCameraWrapper.getEstimatedGlobalPose(getRobotPose());
+            Optional<EstimatedRobotPose> result = leftCameraWrapper.getEstimatedGlobalPose(getRobotPose());
             if (result.isPresent()) {
                 swerveDrivePoseEstimator.addVisionMeasurement(result.get().estimatedPose.toPose2d(),
                         Timer.getFPGATimestamp());
@@ -127,9 +130,19 @@ public class PoseEstimator {
 
         } catch (Exception e) {
             //deez
-        } finally {
-            resetLock.unlock();
-        }
+        } 
+
+        try {
+            Optional<EstimatedRobotPose> result = rightCameraWrapper.getEstimatedGlobalPose(getRobotPose());
+            if (result.isPresent()) {
+                swerveDrivePoseEstimator.addVisionMeasurement(result.get().estimatedPose.toPose2d(),
+                        Timer.getFPGATimestamp());
+            }
+
+        } catch (Exception e) {
+            //deez
+        } 
+        resetLock.unlock();
 
     }
 

@@ -95,6 +95,9 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotPeriodic() {
+        SmartDashboard.putNumber("X-Pos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getX());
+        SmartDashboard.putNumber("Y-Pos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getY());
+        SmartDashboard.putNumber("Rot Deg", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getRotation().getDegrees());
     }
 
     @Override

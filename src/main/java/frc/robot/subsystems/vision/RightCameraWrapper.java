@@ -27,7 +27,7 @@
  import edu.wpi.first.apriltag.AprilTagFieldLayout;
 import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.geometry.Pose2d;
-import frc.robot.subsystems.vision.Constants.VisionConstants;
+import frc.robot.subsystems.vision.Constants.RightCameraVisionConstants;
 
 import java.io.IOException;
  import java.util.Optional;
@@ -36,12 +36,12 @@ import java.io.IOException;
  import org.photonvision.PhotonPoseEstimator;
  import org.photonvision.PhotonPoseEstimator.PoseStrategy;
  
- public class PhotonCameraWrapper {
+ public class RightCameraWrapper {
      public PhotonCamera photonCamera;
      public PhotonPoseEstimator photonPoseEstimator;
      private AprilTagFieldLayout fieldLayout;
 
-     public PhotonCameraWrapper() { 
+     public RightCameraWrapper() { 
          try {
                 fieldLayout = AprilTagFieldLayout.loadFromResource(AprilTagFields.k2023ChargedUp.m_resourceFile);
         } catch (IOException err) {
@@ -52,13 +52,13 @@ import java.io.IOException;
          // Forward Camera
          photonCamera =
                  new PhotonCamera(
-                         VisionConstants
+                         RightCameraVisionConstants
                                  .cameraName); 
  
          // Create pose estimator
          photonPoseEstimator =
                  new PhotonPoseEstimator(
-                        fieldLayout, PoseStrategy.LOWEST_AMBIGUITY, photonCamera, VisionConstants.robotToCam);
+                        fieldLayout, PoseStrategy.AVERAGE_BEST_TARGETS, photonCamera, RightCameraVisionConstants.robotToCam);
      }
  
      /**
