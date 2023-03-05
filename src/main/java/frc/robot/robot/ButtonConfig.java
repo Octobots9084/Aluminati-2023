@@ -98,9 +98,9 @@ public class ButtonConfig {
 				.onTrue(new InstantCommand(() -> Light.getInstance().setStrobeAnimationPurple()));
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 14)
 				.onTrue(new InstantCommand(() -> Light.getInstance().setStrobeAnimationYellow()));
-				new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
+		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
 				.onFalse(new InstantCommand(() -> Light.getInstance().setStrobeAnimationRed()));
-				new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 14)
+		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 14)
 				.onFalse(new InstantCommand(() -> Light.getInstance().setStrobeAnimationRed()));
 		//Arm Override Enable
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 15)
