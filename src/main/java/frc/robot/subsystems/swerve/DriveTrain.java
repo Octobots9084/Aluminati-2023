@@ -145,7 +145,7 @@ public class DriveTrain extends SubsystemBase {
         // Set states
         if (Math.abs(xSpeed) <= 0.05 && Math.abs(ySpeed) <= 0.05 && rot == 0) {
             for (int i = 0; i < swerveModuleStates.length; i++) {
-                swerveModules[i].setDesiredState(new SwerveModuleState(0, new Rotation2d(0)));
+                swerveModules[i].setDesiredState(new SwerveModuleState(0, new Rotation2d(swerveModules[i].getAngle())));
             }
         } else {
             for (int i = 0; i < swerveModuleStates.length; i++) {
@@ -164,10 +164,8 @@ public class DriveTrain extends SubsystemBase {
         // driveDashboard.setEntry("Y-Speed Path", chassisSpeeds.vyMetersPerSecond);
         // driveDashboard.setEntry("Rot Path", chassisSpeeds.omegaRadiansPerSecond);
 
-        this.targetRotationAngle = this.targetRotationAngle
-                - ((Math.toDegrees(chassisSpeeds.omegaRadiansPerSecond) * 0.02));
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(new ChassisSpeeds(
-                -chassisSpeeds.vyMetersPerSecond, chassisSpeeds.vxMetersPerSecond, this.getRotationSpeed()));
+            chassisSpeeds.vxMetersPerSecond,chassisSpeeds.vyMetersPerSecond, -chassisSpeeds.omegaRadiansPerSecond));
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, MAX_SPEED);
         for (int i = 0; i < swerveModuleStates.length; i++) {
             swerveModules[i].setDesiredState(swerveModuleStates[i]);

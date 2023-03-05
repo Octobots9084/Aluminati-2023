@@ -102,7 +102,7 @@ public class PoseEstimator {
         if (DriverStation.getAlliance()==DriverStation.Alliance.Blue) {
             rotation = new Rotation2d(gyro.getRotation2d().getRadians()+Math.PI);
         } else {
-            new Rotation2d(gyro.getRotation2d().getRadians());
+            rotation = new Rotation2d(gyro.getRotation2d().getRadians()+(2*Math.PI));
         }
         var pose2d = swerveDrivePoseEstimator.updateWithTime(
                 Timer.getFPGATimestamp(),
@@ -146,7 +146,7 @@ public class PoseEstimator {
             if (DriverStation.getAlliance()==DriverStation.Alliance.Blue) {
                 rotation = new Rotation2d(gyro.getRotation2d().getRadians()+Math.PI);
             } else {
-                new Rotation2d(gyro.getRotation2d().getRadians());
+                rotation = new Rotation2d(gyro.getRotation2d().getRadians()+(2*Math.PI));
             }
             swerveDrivePoseEstimator.resetPosition(rotation, swerveModulePositions, this.getRobotPose());
         } finally {
@@ -167,7 +167,7 @@ public class PoseEstimator {
             if (DriverStation.getAlliance()==DriverStation.Alliance.Blue) {
                 rotation = new Rotation2d(gyro.getRotation2d().getRadians()+Math.PI);
             } else {
-                new Rotation2d(gyro.getRotation2d().getRadians());
+                rotation = new Rotation2d(gyro.getRotation2d().getRadians()+(2*Math.PI));
             }
             
             swerveDrivePoseEstimator.resetPosition(rotation, swerveModulePositions, pose2d);

@@ -115,7 +115,7 @@ public class SwerveModule {
 
     public SwerveModulePosition getModulePosition() {
         return new SwerveModulePosition(DRIVE_MOTOR_TICK_TO_METERS * this.getDriveTicks(),
-                new Rotation2d(this.getAbsoluteAngle() * -1));
+                new Rotation2d(this.getAngle() * -1));
     }
 
     public double convertAngleToTick(double angleInRads) {

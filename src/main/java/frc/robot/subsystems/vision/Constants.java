@@ -47,11 +47,11 @@
      public static class VisionConstants {
         public static final Transform3d robotToCam =
                  new Transform3d(
-                         new Translation3d(.3048, 0.3429, -0.2413),
+                         new Translation3d(0, 0.9271, 0.127),
                          new Rotation3d(
                                  0, 0,
                                  0)); // Cam mounted facing forward, half a meter forward of center, half a meter up
          // from center.
-         public static final String cameraName = "Microsoft_LifeCam_HD-3000";
+         public static final String cameraName = "Arducam_OV9281_USB_Camera";
      }
  }
