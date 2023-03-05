@@ -1,4 +1,4 @@
-package frc.robot.commands.arm;
+package frc.robot.commands.arm.yeet;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;

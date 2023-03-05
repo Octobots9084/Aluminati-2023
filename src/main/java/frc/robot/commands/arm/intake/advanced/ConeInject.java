@@ -3,11 +3,11 @@ package frc.robot.commands.arm.intake.advanced;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.arm.Arm2PosCooldown;
 import frc.robot.commands.arm.CaliGirlsBottomMoveDownALittle;
 import frc.robot.commands.arm.lowLevel.MoveArmRotationToPos;
 import frc.robot.commands.arm.slow.MoveArmToPositionGoingDown;
 import frc.robot.commands.arm.slow.MoveArmToPositionGoingUp;
+import frc.robot.commands.arm.yeet.Arm2PosCooldown;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
 
