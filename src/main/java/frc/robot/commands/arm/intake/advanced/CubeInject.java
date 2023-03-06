@@ -13,15 +13,13 @@ import frc.robot.commands.arm.yeet.Arm2PosCooldown;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
 
-public class ConeInject extends SequentialCommandGroup {
-    public ConeInject() {
+public class CubeInject extends SequentialCommandGroup {
+    public CubeInject() {
         addCommands(
                 // new SetArmAngle(pos - 0.1, caliGirls.getBottomKf()),
                 // new MoveArmRotationToPos(pos, caliGirls.getBottomKf()),
-                new CaliGirlsBottomMoveDownALittle(),
-                new WaitCommand(0.25),
-                new IntakeNone(),
-                new WaitCommand(0.5),
+                new IntakeOutWithTimeout(),
+                new WaitCommand(0.3),
                 new Arm2PosCooldown(ArmPositions.DRIVE_WITHOUT_PIECE));
     }
 

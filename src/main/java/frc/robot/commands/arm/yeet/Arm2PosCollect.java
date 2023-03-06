@@ -25,7 +25,7 @@ public class Arm2PosCollect extends SequentialCommandGroup {
                 new SetArmAngle(aPosition.armAngle, aPosition.angleHold),
                 new WaitCommand(0.1),
                 new SetWristAngle(aPosition.wrist),
-                new WaitCommand(0.3),
+                new WaitCommand(0.5),
                 new SetArmExtension(aPosition.extension));
     }
 }

@@ -20,6 +20,9 @@ import frc.robot.commands.arm.slow.MoveArmToPositionGoingDown;
 import frc.robot.commands.arm.slow.MoveArmToPositionGoingUp;
 import frc.robot.commands.arm.slow.SafeMoveArmGoingDown;
 import frc.robot.commands.arm.slow.SafeMoveArmGoingUp;
+import frc.robot.commands.arm.yeet.Arm2PosCollect;
+import frc.robot.commands.arm.yeet.Arm2PosFull;
+import frc.robot.commands.arm.yeet.Arm2PosHalfways;
 import frc.robot.commands.arm.yeet.Arm2PosStow;
 import frc.robot.commands.swerve.SetDriveAngle;
 import frc.robot.commands.swerve.SetDriverAssist;
@@ -85,19 +88,19 @@ public class DriverButtonConfig {
 				.whileTrue(new ArmZero());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 6)
-				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.DRIVE_WITHOUT_PIECE));
+				.onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITHOUT_PIECE));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 7)
-				.onTrue(new SequentialCommandGroup(new  SetItemMode(false), new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_HIGH)));
+				.onTrue(new SequentialCommandGroup(new  SetItemMode(false), new Arm2PosHalfways(ArmPositions.CUBE_PLACE_HIGH)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 8)
-				.onTrue(new SequentialCommandGroup(new  SetItemMode(true), new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_HIGH)));
+				.onTrue(new SequentialCommandGroup(new  SetItemMode(true), new Arm2PosFull(ArmPositions.PRE_CONE_PLACE_HIGH)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 9)
-				.onTrue(new SequentialCommandGroup(new  SetItemMode(false), new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_MID)));
+				.onTrue(new SequentialCommandGroup(new  SetItemMode(false), new Arm2PosCollect(ArmPositions.CUBE_PLACE_MID)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 10)
-				.onTrue(new SequentialCommandGroup(new  SetItemMode(true), new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_MID)));
+				.onTrue(new SequentialCommandGroup(new  SetItemMode(true), new Arm2PosHalfways(ArmPositions.PRE_CONE_PLACE_MID)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 11)
 				.onTrue(new IntakeOut());

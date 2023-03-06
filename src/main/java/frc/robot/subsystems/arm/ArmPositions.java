@@ -9,7 +9,7 @@ public enum ArmPositions {
     CONE_PLACE_MID(.7, 0.06, 20.64, .655),
     CONE_PLACE_LOW(.514, 0.03, 0, .4746),
 
-    CONE_INTAKE_GROUND(.57, 0.03, 38.5, 0.522),
+    CONE_INTAKE_GROUND(.578, 0.03, 36, 0.527),
     INTAKE_SUBSTATION(.756, 0, 0, .69),
 
     CUBE_PLACE_HIGH(.763, 0.09, 19.9, .69),

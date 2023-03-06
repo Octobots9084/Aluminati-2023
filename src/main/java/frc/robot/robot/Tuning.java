@@ -59,11 +59,11 @@ public class Tuning {
     //             0.0);
 
     //     public static final PIDConfig CALI_BOTTOM_PID = new PIDConfig(3, 0.0005, 0.2, 0.03);
-    public static final PIDConfig CALI_BOTTOM_PID = new PIDConfig(3, 0.0, 0, 0.1);
+    public static final PIDConfig CALI_BOTTOM_PID = new PIDConfig(5, 0.00, 0, 0.05);
     public static final SmartMotionConfig CALI_BOTTOM_SM = new SmartMotionConfig(true,
-            10000.0,
+            1.0,
             0.0,
-            10000.0,
+            1.0,
             0.0);
     public static final double CALI_BOTTOM_ENCODER_RESOLUTION = 1.0;
 

@@ -18,6 +18,7 @@ import frc.robot.commands.arm.slow.MoveArmToPositionGoingUp;
 import frc.robot.commands.arm.slow.SafeMoveArmGoingDown;
 import frc.robot.commands.arm.slow.SafeMoveArmGoingUp;
 import frc.robot.commands.arm.yeet.Arm2PosCooldown;
+import frc.robot.commands.arm.yeet.Arm2PosFull;
 import frc.robot.commands.arm.yeet.Arm2PosHalfways;
 import frc.robot.commands.autonomous.BalanceChargeStation;
 import frc.robot.commands.autonomous.driveToPos;
@@ -85,13 +86,13 @@ public class ButtonConfig {
 				.onTrue(new Arm2PosHalfways(ArmPositions.CUBE_PLACE_HIGH));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 8)
-				.onTrue(new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_HIGH));
+				.onTrue(new Arm2PosFull(ArmPositions.PRE_CONE_PLACE_HIGH));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 9)
-				.onTrue(new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_MID));
+				.onTrue(new Arm2PosHalfways(ArmPositions.CUBE_PLACE_MID));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 10)
-				.onTrue(new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_MID));
+				.onTrue(new Arm2PosHalfways(ArmPositions.PRE_CONE_PLACE_MID));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 11)
 				.onTrue(new IntakeOut());

@@ -60,6 +60,7 @@ public class CaliGirls extends SubsystemBase {
         pidControllerBottom.setI(Tuning.CALI_BOTTOM_PID.getI());
         pidControllerBottom.setD(Tuning.CALI_BOTTOM_PID.getD());
         pidControllerBottom.setFF(Tuning.CALI_BOTTOM_PID.getF());
+        // pidControllerBottom.setIZone(0.2);
         pidControllerBottom.setOutputRange(-1.0, 1.0);
         motorBottom.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(0.28);
 

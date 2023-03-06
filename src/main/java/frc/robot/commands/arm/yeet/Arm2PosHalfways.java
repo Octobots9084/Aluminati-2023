@@ -22,9 +22,10 @@ public class Arm2PosHalfways extends SequentialCommandGroup {
         this.caliGirls = CaliGirls.getInstance();
         this.armExtension = ArmExtension.getInstance();
         addCommands(
-                new SetWristAngle(aPosition.wrist),
                 new SetArmAngle(aPosition.armAngle, aPosition.armAngle),
-                new WaitCommand(0.5),
+                new WaitCommand(0.3),
+                new SetWristAngle(aPosition.wrist),
+                new WaitCommand(0.3),
                 new SetArmExtension(aPosition.extension));
 
     }

@@ -23,7 +23,7 @@ public class Arm2PosFull extends SequentialCommandGroup {
         this.armExtension = ArmExtension.getInstance();
         addCommands(
                 new SetWristAngle(aPosition.wrist),
-                new SetArmAngle(ArmPositions.DRIVE_WITH_PIECE.armAngle, ArmPositions.DRIVE_WITH_PIECE.armAngle),
+                new SetArmAngle(aPosition.armAngle, aPosition.armAngle),
                 new WaitCommand(0.5),
                 new SetArmExtension(aPosition.extension));
 
