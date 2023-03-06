@@ -132,7 +132,7 @@ public class DriveTrain extends SubsystemBase {
     public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
         //driver assist """implimentation"""
         if (useDriverAssist) {
-            this.targetRotationAngle = targetRotationAngle + rot * 2;
+            this.targetRotationAngle = targetRotationAngle + (Math.toDegrees(rot) * .02);
             rot = getRotationSpeed();
         }
         // Calculate swerve states
@@ -187,25 +187,28 @@ public class DriveTrain extends SubsystemBase {
 
     public double getRotationSpeed() {
         double gyroAngle = MathUtil.wrapToCircle(gyro.getRotation2d().getDegrees());
-        if (MathUtil.isWithinTolerance(gyroAngle, targetRotationAngle, TOLERANCE)) {
-            return 0.0;
-        }
+  
         double targetAngle = MathUtil.wrapToCircle(targetRotationAngle);
-        var diff = targetAngle - gyroAngle;
-        if (Math.abs(diff) >= 180 && diff < 0) {
-            diff += 360;
+        double distance1 = targetAngle-gyroAngle;
+        double distance2 = targetAngle-gyroAngle+360;
+        double distance3 = targetAngle-gyroAngle-360;
+
+        double smallestDistance = 0;
+        if (distance1<distance2) {
+            smallestDistance = distance1;
+        } else {
+            smallestDistance = distance2;
         }
-        if (Math.abs(diff) >= 180 && diff > 0) {
-            diff -= 360;
+
+        if (distance3<smallestDistance) {
+            smallestDistance = distance3;
+        } else {
+            smallestDistance = distance3;
         }
-        double vel = daController.calculate(gyroAngle, targetAngle);
-        // // double vel = (turnSpeedP * (diff));
-
-        double turnSpeed = (Math.signum(diff) * (Math.min(Math.abs(vel), MAX_ANGULAR_SPEED) + minTurnSpeed));
-        // double turnSpeed = (Math.signum(diff) * (Math.min(Math.abs(vel), MAX_ANGULAR_SPEED)));
+        double vel = Math.toRadians(smallestDistance)/.02;
 
 
-        return turnSpeed;
+        return Math.toRadians(vel);
     }
 
     public void setSwerveModuleAngle(double angle) {
