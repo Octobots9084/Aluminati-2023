@@ -10,6 +10,7 @@
     "types": {
       "/FMSInfo": "FMSInfo",
       "/Shuffleboard/Drive/Field": "Field2d",
+      "/Shuffleboard/auto/SendableChooser[0]": "String Chooser",
       "/SmartDashboard/PPSwerveControllerCommand_field": "Field2d"
     }
   },
@@ -17,6 +18,9 @@
     "transitory": {
       "Shuffleboard": {
         "arm": {
+          "open": true
+        },
+        "auto": {
           "open": true
         },
         "open": true

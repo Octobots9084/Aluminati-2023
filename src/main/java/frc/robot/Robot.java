@@ -23,21 +23,15 @@ package frc.robot;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.arm.ParallalMoveArm;
 import frc.robot.commands.arm.manual.ArmControl;
 import frc.robot.commands.arm.manual.TiltControl;
-import frc.robot.commands.autonomous.PathPlannerAutos;
-import frc.robot.commands.autonomous.driveToPos;
 import frc.robot.commands.swerve.SwerveControl;
 import frc.robot.robot.ButtonConfig;
 import frc.robot.robot.ControlMap;
@@ -54,7 +48,6 @@ import frc.robot.util.Gyro;
 public class Robot extends TimedRobot {
     public static double autoStartTime = 0.0;
     private final Field2d field2d = new Field2d();
-    private SendableChooser<Command> chooser;
     private boolean autoFlag = false;
 
     @Override
@@ -90,14 +83,15 @@ public class Robot extends TimedRobot {
                 TimeUnit.MILLISECONDS);
         LiveWindow.disableAllTelemetry();
         LiveWindow.setEnabled(false);
-        this.chooser = new SendableChooser<>();
+        Logging.addAutoChooser();
     }
 
     @Override
     public void robotPeriodic() {
         SmartDashboard.putNumber("X-Pos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getX());
         SmartDashboard.putNumber("Y-Pos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getY());
-        SmartDashboard.putNumber("Rot Deg", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getRotation().getDegrees());
+        SmartDashboard.putNumber("Rot Deg",
+                DriveTrain.getInstance().getPoseEstimator().getRobotPose().getRotation().getDegrees());
     }
 
     @Override
@@ -114,10 +108,10 @@ public class Robot extends TimedRobot {
         SmartDashboard.putNumber("Initialized", 1);
         SmartDashboard.putBoolean("14actual", ControlMap.DRIVER_BUTTONS.getRawButton(14));
         if (!ControlMap.DRIVER_BUTTONS.getRawButton(14)) {
-            SmartDashboard.putBoolean("14",true);
+            SmartDashboard.putBoolean("14", true);
             new DriverButtonConfig().initTeleop();
         } else {
-            SmartDashboard.putBoolean("14",false);
+            SmartDashboard.putBoolean("14", false);
             new ButtonConfig().initTeleop();
         }
         CommandScheduler.getInstance().cancelAll();
@@ -141,19 +135,19 @@ public class Robot extends TimedRobot {
         resetRobotPoseAndGyro();
         //new driveToPos(new Pose2d(14.16, 1.4, new Rotation2d()));
         //CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
-        CommandScheduler.getInstance().schedule(PathPlannerAutos.TestAutoOne());
+        // CommandScheduler.getInstance().schedule(PathPlannerAutos.TestAutoOne());
         //CommandScheduler.getInstance().schedule(new driveToPos(new Pose2d(0.0, FieldConstants.length/2, new Rotation2d(0,0))));
 
         Robot.autoStartTime = Timer.getFPGATimestamp();
-        // try {
-        //     var command = chooser.getSelected();
-        //     if (command != null) {
-        //         CommandScheduler.getInstance().schedule(command);
-        //     }
-        // } catch (Exception ignored) {
-        //     // If this fails we need robot code to still try to work in teleop,
-        //     // so unless debugging there is no case where we want this to throw anything.
-        // }
+
+        try {
+            var command = Logging.getAutoChooser().getSelected();
+            if (command != null) {
+                CommandScheduler.getInstance().schedule(command);
+            }
+        } catch (Exception e) {
+            // I fuxed it
+        }
 
     }
 
