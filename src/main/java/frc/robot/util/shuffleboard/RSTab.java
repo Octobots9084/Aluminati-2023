@@ -154,6 +154,25 @@ public class RSTab {
     }
 
     /**
+     * <p>Adds a {@code Sendable} type object to the {@code RSTab} with properties.</p>
+     *
+     * <p>Applied as a {@code ComplexWidget} type to the WPILib {@code ShuffleboardTab}.
+     * Title/name of {@code Shuffleboard} tile equal to registered name of {@code Sendable}.
+     * Typically used for WPILib {@code SendableChooser} objects.</p>
+     *
+     * @param name the name of the tile
+     * @param sendable the sendable type object to add.
+     * @param options placement and sizing options on the {@code RSTab}.
+     * @return the current {@code RSTab} where the {@code Sendable} was added.
+     *
+     * @since 0.1.0
+     */
+    public RSTab setSendable(String name, Sendable sendable, RSTileOptions options) {
+        options.applyToComplex(tab.add(name, sendable));
+        return this;
+    }
+
+    /**
      * <p>Adds a primitive value to the {@code RSTab}.
      * Uses default {@link RSTileOptions}</p>
      *

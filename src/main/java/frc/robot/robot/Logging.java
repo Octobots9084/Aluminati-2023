@@ -85,7 +85,7 @@ public class Logging {
     }
 
     public static void addAutoChooser() {
-        autoDashboard.setSendable(autoChooser, new RSTileOptions(2, 1, 0, 0));
+        autoDashboard.setSendable("Auto Chooser", autoChooser, new RSTileOptions(2, 1, 0, 0));
     }
 
     public static SendableChooser<Command> getAutoChooser() {
