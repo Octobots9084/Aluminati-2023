@@ -68,13 +68,13 @@ public class MathUtil {
                 if (val >= 1) {
                     return 1;
                 } else {
-                    return val - deadband;
+                    return (val - deadband) * 1 / (1 - deadband);
                 }
             } else if (val < 0) {
                 if (val <= -1) {
                     return -1;
                 } else {
-                    return val + deadband;
+                    return (val + deadband)* 1 / (1 - deadband);
                 }
             }
         }
