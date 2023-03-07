@@ -31,7 +31,7 @@ import frc.robot.util.MathUtil;
 /**
  * Represents a swerve drive style drivetrain.
 */
-public class driveToPos extends CommandBase {
+public class DriveToPos extends CommandBase {
     private final DriveTrain driveTrain;
     private final Pose2d target;
 
@@ -43,7 +43,7 @@ public class driveToPos extends CommandBase {
     private PIDController turnPids;
     private double startTime;
     private double currentTime;
-    public driveToPos(Pose2d target) {
+    public DriveToPos(Pose2d target) {
         this.driveTrain = DriveTrain.getInstance();
         this.target = target;
         this.xSpeed = 0;
