@@ -7,6 +7,7 @@ import frc.robot.commands.arm.CaliGirlsBottomMoveDownALittle;
 import frc.robot.commands.arm.basic.MoveArmRotationToPos;
 import frc.robot.commands.arm.basic.SetArmAngle;
 import frc.robot.commands.arm.intake.basic.IntakeNone;
+import frc.robot.commands.arm.intake.basic.IntakeOutALittle;
 import frc.robot.commands.arm.slow.MoveArmToPositionGoingDown;
 import frc.robot.commands.arm.slow.MoveArmToPositionGoingUp;
 import frc.robot.commands.arm.yeet.Arm2PosCooldown;
@@ -20,9 +21,10 @@ public class ConeInject extends SequentialCommandGroup {
                 // new MoveArmRotationToPos(pos, caliGirls.getBottomKf()),
                 new CaliGirlsBottomMoveDownALittle(),
                 new WaitCommand(0.25),
-                new IntakeNone(),
-                new WaitCommand(0.5),
+                new IntakeOutALittle(),
+                new WaitCommand(1),
                 new Arm2PosCooldown(ArmPositions.DRIVE_WITHOUT_PIECE));
+                new IntakeNone();
     }
 
 }

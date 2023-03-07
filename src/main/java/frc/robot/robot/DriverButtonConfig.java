@@ -8,6 +8,7 @@ import frc.robot.commands.advanced.CollectConeSubstation;
 import frc.robot.commands.advanced.MagicButtonV1Cone;
 import frc.robot.commands.advanced.MagicButtonV1Cube;
 import frc.robot.commands.arm.intake.advanced.ConeInject;
+import frc.robot.commands.arm.intake.advanced.CubeInject;
 import frc.robot.commands.arm.intake.advanced.IntakeOutWithTimeout;
 import frc.robot.commands.arm.intake.advanced.SmartEject;
 import frc.robot.commands.arm.intake.basic.IntakeIn;
@@ -103,7 +104,7 @@ public class DriverButtonConfig {
 				.onTrue(new SequentialCommandGroup(new  SetItemMode(true), new Arm2PosHalfways(ArmPositions.PRE_CONE_PLACE_MID)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 11)
-				.onTrue(new IntakeOut());
+				.onTrue(new CubeInject());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 12)
 				.onTrue(new ConeInject());

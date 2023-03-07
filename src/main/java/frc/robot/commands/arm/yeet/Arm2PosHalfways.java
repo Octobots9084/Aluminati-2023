@@ -23,9 +23,9 @@ public class Arm2PosHalfways extends SequentialCommandGroup {
         this.armExtension = ArmExtension.getInstance();
         addCommands(
                 new SetArmAngle(aPosition.armAngle, aPosition.armAngle),
-                new WaitCommand(0.3),
+                new WaitCommand(0),
                 new SetWristAngle(aPosition.wrist),
-                new WaitCommand(0.3),
+                new WaitCommand(1.2),
                 new SetArmExtension(aPosition.extension));
 
     }
