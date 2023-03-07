@@ -29,6 +29,7 @@ import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.subsystems.Light;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.swerve.DriveTrain;
+import frc.robot.subsystems.swerve.FieldPositions;
 import frc.robot.util.Gyro;
 
 public class ButtonConfig {
@@ -117,6 +118,6 @@ public class ButtonConfig {
 
 	
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
-				.onTrue(new driveToPos(new Pose2d(14.126, 2.36, new Rotation2d())));
+				.onTrue(new driveToPos(new Pose2d(FieldPositions.RED_CONE_RIGHT.xPos, FieldPositions.RED_CONE_RIGHT.yPos, new Rotation2d())));
 	}
 }

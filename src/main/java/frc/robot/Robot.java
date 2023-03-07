@@ -23,6 +23,8 @@ package frc.robot;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -178,6 +180,7 @@ public class Robot extends TimedRobot {
         Gyro.getInstance().resetGyro();
         DriveTrain.getInstance().setTargetRotationAngle(0);
         DriveTrain.getInstance().drive(0, 0, 0, true);
+        DriveTrain.getInstance().getPoseEstimator().resetPose(new Pose2d(0,0, new Rotation2d()));
     }
 
     private void initializeDefaultCommands() {

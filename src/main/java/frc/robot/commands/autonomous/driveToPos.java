@@ -127,12 +127,12 @@ public class driveToPos extends CommandBase {
             xSpeed = -0.5;
         }
 
-        if (ySpeed>0.2) {
-            ySpeed = 0.2;
+        if (ySpeed>0.5) {
+            ySpeed = 0.5;
         }
 
-        if (ySpeed<-0.2) {
-            ySpeed = -0.2;
+        if (ySpeed<-0.5) {
+            ySpeed = -0.5;
         }
 
         // Check driver assist and drive

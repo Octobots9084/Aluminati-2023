@@ -70,13 +70,21 @@ public final class PathPlannerAutos {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("TestingPath", new PathConstraints(0.2, 0.2)));
     }
 
-    public static CommandBase BalanceChargeStation() {
+    public static CommandBase PlaceConeAndBalance() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStationMove", new PathConstraints(3, 2)));
     }
-
-    public static CommandBase TestAutoOne() {
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("MoveAndGrabCone", new PathConstraints(1, 1)));
+    public static CommandBase PlaceConeAndMoveBackBottom() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("MoveAndGrabConeBottom", new PathConstraints(2, 1)));
     }
+
+    public static CommandBase PlaceConeAndMoveBackTop() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("MoveAndGrabConeTop", new PathConstraints(2, 1)));
+    }
+
+    public static CommandBase Place2Cone() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("MoveAndGrabConeBottomAndComeBack", new PathConstraints(2, 1)));
+    }
+    
 
     public static CommandBase none() {
         return Commands.none();

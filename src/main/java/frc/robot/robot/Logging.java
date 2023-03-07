@@ -55,17 +55,12 @@ public class Logging {
     private void addAutoOptions() {
         //
         autoChooser.setDefaultOption("No Auto", null);
+        autoChooser.addOption("OneMeterSpin", PathPlannerAutos.OneMeterSpin());
+        autoChooser.addOption("Balance Charge Station", PathPlannerAutos.PlaceConeAndBalance());
+        autoChooser.addOption("Move and Grab Cone Bottom", PathPlannerAutos.PlaceConeAndMoveBackBottom());
+        autoChooser.addOption("Move and Grab Cone Top", PathPlannerAutos.PlaceConeAndMoveBackTop());
+        autoChooser.addOption("2 Cones", PathPlannerAutos.Place2Cone());
 
-        autoChooser.addOption("Auto Cone Middle", new AutoConeMid());
-        autoChooser.addOption("Auto Cone Top", new AutoConeTop());
-        autoChooser.addOption("Auto Cone Low", new AutoConeLow());
-        autoChooser.addOption("Auto Cube Top", new AutoCubeTop());
-        autoChooser.addOption("Auto Cube Middle", new AutoCubeMid());
-        autoChooser.addOption("Auto Cube Low", new AutoCubeLow());
-        autoChooser.addOption("Auto Intake Cone", new AutoGroundIntakeCone());
-        autoChooser.addOption("Auto Intake Cube", new AutoGroundIntakeCube());
-        autoChooser.addOption("Balance Charge Station", PathPlannerAutos.BalanceChargeStation());
-        autoChooser.addOption("Move and Grab Cone", PathPlannerAutos.TestAutoOne());
 
     }
 

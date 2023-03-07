@@ -197,7 +197,7 @@ public class DriveTrain extends SubsystemBase {
         var diff = gyroAngle-targetAngle;
         
         double vel = daController.calculate(diff);
-        if (MathUtil.isWithinTolerance(diff, 0, 0.017));
+        if (MathUtil.isWithinTolerance(diff, 0, 0.03));
         return vel;
     }
 
