@@ -186,29 +186,9 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public double getRotationSpeed() {
-        double gyroAngle = MathUtil.wrapToCircle(gyro.getRotation2d().getDegrees());
-  
-        double targetAngle = MathUtil.wrapToCircle(targetRotationAngle);
-        double distance1 = targetAngle-gyroAngle;
-        double distance2 = targetAngle-gyroAngle+360;
-        double distance3 = targetAngle-gyroAngle-360;
-
-        double smallestDistance = 0;
-        if (distance1<distance2) {
-            smallestDistance = distance1;
-        } else {
-            smallestDistance = distance2;
-        }
-
-        if (distance3<smallestDistance) {
-            smallestDistance = distance3;
-        } else {
-            smallestDistance = distance3;
-        }
-        double vel = Math.toRadians(smallestDistance)/.02;
-
-
-        return Math.toRadians(vel);
+        double gyroAngle = gyro.getRotation2d().getRadians();
+        double diff = targetRotationAngle > gyroAngle ? targetRotationAngle - gyroAngle : gyroAngle - targetRotationAngle;
+        return daController.calculate(diff);    
     }
 
     public void setSwerveModuleAngle(double angle) {
