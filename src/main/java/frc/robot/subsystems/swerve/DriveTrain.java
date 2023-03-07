@@ -30,6 +30,7 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.robot.Logging;
 import frc.robot.robot.MotorIDs;
@@ -85,7 +86,7 @@ public class DriveTrain extends SubsystemBase {
     private final RSTab driveDashboard;
 
     private DriveTrain() {
-        this.daController = new PIDController(0.05, 0, 0);
+        this.daController = new PIDController(0.09, 0, 0);
         //Position relative to center of robot -> (0,0) is the center (m)
         swervePosition[1] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
         swervePosition[3] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
@@ -134,6 +135,8 @@ public class DriveTrain extends SubsystemBase {
         if (useDriverAssist) {
             this.targetRotationAngle = targetRotationAngle + (Math.toDegrees(rot) * .02);
             rot = getRotationSpeed();
+            
+            
         }
         // Calculate swerve states
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(
@@ -186,9 +189,16 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public double getRotationSpeed() {
-        double gyroAngle = gyro.getRotation2d().getRadians();
-        double diff = targetRotationAngle > gyroAngle ? targetRotationAngle - gyroAngle : gyroAngle - targetRotationAngle;
-        return daController.calculate(diff);    
+        double gyroAngle = gyro.getUnwrappedAngle();
+        // if (MathUtil.isWithinTolerance(gyroAngle, targetRotationAngle, TOLERANCE)) {
+        //     return 0.0;
+        // }
+        double targetAngle = targetRotationAngle;
+        var diff = gyroAngle-targetAngle;
+        
+        double vel = daController.calculate(diff);
+        if (MathUtil.isWithinTolerance(diff, 0, 0.017));
+        return vel;
     }
 
     public void setSwerveModuleAngle(double angle) {

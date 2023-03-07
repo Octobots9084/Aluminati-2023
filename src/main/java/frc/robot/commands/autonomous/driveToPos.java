@@ -142,7 +142,7 @@ public class driveToPos extends CommandBase {
         
         driveTrain.drive(xSpeed, ySpeed, 0, true);//rotSpeed, true);
         Gyro.getInstance().updateRotation2D();
-        driveTrain.setTargetRotationAngle(Gyro.getInstance().getRotation2d().getDegrees() * -1);
+        driveTrain.setTargetRotationAngle(Gyro.getInstance().getUnwrappedAngle());
         // }
     }
 
@@ -153,7 +153,7 @@ public class driveToPos extends CommandBase {
                 && MathUtil.isWithinTolerance(currentPose.getX(), target.getX(), 0.05)
                 && MathUtil.isWithinTolerance(MathUtil.wrapToCircle(currentPose.getRotation().getRadians()),
                         MathUtil.wrapToCircle(target.getRotation().getRadians()), 0.1)) || (!(MathUtil.isWithinTolerance(startTime, currentTime, 10)))) {
-                            driveTrain.setTargetRotationAngle(Gyro.getInstance().getRotation2d().getDegrees());
+                            driveTrain.setTargetRotationAngle(Gyro.getInstance().getUnwrappedAngle());
             return true;
         }
 
