@@ -23,7 +23,7 @@ import frc.robot.commands.arm.yeet.Arm2PosCollect;
 import frc.robot.commands.arm.yeet.Arm2PosFull;
 import frc.robot.commands.arm.yeet.Arm2PosHalfways;
 import frc.robot.commands.arm.yeet.Arm2PosStow;
-import frc.robot.commands.autonomous.DriveToPos;
+import frc.robot.commands.autonomous.DriveToPosition;
 import frc.robot.commands.swerve.SetDriveAngle;
 import frc.robot.commands.swerve.SetDriverAssist;
 import frc.robot.commands.swerve.ZeroGyro;
@@ -127,6 +127,6 @@ public class ButtonConfig {
 		////END CO-DRIVER//////////////////////////
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
-				.onTrue(new DriveToPos(new Pose2d(FieldPositions.RED_CONE_RIGHT.xPos, FieldPositions.RED_CONE_RIGHT.yPos, new Rotation2d())));
+				.onTrue(new DriveToPosition(new Pose2d(FieldPositions.RED_CONE_RIGHT.xPos, FieldPositions.RED_CONE_RIGHT.yPos, new Rotation2d())));
 	}
 }

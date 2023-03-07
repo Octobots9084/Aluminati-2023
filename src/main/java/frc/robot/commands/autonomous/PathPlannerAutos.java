@@ -28,7 +28,7 @@ import frc.robot.subsystems.swerve.DriveTrain;
 
 public final class PathPlannerAutos {
     private static final Map<String, Command> eventMap = new HashMap<>(Map.ofEntries(
-            Map.entry("driveToPos", new DriveToPos(new Pose2d(14, 0.7, new Rotation2d(0)))),
+            Map.entry("driveToPos", new DriveToPosition(new Pose2d(14, 0.7, new Rotation2d(0)))),
             Map.entry("BalanceChargeStation", new BalanceChargeStation()),
             Map.entry("ConeTop", new AutoConeTop()),
             Map.entry("ConeMid", new AutoConeMid()),
