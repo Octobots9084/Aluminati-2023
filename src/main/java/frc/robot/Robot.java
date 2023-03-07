@@ -28,7 +28,6 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.arm.ParallalMoveArm;
@@ -49,7 +48,6 @@ import frc.robot.util.Gyro;
 
 public class Robot extends TimedRobot {
     public static double autoStartTime = 0.0;
-    private final Field2d field2d = new Field2d();
     private boolean autoFlag = false;
 
     @Override

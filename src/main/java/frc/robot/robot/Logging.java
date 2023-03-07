@@ -3,14 +3,7 @@ package frc.robot.robot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.autonomous.PathPlannerAutos;
-import frc.robot.commands.autonomous.arm.AutoConeLow;
-import frc.robot.commands.autonomous.arm.AutoConeMid;
 import frc.robot.commands.autonomous.arm.AutoConeTop;
-import frc.robot.commands.autonomous.arm.AutoCubeLow;
-import frc.robot.commands.autonomous.arm.AutoCubeMid;
-import frc.robot.commands.autonomous.arm.AutoCubeTop;
-import frc.robot.commands.autonomous.arm.AutoGroundIntakeCone;
-import frc.robot.commands.autonomous.arm.AutoGroundIntakeCube;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.CaliGirls;
 import frc.robot.subsystems.swerve.DriveTrain;
@@ -44,11 +37,11 @@ public class Logging {
     private static SendableChooser<Command> autoChooser;
 
     private Logging(CaliGirls caliGirls, ArmExtension armExtension, DriveTrain driveTrain, Gyro gyro) {
-        this.caliGirls = caliGirls;
-        this.armExtension = armExtension;
-        this.drive = driveTrain;
-        this.gyro = gyro;
-        this.autoChooser = new SendableChooser<Command>();
+        Logging.caliGirls = caliGirls;
+        Logging.armExtension = armExtension;
+        Logging.drive = driveTrain;
+        Logging.gyro = gyro;
+        Logging.autoChooser = new SendableChooser<Command>();
         addAutoOptions();
     }
 

@@ -2,7 +2,6 @@ package frc.robot.commands.arm.manual;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.robot.ControlMap;
-import frc.robot.robot.Logging;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.util.MathUtil;
 

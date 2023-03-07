@@ -30,15 +30,12 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.robot.Logging;
 import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
 import frc.robot.util.Gyro;
 import frc.robot.util.MathUtil;
 import frc.robot.util.PoseEstimator;
-import frc.robot.util.shuffleboard.RSTab;
 
 /**
  * Represents a swerve drive style drivetrain.
@@ -83,8 +80,6 @@ public class DriveTrain extends SubsystemBase {
     // Pose Estimator
     private final PoseEstimator swerveDrivePoseEstimator;
 
-    private final RSTab driveDashboard;
-
     private DriveTrain() {
         this.daController = new PIDController(0.09, 0, 0);
         //Position relative to center of robot -> (0,0) is the center (m)
@@ -117,8 +112,6 @@ public class DriveTrain extends SubsystemBase {
                 //PID FOR ROTATION (kp of 1 = 1rad/s extra velocity / rad of error)
                 new ProfiledPIDController(0.1, 0.0, 0.00,
                         new TrapezoidProfile.Constraints(MAX_ANGULAR_SPEED * 5, MAX_ANGULAR_ACCELERATION * 5)));
-
-        this.driveDashboard = Logging.armDashboard;
 
     }
 
