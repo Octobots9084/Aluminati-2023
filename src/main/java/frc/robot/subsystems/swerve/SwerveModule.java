@@ -172,4 +172,21 @@ public class SwerveModule {
         setDriveMotorVelocity(optimizedAngle.speedMetersPerSecond);
         setSteeringMotorAngle(convertAngleToTick(optimizedAngle.angle.getRadians()));
     }
+
+    /**
+     * Sets the desired state for the module.
+     *
+     * @param state Desired state with speed and angle.
+     */
+    public void setDesiredState(SwerveModuleState state, boolean noAngle) {
+        if (!noAngle){
+            setDesiredState(state);
+            return;
+        }
+        // Optimize the swerve state and set it
+        var optimizedAngle = SwerveUtil.optimizeSwerveStates(state, getAngle());
+        // SmartDashboard.putNumber("Angle", convertAngleToTick(optimizedAngle.angle.getRadians()));
+        // Logging.driveDashboard.setEntry("Angle", convertAngleToTick(optimizedAngle.angle.getRadians()));
+        setDriveMotorVelocity(optimizedAngle.speedMetersPerSecond);
+    }
 }
