@@ -49,6 +49,10 @@ public class Gyro {
         return MathUtil.wrapToCircle(navX.getAngle(), 360);
     }
 
+    public double getUnwrappedAngle() {
+        return navX.getAngle();
+    }
+
     public Rotation2d getRotation2d() {
         return new Rotation2d(-atomicReference.get().getRadians());
     }

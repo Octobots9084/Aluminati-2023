@@ -40,7 +40,7 @@ public class SwerveControl extends CommandBase {
 
     @Override
     public void initialize() {
-        driveTrain.setTargetRotationAngle(gyro.getRotation2d().getDegrees());
+        driveTrain.setTargetRotationAngle(gyro.getUnwrappedAngle());
     }
 
     @Override
