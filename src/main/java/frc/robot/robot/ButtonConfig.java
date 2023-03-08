@@ -16,11 +16,13 @@ import frc.robot.commands.arm.yeet.Arm2PosFull;
 import frc.robot.commands.arm.yeet.Arm2PosHalfways;
 import frc.robot.commands.arm.yeet.Arm2PosStow;
 import frc.robot.commands.autonomous.BalanceChargeStation;
+import frc.robot.commands.autonomous.DriveToPosition;
 import frc.robot.commands.swerve.SetDriveAngle;
 import frc.robot.commands.swerve.SetDriverAssist;
 import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.subsystems.Light;
 import frc.robot.subsystems.arm.ArmPositions;
+import frc.robot.util.PoseFinder;
 
 public class ButtonConfig {
 	public void initTeleop() {
@@ -43,6 +45,25 @@ public class ButtonConfig {
 				.onTrue(new ZeroGyro());
 
 		//buttons 8-12 reserved for AutoAlign
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
+				.onTrue(new DriveToPosition(PoseFinder.getPositionFromID(PoseFinder.getGrid(), 1)));
+
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 8)
+				.onTrue(new InstantCommand(() -> PoseFinder.setGrid(1)));
+
+				
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 9)
+				.onTrue(new DriveToPosition(PoseFinder.getPositionFromID(PoseFinder.getGrid(), 2)));
+		
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 10)
+				.onTrue(new InstantCommand(() -> PoseFinder.setGrid(2)));
+			
+				
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 11)
+				.onTrue(new DriveToPosition(PoseFinder.getPositionFromID(PoseFinder.getGrid(), 3)));
+
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 12)
+				.onTrue(new InstantCommand(() -> PoseFinder.setGrid(3)));
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
 				.whileTrue(new SetDriverAssist(true));

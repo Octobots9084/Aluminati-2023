@@ -8,7 +8,17 @@ import frc.robot.subsystems.swerve.FieldPositions;
 
 public class PoseFinder {
     private static Translation2d[] scoringPos = new Translation2d[8];
+    private static int grid;
+    
+    public static int getGrid() {
+        return grid;
+    }
 
+    public static void setGrid(int grid) {
+        PoseFinder.grid = grid;
+    }
+
+    @Deprecated
     public static Translation2d getScoringPos(double x) {
         if (0.0 > x && x > 0.0) {
             return scoringPos[0];
