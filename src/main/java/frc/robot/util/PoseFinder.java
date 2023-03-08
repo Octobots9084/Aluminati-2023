@@ -95,5 +95,6 @@ public class PoseFinder {
 
     public static Pose2d getPositionFromID(int grid, int node) {
         return getPositionFromID((grid-1)*3+node);
+        
     }
 }
