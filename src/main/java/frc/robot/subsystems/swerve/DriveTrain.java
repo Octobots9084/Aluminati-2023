@@ -88,10 +88,11 @@ public class DriveTrain extends SubsystemBase {
     private DriveTrain() {
         this.daController = new PIDController(0.09, 0, 0);
         //Position relative to center of robot -> (0,0) is the center (m)
-        swervePosition[1] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
-        swervePosition[3] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
         swervePosition[0] = new Translation2d(-WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
+        swervePosition[1] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
         swervePosition[2] = new Translation2d(WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
+        swervePosition[3] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
+        
 
         swerveModules[0] = new SwerveModule(MotorIDs.FRONT_LEFT_DRIVE, MotorIDs.FRONT_LEFT_STEER, false,
                 Tuning.FL_TURN_PID, Tuning.FL_DRIVE_PID);

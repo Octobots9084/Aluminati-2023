@@ -61,10 +61,10 @@ public class PoseEstimator {
         this.gyro = gyro;
         this.swerveModules = swerveModules;
         SwerveModulePosition[] swerveModulePositions = {
-                swerveModules[0].getModulePosition(),
-                swerveModules[1].getModulePosition(),
                 swerveModules[2].getModulePosition(),
-                swerveModules[3].getModulePosition()
+                swerveModules[3].getModulePosition(),
+                swerveModules[0].getModulePosition(),
+                swerveModules[1].getModulePosition()
         };
         this.swerveDrivePoseEstimator = new SwerveDrivePoseEstimator(
                 swerveDriveKinematics,
@@ -98,10 +98,10 @@ public class PoseEstimator {
     public void updateOdometry() {
         resetLock.lock();
         SwerveModulePosition[] swerveModulePositions = {
-                swerveModules[0].getModulePosition(),
-                swerveModules[1].getModulePosition(),
                 swerveModules[2].getModulePosition(),
-                swerveModules[3].getModulePosition()
+                swerveModules[3].getModulePosition(),
+                swerveModules[0].getModulePosition(),
+                swerveModules[1].getModulePosition()
         };
         Rotation2d rotation = new Rotation2d();
         if (DriverStation.getAlliance()==DriverStation.Alliance.Blue) {
@@ -152,10 +152,10 @@ public class PoseEstimator {
         resetLock.lock();
         try {
             SwerveModulePosition[] swerveModulePositions = {
-                    swerveModules[0].getModulePosition(),
-                    swerveModules[1].getModulePosition(),
                     swerveModules[2].getModulePosition(),
-                    swerveModules[3].getModulePosition()
+                    swerveModules[3].getModulePosition(),
+                    swerveModules[0].getModulePosition(),
+                    swerveModules[1].getModulePosition()
             };
             Rotation2d rotation = new Rotation2d();
             if (DriverStation.getAlliance()==DriverStation.Alliance.Blue) {
@@ -173,10 +173,10 @@ public class PoseEstimator {
         resetLock.lock();
         try {
             SwerveModulePosition[] swerveModulePositions = {
-                    swerveModules[0].getModulePosition(),
-                    swerveModules[1].getModulePosition(),
                     swerveModules[2].getModulePosition(),
-                    swerveModules[3].getModulePosition()
+                    swerveModules[3].getModulePosition(),
+                    swerveModules[0].getModulePosition(),
+                    swerveModules[1].getModulePosition()
             };
             Rotation2d rotation = new Rotation2d();
             if (DriverStation.getAlliance()==DriverStation.Alliance.Blue) {
