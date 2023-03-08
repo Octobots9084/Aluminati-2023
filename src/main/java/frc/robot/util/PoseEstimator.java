@@ -38,11 +38,9 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.robot.Logging;
 import frc.robot.subsystems.swerve.SwerveModule;
 import frc.robot.subsystems.vision.LeftCameraWrapper;
 import frc.robot.subsystems.vision.RightCameraWrapper;
-import frc.robot.util.shuffleboard.RSTab;
 
 public class PoseEstimator {
     public final SwerveDrivePoseEstimator swerveDrivePoseEstimator;
@@ -52,8 +50,6 @@ public class PoseEstimator {
     private final SwerveModule[] swerveModules;
     public LeftCameraWrapper leftCameraWrapper;
     public RightCameraWrapper rightCameraWrapper;
-
-    private final RSTab driveDashboard;
 
     public PoseEstimator(Gyro gyro, SwerveDriveKinematics swerveDriveKinematics, SwerveModule[] swerveModules) {
         this.leftCameraWrapper = new LeftCameraWrapper();
@@ -86,8 +82,6 @@ public class PoseEstimator {
         e.scheduleWithFixedDelay(this::updateOdometry, 5, 15, TimeUnit.MILLISECONDS);
         robotPose.set(new Pose2d());
         this.swerveDrivePoseEstimator.getEstimatedPosition();
-
-        this.driveDashboard = Logging.driveDashboard;
     }
 
     public Pose2d getRobotPose() {

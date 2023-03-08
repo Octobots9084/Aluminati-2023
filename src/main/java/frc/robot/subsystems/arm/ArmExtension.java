@@ -7,7 +7,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxPIDController;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.robot.Logging;
 import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
 import frc.robot.util.MotorUtil;

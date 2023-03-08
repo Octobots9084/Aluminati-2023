@@ -7,7 +7,6 @@ import frc.robot.commands.arm.basic.MoveArmRotationToPos;
 import frc.robot.commands.arm.basic.MoveArmWristToPos;
 import frc.robot.commands.arm.intake.basic.IntakeIn;
 import frc.robot.commands.arm.intake.basic.IntakeNone;
-import frc.robot.commands.arm.intake.basic.IntakeOut;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
