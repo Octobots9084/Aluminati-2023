@@ -126,8 +126,6 @@ public class ButtonConfig {
 
 		////END CO-DRIVER//////////////////////////
 
-		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
-				.onTrue(new DriveToPosition(new Pose2d(FieldPositions.RED_CONE_RIGHT.xPos, FieldPositions.RED_CONE_RIGHT.yPos, new Rotation2d())));
 
 	}
 }
