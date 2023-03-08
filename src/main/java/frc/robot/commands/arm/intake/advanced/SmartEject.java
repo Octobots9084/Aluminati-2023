@@ -2,7 +2,6 @@ package frc.robot.commands.arm.intake.advanced;
 
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.commands.arm.intake.basic.IntakeOut;
 import frc.robot.subsystems.arm.Roller;
 
 public class SmartEject extends InstantCommand{
@@ -21,7 +20,7 @@ public class SmartEject extends InstantCommand{
         if (itemMode) {
             CommandScheduler.getInstance().schedule(new ConeInject());
         } else {
-            CommandScheduler.getInstance().schedule(new IntakeOut().withTimeout(2));
+            CommandScheduler.getInstance().schedule(new CubeInject());
         }
     }
 

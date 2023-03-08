@@ -11,7 +11,6 @@ public class CubeInject extends SequentialCommandGroup {
                 // new SetArmAngle(pos - 0.1, caliGirls.getBottomKf()),
                 // new MoveArmRotationToPos(pos, caliGirls.getBottomKf()),
                 new IntakeOutWithTimeout(),
-                new WaitCommand(0.3),
                 new Arm2PosCooldown(ArmPositions.DRIVE_WITHOUT_PIECE));
     }
 
