@@ -99,7 +99,7 @@ public class DriverButtonConfig {
 				.onTrue(new SequentialCommandGroup(new  SetItemMode(true), new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_HIGH)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 9)
-				.onTrue(new SequentialCommandGroup(new  SetItemMode(false), new Arm2PosStow(ArmPositions.DRIVE_WITH_PIECE)));
+				.onTrue(new SequentialCommandGroup(new  SetItemMode(false), new MoveArmToPositionGoingUp(ArmPositions.CONE_PLACE_MID)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 10)
 				.onTrue(new SequentialCommandGroup(new  SetItemMode(true), new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_MID)));
