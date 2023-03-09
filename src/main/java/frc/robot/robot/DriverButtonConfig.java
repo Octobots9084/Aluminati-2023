@@ -86,6 +86,8 @@ public class DriverButtonConfig {
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
 				.onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITHOUT_PIECE));
+		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 5)
+				.onTrue(new IntakeOutWithTimeout());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 6)
 				.whileTrue(new ArmZero());
