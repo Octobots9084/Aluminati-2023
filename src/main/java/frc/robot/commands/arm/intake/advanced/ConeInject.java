@@ -4,11 +4,15 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.arm.CaliGirlsBottomMoveDownALittle;
 import frc.robot.commands.arm.basic.MoveArmExtensionToPos;
+import frc.robot.commands.arm.basic.MoveArmRotationToPos;
+import frc.robot.commands.arm.basic.SetArmAngle;
+import frc.robot.commands.arm.basic.SetArmExtension;
 import frc.robot.commands.arm.intake.basic.IntakeNone;
 import frc.robot.commands.arm.intake.basic.IntakeOutALittle;
 import frc.robot.commands.arm.slow.MoveArmToPositionGoingDown;
 import frc.robot.commands.arm.yeet.Arm2PosCooldown;
 import frc.robot.subsystems.arm.ArmPositions;
+import frc.robot.subsystems.arm.CaliGirls;
 
 public class ConeInject extends SequentialCommandGroup {
     public ConeInject() {
@@ -18,8 +22,9 @@ public class ConeInject extends SequentialCommandGroup {
                 new CaliGirlsBottomMoveDownALittle(),
                 new WaitCommand(0.25),
                 new IntakeOutALittle(),
-                new WaitCommand(1),
-                new MoveArmExtensionToPos(0),
+                new SetArmExtension(0),
+                new SetArmAngle(ArmPositions.PRE_CONE_PLACE_HIGH.armAngle, CaliGirls.getInstance().getBottomKf()),
+                new WaitCommand(0.5),
                 new MoveArmToPositionGoingDown(ArmPositions.DRIVE_WITHOUT_PIECE));
                 new IntakeNone();
     }
