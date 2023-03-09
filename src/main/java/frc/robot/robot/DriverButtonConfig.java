@@ -13,8 +13,6 @@ import frc.robot.commands.arm.intake.basic.IntakeIn;
 import frc.robot.commands.arm.intake.basic.SetItemMode;
 import frc.robot.commands.arm.manual.ArmZero;
 import frc.robot.commands.arm.slow.MoveArmToPositionGoingUp;
-import frc.robot.commands.arm.yeet.Arm2PosFull;
-import frc.robot.commands.arm.yeet.Arm2PosHalfways;
 import frc.robot.commands.arm.yeet.Arm2PosStow;
 import frc.robot.commands.autonomous.BalanceChargeStation;
 import frc.robot.commands.swerve.SetDriveAngle;
