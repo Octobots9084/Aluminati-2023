@@ -67,6 +67,10 @@ public class Gyro {
         unwrappedRotation2d.set(new Rotation2d(Math.toRadians(-getUnwrappedAngle())));
     }
 
+    public Rotation2d getUnwrappedRotation2d() {
+        return new Rotation2d(-unwrappedRotation2d.get().getRadians());
+    }
+
     public double getRate() {
         return Math.toRadians(-navX.getRate());
     }

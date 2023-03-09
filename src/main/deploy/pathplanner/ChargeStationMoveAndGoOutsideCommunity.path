@@ -30,22 +30,20 @@
         "y": 3.0
       },
       "prevControl": {
-        "x": 5.2004386490941314,
-        "y": 3.0
+        "x": 6.2034487508737195,
+        "y": 2.9975045054495557
       },
       "nextControl": {
-        "x": 7.2004386490941314,
-        "y": 3.0
+        "x": 6.17756773316685,
+        "y": 3.018960902401119
       },
       "holonomicAngle": 180.0,
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
-        "names": [
-          "BalanceChargeStation"
-        ],
+        "names": [],
         "executionBehavior": "sequential",
         "waitBehavior": "none",
         "waitTime": 0
@@ -53,11 +51,11 @@
     },
     {
       "anchorPoint": {
-        "x": 3.6,
+        "x": 3.5,
         "y": 3.0
       },
       "prevControl": {
-        "x": 3.1113434839376812,
+        "x": 3.011343483937681,
         "y": 3.0
       },
       "nextControl": null,

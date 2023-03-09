@@ -10,6 +10,7 @@ import frc.robot.commands.arm.intake.basic.IntakeIn;
 import frc.robot.commands.arm.intake.basic.IntakeNone;
 import frc.robot.commands.arm.intake.basic.IntakeOutALittle;
 import frc.robot.commands.arm.yeet.Arm2PosStow;
+import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
@@ -30,7 +31,7 @@ public class AutoConeTop extends SequentialCommandGroup{
             new IntakeIn(),
             new WaitCommand(2),
             new SetArmAngle(aPosition.armAngle, aPosition.angleHold), 
-            new WaitCommand(.35),
+            new WaitCommand(.5),
             new SetArmExtension(aPosition.extension),
             new WaitCommand(0.8),
             new SetWristAngle(aPosition.wrist), 

@@ -91,6 +91,7 @@ public class PoseEstimator {
 
     public void updateOdometry() {
         resetLock.lock();
+        gyro.updateUnwrappedRotation2d();
         SwerveModulePosition[] swerveModulePositions = {
                 swerveModules[2].getModulePosition(),
                 swerveModules[3].getModulePosition(),
@@ -99,9 +100,9 @@ public class PoseEstimator {
         };
         Rotation2d rotation = new Rotation2d();
         if (DriverStation.getAlliance()==DriverStation.Alliance.Blue) {
-            rotation = new Rotation2d(gyro.getRotation2d().getRadians());
+            rotation = gyro.getUnwrappedRotation2d();
         } else {
-            rotation = new Rotation2d(gyro.getRotation2d().getRadians());
+            rotation = gyro.getUnwrappedRotation2d();
         }
         var pose2d = swerveDrivePoseEstimator.updateWithTime(
                 Timer.getFPGATimestamp(),
@@ -153,9 +154,9 @@ public class PoseEstimator {
             };
             Rotation2d rotation = new Rotation2d();
             if (DriverStation.getAlliance()==DriverStation.Alliance.Blue) {
-                rotation = new Rotation2d(gyro.getRotation2d().getRadians());
+                rotation = gyro.getUnwrappedRotation2d();
             } else {
-                rotation = new Rotation2d(gyro.getRotation2d().getRadians());
+                rotation = gyro.getUnwrappedRotation2d();
             }
             swerveDrivePoseEstimator.resetPosition(rotation, swerveModulePositions, this.getRobotPose());
         } finally {
@@ -174,9 +175,9 @@ public class PoseEstimator {
             };
             Rotation2d rotation = new Rotation2d();
             if (DriverStation.getAlliance()==DriverStation.Alliance.Blue) {
-                rotation = new Rotation2d(gyro.getRotation2d().getRadians());
+                rotation = gyro.getUnwrappedRotation2d();
             } else {
-                rotation = new Rotation2d(gyro.getRotation2d().getRadians());
+                rotation = gyro.getUnwrappedRotation2d();
             }
             
             swerveDrivePoseEstimator.resetPosition(rotation, swerveModulePositions, pose2d);

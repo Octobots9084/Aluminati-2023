@@ -34,6 +34,7 @@ import frc.robot.commands.arm.ParallalMoveArm;
 import frc.robot.commands.arm.manual.ArmControl;
 import frc.robot.commands.arm.manual.TiltControl;
 import frc.robot.commands.swerve.SwerveControl;
+import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.robot.ButtonConfig;
 import frc.robot.robot.ControlMap;
 import frc.robot.robot.DriverButtonConfig;
@@ -55,7 +56,7 @@ public class Robot extends TimedRobot {
         DriveTrain.getInstance().drive(0, 0, 0, true);
         CommandScheduler.getInstance().cancelAll();
 
-        Logging.updateLogging();
+        //Logging.updateLogging();
 
         // SmartDashboard.putNumber("Extens2ion", ArmExtension.getInstance().getPosition());
         // SmartDashboard.putNumber("Arm Rotat2ion", CaliGirls.getInstance().getTopPos());
@@ -98,7 +99,7 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         DriveTrain.getInstance().updateSwerveStates();
         CommandScheduler.getInstance().run();
-        Logging.updateLogging();
+        //Logging.updateLogging();
 
         // Logging.updateLogging();
     }
@@ -123,7 +124,7 @@ public class Robot extends TimedRobot {
         }
         this.autoFlag = false;
 
-        Logging.updateLogging();
+        //Logging.updateLogging();
 
     }
 
@@ -175,7 +176,7 @@ public class Robot extends TimedRobot {
     }
 
     private void resetRobotPoseAndGyro() {
-        Gyro.getInstance().resetGyro();
+        CommandScheduler.getInstance().schedule(new ZeroGyro());
         DriveTrain.getInstance().setTargetRotationAngle(0);
         DriveTrain.getInstance().drive(0, 0, 0, true);
         DriveTrain.getInstance().getPoseEstimator().resetPose(new Pose2d(0,0, new Rotation2d()));
