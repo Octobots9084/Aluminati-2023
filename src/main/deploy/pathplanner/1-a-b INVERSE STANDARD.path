@@ -51,24 +51,26 @@
     },
     {
       "anchorPoint": {
-        "x": 6.474131051045696,
-        "y": 0.9752043813250832
+        "x": 6.363255461553659,
+        "y": 0.8792759465860819
       },
       "prevControl": {
-        "x": 5.3569853457996714,
-        "y": 0.8758854572340974
+        "x": 5.246109756307634,
+        "y": 0.779957022495096
       },
       "nextControl": {
-        "x": 6.613804107517964,
-        "y": 0.9876219000320724
+        "x": 6.502928518025927,
+        "y": 0.891693465293071
       },
       "holonomicAngle": 0,
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "IntakeCone"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -141,9 +143,11 @@
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "ConeTop"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -216,9 +220,11 @@
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "IntakeCone"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -327,30 +333,5 @@
   "maxVelocity": 5.0,
   "maxAcceleration": 7.0,
   "isReversed": null,
-  "markers": [
-    {
-      "position": 2.0,
-      "names": [
-        "IntakeCone"
-      ]
-    },
-    {
-      "position": 7.0,
-      "names": [
-        "IntakeCube"
-      ]
-    },
-    {
-      "position": 5.0,
-      "names": [
-        "ConeTop"
-      ]
-    },
-    {
-      "position": 11.0,
-      "names": [
-        "CubeTop"
-      ]
-    }
-  ]
+  "markers": []
 }

@@ -16,7 +16,9 @@
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "CubeTop"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -76,12 +78,6 @@
   "maxAcceleration": 7.0,
   "isReversed": null,
   "markers": [
-    {
-      "position": 0.0,
-      "names": [
-        "CubeTop"
-      ]
-    },
     {
       "position": 1.0,
       "names": [

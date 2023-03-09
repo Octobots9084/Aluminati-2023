@@ -66,9 +66,11 @@
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "IntakeCone"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -141,9 +143,11 @@
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "CubeMid"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -201,24 +205,26 @@
     },
     {
       "anchorPoint": {
-        "x": 6.705830505678106,
-        "y": 2.089707769159128
+        "x": 6.340417125278695,
+        "y": 2.1239652735715735
       },
       "prevControl": {
-        "x": 6.824428939171937,
-        "y": 2.2286903084097114
+        "x": 6.459015558772526,
+        "y": 2.2629478128221567
       },
       "nextControl": {
-        "x": 5.975003744879285,
-        "y": 1.2332701588480097
+        "x": 5.609590364479875,
+        "y": 1.267527663260455
       },
       "holonomicAngle": 0,
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "IntakeCone"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -305,12 +311,39 @@
         "y": 1.0
       },
       "prevControl": {
-        "x": 2.0610633055643723,
-        "y": 0.7250908883104232
+        "x": 1.921199056073326,
+        "y": 0.6965692563863765
       },
       "nextControl": {
-        "x": 1.7668415708882206,
-        "y": 1.342229570806574
+        "x": 1.939770663807051,
+        "y": 1.3368638420234409
+      },
+      "holonomicAngle": 180.0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": true,
+      "stopEvent": {
+        "names": [
+          "CubeLow"
+        ],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 2.400804117847552,
+        "y": 2.0782886010216464
+      },
+      "prevControl": {
+        "x": 2.2235099719803535,
+        "y": 1.9543376186236343
+      },
+      "nextControl": {
+        "x": 2.583111759862239,
+        "y": 2.205744649927581
       },
       "holonomicAngle": 180.0,
       "isReversal": false,
@@ -326,37 +359,12 @@
     },
     {
       "anchorPoint": {
-        "x": 1.93,
-        "y": 2.155964628747164
+        "x": 4.033745161507418,
+        "y": 2.0782886010216464
       },
       "prevControl": {
-        "x": 1.723138933624108,
-        "y": 1.9689137963974455
-      },
-      "nextControl": {
-        "x": 2.3639033836661705,
-        "y": 2.548314868915777
-      },
-      "holonomicAngle": 180.0,
-      "isReversal": false,
-      "velOverride": null,
-      "isLocked": false,
-      "isStopPoint": false,
-      "stopEvent": {
-        "names": [],
-        "executionBehavior": "parallel",
-        "waitBehavior": "none",
-        "waitTime": 0
-      }
-    },
-    {
-      "anchorPoint": {
-        "x": 3.877500562602075,
-        "y": 2.1
-      },
-      "prevControl": {
-        "x": 3.165367603894353,
-        "y": 2.132590678483019
+        "x": 3.3216122027996957,
+        "y": 2.1108792795046654
       },
       "nextControl": null,
       "holonomicAngle": 180.0,
@@ -377,36 +385,5 @@
   "maxVelocity": 5.0,
   "maxAcceleration": 7.0,
   "isReversed": null,
-  "markers": [
-    {
-      "position": 2.0,
-      "names": [
-        "ConeIntake"
-      ]
-    },
-    {
-      "position": 5.0,
-      "names": [
-        "CubeMid"
-      ]
-    },
-    {
-      "position": 7.0,
-      "names": [
-        "IntakeCube"
-      ]
-    },
-    {
-      "position": 11.0,
-      "names": [
-        "CubeLow"
-      ]
-    },
-    {
-      "position": 0.0,
-      "names": [
-        "CubeTop"
-      ]
-    }
-  ]
+  "markers": []
 }

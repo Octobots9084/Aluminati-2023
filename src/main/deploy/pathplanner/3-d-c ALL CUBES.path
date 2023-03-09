@@ -91,9 +91,11 @@
       "isReversal": false,
       "velOverride": null,
       "isLocked": true,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "IntakeCone"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -141,9 +143,11 @@
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "CubeMid"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -201,24 +205,26 @@
     },
     {
       "anchorPoint": {
-        "x": 6.686780324901708,
-        "y": 3.3508052198120457
+        "x": 6.317578789003732,
+        "y": 3.4029121049695097
       },
       "prevControl": {
-        "x": 6.212201491582177,
-        "y": 3.3584597171236514
+        "x": 5.842999955684201,
+        "y": 3.4105666022811154
       },
       "nextControl": {
-        "x": 7.155044551484581,
-        "y": 3.3432525709961927
+        "x": 6.785843015586605,
+        "y": 3.3953594561536566
       },
       "holonomicAngle": 0,
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "IntakeCone"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -290,7 +296,9 @@
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "CubeLow"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -300,30 +308,5 @@
   "maxVelocity": 5.0,
   "maxAcceleration": 7.0,
   "isReversed": null,
-  "markers": [
-    {
-      "position": 2.0,
-      "names": [
-        "IntakeCube"
-      ]
-    },
-    {
-      "position": 4.0,
-      "names": [
-        "CubeMid"
-      ]
-    },
-    {
-      "position": 6.0,
-      "names": [
-        "IntakeCube"
-      ]
-    },
-    {
-      "position": 9.0,
-      "names": [
-        "CubeLow"
-      ]
-    }
-  ]
+  "markers": []
 }
