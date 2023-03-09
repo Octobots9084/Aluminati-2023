@@ -17,8 +17,7 @@
       "isStopPoint": false,
       "stopEvent": {
         "names": [
-          "ConeTop",
-          "LowerArm"
+          "ConeTop"
         ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
@@ -67,10 +66,10 @@
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
         "names": [
-          "IntakeCube"
+          "IntakeCone"
         ],
         "executionBehavior": "sequential",
         "waitBehavior": "none",
@@ -144,9 +143,11 @@
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "CubeTop"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -219,9 +220,11 @@
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "IntakeCone"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -319,8 +322,7 @@
       "isStopPoint": false,
       "stopEvent": {
         "names": [
-          "PlacePieceTop",
-          "LowerArm"
+          "ConeTop"
         ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
@@ -331,18 +333,5 @@
   "maxVelocity": 5.0,
   "maxAcceleration": 7.0,
   "isReversed": null,
-  "markers": [
-    {
-      "position": 5.0,
-      "names": [
-        "CubeTop"
-      ]
-    },
-    {
-      "position": 6.981818181817916,
-      "names": [
-        "event"
-      ]
-    }
-  ]
+  "markers": []
 }

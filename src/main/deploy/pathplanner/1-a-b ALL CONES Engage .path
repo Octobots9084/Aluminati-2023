@@ -66,9 +66,11 @@
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "IntakeCone"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -141,7 +143,7 @@
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
         "names": [],
         "executionBehavior": "parallel",
@@ -176,16 +178,16 @@
     },
     {
       "anchorPoint": {
-        "x": 5.392626169867724,
-        "y": 2.181061114258982
+        "x": 5.486057759966633,
+        "y": 2.1706806545707558
       },
       "prevControl": {
-        "x": 5.483979514967577,
-        "y": 0.5367009024616345
+        "x": 5.401970819458592,
+        "y": 0.18062306254712318
       },
       "nextControl": {
-        "x": 5.381429012020631,
-        "y": 2.3826099555066573
+        "x": 5.494579436529344,
+        "y": 2.372360333221568
       },
       "holonomicAngle": 0,
       "isReversal": false,
@@ -216,9 +218,11 @@
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "IntakeCone"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -316,7 +320,7 @@
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
         "names": [],
         "executionBehavior": "parallel",
@@ -355,30 +359,6 @@
   "markers": [
     {
       "position": 0.0,
-      "names": [
-        "ConeTop"
-      ]
-    },
-    {
-      "position": 2.0,
-      "names": [
-        "IntakeCone"
-      ]
-    },
-    {
-      "position": 5.0,
-      "names": [
-        "ConeTop"
-      ]
-    },
-    {
-      "position": 8.0,
-      "names": [
-        "IntakeCone"
-      ]
-    },
-    {
-      "position": 11.0,
       "names": [
         "ConeTop"
       ]
