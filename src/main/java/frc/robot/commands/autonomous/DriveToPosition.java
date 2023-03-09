@@ -24,16 +24,15 @@ import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.robot.Logging;
+import frc.robot.robot.ControlMap;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 import frc.robot.util.MathUtil;
-import frc.robot.util.shuffleboard.RSTab;
 
 /**
  * Represents a swerve drive style drivetrain.
 */
-public class driveToPos extends CommandBase {
+public class DriveToPosition extends CommandBase {
     private final DriveTrain driveTrain;
     private final Pose2d target;
 
@@ -45,17 +44,13 @@ public class driveToPos extends CommandBase {
     private PIDController turnPids;
     private double startTime;
     private double currentTime;
-    private final RSTab autoDashboard;
-
-    public driveToPos(Pose2d target) {
+    public DriveToPosition(Pose2d target) {
         this.driveTrain = DriveTrain.getInstance();
         this.target = target;
         this.xSpeed = 0;
         this.ySpeed = 0;
         this.rotSpeed = 0;
         this.currentPose = new Pose2d();
-        this.autoDashboard = Logging.autoDashboard;
-
         // P is a little high
         this.drivePids = new PIDController(1.3, 0, 0.0000);
         this.turnPids = new PIDController(0.8, 0, 0.00);
@@ -157,7 +152,7 @@ public class driveToPos extends CommandBase {
             return true;
         }
 
-        return false;
+        return !ControlMap.DRIVER_BUTTONS.getRawButton(16);
     }
 
     @Override

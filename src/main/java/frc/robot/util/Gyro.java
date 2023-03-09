@@ -39,10 +39,12 @@ public class Gyro {
 
     private final AHRS navX;
     private final AtomicReference<Rotation2d> atomicReference;
+    private final AtomicReference<Rotation2d> unwrappedRotation2d;
 
     private Gyro() {
         this.navX = new AHRS(SPI.Port.kMXP);
         this.atomicReference = new AtomicReference<>(new Rotation2d(0));
+        this.unwrappedRotation2d = new AtomicReference<>(new Rotation2d(0));
     }
 
     private double getAngle() {
@@ -59,6 +61,10 @@ public class Gyro {
 
     public void updateRotation2D() {
         atomicReference.set(new Rotation2d(Math.toRadians(-getAngle())));
+    }
+
+    public void updateUnwrappedRotation2d() {
+        unwrappedRotation2d.set(new Rotation2d(Math.toRadians(-getUnwrappedAngle())));
     }
 
     public double getRate() {

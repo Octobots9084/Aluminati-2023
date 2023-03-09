@@ -2,9 +2,6 @@ package frc.robot.commands.arm.yeet;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.arm.basic.MoveArmExtensionToPos;
-import frc.robot.commands.arm.basic.MoveArmRotationToPos;
-import frc.robot.commands.arm.basic.MoveArmWristToPos;
 import frc.robot.commands.arm.basic.SetArmAngle;
 import frc.robot.commands.arm.basic.SetArmExtension;
 import frc.robot.commands.arm.basic.SetWristAngle;

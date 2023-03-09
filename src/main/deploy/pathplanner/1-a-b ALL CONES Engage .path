@@ -26,16 +26,16 @@
     },
     {
       "anchorPoint": {
-        "x": 3.9994876570949724,
-        "y": 0.6508925838364495
+        "x": 4.1094496566675955,
+        "y": 0.5401114109731676
       },
       "prevControl": {
-        "x": 3.7030850224515404,
-        "y": 0.6125820392226725
+        "x": 3.810585986652091,
+        "y": 0.5384602304758442
       },
       "nextControl": {
-        "x": 5.6781053733047635,
-        "y": 0.8678567784486001
+        "x": 5.870719606503953,
+        "y": 0.549842184176684
       },
       "holonomicAngle": 180.0,
       "isReversal": false,
@@ -66,9 +66,11 @@
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "IntakeCone"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -141,7 +143,7 @@
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
         "names": [],
         "executionBehavior": "parallel",
@@ -155,12 +157,12 @@
         "y": 0.65
       },
       "prevControl": {
-        "x": 2.3226532870775,
-        "y": 0.7281216118338323
+        "x": 3.3306166881581887,
+        "y": 0.6060458739515734
       },
       "nextControl": {
-        "x": 5.692882033504242,
-        "y": 0.5711548381243959
+        "x": 4.873989937675516,
+        "y": 0.7073893361338003
       },
       "holonomicAngle": 180.0,
       "isReversal": false,
@@ -176,16 +178,16 @@
     },
     {
       "anchorPoint": {
-        "x": 6.294740452728768,
-        "y": 2.1582227779840184
+        "x": 5.486057759966633,
+        "y": 2.1706806545707558
       },
       "prevControl": {
-        "x": 5.512377133193217,
-        "y": 0.9421952357137962
+        "x": 5.401970819458592,
+        "y": 0.18062306254712318
       },
       "nextControl": {
-        "x": 6.428930930610126,
-        "y": 2.3667950780133773
+        "x": 5.494579436529344,
+        "y": 2.372360333221568
       },
       "holonomicAngle": 0,
       "isReversal": false,
@@ -194,6 +196,33 @@
       "isStopPoint": false,
       "stopEvent": {
         "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 6.357764955166547,
+        "y": 2.186989776009352
+      },
+      "prevControl": {
+        "x": 5.980494251266395,
+        "y": 2.195972411816499
+      },
+      "nextControl": {
+        "x": 6.74382679030601,
+        "y": 2.17779782755365
+      },
+      "holonomicAngle": 0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": true,
+      "stopEvent": {
+        "names": [
+          "IntakeCone"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -291,7 +320,7 @@
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
         "names": [],
         "executionBehavior": "parallel",
@@ -301,12 +330,12 @@
     },
     {
       "anchorPoint": {
-        "x": 3.877500562602075,
-        "y": 2.1
+        "x": 3.988068488957491,
+        "y": 2.2267377868089064
       },
       "prevControl": {
-        "x": 3.165367603894353,
-        "y": 2.132590678483019
+        "x": 3.275935530249769,
+        "y": 2.2593284652919254
       },
       "nextControl": null,
       "holonomicAngle": 180.0,
@@ -330,30 +359,6 @@
   "markers": [
     {
       "position": 0.0,
-      "names": [
-        "ConeTop"
-      ]
-    },
-    {
-      "position": 2.0,
-      "names": [
-        "IntakeCone"
-      ]
-    },
-    {
-      "position": 5.0,
-      "names": [
-        "ConeTop"
-      ]
-    },
-    {
-      "position": 7.0,
-      "names": [
-        "IntakeCone"
-      ]
-    },
-    {
-      "position": 11.0,
       "names": [
         "ConeTop"
       ]

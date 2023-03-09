@@ -22,11 +22,9 @@ package frc.robot.commands.autonomous;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.robot.Logging;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 import frc.robot.util.MathUtil;
-import frc.robot.util.shuffleboard.RSTab;
 
 /**
  * Represents a swerve drive style drivetrain.
@@ -39,16 +37,12 @@ public class DriveToPosBB extends CommandBase {
     private double xSpeed, ySpeed;
     private boolean xDone, yDone;
 
-    private final RSTab autoDashboard;
-
     public DriveToPosBB(Pose2d target, double speed) {
         this.driveTrain = DriveTrain.getInstance();
         this.target = target;
         this.xSpeed = speed;
         this.ySpeed = speed;
         this.currentPose = new Pose2d();
-
-        this.autoDashboard = Logging.autoDashboard;
 
         // SmartDashboard.putBoolean("X Good?", false);
         // SmartDashboard.putBoolean("Y Good?", false);

@@ -22,7 +22,6 @@ package frc.robot.commands.swerve;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.robot.ControlMap;
-import frc.robot.robot.Logging;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 import frc.robot.util.MathUtil;
