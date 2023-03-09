@@ -42,7 +42,7 @@ public class Tuning {
 
     //Movement Characteristics
     //Wrist
-    public static final PIDConfig CALI_TOP_PID = new PIDConfig(2, 0.000, 1, 0.02);
+    public static final PIDConfig CALI_TOP_PID = new PIDConfig(2, 0.0001, 0, 0.02);
     public static final SmartMotionConfig CALI_TOP_SM = new SmartMotionConfig(true,
             10000.0,
             0.0,
@@ -79,9 +79,9 @@ public class Tuning {
 
     //Drive Motors
     public static final PIDConfig FL_DRIVE_PID = new PIDConfig(0.06, 0.0001, 0, 0.06);
-    public static final PIDConfig FR_DRIVE_PID = new PIDConfig(0.07, 0.0001, 0, 0.06);
-    public static final PIDConfig BL_DRIVE_PID = new PIDConfig(0.06, 0.0001, 0, 0.06);
-    public static final PIDConfig BR_DRIVE_PID = new PIDConfig(0.05, 0.0001, 0, 0.06);
+    public static final PIDConfig FR_DRIVE_PID = new PIDConfig(0.08, 0.0001, 0, 0.06);
+    public static final PIDConfig BL_DRIVE_PID = new PIDConfig(0.04, 0.0001, 0, 0.06);
+    public static final PIDConfig BR_DRIVE_PID = new PIDConfig(0.06, 0.0001, 0, 0.06);
     public static final MotionMagicConfig DM_MM_CONFIG = new MotionMagicConfig(
             new ArrayList<>(), true,
             10000.0, 10000.0,
@@ -93,10 +93,10 @@ public class Tuning {
     public static final int TURN_MOTOR_STALL = 31;
 
     //Turn Motors
-    public static final PIDConfig FL_TURN_PID = new PIDConfig(10, 0, 0);
-    public static final PIDConfig FR_TURN_PID = new PIDConfig(10, 0, 0);
-    public static final PIDConfig BL_TURN_PID = new PIDConfig(10, 0, 0);
-    public static final PIDConfig BR_TURN_PID = new PIDConfig(10, 0, 0);
+    public static final PIDConfig FL_TURN_PID = new PIDConfig(15, 0, 0);
+    public static final PIDConfig FR_TURN_PID = new PIDConfig(15, 0, 0);
+    public static final PIDConfig BL_TURN_PID = new PIDConfig(15, 0, 0);
+    public static final PIDConfig BR_TURN_PID = new PIDConfig(15, 0, 0);
     public static final SmartMotionConfig TM_SM_CONFIG = new SmartMotionConfig(
             true,
             20000.0,

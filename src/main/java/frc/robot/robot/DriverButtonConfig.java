@@ -12,6 +12,7 @@ import frc.robot.commands.arm.intake.advanced.SmartEject;
 import frc.robot.commands.arm.intake.basic.IntakeIn;
 import frc.robot.commands.arm.intake.basic.SetItemMode;
 import frc.robot.commands.arm.manual.ArmZero;
+import frc.robot.commands.arm.slow.MoveArmToPositionGoingUp;
 import frc.robot.commands.arm.yeet.Arm2PosFull;
 import frc.robot.commands.arm.yeet.Arm2PosHalfways;
 import frc.robot.commands.arm.yeet.Arm2PosStow;
@@ -74,7 +75,7 @@ public class DriverButtonConfig {
 
 		////CO DRIVER////////////////
 
-		new JoystickButton(ControlMap.CO_DRIVER_RIGHT, 1)
+		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 1)
 				.onTrue(new CollectCone());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
@@ -90,16 +91,16 @@ public class DriverButtonConfig {
 				.whileTrue(new ArmZero());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 7)
-				.onTrue(new SequentialCommandGroup(new  SetItemMode(false), new Arm2PosHalfways(ArmPositions.CUBE_PLACE_HIGH)));
+				.onTrue(new SequentialCommandGroup(new  SetItemMode(false), new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_HIGH)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 8)
-				.onTrue(new SequentialCommandGroup(new  SetItemMode(true), new Arm2PosFull(ArmPositions.PRE_CONE_PLACE_HIGH)));
+				.onTrue(new SequentialCommandGroup(new  SetItemMode(true), new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_HIGH)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 9)
-				.onTrue(new SequentialCommandGroup(new  SetItemMode(false), new Arm2PosHalfways(ArmPositions.CUBE_PLACE_MID)));
+				.onTrue(new SequentialCommandGroup(new  SetItemMode(false), new Arm2PosStow(ArmPositions.DRIVE_WITH_PIECE)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 10)
-				.onTrue(new SequentialCommandGroup(new  SetItemMode(true), new Arm2PosHalfways(ArmPositions.PRE_CONE_PLACE_MID)));
+				.onTrue(new SequentialCommandGroup(new  SetItemMode(true), new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_MID)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 11)
 				.onTrue(new CubeInject());
