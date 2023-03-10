@@ -196,7 +196,7 @@ public class DriveTrain extends SubsystemBase {
         //diff = Math.min(diff, otherDiff);
         
         
-        double vel = daController.calculate(diff);2
+        double vel = daController.calculate(diff);
         if (MathUtil.isWithinTolerance(diff, 0, 0.03));
         return vel;
     }
