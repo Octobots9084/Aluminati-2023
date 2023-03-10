@@ -121,7 +121,7 @@ public class PoseEstimator {
         try {
             Optional<EstimatedRobotPose> result = leftCameraWrapper.getEstimatedGlobalPose(getRobotPose());
             if (result.isPresent()) {
-                swerveDrivePoseEstimator.addVisionMeasurement(result.get().estimatedPose.toPose2d(),
+                swerveDrivePoseEstimator.addVisionMeasurement(new Pose2d(result.get().estimatedPose.toPose2d().getX()+0.05,result.get().estimatedPose.toPose2d().getY(), result.get().estimatedPose.toPose2d().getRotation()),
                         Timer.getFPGATimestamp());
             }
 

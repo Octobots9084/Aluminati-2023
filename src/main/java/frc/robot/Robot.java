@@ -56,7 +56,7 @@ public class Robot extends TimedRobot {
         DriveTrain.getInstance().drive(0, 0, 0, true);
         CommandScheduler.getInstance().cancelAll();
 
-        //Logging.updateLogging();
+        Logging.updateLogging();
 
         // SmartDashboard.putNumber("Extens2ion", ArmExtension.getInstance().getPosition());
         // SmartDashboard.putNumber("Arm Rotat2ion", CaliGirls.getInstance().getTopPos());
@@ -89,19 +89,18 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotPeriodic() {
-        SmartDashboard.putNumber("X-Pos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getX());
-        SmartDashboard.putNumber("Y-Pos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getY());
-        SmartDashboard.putNumber("Rot Deg",
-                DriveTrain.getInstance().getPoseEstimator().getRobotPose().getRotation().getDegrees());
+        // SmartDashboard.putNumber("X-Pos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getX());
+        // SmartDashboard.putNumber("Y-Pos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getY());
+        // SmartDashboard.putNumber("Rot Deg",
+        // DriveTrain.getInstance().getPoseEstimator().getRobotPose().getRotation().getDegrees());
     }
 
     @Override
     public void teleopPeriodic() {
         DriveTrain.getInstance().updateSwerveStates();
         CommandScheduler.getInstance().run();
-        //Logging.updateLogging();
 
-        // Logging.updateLogging();
+        Logging.updateLogging();
     }
 
     @Override
@@ -124,7 +123,6 @@ public class Robot extends TimedRobot {
         }
         this.autoFlag = false;
 
-        //Logging.updateLogging();
 
     }
 
@@ -133,7 +131,6 @@ public class Robot extends TimedRobot {
         this.autoFlag = true;
         initializeAllSubsystems();
 
-        resetRobotPoseAndGyro();
         //new driveToPos(new Pose2d(14.16, 1.4, new Rotation2d()));
         //CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
         // CommandScheduler.getInstance().schedule(PathPlannerAutos.TestAutoOne());
@@ -176,7 +173,7 @@ public class Robot extends TimedRobot {
     }
 
     private void resetRobotPoseAndGyro() {
-        CommandScheduler.getInstance().schedule(new ZeroGyro());
+        Gyro.getInstance().resetGyro();
         DriveTrain.getInstance().setTargetRotationAngle(0);
         DriveTrain.getInstance().drive(0, 0, 0, true);
         DriveTrain.getInstance().getPoseEstimator().resetPose(new Pose2d(0,0, new Rotation2d()));

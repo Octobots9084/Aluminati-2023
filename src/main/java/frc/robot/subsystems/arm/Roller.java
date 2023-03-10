@@ -27,7 +27,7 @@ public class Roller {
     }
 
     public boolean getItemMode() {
-        return itemMode;
+        return this.itemMode;
     }
 
     public void setRollerVoltage(double v) {

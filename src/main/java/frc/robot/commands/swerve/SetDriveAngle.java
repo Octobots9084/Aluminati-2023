@@ -2,6 +2,7 @@ package frc.robot.commands.swerve;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.swerve.DriveTrain;
+import frc.robot.util.Gyro;
 
 
 /**
@@ -17,7 +18,7 @@ public class SetDriveAngle extends InstantCommand {
 
     @Override
     public void initialize() {
-        dt.setTargetRotationAngle(angle);
+        dt.setTargetRotationAngle((Gyro.getInstance().getUnwrappedAngle()-(Gyro.getInstance().getUnwrappedAngle()%360))+angle);
     }
 
 }
