@@ -35,10 +35,10 @@ public class DriverButtonConfig {
 				.onTrue(new SmartEject());
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 4)
-				.onTrue(new SetDriveAngle(0).withTimeout(1));
+				.onTrue(new IntakeIn());
 		
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 5)
-				.onTrue(new SetDriveAngle(180).withTimeout(1));
+				.onTrue(new IntakeOutWithTimeout());
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
 				.onTrue(new ZeroGyro());
@@ -103,10 +103,10 @@ public class DriverButtonConfig {
 
 		//Driver Joystick Left
 		new JoystickButton(ControlMap.DRIVER_LEFT, 1)
-				.onTrue(new IntakeIn());
+				.onTrue(new SetDriveAngle(0).withTimeout(1));
 
 		new JoystickButton(ControlMap.DRIVER_LEFT, 2)
-				.onTrue(new IntakeOutWithTimeout());
+				.onTrue(new SetDriveAngle(180).withTimeout(1));
 
 		//Driver Joystick Right
 		new JoystickButton(ControlMap.DRIVER_RIGHT, 1)

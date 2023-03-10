@@ -116,6 +116,7 @@ public class Robot extends TimedRobot {
         }
         CommandScheduler.getInstance().cancelAll();
         initializeAllSubsystems();
+        DriveTrain.getInstance().setUseDriverAssist(true);
         initializeDefaultCommands();
         ArmExtension.getInstance().setOffset();
         if (!autoFlag) {

@@ -118,27 +118,27 @@ public class PoseEstimator {
         // driveDashboard.setEntry("Y-Pos", robotPose.get().getY());
         // driveDashboard.setEntry("Rot Deg", robotPose.get().getRotation().getDegrees());
 
-        try {
-            Optional<EstimatedRobotPose> result = leftCameraWrapper.getEstimatedGlobalPose(getRobotPose());
-            if (result.isPresent()) {
-                swerveDrivePoseEstimator.addVisionMeasurement(new Pose2d(result.get().estimatedPose.toPose2d().getX()+0.05,result.get().estimatedPose.toPose2d().getY(), result.get().estimatedPose.toPose2d().getRotation()),
-                        Timer.getFPGATimestamp());
-            }
+        // try {
+        //     Optional<EstimatedRobotPose> result = leftCameraWrapper.getEstimatedGlobalPose(getRobotPose());
+        //     if (result.isPresent()) {
+        //         swerveDrivePoseEstimator.addVisionMeasurement(new Pose2d(result.get().estimatedPose.toPose2d().getX()+0.05,result.get().estimatedPose.toPose2d().getY(), result.get().estimatedPose.toPose2d().getRotation()),
+        //                 Timer.getFPGATimestamp());
+        //     }
 
-        } catch (Exception e) {
-            //deez
-        } 
+        // } catch (Exception e) {
+        //     //deez
+        // } 
 
-        try {
-            Optional<EstimatedRobotPose> result = rightCameraWrapper.getEstimatedGlobalPose(getRobotPose());
-            if (result.isPresent()) {
-                swerveDrivePoseEstimator.addVisionMeasurement(result.get().estimatedPose.toPose2d(),
-                        Timer.getFPGATimestamp());
-            }
+        // try {
+        //     Optional<EstimatedRobotPose> result = rightCameraWrapper.getEstimatedGlobalPose(getRobotPose());
+        //     if (result.isPresent()) {
+        //         swerveDrivePoseEstimator.addVisionMeasurement(result.get().estimatedPose.toPose2d(),
+        //                 Timer.getFPGATimestamp());
+        //     }
 
-        } catch (Exception e) {
-            //deez
-        } 
+        // } catch (Exception e) {
+        //     //deez
+        // } 
         resetLock.unlock();
 
     }

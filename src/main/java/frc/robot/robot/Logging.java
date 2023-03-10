@@ -54,21 +54,23 @@ public class Logging {
         autoChooser.addOption("Move and Grab Cone Top", PathPlannerAutos.PlaceConeAndMoveBackTop());
         autoChooser.addOption("2 Cones", PathPlannerAutos.Place2Cone());
 
+        autoChooser.addOption("threedcCones", PathPlannerAutos.threedcCones());
+
 
     }
 
     public static void updateLogging() {
         //Drive
-        driveDashboard.setEntry("X-Pos", drive.getPoseEstimator().getRobotPose().getX());
-        driveDashboard.setEntry("Y-Pos", drive.getPoseEstimator().getRobotPose().getY());
-        driveDashboard.setEntry("Rot Deg", drive.getPoseEstimator().getRobotPose().getRotation().getDegrees());
+        // driveDashboard.setEntry("X-Pos", drive.getPoseEstimator().getRobotPose().getX());
+        // driveDashboard.setEntry("Y-Pos", drive.getPoseEstimator().getRobotPose().getY());
+        // driveDashboard.setEntry("Rot Deg", drive.getPoseEstimator().getRobotPose().getRotation().getDegrees());
 
-        driveDashboard.setEntry("Gyro Pitch", gyro.getRoll());
+        // driveDashboard.setEntry("Gyro Pitch", gyro.getRoll());
 
-        //Arm
-        armDashboard.setEntry("Arm Extension", armExtension.getPosition());
-        armDashboard.setEntry("Claw Rotation", caliGirls.getTopPos());
-        armDashboard.setEntry("Arm Rotation", caliGirls.getBottomPos());
+        // //Arm
+        // armDashboard.setEntry("Arm Extension", armExtension.getPosition());
+        // armDashboard.setEntry("Claw Rotation", caliGirls.getTopPos());
+        // armDashboard.setEntry("Arm Rotation", caliGirls.getBottomPos());
 
     }
 

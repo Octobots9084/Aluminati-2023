@@ -188,9 +188,15 @@ public class DriveTrain extends SubsystemBase {
         //     return 0.0;
         // }
         double targetAngle = targetRotationAngle;
-        var diff = gyroAngle-targetAngle;
+        double wrappedTarget = targetAngle % 360;
+        double wrappedGyro = gyroAngle % 360;
+
+        //double otherDiff = (wrappedGyro) - (360-wrappedTarget) + (((int)(gyroAngle/360))*360);
+        double diff = gyroAngle-targetAngle;
+        //diff = Math.min(diff, otherDiff);
         
-        double vel = daController.calculate(diff);
+        
+        double vel = daController.calculate(diff);2
         if (MathUtil.isWithinTolerance(diff, 0, 0.03));
         return vel;
     }
