@@ -19,7 +19,6 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.commands.autonomous.arm.AutoConeLow;
 import frc.robot.commands.autonomous.arm.AutoConeMid;
 import frc.robot.commands.autonomous.arm.AutoConeTop;
-import frc.robot.commands.autonomous.arm.AutoConeTopBalance;
 import frc.robot.commands.autonomous.arm.AutoCubeLow;
 import frc.robot.commands.autonomous.arm.AutoCubeMid;
 import frc.robot.commands.autonomous.arm.AutoCubeTop;
@@ -32,7 +31,6 @@ public final class PathPlannerAutos {
             Map.entry("driveToPos", new DriveToPosition(new Pose2d(14, 0.7, new Rotation2d(0)))),
             Map.entry("BalanceChargeStation", new BalanceChargeStation()),
             Map.entry("ConeTop", new AutoConeTop()),
-            Map.entry("ConeTopBalance", new AutoConeTopBalance()),
             Map.entry("ConeMid", new AutoConeMid()),
             Map.entry("ConeLow", new AutoConeLow()),
             Map.entry("CubeTop", new AutoCubeTop()),
@@ -71,7 +69,7 @@ public final class PathPlannerAutos {
     }
 
     public static CommandBase PlaceConeAndBalance() {
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStationMove", new PathConstraints(20, 5)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStationMoveAndGoOutsideCommunity", new PathConstraints(3, 2)));
     }
     public static CommandBase PlaceConeAndMoveBackBottom() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("MoveAndGrabConeBottom", new PathConstraints(2, 1)));
@@ -81,14 +79,28 @@ public final class PathPlannerAutos {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("MoveAndGrabConeTop", new PathConstraints(2, 1)));
     }
 
+    public static CommandBase ConeMiddleAndCollectTop() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("MiddleMoveAndGrabConeTop", new PathConstraints(2, 1)));
+    }
+
+    public static CommandBase ConeMiddleAndCollectBottom() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("MiddleMoveAndGrabConeBottom", new PathConstraints(2, 1)));
+    }
+
+    public static CommandBase ConeMiddleAndCollectTopAndCharge() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("MiddleMoveAndGrabConeTopBalance", new PathConstraints(2, 1)));
+    }
+
+    public static CommandBase ConeMiddleandCollectBottomAndCharge() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("MiddleMoveAndGrabConeBottomBalance", new PathConstraints(2, 1)));
+    }
+
+
     public static CommandBase Place2Cone() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("MoveAndGrabConeBottomAndComeBack", new PathConstraints(2, 1)));
     }
     
-    public static CommandBase threedc2Cones() {
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("3-d-c 2 ALL CONES", new PathConstraints(4, 3)));
-    }
-    
+
     public static CommandBase none() {
         return Commands.none();
     }
