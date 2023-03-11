@@ -197,7 +197,24 @@ public class DriveTrain extends SubsystemBase {
         
         double vel = daController.calculate(diff);
         if (MathUtil.isWithinTolerance(diff, 0, 0.03));
+        if (vel > 5) {
+            vel = 5;
+        }
         return vel;
+    }
+    public double getShortestRotationDiff() {
+        double gyroAngle = gyro.getUnwrappedAngle();
+        // if (MathUtil.isWithinTolerance(gyroAngle, targetRotationAngle, TOLERANCE)) {
+        //     return 0.0;
+        // }
+        double targetAngle = targetRotationAngle;
+
+        double otherDiff = gyroAngle-(targetAngle+360);
+        double diff = gyroAngle-targetAngle;
+        if (Math.abs(diff)>Math.abs(otherDiff)) {
+            diff = otherDiff;
+        }
+        return diff;
     }
 
     public void setSwerveModuleAngle(double angle) {

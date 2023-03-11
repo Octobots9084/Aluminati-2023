@@ -18,6 +18,9 @@ public class SetDriveAngle extends InstantCommand {
 
     @Override
     public void initialize() {
+        if (DriveTrain.getInstance().getShortestRotationDiff() > 25) {
+            return;
+        }
         dt.setTargetRotationAngle((Gyro.getInstance().getUnwrappedAngle()-(Gyro.getInstance().getUnwrappedAngle()%360))+angle);
     }
 
