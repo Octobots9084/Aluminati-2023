@@ -123,6 +123,7 @@ public class Robot extends TimedRobot {
             resetRobotPoseAndGyro();
         }
         this.autoFlag = false;
+        Gyro.getInstance().setAngleAdjustment(180);
 
         //DriveTrain.getInstance().getPoseEstimator().useAprilTags.set(true);
 
@@ -140,7 +141,7 @@ public class Robot extends TimedRobot {
         //CommandScheduler.getInstance().schedule(new driveToPos(new Pose2d(0.0, FieldConstants.length/2, new Rotation2d(0,0))));
 
         Robot.autoStartTime = Timer.getFPGATimestamp();
-
+        Gyro.getInstance().setAngleAdjustment(0);
         try {
             var command = Logging.getAutoChooser().getSelected();
             if (command != null) {

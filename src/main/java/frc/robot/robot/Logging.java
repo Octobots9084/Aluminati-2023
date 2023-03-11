@@ -55,6 +55,8 @@ public class Logging {
         autoChooser.addOption("2 Cones", PathPlannerAutos.Place2Cone());
 
         autoChooser.addOption("threedcCones", PathPlannerAutos.threedc2Cones());
+        autoChooser.addOption("PlaceConeAndBalanceAndCommunity", PathPlannerAutos.PlaceConeAndBalanceAndCommunity());
+        
 
 
     }
