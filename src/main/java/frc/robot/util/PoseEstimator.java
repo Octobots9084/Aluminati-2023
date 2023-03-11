@@ -51,6 +51,7 @@ public class PoseEstimator {
     public LeftCameraWrapper leftCameraWrapper;
     public RightCameraWrapper rightCameraWrapper;
 
+    public final AtomicReference<Boolean> useAprilTags = new AtomicReference<Boolean>(false);
     public PoseEstimator(Gyro gyro, SwerveDriveKinematics swerveDriveKinematics, SwerveModule[] swerveModules) {
         this.leftCameraWrapper = new LeftCameraWrapper();
         this.rightCameraWrapper = new RightCameraWrapper();
@@ -103,7 +104,8 @@ public class PoseEstimator {
             rotation = gyro.getUnwrappedRotation2d();
         } else {
             rotation = gyro.getUnwrappedRotation2d();
-        }
+        }   
+
         var pose2d = swerveDrivePoseEstimator.updateWithTime(
                 Timer.getFPGATimestamp(),
                 rotation,
@@ -118,27 +120,30 @@ public class PoseEstimator {
         // driveDashboard.setEntry("Y-Pos", robotPose.get().getY());
         // driveDashboard.setEntry("Rot Deg", robotPose.get().getRotation().getDegrees());
 
-        // try {
-        //     Optional<EstimatedRobotPose> result = leftCameraWrapper.getEstimatedGlobalPose(getRobotPose());
-        //     if (result.isPresent()) {
-        //         swerveDrivePoseEstimator.addVisionMeasurement(new Pose2d(result.get().estimatedPose.toPose2d().getX()+0.05,result.get().estimatedPose.toPose2d().getY(), result.get().estimatedPose.toPose2d().getRotation()),
-        //                 Timer.getFPGATimestamp());
-        //     }
+        // if (useAprilTags.get()) {
+        //     try {
+        //         Optional<EstimatedRobotPose> result = leftCameraWrapper.getEstimatedGlobalPose(getRobotPose());
+        //         if (result.isPresent()) {
+        //             swerveDrivePoseEstimator.addVisionMeasurement(new Pose2d(result.get().estimatedPose.toPose2d().getX()+0.05,result.get().estimatedPose.toPose2d().getY(), result.get().estimatedPose.toPose2d().getRotation()),
+        //                     Timer.getFPGATimestamp());
+        //         }
 
-        // } catch (Exception e) {
-        //     //deez
-        // } 
+        //     } catch (Exception e) {
+        //         //deez
+        //     } 
 
-        // try {
-        //     Optional<EstimatedRobotPose> result = rightCameraWrapper.getEstimatedGlobalPose(getRobotPose());
-        //     if (result.isPresent()) {
-        //         swerveDrivePoseEstimator.addVisionMeasurement(result.get().estimatedPose.toPose2d(),
-        //                 Timer.getFPGATimestamp());
-        //     }
+        //     try {
+        //         Optional<EstimatedRobotPose> result = rightCameraWrapper.getEstimatedGlobalPose(getRobotPose());
+        //         if (result.isPresent()) {
+        //             swerveDrivePoseEstimator.addVisionMeasurement(result.get().estimatedPose.toPose2d(),
+        //                     Timer.getFPGATimestamp());
+        //         }
 
-        // } catch (Exception e) {
-        //     //deez
-        // } 
+        //     } catch (Exception e) {
+        //         //deez
+        //     } 
+        // }
+        
         resetLock.unlock();
 
     }
@@ -154,10 +159,11 @@ public class PoseEstimator {
             };
             Rotation2d rotation = new Rotation2d();
             if (DriverStation.getAlliance()==DriverStation.Alliance.Blue) {
-                rotation = gyro.getUnwrappedRotation2d();
+                rotation = gyro.getUnwrappedRotation2d();          
             } else {
                 rotation = gyro.getUnwrappedRotation2d();
             }
+            
             swerveDrivePoseEstimator.resetPosition(rotation, swerveModulePositions, this.getRobotPose());
         } finally {
             resetLock.unlock();
