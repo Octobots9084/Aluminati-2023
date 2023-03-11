@@ -182,6 +182,12 @@ public class DriveTrain extends SubsystemBase {
         return this.getPoseEstimator().getRobotPose();
     }
 
+    public Pose2d getPose2dPathplanner() {
+        return new Pose2d(0,0, gyro.getUnwrappedRotation2d());
+    }
+    public void resetPosePathplanner(Pose2d pose2d) {
+    }
+
     public double getRotationSpeed() {
         double gyroAngle = gyro.getUnwrappedAngle();
         // if (MathUtil.isWithinTolerance(gyroAngle, targetRotationAngle, TOLERANCE)) {

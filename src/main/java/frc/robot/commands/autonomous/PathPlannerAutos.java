@@ -71,7 +71,7 @@ public final class PathPlannerAutos {
     }
 
     public static CommandBase PlaceConeAndBalance() {
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStationMove", new PathConstraints(20, 5)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStationMove", new PathConstraints(20, 20)));
     }
 
     public static CommandBase PlaceConeAndBalanceAndCommunity() {
