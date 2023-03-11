@@ -54,7 +54,7 @@ public class Logging {
         autoChooser.addOption("Move and Grab Cone Top", PathPlannerAutos.PlaceConeAndMoveBackTop());
         autoChooser.addOption("2 Cones", PathPlannerAutos.Place2Cone());
 
-        autoChooser.addOption("threedcCones", PathPlannerAutos.threedcCones());
+        autoChooser.addOption("threedcCones", PathPlannerAutos.threedc2Cones());
 
 
     }
