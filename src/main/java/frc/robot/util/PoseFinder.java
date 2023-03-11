@@ -45,23 +45,23 @@ public class PoseFinder {
     public static Pose2d getPositionFromID(int ID) {
         if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) {
             if (ID==1) {
-                return new Pose2d(FieldPositions.BLUE_1_CONE.xPos, FieldPositions.BLUE_1_CONE.yPos, new Rotation2d());
+                return new Pose2d(FieldPositions.BLUE_1_CONE.xPos, FieldPositions.BLUE_1_CONE.yPos, new Rotation2d(Math.PI));
             } else if (ID==2) {
-                return new Pose2d(FieldPositions.BLUE_2_CUBE.xPos, FieldPositions.BLUE_2_CUBE.yPos, new Rotation2d());
+                return new Pose2d(FieldPositions.BLUE_2_CUBE.xPos, FieldPositions.BLUE_2_CUBE.yPos, new Rotation2d(Math.PI));
             } else if (ID==3) {
-                return new Pose2d(FieldPositions.BLUE_3_CONE.xPos, FieldPositions.BLUE_3_CONE.yPos, new Rotation2d());
+                return new Pose2d(FieldPositions.BLUE_3_CONE.xPos, FieldPositions.BLUE_3_CONE.yPos, new Rotation2d(Math.PI));
             } else if (ID==4) {
-                return new Pose2d(FieldPositions.BLUE_4_CONE.xPos, FieldPositions.BLUE_4_CONE.yPos, new Rotation2d());
+                return new Pose2d(FieldPositions.BLUE_4_CONE.xPos, FieldPositions.BLUE_4_CONE.yPos, new Rotation2d(Math.PI));
             } else if (ID==5) {
-                return new Pose2d(FieldPositions.BLUE_5_CUBE.xPos, FieldPositions.BLUE_5_CUBE.yPos, new Rotation2d());
+                return new Pose2d(FieldPositions.BLUE_5_CUBE.xPos, FieldPositions.BLUE_5_CUBE.yPos, new Rotation2d(Math.PI));
             } else if (ID==6) {
-                return new Pose2d(FieldPositions.BLUE_6_CONE.xPos, FieldPositions.BLUE_6_CONE.yPos, new Rotation2d());
+                return new Pose2d(FieldPositions.BLUE_6_CONE.xPos, FieldPositions.BLUE_6_CONE.yPos, new Rotation2d(Math.PI));
             } else if (ID==7) {
-                return new Pose2d(FieldPositions.BLUE_7_CONE.xPos, FieldPositions.BLUE_7_CONE.yPos, new Rotation2d());
+                return new Pose2d(FieldPositions.BLUE_7_CONE.xPos, FieldPositions.BLUE_7_CONE.yPos, new Rotation2d(Math.PI));
             } else if (ID==8) {
-                return new Pose2d(FieldPositions.BLUE_8_CUBE.xPos, FieldPositions.BLUE_8_CUBE.yPos, new Rotation2d());
+                return new Pose2d(FieldPositions.BLUE_8_CUBE.xPos, FieldPositions.BLUE_8_CUBE.yPos, new Rotation2d(Math.PI));
             } else if (ID==9) {
-                return new Pose2d(FieldPositions.BLUE_9_CONE.xPos, FieldPositions.BLUE_9_CONE.yPos, new Rotation2d());
+                return new Pose2d(FieldPositions.BLUE_9_CONE.xPos, FieldPositions.BLUE_9_CONE.yPos, new Rotation2d(Math.PI));
             } else {
                 return new Pose2d();
             }

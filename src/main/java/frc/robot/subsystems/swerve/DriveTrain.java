@@ -188,13 +188,12 @@ public class DriveTrain extends SubsystemBase {
         //     return 0.0;
         // }
         double targetAngle = targetRotationAngle;
-        double wrappedTarget = targetAngle % 360;
-        double wrappedGyro = gyroAngle % 360;
 
-        //double otherDiff = (wrappedGyro) - (360-wrappedTarget) + (((int)(gyroAngle/360))*360);
+        double otherDiff = gyroAngle-(targetAngle+360);
         double diff = gyroAngle-targetAngle;
-        //diff = Math.min(diff, otherDiff);
-        
+        if (Math.abs(diff)>Math.abs(otherDiff)) {
+            diff = otherDiff;
+        }
         
         double vel = daController.calculate(diff);
         if (MathUtil.isWithinTolerance(diff, 0, 0.03));
@@ -207,6 +206,7 @@ public class DriveTrain extends SubsystemBase {
             m.setDesiredState(new SwerveModuleState(0, new Rotation2d(angle)));
         }
     }
+    
 
     public void setSwerveModuleVelocity(double vel) {
         for (var m : swerveModules) {

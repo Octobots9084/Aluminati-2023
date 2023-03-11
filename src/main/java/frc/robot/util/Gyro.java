@@ -96,4 +96,5 @@ public class Gyro {
     public void resetGyro() {
         navX.reset();
     }
+    
 }

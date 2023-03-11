@@ -28,7 +28,7 @@ public class AutoConeTop extends SequentialCommandGroup{
         this.armExtension = ArmExtension.getInstance();
         addCommands(
             new IntakeIn(),
-            new WaitCommand(2),
+            new WaitCommand(1),
             new SetArmAngle(aPosition.armAngle, aPosition.angleHold), 
             new WaitCommand(.5),
             new SetArmExtension(aPosition.extension),

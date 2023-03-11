@@ -124,6 +124,8 @@ public class Robot extends TimedRobot {
         }
         this.autoFlag = false;
 
+        //DriveTrain.getInstance().getPoseEstimator().useAprilTags.set(true);
+
 
     }
 

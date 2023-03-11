@@ -22,6 +22,7 @@ package frc.robot.commands.autonomous;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.robot.ControlMap;
@@ -70,8 +71,14 @@ public class DriveToPosition extends CommandBase {
         // SmartDashboard.putNumber("Ro1t2: ", currentPose.getRotation().getDegrees());
         
 
-        ySpeed = drivePids.calculate(target.getY(), currentPose.getY());
-        xSpeed = drivePids.calculate(currentPose.getX(), target.getX());
+        if (DriverStation.getAlliance() == DriverStation.Alliance.Red) {
+            ySpeed = drivePids.calculate(target.getY(), currentPose.getY());
+            xSpeed = drivePids.calculate(currentPose.getX(), target.getX());
+        } else {
+            ySpeed = drivePids.calculate(currentPose.getY(),target.getY());
+            xSpeed = drivePids.calculate(target.getX(),currentPose.getX());
+        }
+        
         rotSpeed = turnPids.calculate(target.getRotation().getRadians(), currentPose.getRotation().getRadians());
 
         if (xSpeed>0 && xSpeed < 0.1) {
@@ -115,19 +122,19 @@ public class DriveToPosition extends CommandBase {
         }
 
 
-        if (xSpeed>0.5) {
-            xSpeed = 0.5;
+        if (xSpeed>1) {
+            xSpeed = 1;
         }
-        if (xSpeed<-0.5) {
-            xSpeed = -0.5;
-        }
-
-        if (ySpeed>0.5) {
-            ySpeed = 0.5;
+        if (xSpeed<-1) {
+            xSpeed = -1;
         }
 
-        if (ySpeed<-0.5) {
-            ySpeed = -0.5;
+        if (ySpeed>1) {
+            ySpeed = 1;
+        }
+
+        if (ySpeed<-1) {
+            ySpeed = -1;
         }
 
         // Check driver assist and drive
