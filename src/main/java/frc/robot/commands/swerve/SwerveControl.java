@@ -19,6 +19,13 @@
  */
 
 package frc.robot.commands.swerve;
+import org.json.simple.JSONObject;
+
+import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.json.simple.JSONArray;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.robot.ControlMap;
@@ -29,11 +36,17 @@ import frc.robot.util.MathUtil;
 public class SwerveControl extends CommandBase {
     private final DriveTrain driveTrain;
     private final Gyro gyro;
+    public static ArrayList<Double> xSpeeds;
+    public static ArrayList<Double> ySpeeds;
+    public static ArrayList<Double> rots;
 
     public SwerveControl() {
         // Initialization
         this.driveTrain = DriveTrain.getInstance();
         this.gyro = Gyro.getInstance();
+        ArrayList<Double> xSpeeds = new ArrayList<Double>();
+        ArrayList<Double> ySpeeds = new ArrayList<Double>();
+        ArrayList<Double> rots = new ArrayList<Double>();
         addRequirements(this.driveTrain);
     }
 
@@ -59,6 +72,12 @@ public class SwerveControl extends CommandBase {
 
         // Calculate the deadband
         rot = MathUtil.fitDeadband(rightJoystick.getX()) * DriveTrain.MAX_ANGULAR_SPEED;
+
+
+        xSpeeds.add(xSpeed);
+        ySpeeds.add(ySpeed);
+        rots.add(rot);
+
 
         //just drive lol
         driveTrain.drive(xSpeed, ySpeed, rot, driveTrain.getFieldCentric());
