@@ -1,2 +1,2 @@
 # Aluminati-2023
-Watch closely now 👁.
+Watch closely 👁.
