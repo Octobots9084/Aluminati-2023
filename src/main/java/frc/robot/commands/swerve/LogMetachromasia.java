@@ -3,7 +3,7 @@ package frc.robot.commands.swerve;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.swerve.SwerveControl;
-public class logRubberDucky extends InstantCommand{
+public class LogMetachromasia extends InstantCommand{
     @Override
     public void initialize() {
         
@@ -18,9 +18,9 @@ public class logRubberDucky extends InstantCommand{
         Double[] rotsDouble = new Double[SwerveControl.rots.size()];
         rotsDouble = SwerveControl.rots.toArray(rotsDouble);
 
-
-        SmartDashboard.putNumberArray("xSpeeds", xSpeedsDouble);
-        SmartDashboard.putNumberArray("ySpeeds", ySpeedsDouble);
-        SmartDashboard.putNumberArray("rot", rotsDouble);
+        SmartDashboard.putNumber("test", 0);
+        SmartDashboard.putString("xSpeeds", xSpeedsDouble.toString());
+        SmartDashboard.putString("ySpeeds", ySpeedsDouble.toString());
+        SmartDashboard.putString("rot", rotsDouble.toString());
     }
 }

@@ -39,14 +39,15 @@ public class SwerveControl extends CommandBase {
     public static ArrayList<Double> xSpeeds;
     public static ArrayList<Double> ySpeeds;
     public static ArrayList<Double> rots;
+    public static boolean MetachromasiaEnabled = false;
 
     public SwerveControl() {
         // Initialization
         this.driveTrain = DriveTrain.getInstance();
         this.gyro = Gyro.getInstance();
-        ArrayList<Double> xSpeeds = new ArrayList<Double>();
-        ArrayList<Double> ySpeeds = new ArrayList<Double>();
-        ArrayList<Double> rots = new ArrayList<Double>();
+        xSpeeds = new ArrayList<Double>();
+        ySpeeds = new ArrayList<Double>();
+        rots = new ArrayList<Double>();
         addRequirements(this.driveTrain);
     }
 
@@ -73,10 +74,12 @@ public class SwerveControl extends CommandBase {
         // Calculate the deadband
         rot = MathUtil.fitDeadband(rightJoystick.getX()) * DriveTrain.MAX_ANGULAR_SPEED;
 
-
-        xSpeeds.add(xSpeed);
-        ySpeeds.add(ySpeed);
-        rots.add(rot);
+        if (MetachromasiaEnabled) {
+            xSpeeds.add(xSpeed);
+            ySpeeds.add(ySpeed);
+            rots.add(rot);
+        }
+        
 
 
         //just drive lol
