@@ -15,7 +15,7 @@ public class DriveNone extends CommandBase{
 
     @Override
     public void execute() {
-        DriveTrain.getInstance().drive(0,0, 0, false);
+        DriveTrain.getInstance().drive(0,0, DriveTrain.getInstance().getRotationSpeed(), false);
     }
 
     @Override

@@ -4,6 +4,7 @@ package frc.robot.subsystems.arm;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 import com.revrobotics.SparkMaxPIDController;
 
@@ -74,6 +75,31 @@ public class CaliGirls extends SubsystemBase {
         this.motorBottomFollower = new CANSparkMax(MotorIDs.ARM_PIVOT_ANGLE_FOLLOWER, MotorType.kBrushless);
         this.motorBottomFollower.setSmartCurrentLimit(Tuning.CALI_TOP_FOLLOWER_STALL, Tuning.CALI_TOP_FOLLOWER_FREE);
         this.motorBottomFollower.follow(motorBottom, true);
+
+
+        this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);
+        this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 255);
+        this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 255);
+        this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 255);
+        this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
+        this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
+        this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
+
+        this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);
+        this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 255);
+        this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 255);
+        this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 255);
+        this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
+        this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
+        this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
+
+        this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);
+        this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 255);
+        this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 255);
+        this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 255);
+        this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
+        this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
+        this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
     }
 
     public void setTopPos(double angle) {

@@ -18,7 +18,7 @@ public class DriveBackwards extends CommandBase{
 
     @Override
     public void execute() {
-        DriveTrain.getInstance().drive(-speed * DriveTrain.MAX_TURN_SPEED,0, 0, false);
+        DriveTrain.getInstance().drive(-speed * DriveTrain.MAX_TURN_SPEED,0, DriveTrain.getInstance().getRotationSpeed(), false);
     }
 
     @Override

@@ -29,6 +29,7 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.autonomous.arm.AutoConeTop;
+import frc.robot.commands.swerve.SetDriveAngle;
 import frc.robot.robot.ControlMap;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
@@ -41,10 +42,11 @@ public class AutoDriveOntoChargeStationAndCommunity extends SequentialCommandGro
     public AutoDriveOntoChargeStationAndCommunity() {
         addCommands(
             new AutoConeTop(),
-            new DriveBackwards(1).withTimeout(0.7),
+            new DriveBackwards(0.5).withTimeout(2),
             new DriveBackwards(0.1).withTimeout(2.8),
+            new SetDriveAngle(180),
             new DriveForwards(0.0).withTimeout(2),
-            new DriveForwards(1).withTimeout(1),
+            new DriveBackwards(0.5).withTimeout(2),
             new BalanceChargeStation()
         
         

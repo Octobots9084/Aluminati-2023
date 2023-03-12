@@ -41,7 +41,7 @@ public class AutoDriveOntoChargeStation extends SequentialCommandGroup {
     public AutoDriveOntoChargeStation() {
         addCommands(
             new AutoConeTop(),
-            new DriveBackwards(1).withTimeout(1),
+            new DriveBackwards(0.7).withTimeout(1.2),
             new InstantCommand(() -> DriveTrain.getInstance().drive(0,0, 0, false)),
             new BalanceChargeStation()
         

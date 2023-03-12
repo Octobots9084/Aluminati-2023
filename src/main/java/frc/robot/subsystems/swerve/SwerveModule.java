@@ -29,6 +29,7 @@ import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -97,6 +98,14 @@ public class SwerveModule {
         this.driveMotor.configStatorCurrentLimit(Tuning.DRIVE_STATOR_LIMIT); //How much current the motor can use (outputwise)
         this.driveMotor.configSupplyCurrentLimit(Tuning.DRIVE_SUPPLY_LIMIT); //How much current the supply can give (inputwise)
         this.steeringMotor.setSmartCurrentLimit(Tuning.TURN_MOTOR_STALL, Tuning.TURN_MOTOR_FREE);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 255);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 255);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 255);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
+
 
         try {
             Thread.sleep(200);

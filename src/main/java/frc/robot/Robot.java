@@ -142,6 +142,7 @@ public class Robot extends TimedRobot {
 
         Robot.autoStartTime = Timer.getFPGATimestamp();
         Gyro.getInstance().setAngleAdjustment(0);
+        DriveTrain.getInstance().setUseDriverAssist(true);
         try {
             var command = Logging.getAutoChooser().getSelected();
             if (command != null) {
@@ -155,6 +156,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousPeriodic() {
+        DriveTrain.getInstance().getPoseEstimator().updateOdometry();
         CommandScheduler.getInstance().run();
     }
 
