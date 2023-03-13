@@ -21,4 +21,19 @@ public class SetDriveAngle extends InstantCommand {
         dt.setTargetRotationAngle((Gyro.getInstance().getUnwrappedAngle()-(Gyro.getInstance().getUnwrappedAngle()%360))+angle);
     }
 
+    // Maybe better
+    // @Override
+    // public void initialize() {
+    //     double gyroUnwrappedAngle = Gyro.getInstance().getUnwrappedAngle();
+    //     if (Math.abs((gyroUnwrappedAngle-(gyroUnwrappedAngle%360)+angle)-gyroUnwrappedAngle) < Math.abs(gyroUnwrappedAngle-(gyroUnwrappedAngle+(360-(gyroUnwrappedAngle%360))-(360-angle)))) {
+    //         dt.setTargetRotationAngle((gyroUnwrappedAngle-(gyroUnwrappedAngle%360))+angle);
+
+    //     } else {
+    //         dt.setTargetRotationAngle((gyroUnwrappedAngle+(360-(gyroUnwrappedAngle%360))-(360-angle)));
+    //     }
+
+
+        
+    // }
+
 }

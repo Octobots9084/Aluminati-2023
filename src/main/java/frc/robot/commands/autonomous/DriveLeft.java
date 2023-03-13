@@ -17,7 +17,7 @@ public class DriveLeft extends CommandBase{
 
     @Override
     public void execute() {
-        DriveTrain.getInstance().drive(0,speed * DriveTrain.MAX_TURN_SPEED, DriveTrain.getInstance().getRotationSpeed(), false);
+        DriveTrain.getInstance().drive(0,speed * DriveTrain.MAX_TURN_SPEED, 0, false);
     }
 
     @Override

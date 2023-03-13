@@ -17,7 +17,7 @@ public class DriveForwards extends CommandBase{
 
     @Override
     public void execute() {
-        DriveTrain.getInstance().drive(speed * DriveTrain.MAX_TURN_SPEED,0, DriveTrain.getInstance().getRotationSpeed(), false);
+        DriveTrain.getInstance().drive(speed * DriveTrain.MAX_TURN_SPEED,0, 0, false);
     }
 
     @Override

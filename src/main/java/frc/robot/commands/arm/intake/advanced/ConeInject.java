@@ -22,7 +22,7 @@ public class ConeInject extends SequentialCommandGroup {
                 new SetArmExtension(0),
                 new WaitCommand(0.25),
                 new SetArmAngle(ArmPositions.PRE_CONE_PLACE_HIGH.armAngle, CaliGirls.getInstance().getBottomKf()),
-                new WaitCommand(0.25),
+                new WaitCommand(0.45),
                 new MoveArmToPositionGoingDown(ArmPositions.DRIVE_WITHOUT_PIECE));
                 new IntakeNone();
     }

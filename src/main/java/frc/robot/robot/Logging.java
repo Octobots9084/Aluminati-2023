@@ -51,15 +51,15 @@ public class Logging {
         //
         autoChooser.setDefaultOption("No Movement", new AutoConeTop());
         // autoChooser.addOption("OneMeterSpin", PathPlannerAutos.OneMeterSpin());
-        autoChooser.addOption("Balance Charge Station", PathPlannerAutos.PlaceConeAndBalance());
+        // autoChooser.addOption("DONNOTUSEBalance Charge Station", PathPlannerAutos.PlaceConeAndBalance());
         autoChooser.addOption("Move and Grab Cone Bottom", PathPlannerAutos.PlaceConeAndMoveBackBottom());
         autoChooser.addOption("Move and Grab Cone Top", PathPlannerAutos.PlaceConeAndMoveBackTop());
-        autoChooser.addOption("2 Cones", PathPlannerAutos.Place2Cone());
+        // autoChooser.addOption("DONNOTUSE2 Cones", PathPlannerAutos.Place2Cone());
 
-        autoChooser.addOption("threedcCones", PathPlannerAutos.threedc2Cones());
-        autoChooser.addOption("PlaceConeAndBalanceAndCommunity", PathPlannerAutos.PlaceConeAndBalanceAndCommunity());
+        // autoChooser.addOption("DONNOTUSEthreedcCones", PathPlannerAutos.threedc2Cones());
+        // autoChooser.addOption("DONNOTUSEPlaceConeAndBalanceAndCommunity", PathPlannerAutos.PlaceConeAndBalanceAndCommunity());
         autoChooser.addOption("nALANCEv2", new AutoDriveOntoChargeStation());
-        autoChooser.addOption("nALANCEv3", new AutoDriveOntoChargeStationAndCommunity());
+        // autoChooser.addOption("DONOTUSEnALANCEv3", new AutoDriveOntoChargeStationAndCommunity());
         
 
 
