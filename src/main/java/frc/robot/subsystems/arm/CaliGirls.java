@@ -8,11 +8,13 @@ import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 import com.revrobotics.SparkMaxPIDController;
 
+import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.robot.Logging;
 import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
+import frc.robot.util.PIDConfig;
 
 public class CaliGirls extends SubsystemBase {
     private CANSparkMax motorTop, motorBottom, motorBottomFollower;
@@ -20,6 +22,9 @@ public class CaliGirls extends SubsystemBase {
     private SparkMaxPIDController pidControllerTop;
     private SparkMaxPIDController pidControllerBottom;
 
+
+    //these values are likely wrong right now, just testing. also, kA may be unnecessary
+    private ArmFeedforward feedforward = new ArmFeedforward(0.25, 0.69, 3.51, 0.04);
     private static CaliGirls caliGirls;
 
     public static CaliGirls getInstance() {
@@ -102,6 +107,8 @@ public class CaliGirls extends SubsystemBase {
         this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
     }
 
+
+
     public void setTopPos(double angle) {
         if (angle > 0.67) {
             angle = 0.67;
@@ -136,14 +143,16 @@ public class CaliGirls extends SubsystemBase {
     public void periodic() {
         // pidControllerBottom();
         SmartDashboard.putNumber("bruh", getLowerBounding());
+
+        setBottomKf();
     }
 
     public double getBottomKf() {
         return pidControllerBottom.getFF();
     }
 
-    public void setBottomKf(double kf) {
-        // pidControllerBottom.setFF(kf);
+    public void setBottomKf() {
+        pidControllerBottom.setFF(feedforward.calculate(getBottomPos(), getBottomVel()));
     }
 
     public double getTopPos() {
@@ -152,6 +161,10 @@ public class CaliGirls extends SubsystemBase {
 
     public double getBottomPos() {
         return motorBottom.getAbsoluteEncoder(Type.kDutyCycle).getPosition();
+    }
+
+    public double getBottomVel(){
+        return motorBottom.getAbsoluteEncoder(Type.kDutyCycle).getVelocity();
     }
 
 }
