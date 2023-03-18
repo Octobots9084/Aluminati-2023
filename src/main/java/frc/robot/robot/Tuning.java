@@ -110,4 +110,7 @@ public class Tuning {
 
     //Command Characteristics
     //Autos
+
+    //Ground Intake
+    public static final int SPATULA_ANGLE_TUNE = 20;
 }

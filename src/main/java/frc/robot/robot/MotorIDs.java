@@ -42,6 +42,10 @@ public class MotorIDs {
     //light
     public static final int CANDLE_ID = 14;
 
+    //ground intake
+    public static final int SPATULA_ANGLE = 15;
+    public static final int SPATULA_ROLLER = 16;
+
     private MotorIDs() {
     }
 }
