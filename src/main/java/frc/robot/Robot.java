@@ -33,6 +33,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.arm.ParallalMoveArm;
 import frc.robot.commands.arm.manual.ArmControl;
 import frc.robot.commands.arm.manual.TiltControl;
+import frc.robot.commands.swerve.LogMetachromasia;
 import frc.robot.commands.swerve.SwerveControl;
 import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.robot.ButtonConfig;
@@ -156,8 +157,9 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousPeriodic() {
-        DriveTrain.getInstance().getPoseEstimator().updateOdometry();
-        CommandScheduler.getInstance().run();
+//        DriveTrain.getInstance().getPoseEstimator().updateOdometry();
+//        CommandScheduler.getInstance().run();
+        new LogMetachromasia();
     }
 
     @Override

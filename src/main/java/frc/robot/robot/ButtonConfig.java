@@ -45,12 +45,12 @@ public class ButtonConfig {
 				.onTrue(new ZeroGyro());
 
 		//buttons 8-12 reserved for AutoAlign
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
-				.onTrue(new SequentialCommandGroup(
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(1, true)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(3, false)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(5, false)),
-					new DriveToPosition(PoseFinder.getPositionFromID(PoseFinder.getGrid(), 1))));
+		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
+		// 		.onTrue(new SequentialCommandGroup(
+		// 			new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(1, true)), 
+		// 			new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(3, false)), 
+		// 			new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(5, false)),
+		// 			// new DriveToPosition(PoseFinder.getPositionFromID(PoseFinder.getGrid(), 1))));
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 8)
 				.onTrue(new SequentialCommandGroup(
@@ -60,12 +60,12 @@ public class ButtonConfig {
 					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(6, false))));
 
 				
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 9)
-				.onTrue(new SequentialCommandGroup(
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(1, false)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(3, true)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(5, false)),
-					new DriveToPosition(PoseFinder.getPositionFromID(PoseFinder.getGrid(), 2))));
+		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 9)
+		// 		.onTrue(new SequentialCommandGroup(
+		// 			new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(1, false)), 
+		// 			new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(3, true)), 
+		// 			new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(5, false)),
+		// 			new DriveToPosition(PoseFinder.getPositionFromID(PoseFinder.getGrid(), 2))));
 		
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 10)
 				.onTrue(new SequentialCommandGroup(
@@ -75,12 +75,12 @@ public class ButtonConfig {
 					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(6, false))));
 			
 				
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 11)
-				.onTrue(new SequentialCommandGroup(
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(1, false)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(3, false)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(5, true)),
-					new DriveToPosition(PoseFinder.getPositionFromID(PoseFinder.getGrid(), 3))));
+		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 11)
+		// 		.onTrue(new SequentialCommandGroup(
+		// 			new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(1, false)), 
+		// 			new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(3, false)), 
+		// 			new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(5, true)),
+		// 			new DriveToPosition(PoseFinder.getPositionFromID(PoseFinder.getGrid(), 3))));
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 12)
 				.onTrue(new SequentialCommandGroup(
