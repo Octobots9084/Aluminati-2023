@@ -142,9 +142,8 @@ public class CaliGirls extends SubsystemBase {
     @Override
     public void periodic() {
         // pidControllerBottom();
-        SmartDashboard.putNumber("bruh", getLowerBounding());
-
-        setBottomKf();
+        // setBottomKf();
+        SmartDashboard.putNumber("bruh", getBottomKf());
     }
 
     public double getBottomKf() {
@@ -152,7 +151,8 @@ public class CaliGirls extends SubsystemBase {
     }
 
     public void setBottomKf() {
-        pidControllerBottom.setFF(feedforward.calculate(getBottomPos(), getBottomVel()));
+        // pidControllerBottom.setFF(feedforward.calculate(getBottomPos(), getBottomVel()));
+        pidControllerBottom.setFF(0.1);
     }
 
     public double getTopPos() {

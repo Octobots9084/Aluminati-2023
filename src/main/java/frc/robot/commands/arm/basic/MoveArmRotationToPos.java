@@ -21,19 +21,18 @@ public class MoveArmRotationToPos extends CommandBase {
 
     @Override
     public void initialize() {
-        startTime = Timer.getFPGATimestamp();
+        startTime = target;
         caliGirls.setBottomKf();
         caliGirls.setBottomPos(target);
     }
 
     @Override
     public void execute() {
-        currentTime = Timer.getFPGATimestamp();
+        currentTime = caliGirls.getBottomPos();
     }
 
     @Override
     public boolean isFinished() {
-        boolean timeout = !MathUtil.isWithinTolerance(startTime, currentTime, 0.5);
-        return (timeout);
+        return MathUtil.isWithinTolerance(startTime, currentTime, 0.05);
     }
 }
