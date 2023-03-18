@@ -22,7 +22,7 @@ public class MoveArmRotationToPos extends CommandBase {
     @Override
     public void initialize() {
         startTime = Timer.getFPGATimestamp();
-        caliGirls.setBottomKf(kf);
+        caliGirls.setBottomKf();
         caliGirls.setBottomPos(target);
     }
 

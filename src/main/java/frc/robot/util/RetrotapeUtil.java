@@ -4,7 +4,7 @@ import org.photonvision.PhotonCamera;
 import org.photonvision.PhotonUtils;
 
 public class RetrotapeUtil {
-    private final PhotonCamera camera;
+    // private final PhotonCamera camera;
     public final double LL_ANGLE = 0;
     public final double GOAL_HEIGHT = 0;
     public final double ROBOT_HEIGHT = 0;
