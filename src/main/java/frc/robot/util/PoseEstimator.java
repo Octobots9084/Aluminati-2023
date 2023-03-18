@@ -39,7 +39,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.swerve.SwerveModule;
-import frc.robot.subsystems.vision.LeftCameraWrapper;
+// import frc.robot.subsystems.vision.LeftCameraWrapper;
 import frc.robot.subsystems.vision.RightCameraWrapper;
 
 public class PoseEstimator {
@@ -48,12 +48,12 @@ public class PoseEstimator {
     private final ReentrantLock resetLock = new ReentrantLock();
     private final Gyro gyro;
     private final SwerveModule[] swerveModules;
-    public LeftCameraWrapper leftCameraWrapper;
+    // public LeftCameraWrapper leftCameraWrapper;
     public RightCameraWrapper rightCameraWrapper;
 
     public final AtomicReference<Boolean> useAprilTags = new AtomicReference<Boolean>(false);
     public PoseEstimator(Gyro gyro, SwerveDriveKinematics swerveDriveKinematics, SwerveModule[] swerveModules) {
-        this.leftCameraWrapper = new LeftCameraWrapper();
+        // this.leftCameraWrapper = new LeftCameraWrapper();
         this.rightCameraWrapper = new RightCameraWrapper();
         this.gyro = gyro;
         this.swerveModules = swerveModules;
