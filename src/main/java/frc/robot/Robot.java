@@ -112,6 +112,7 @@ public class Robot extends TimedRobot {
             SmartDashboard.putBoolean("14", true);
             new DriverButtonConfig().initTeleop();
         } else {
+            SmartDashboard.putString("Who", "Kaustubh2");
             SmartDashboard.putBoolean("14", false);
             new ButtonConfig().initTeleop();
         }
@@ -127,6 +128,7 @@ public class Robot extends TimedRobot {
         Gyro.getInstance().setAngleAdjustment(180);
 
         //DriveTrain.getInstance().getPoseEstimator().useAprilTags.set(true);
+
 
 
     }
@@ -157,9 +159,9 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousPeriodic() {
-//        DriveTrain.getInstance().getPoseEstimator().updateOdometry();
-//        CommandScheduler.getInstance().run();
         new LogMetachromasia();
+        DriveTrain.getInstance().getPoseEstimator().updateOdometry();
+        CommandScheduler.getInstance().run();        
     }
 
     @Override
