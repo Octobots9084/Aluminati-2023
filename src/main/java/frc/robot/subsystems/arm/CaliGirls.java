@@ -24,7 +24,7 @@ public class CaliGirls extends SubsystemBase {
 
 
     //these values are likely wrong right now, just testing. also, kA may be unnecessary
-    private ArmFeedforward feedforward = new ArmFeedforward(0.25, 0.69, 3.51, 0.04);
+    private ArmFeedforward feedforward = new ArmFeedforward(0.01, 0.2, 0);
     private static CaliGirls caliGirls;
 
     public static CaliGirls getInstance() {
@@ -142,8 +142,11 @@ public class CaliGirls extends SubsystemBase {
     @Override
     public void periodic() {
         // pidControllerBottom();
-        // setBottomKf();
-        SmartDashboard.putNumber("bruh", getBottomKf());
+        setBottomKf();
+
+        Logging.armDashboard.setEntry("bottom_kf", getBottomKf());
+
+        //System.out.println("bottom kf value: " + getBottomKf());
     }
 
     public double getBottomKf() {
@@ -151,8 +154,8 @@ public class CaliGirls extends SubsystemBase {
     }
 
     public void setBottomKf() {
-        // pidControllerBottom.setFF(feedforward.calculate(getBottomPos(), getBottomVel()));
-        pidControllerBottom.setFF(0.1);
+        pidControllerBottom.setFF(feedforward.calculate((getBottomPos() - 0.5)*Math.PI*2, getBottomVel()*Math.PI*2));
+        //pidControllerBottom.setFF(0.1);
     }
 
     public double getTopPos() {

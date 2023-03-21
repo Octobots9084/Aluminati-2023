@@ -50,7 +50,7 @@ public class Logging {
     private void addAutoOptions() {
         //
         autoChooser.setDefaultOption("No Movement", new AutoConeTop());
-        // autoChooser.addOption("OneMeterSpin", PathPlannerAutos.OneMeterSpin());
+        autoChooser.addOption("OneMeterSpin", PathPlannerAutos.OneMeterSpin());
         // autoChooser.addOption("DONNOTUSEBalance Charge Station", PathPlannerAutos.PlaceConeAndBalance());
         autoChooser.addOption("Move and Grab Cone Bottom", PathPlannerAutos.PlaceConeAndMoveBackBottom());
         autoChooser.addOption("Move and Grab Cone Top", PathPlannerAutos.PlaceConeAndMoveBackTop());
@@ -67,9 +67,9 @@ public class Logging {
 
     public static void updateLogging() {
         //Drive
-        // driveDashboard.setEntry("X-Pos", drive.getPoseEstimator().getRobotPose().getX());
-        // driveDashboard.setEntry("Y-Pos", drive.getPoseEstimator().getRobotPose().getY());
-        // driveDashboard.setEntry("Rot Deg", drive.getPoseEstimator().getRobotPose().getRotation().getDegrees());
+        driveDashboard.setEntry("X-Pos", drive.getPoseEstimator().getRobotPose().getX());
+        driveDashboard.setEntry("Y-Pos", drive.getPoseEstimator().getRobotPose().getY());
+        driveDashboard.setEntry("Rot Deg", drive.getPoseEstimator().getRobotPose().getRotation().getDegrees());
 
         // driveDashboard.setEntry("Gyro Pitch", gyro.getRoll());
 

@@ -48,27 +48,27 @@ public class Gyro {
     }
 
     private double getAngle() {
-        return MathUtil.wrapToCircle(navX.getAngle(), 360);
+        return MathUtil.wrapToCircle(-navX.getAngle(), 360);
     }
 
     public double getUnwrappedAngle() {
-        return navX.getAngle();
+        return -navX.getAngle();
     }
 
     public Rotation2d getRotation2d() {
-        return new Rotation2d(-atomicReference.get().getRadians());
+        return new Rotation2d(atomicReference.get().getRadians());
     }
 
     public void updateRotation2D() {
-        atomicReference.set(new Rotation2d(Math.toRadians(-getAngle())));
+        atomicReference.set(new Rotation2d(Math.toRadians(getAngle())));
     }
 
     public void updateUnwrappedRotation2d() {
-        unwrappedRotation2d.set(new Rotation2d(Math.toRadians(-getUnwrappedAngle())));
+        unwrappedRotation2d.set(new Rotation2d(Math.toRadians(getUnwrappedAngle())));
     }
 
     public Rotation2d getUnwrappedRotation2d() {
-        return new Rotation2d(-unwrappedRotation2d.get().getRadians());
+        return new Rotation2d(unwrappedRotation2d.get().getRadians());
     }
 
     public double getRate() {
