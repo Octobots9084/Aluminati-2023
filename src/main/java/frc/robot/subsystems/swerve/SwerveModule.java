@@ -79,8 +79,8 @@ public class SwerveModule {
         TM_SM_PID.setTolerance(0);
         this.steeringMotor.restoreFactoryDefaults();
         MotorUtil.setupSmartMotion(Type.kDutyCycle, TM_SM_PID, Tuning.TM_SM_CONFIG, ENCODER_RESOLUTION, steeringMotor);
-        this.steeringMotor.getAbsoluteEncoder(Type.kDutyCycle).setInverted(false);
-
+        this.steeringMotor.getAbsoluteEncoder(Type.kDutyCycle).setInverted(true);
+        this.steeringMotor.setInverted(true);
         // Initialize position of steering motor encoder to the same as the rio encoder
         // this.steeringMotor.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(zeroTicks);
 
@@ -124,7 +124,7 @@ public class SwerveModule {
 
     public SwerveModulePosition getModulePosition() {
         return new SwerveModulePosition(DRIVE_MOTOR_TICK_TO_METERS * this.getDriveTicks(),
-                new Rotation2d(this.getAngle() * -1));
+                new Rotation2d(this.getAngle()));
     }
 
     public double convertAngleToTick(double angleInRads) {
