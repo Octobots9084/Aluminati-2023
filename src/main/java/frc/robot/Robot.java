@@ -29,6 +29,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.arm.ParallalMoveArm;
 import frc.robot.commands.arm.manual.ArmControl;
@@ -101,8 +102,13 @@ public class Robot extends TimedRobot {
     public void teleopPeriodic() {
         DriveTrain.getInstance().updateSwerveStates();
         CommandScheduler.getInstance().run();
-
+        
         Logging.updateLogging();
+    }
+
+    @Override
+    public void simulationPeriodic(){
+        CommandScheduler.getInstance().schedule(new LogMetachromasia());
     }
 
     @Override
@@ -130,15 +136,12 @@ public class Robot extends TimedRobot {
 
         //DriveTrain.getInstance().getPoseEstimator().useAprilTags.set(true);
 
-
-
     }
 
     @Override
     public void autonomousInit() {
         this.autoFlag = true;
         initializeAllSubsystems();
-
         //new driveToPos(new Pose2d(14.16, 1.4, new Rotation2d()));
         //CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
         // CommandScheduler.getInstance().schedule(PathPlannerAutos.TestAutoOne());
