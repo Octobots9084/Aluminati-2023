@@ -40,7 +40,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.swerve.SwerveModule;
 // import frc.robot.subsystems.vision.LeftCameraWrapper;
-import frc.robot.subsystems.vision.RightCameraWrapper;
+// import frc.robot.subsystems.vision.RightCameraWrapper;
 
 public class PoseEstimator {
     public final SwerveDrivePoseEstimator swerveDrivePoseEstimator;
@@ -49,12 +49,13 @@ public class PoseEstimator {
     private final Gyro gyro;
     private final SwerveModule[] swerveModules;
     // public LeftCameraWrapper leftCameraWrapper;
-    public RightCameraWrapper rightCameraWrapper;
+    // public RightCameraWrapper rightCameraWrapper;
 
     public final AtomicReference<Boolean> useAprilTags = new AtomicReference<Boolean>(false);
+
     public PoseEstimator(Gyro gyro, SwerveDriveKinematics swerveDriveKinematics, SwerveModule[] swerveModules) {
         // this.leftCameraWrapper = new LeftCameraWrapper();
-        this.rightCameraWrapper = new RightCameraWrapper();
+        // this.rightCameraWrapper = new RightCameraWrapper();
         this.gyro = gyro;
         this.swerveModules = swerveModules;
         SwerveModulePosition[] swerveModulePositions = {
@@ -100,11 +101,11 @@ public class PoseEstimator {
                 swerveModules[1].getModulePosition()
         };
         Rotation2d rotation = new Rotation2d();
-        if (DriverStation.getAlliance()==DriverStation.Alliance.Blue) {
+        if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) {
             rotation = gyro.getUnwrappedRotation2d();
         } else {
             rotation = gyro.getUnwrappedRotation2d();
-        }   
+        }
 
         var pose2d = swerveDrivePoseEstimator.updateWithTime(
                 Timer.getFPGATimestamp(),
@@ -143,7 +144,7 @@ public class PoseEstimator {
         //         //deez
         //     } 
         // }
-        
+
         resetLock.unlock();
 
     }
@@ -158,12 +159,12 @@ public class PoseEstimator {
                     swerveModules[1].getModulePosition()
             };
             Rotation2d rotation = new Rotation2d();
-            if (DriverStation.getAlliance()==DriverStation.Alliance.Blue) {
-                rotation = gyro.getUnwrappedRotation2d();          
+            if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) {
+                rotation = gyro.getUnwrappedRotation2d();
             } else {
                 rotation = gyro.getUnwrappedRotation2d();
             }
-            
+
             swerveDrivePoseEstimator.resetPosition(rotation, swerveModulePositions, this.getRobotPose());
         } finally {
             resetLock.unlock();
@@ -180,12 +181,12 @@ public class PoseEstimator {
                     swerveModules[1].getModulePosition()
             };
             Rotation2d rotation = new Rotation2d();
-            if (DriverStation.getAlliance()==DriverStation.Alliance.Blue) {
+            if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) {
                 rotation = gyro.getUnwrappedRotation2d();
             } else {
                 rotation = gyro.getUnwrappedRotation2d();
             }
-            
+
             swerveDrivePoseEstimator.resetPosition(rotation, swerveModulePositions, pose2d);
         } finally {
             resetLock.unlock();

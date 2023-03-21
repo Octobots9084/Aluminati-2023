@@ -7,13 +7,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.subsystems.vision.Vision;
 
-public class GoTowardsTarget extends CommandBase {
+public class GoTowardsTargetWithID extends CommandBase {
     private final DriveTrain driveTrain;
     private final Vision vision;
     private PhotonTrackedTarget cameraToTarget;
     private double ySpeed = 0;
 
-    public GoTowardsTarget() {
+    public GoTowardsTargetWithID() {
         // Initialization
         this.driveTrain = DriveTrain.getInstance();
         this.vision = Vision.getInstance();
@@ -22,22 +22,23 @@ public class GoTowardsTarget extends CommandBase {
 
     @Override
     public void initialize() {
-        // if (vision.getCamsHaveTarget()) {
-        cameraToTarget = vision.getClosestTarget();
-        // }
+        if (vision.getTagCamHasTarget()) {
+            cameraToTarget = vision.getBestTargetWithID();
+
+        }
     }
 
     @Override
     public void execute() {
         try {
-            // if (vision.getCamsHaveTarget()) {
-            cameraToTarget = vision.getClosestTarget();
+            if (vision.getTagCamHasTarget()) {
+                cameraToTarget = vision.getBestTargetWithID();
 
-            ySpeed = cameraToTarget.getYaw() * 0.1;
-            SmartDashboard.putNumber("Y_SPED", ySpeed);
+                ySpeed = cameraToTarget.getYaw() * 0.1;
+                SmartDashboard.putNumber("Y_SPED", ySpeed);
 
-            driveTrain.drive(0, ySpeed, 0, true);
-            // }
+                driveTrain.drive(0, ySpeed, 0, true);
+            }
         } catch (Exception e) {
             //
         }
