@@ -94,6 +94,7 @@ public class Robot extends TimedRobot {
         // SmartDashboard.putNumber("Y-Pos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getY());
         // SmartDashboard.putNumber("Rot Deg",
         // DriveTrain.getInstance().getPoseEstimator().getRobotPose().getRotation().getDegrees());
+        //CommandScheduler.getInstance().schedule(new LogMetachromasia());
     }
 
     @Override
@@ -159,7 +160,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousPeriodic() {
-        new LogMetachromasia();
+        CommandScheduler.getInstance().schedule(new LogMetachromasia());
         DriveTrain.getInstance().getPoseEstimator().updateOdometry();
         CommandScheduler.getInstance().run();        
     }
