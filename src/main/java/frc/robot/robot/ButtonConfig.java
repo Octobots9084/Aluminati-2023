@@ -19,10 +19,12 @@ import frc.robot.commands.autonomous.BalanceChargeStation;
 import frc.robot.commands.autonomous.DriveToPosition;
 import frc.robot.commands.swerve.SetDriveAngle;
 import frc.robot.commands.swerve.SetDriverAssist;
+import frc.robot.commands.swerve.SwerveControl;
 import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.subsystems.Light;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.util.PoseFinder;
+import frc.robot.commands.swerve.ReplayMetachromasia;
 
 public class ButtonConfig {
 	public void initTeleop() {
@@ -44,6 +46,8 @@ public class ButtonConfig {
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
 				.onTrue(new ZeroGyro());
 
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
+				.onTrue(new ReplayMetachromasia(new double[] {0}, new double[] {0}));
 		//buttons 8-12 reserved for AutoAlign
 		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
 		// 		.onTrue(new SequentialCommandGroup(
