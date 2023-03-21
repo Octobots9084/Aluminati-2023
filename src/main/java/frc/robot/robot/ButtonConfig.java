@@ -20,6 +20,7 @@ import frc.robot.commands.autonomous.DriveToPosition;
 import frc.robot.commands.swerve.SetDriveAngle;
 import frc.robot.commands.swerve.SetDriverAssist;
 import frc.robot.commands.swerve.ZeroGyro;
+import frc.robot.commands.vision.GoTowardsTarget;
 import frc.robot.subsystems.Light;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.util.PoseFinder;
@@ -132,7 +133,7 @@ public class ButtonConfig {
 				.onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITHOUT_PIECE));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 6)
-				.whileTrue(new ArmZero());
+				.whileTrue(new GoTowardsTarget());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 7)
 				.onTrue(new SequentialCommandGroup(new  SetItemMode(false), new Arm2PosHalfways(ArmPositions.CUBE_PLACE_HIGH)));

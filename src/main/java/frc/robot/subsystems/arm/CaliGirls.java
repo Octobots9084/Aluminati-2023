@@ -8,11 +8,13 @@ import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 import com.revrobotics.SparkMaxPIDController;
 
+import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.robot.Logging;
 import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
+import frc.robot.util.PIDConfig;
 
 public class CaliGirls extends SubsystemBase {
     private CANSparkMax motorTop, motorBottom, motorBottomFollower;
@@ -20,6 +22,9 @@ public class CaliGirls extends SubsystemBase {
     private SparkMaxPIDController pidControllerTop;
     private SparkMaxPIDController pidControllerBottom;
 
+
+    //these values are likely wrong right now, just testing. also, kA may be unnecessary
+    private ArmFeedforward feedforward = new ArmFeedforward(0.01, 0.2, 0);
     private static CaliGirls caliGirls;
 
     public static CaliGirls getInstance() {
@@ -102,6 +107,8 @@ public class CaliGirls extends SubsystemBase {
         this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
     }
 
+
+
     public void setTopPos(double angle) {
         if (angle > 0.67) {
             angle = 0.67;
@@ -135,15 +142,20 @@ public class CaliGirls extends SubsystemBase {
     @Override
     public void periodic() {
         // pidControllerBottom();
-        SmartDashboard.putNumber("bruh", getLowerBounding());
+        setBottomKf();
+
+        Logging.armDashboard.setEntry("bottom_kf", getBottomKf());
+
+        //System.out.println("bottom kf value: " + getBottomKf());
     }
 
     public double getBottomKf() {
         return pidControllerBottom.getFF();
     }
 
-    public void setBottomKf(double kf) {
-        // pidControllerBottom.setFF(kf);
+    public void setBottomKf() {
+        pidControllerBottom.setFF(feedforward.calculate((getBottomPos() - 0.5)*Math.PI*2, getBottomVel()*Math.PI*2));
+        //pidControllerBottom.setFF(0.1);
     }
 
     public double getTopPos() {
@@ -152,6 +164,10 @@ public class CaliGirls extends SubsystemBase {
 
     public double getBottomPos() {
         return motorBottom.getAbsoluteEncoder(Type.kDutyCycle).getPosition();
+    }
+
+    public double getBottomVel(){
+        return motorBottom.getAbsoluteEncoder(Type.kDutyCycle).getVelocity();
     }
 
 }

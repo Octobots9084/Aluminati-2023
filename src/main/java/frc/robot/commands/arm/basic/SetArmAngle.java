@@ -16,6 +16,6 @@ public class SetArmAngle extends InstantCommand {
     @Override
     public void initialize() {
         caliGirls.setBottomPos(angle);
-        caliGirls.setBottomKf(kf);
+        caliGirls.setBottomKf();
     }
 }
