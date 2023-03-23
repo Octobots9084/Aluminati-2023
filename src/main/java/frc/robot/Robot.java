@@ -159,6 +159,7 @@ public class Robot extends TimedRobot {
     public void autonomousPeriodic() {
         DriveTrain.getInstance().getPoseEstimator().updateOdometry();
         CommandScheduler.getInstance().run();
+        Logging.updateLogging();
     }
 
     @Override

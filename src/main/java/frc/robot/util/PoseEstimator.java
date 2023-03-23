@@ -185,12 +185,16 @@ public class PoseEstimator {
             } else {
                 rotation = new Rotation2d(gyro.getUnwrappedRotation2d().getRadians());
             }
+
             
             swerveDrivePoseEstimator.resetPosition(rotation, swerveModulePositions, pose2d);
+            robotPose.set(swerveDrivePoseEstimator.getEstimatedPosition());
+
         } finally {
             resetLock.unlock();
         }
     }
+    
 
     public void updateRobotPose(Pose2d pose2d) {
         resetLock.lock();
