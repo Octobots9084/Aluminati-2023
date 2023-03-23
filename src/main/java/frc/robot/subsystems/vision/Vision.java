@@ -91,8 +91,4 @@ public class Vision extends SubsystemBase {
 	public boolean getTagCamHasTarget() {
 		return tagResult.hasTargets(); // Returns whether a target was found
 	}
-
-	public boolean getCamsHaveTarget() {
-		return tapeResult.hasTargets() && tagResult.hasTargets();
-	}
 }

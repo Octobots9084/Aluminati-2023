@@ -22,22 +22,26 @@ public class GoTowardsTarget extends CommandBase {
 
     @Override
     public void initialize() {
-        // if (vision.getCamsHaveTarget()) {
-        cameraToTarget = vision.getClosestTarget();
-        // }
+        try {
+            if (vision.getTagCamHasTarget() || vision.getTapeCamHasTarget()) {
+                cameraToTarget = vision.getClosestTarget();
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
     }
 
     @Override
     public void execute() {
         try {
-            // if (vision.getCamsHaveTarget()) {
-            cameraToTarget = vision.getClosestTarget();
+            if (vision.getTagCamHasTarget() || vision.getTapeCamHasTarget()) {
+                cameraToTarget = vision.getClosestTarget();
 
-            ySpeed = cameraToTarget.getYaw() * 0.1;
-            SmartDashboard.putNumber("Y_SPED", ySpeed);
+                ySpeed = cameraToTarget.getYaw() * 0.05;
+                SmartDashboard.putNumber("Y_SPED", ySpeed);
 
-            driveTrain.drive(0, ySpeed, 0, true);
-            // }
+                driveTrain.drive(0, ySpeed, 0, true);
+            }
         } catch (Exception e) {
             //
         }
