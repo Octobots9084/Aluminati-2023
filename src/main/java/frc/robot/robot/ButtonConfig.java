@@ -47,7 +47,7 @@ public class ButtonConfig {
 				.onTrue(new ZeroGyro());
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
-				.onTrue(new ReplayMetachromasia(new double[] {0}, new double[] {0}));
+				.onTrue(new ReplayMetachromasia(new double[] {0, 0, 0, 0, 0,0, 0, 0, 0, 0,0, 0, 0, 0, 0,0, 0, 0, 0, 0,0, 0, 0, 0, 0,0, 0, 0, 0, 0,0, 0, 0, 0, 0,0, 0, 0, 0, 0,0, 0, 0, 0, 0,0, 0, 0, 0, 0}, new double[] {0, 0, 0, 0, 0,0, 0, 0, 0, 0,0, 0, 0, 0, 0,0, 0, 0, 0, 0,0, 0, 0, 0, 0,0, 0, 0, 0, 0,0, 0, 0, 0, 0,0, 0, 0, 0, 0,0, 0, 0, 0, 0,0, 0, 0, 0, 0}));
 		//buttons 8-12 reserved for AutoAlign
 		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
 		// 		.onTrue(new SequentialCommandGroup(

@@ -119,7 +119,6 @@ public class Robot extends TimedRobot {
             SmartDashboard.putBoolean("14", true);
             new DriverButtonConfig().initTeleop();
         } else {
-            SmartDashboard.putString("Who", "Kaustubh2");
             SmartDashboard.putBoolean("14", false);
             new ButtonConfig().initTeleop();
         }
