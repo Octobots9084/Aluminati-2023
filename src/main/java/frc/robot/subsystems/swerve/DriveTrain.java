@@ -129,10 +129,10 @@ public class DriveTrain extends SubsystemBase {
         //driver assist """implementation"""
         if (useDriverAssist) {
             this.targetRotationAngle = targetRotationAngle + (Math.toDegrees(rot) * .02);
-            SmartDashboard.putNumber("controt", rot);
+            //SmartDashboard.putNumber("controt", rot);
 
             rot = getRotationSpeed();
-            SmartDashboard.putNumber("darot", rot);
+            //SmartDashboard.putNumber("darot", rot);
             }
         // Calculate swerve states
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(
