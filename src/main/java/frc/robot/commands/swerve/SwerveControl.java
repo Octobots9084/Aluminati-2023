@@ -27,7 +27,9 @@ import java.util.List;
 
 import org.json.simple.JSONArray;
 
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.robot.ControlMap;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
@@ -36,19 +38,32 @@ import frc.robot.util.MathUtil;
 public class SwerveControl extends CommandBase {
     private final DriveTrain driveTrain;
     private final Gyro gyro;
-    public static ArrayList<Double> xSpeeds;
-    public static ArrayList<Double> ySpeeds;
-    public static ArrayList<Double> rots;
+    public static ArrayList<Double> xSpeeder;
+    public static ArrayList<Double> ySpeeder;
+    public static ArrayList<Double> rotser;
+    public static double[] xSpeeds;
+    public static double[] ySpeeds;
+    public static double[] rots;
     public static boolean MetachromasiaEnabled = false;
+    public static double xSpeed ;
+    public static double ySpeed;
+    public static double rot;
+
+    public static Joystick leftJoystick = ControlMap.DRIVER_LEFT;
+    public static Joystick rightJoystick = ControlMap.DRIVER_RIGHT;
+
 
     public SwerveControl() {
         // Initialization
         this.driveTrain = DriveTrain.getInstance();
         this.gyro = Gyro.getInstance();
-        xSpeeds = new ArrayList<Double>();
-        ySpeeds = new ArrayList<Double>();
-        rots = new ArrayList<Double>();
+        xSpeeder = new ArrayList<Double>();
+        ySpeeder = new ArrayList<Double>();
+        rotser = new ArrayList<Double>();
         addRequirements(this.driveTrain);
+        xSpeed = 0.0;
+        ySpeed = 0.0;
+        rot = 0.0;
     }
 
     @Override
@@ -59,12 +74,7 @@ public class SwerveControl extends CommandBase {
     @Override
     public void execute() {
         // Link joysticks
-        var leftJoystick = ControlMap.DRIVER_LEFT;
-        var rightJoystick = ControlMap.DRIVER_RIGHT;
-
-        var xSpeed = 0.0;
-        var ySpeed = 0.0;
-        var rot = 0.0;
+        
 
 
         // Get speeds from joysticks
@@ -75,11 +85,17 @@ public class SwerveControl extends CommandBase {
         rot = MathUtil.fitDeadband(rightJoystick.getX()) * DriveTrain.MAX_ANGULAR_SPEED;
 
         if (MetachromasiaEnabled) {
-            xSpeeds.add(xSpeed);
-            ySpeeds.add(ySpeed);
-            rots.add(rot);
+            xSpeeder.add(xSpeed);
+            ySpeeder.add(ySpeed);
+            rotser.add(rot);
         }
         
+        xSpeeds = new double[xSpeeder.size()];
+        xSpeeds = xSpeeder.stream().mapToDouble(v -> v.doubleValue()).toArray();
+        ySpeeds = new double[ySpeeder.size()];
+        ySpeeds = ySpeeder.stream().mapToDouble(v -> v.doubleValue()).toArray();
+        rots = new double[rotser.size()];
+        rots = rotser.stream().mapToDouble(v -> v.doubleValue()).toArray();
 
 
         //just drive lol
