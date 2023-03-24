@@ -23,8 +23,8 @@ public class GoTowardsTarget extends CommandBase {
     @Override
     public void initialize() {
         try {
-            if (vision.getTagCamHasTarget() || vision.getTapeCamHasTarget()) {
-                cameraToTarget = vision.getClosestTarget();
+            if (vision.getTapeCamHasTarget()) {
+                cameraToTarget = vision.getBestTarget();
             }
         } catch (Exception e) {
             // TODO: handle exception
@@ -34,8 +34,8 @@ public class GoTowardsTarget extends CommandBase {
     @Override
     public void execute() {
         try {
-            if (vision.getTagCamHasTarget() || vision.getTapeCamHasTarget()) {
-                cameraToTarget = vision.getClosestTarget();
+            if (vision.getTapeCamHasTarget()) {
+                cameraToTarget = vision.getBestTarget();
 
                 ySpeed = cameraToTarget.getYaw() * 0.05;
                 SmartDashboard.putNumber("Y_SPED", ySpeed);

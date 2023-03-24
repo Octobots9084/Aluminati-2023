@@ -41,7 +41,7 @@ public class Vision extends SubsystemBase {
 	}
 
 	public PhotonTrackedTarget getTargetWithID(int id) { // Returns the apriltag target with the specified ID (if it exists)
-		if (this.getTagCamHasTarget()) {
+		if (tagResult.hasTargets()) {
 			List<PhotonTrackedTarget> targets = tagResult.getTargets(); // Create a list of all currently tracked targets
 			for (PhotonTrackedTarget i : targets) {
 				if (i.getFiducialId() == id) { // Check the ID of each target in the list

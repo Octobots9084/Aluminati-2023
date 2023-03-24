@@ -22,10 +22,14 @@ public class GoTowardsTargetWithID extends CommandBase {
 
     @Override
     public void initialize() {
-        if (vision.getTagCamHasTarget()) {
-            cameraToTarget = vision.getBestTargetWithID();
-
+        try {
+            if (vision.getTagCamHasTarget()) {
+                cameraToTarget = vision.getBestTargetWithID();
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
         }
+
     }
 
     @Override
