@@ -45,7 +45,7 @@ public final class PathPlannerAutos {
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
             DriveTrain.getInstance()::getPose2d,
             DriveTrain.getInstance().getPoseEstimator()::resetPose,
-            new PIDConstants(0.4, 0, 0),
+            new PIDConstants(1.2, 0.0, 0),
             new PIDConstants(2, 0, 0),
             DriveTrain.getInstance()::driveAutos,
             eventMap,
@@ -60,8 +60,8 @@ public final class PathPlannerAutos {
     }
 
     public static CommandBase Onemeter() {
-        DriveTrain.getInstance().setUseDriverAssist(true);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("1m", new PathConstraints(1, 3)));
+        DriveTrain.getInstance().setUseDriverAssist(false);
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("1MeterForward", new PathConstraints(2, 1)));
     }
 
     

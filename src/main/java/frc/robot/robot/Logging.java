@@ -59,6 +59,8 @@ public class Logging {
         // autoChooser.addOption("DONNOTUSEthreedcCones", PathPlannerAutos.threedc2Cones());
         // autoChooser.addOption("DONNOTUSEPlaceConeAndBalanceAndCommunity", PathPlannerAutos.PlaceConeAndBalanceAndCommunity());
         autoChooser.addOption("nALANCEv2", new AutoDriveOntoChargeStation());
+        autoChooser.addOption("Onemeter", PathPlannerAutos.Onemeter());
+        
         // autoChooser.addOption("DONOTUSEnALANCEv3", new AutoDriveOntoChargeStationAndCommunity());
         
 

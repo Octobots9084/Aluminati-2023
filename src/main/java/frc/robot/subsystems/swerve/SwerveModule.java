@@ -44,12 +44,13 @@ import frc.robot.util.SwerveUtil;
 
 public class SwerveModule {
     // Physical Constants
-    private static final double WHEEL_RADIUS = 0.03915;
+    private static final double WHEEL_RADIUS = 0.038;
     private static final double ENCODER_RESOLUTION = 1;
     private static final double GEARING = 11.0 / 40.0;
+    private static final double DRIVE_CONSTANT = 0.21736;
     private static final double GEARING_TURN_MOTORS = 1.0 / 1.0;
     private static final double STEER_MOTOR_TICK_TO_ANGLE = 2.0 * Math.PI / ENCODER_RESOLUTION / GEARING_TURN_MOTORS; // radians
-    private static final double DRIVE_MOTOR_TICK_TO_METERS = (GEARING * 2.0 * Math.PI * WHEEL_RADIUS) / 2048.0;
+    private static final double DRIVE_MOTOR_TICK_TO_METERS = (DRIVE_CONSTANT * 2.0 * Math.PI * WHEEL_RADIUS) / 2048.0;
     private static final double DRIVE_MOTOR_TICK_TO_SPEED = 10 * GEARING * (2 * Math.PI * WHEEL_RADIUS) / 2048; // m/s
     // P was 30
 
