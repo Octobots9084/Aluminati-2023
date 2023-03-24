@@ -35,7 +35,7 @@
         "x": 6.015464471686096,
         "y": 4.0
       },
-      "holonomicAngle": 0,
+      "holonomicAngle": 180.0,
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
@@ -85,7 +85,7 @@
         "x": 5.978434027591273,
         "y": 4.0
       },
-      "holonomicAngle": 0,
+      "holonomicAngle": 180.0,
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
@@ -121,7 +121,7 @@
     }
   ],
   "maxVelocity": 5.0,
-  "maxAcceleration": 5.0,
+  "maxAcceleration": 1.0,
   "isReversed": null,
   "markers": []
 }

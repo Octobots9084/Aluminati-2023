@@ -68,7 +68,6 @@ public class Robot extends TimedRobot {
     public void robotInit() {
 
         initializeAllSubsystems();
-        initializeDefaultCommands();
 
         // var drive = Shuffleboard.getTab("Drive");
         // drive.add(field2d)

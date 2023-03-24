@@ -95,10 +95,10 @@ public class Tuning {
     public static final int TURN_MOTOR_STALL = 31;
 
     //Turn Motors
-    public static final PIDConfig FL_TURN_PID = new PIDConfig(15, .0, 0);
-    public static final PIDConfig FR_TURN_PID = new PIDConfig(15, .0, 0);
-    public static final PIDConfig BL_TURN_PID = new PIDConfig(15, .0, 0);
-    public static final PIDConfig BR_TURN_PID = new PIDConfig(15, .0, 0);
+    public static final PIDConfig FL_TURN_PID = new PIDConfig(10, .0, 0.02);
+    public static final PIDConfig FR_TURN_PID = new PIDConfig(10, .0, 0.02);
+    public static final PIDConfig BL_TURN_PID = new PIDConfig(10, .0, 0.02);
+    public static final PIDConfig BR_TURN_PID = new PIDConfig(10, .0, 0.02);
     public static final SmartMotionConfig TM_SM_CONFIG = new SmartMotionConfig(
             true,
             20000.0,
