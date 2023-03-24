@@ -10,9 +10,8 @@ public class ReplayMetachromasia extends CommandBase{
     double[] ySpeeds;
     double[] rots;
     int i;
-    double[] xSpeeder = {1, 1, 1, 1, 1,1, 1, 1, 1, 1,1, 1, 1, 1, 1,1, 1, 1, 1, 1,1, 1, 1, 1, 1,1, 1, 1, 1, 1,1, 1, 1, 1, 1,1, 1, 1, 1, 1,1, 1, 1, 1, 1,1, 1, 1, 1, 1};
-    public ReplayMetachromasia(double[] ySpeeds, double[] rots) {
-        this.xSpeeds = xSpeeder;
+    public ReplayMetachromasia(double[] xSpeeds, double[] ySpeeds, double[] rots) {
+        this.xSpeeds = xSpeeds;
         this.ySpeeds = ySpeeds;
         this.rots = rots;
         this.i = 0;

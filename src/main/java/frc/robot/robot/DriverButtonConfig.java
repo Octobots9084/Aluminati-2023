@@ -20,6 +20,7 @@ import frc.robot.commands.swerve.SetDriveAngle;
 import frc.robot.commands.swerve.SetDriverAssist;
 import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.commands.swerve.LogMetachromasia;
+import frc.robot.commands.swerve.ReplayMetachromasia;
 import frc.robot.commands.swerve.ToggleMetachromia;
 import frc.robot.subsystems.Light;
 import frc.robot.subsystems.arm.ArmPositions;
@@ -50,6 +51,13 @@ public class DriverButtonConfig {
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 8)
 				.onTrue(new LogMetachromasia());
+		
+		double[] xSpeeds = {};
+		double[] ySpeeds = {};
+		double[] rots = {};
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 9)
+				.onTrue(new ReplayMetachromasia(xSpeeds,ySpeeds,rots));
+
 		// //buttons 8-12 reserved for AutoAlign
 		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
 		// 		.onTrue(new SequentialCommandGroup(
