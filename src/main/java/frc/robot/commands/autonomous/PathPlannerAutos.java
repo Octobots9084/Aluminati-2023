@@ -61,7 +61,7 @@ public final class PathPlannerAutos {
 
     public static CommandBase Onemeter() {
         DriveTrain.getInstance().setUseDriverAssist(false);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("1MeterForward", new PathConstraints(200000, 0.5)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("1MeterForward", new PathConstraints(5, 1)));
     }
 
     
