@@ -19,7 +19,7 @@
         "names": [
           "ConeTop"
         ],
-        "executionBehavior": "parallel",
+        "executionBehavior": "sequential",
         "waitBehavior": "none",
         "waitTime": 0
       }
@@ -51,16 +51,16 @@
     },
     {
       "anchorPoint": {
-        "x": 6.351836293416177,
-        "y": 0.9363717872734894
+        "x": 6.223309565021413,
+        "y": 0.9491430109821704
       },
       "prevControl": {
-        "x": 5.234690588170152,
-        "y": 0.8370528631825035
+        "x": 5.106163859775388,
+        "y": 0.8498240868911845
       },
       "nextControl": {
-        "x": 6.491509349888445,
-        "y": 0.9487893059804785
+        "x": 6.362982621493681,
+        "y": 0.9615605296891595
       },
       "holonomicAngle": 0,
       "isReversal": false,
@@ -71,7 +71,7 @@
         "names": [
           "IntakeCone"
         ],
-        "executionBehavior": "parallel",
+        "executionBehavior": "sequential",
         "waitBehavior": "none",
         "waitTime": 0
       }
@@ -143,12 +143,10 @@
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": true,
+      "isStopPoint": false,
       "stopEvent": {
-        "names": [
-          "CubeTop"
-        ],
-        "executionBehavior": "parallel",
+        "names": [],
+        "executionBehavior": "sequential",
         "waitBehavior": "none",
         "waitTime": 0
       }
@@ -197,7 +195,7 @@
         "names": [
           "BalanceChargeStation"
         ],
-        "executionBehavior": "parallel",
+        "executionBehavior": "sequential",
         "waitBehavior": "none",
         "waitTime": 0
       }
