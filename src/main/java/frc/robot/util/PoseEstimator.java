@@ -188,6 +188,8 @@ public class PoseEstimator {
             }
 
             swerveDrivePoseEstimator.resetPosition(rotation, swerveModulePositions, pose2d);
+            robotPose.set(swerveDrivePoseEstimator.getEstimatedPosition());
+
         } finally {
             resetLock.unlock();
         }

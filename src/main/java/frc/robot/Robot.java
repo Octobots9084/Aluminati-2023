@@ -68,7 +68,6 @@ public class Robot extends TimedRobot {
     public void robotInit() {
 
         initializeAllSubsystems();
-        initializeDefaultCommands();
 
         // var drive = Shuffleboard.getTab("Drive");
         // drive.add(field2d)
@@ -159,6 +158,7 @@ public class Robot extends TimedRobot {
     public void autonomousPeriodic() {
         DriveTrain.getInstance().getPoseEstimator().updateOdometry();
         CommandScheduler.getInstance().run();
+        Logging.updateLogging();
     }
 
     @Override
