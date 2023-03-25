@@ -49,7 +49,11 @@ import frc.robot.util.Gyro;
 
 public class Robot extends TimedRobot {
     public static double autoStartTime = 0.0;
-    private boolean autoFlag = false;
+    private static boolean autoFlag = false;
+
+    public static boolean isAutoFlag() {
+        return autoFlag;
+    }
 
     @Override
     public void disabledPeriodic() {
