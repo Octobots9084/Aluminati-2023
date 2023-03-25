@@ -40,7 +40,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.swerve.SwerveModule;
 // import frc.robot.subsystems.vision.LeftCameraWrapper;
-import frc.robot.subsystems.vision.RightCameraWrapper;
+// import frc.robot.subsystems.vision.RightCameraWrapper;
 
 public class PoseEstimator {
     public final SwerveDrivePoseEstimator swerveDrivePoseEstimator;
@@ -49,12 +49,13 @@ public class PoseEstimator {
     private final Gyro gyro;
     private final SwerveModule[] swerveModules;
     // public LeftCameraWrapper leftCameraWrapper;
-    public RightCameraWrapper rightCameraWrapper;
+    // public RightCameraWrapper rightCameraWrapper;
 
     public final AtomicReference<Boolean> useAprilTags = new AtomicReference<Boolean>(false);
+
     public PoseEstimator(Gyro gyro, SwerveDriveKinematics swerveDriveKinematics, SwerveModule[] swerveModules) {
         // this.leftCameraWrapper = new LeftCameraWrapper();
-        this.rightCameraWrapper = new RightCameraWrapper();
+        // this.rightCameraWrapper = new RightCameraWrapper();
         this.gyro = gyro;
         this.swerveModules = swerveModules;
         SwerveModulePosition[] swerveModulePositions = {
@@ -94,17 +95,17 @@ public class PoseEstimator {
         resetLock.lock();
         gyro.updateUnwrappedRotation2d();
         SwerveModulePosition[] swerveModulePositions = {
-            swerveModules[0].getModulePosition(),
-            swerveModules[1].getModulePosition(),
-            swerveModules[2].getModulePosition(),
-            swerveModules[3].getModulePosition()
+                swerveModules[0].getModulePosition(),
+                swerveModules[1].getModulePosition(),
+                swerveModules[2].getModulePosition(),
+                swerveModules[3].getModulePosition()
         };
         Rotation2d rotation = new Rotation2d();
-        if (DriverStation.getAlliance()==DriverStation.Alliance.Blue) {
+        if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) {
             rotation = new Rotation2d(gyro.getUnwrappedRotation2d().getRadians());
         } else {
             rotation = new Rotation2d(gyro.getUnwrappedRotation2d().getRadians());
-        }   
+        }
 
         var pose2d = swerveDrivePoseEstimator.updateWithTime(
                 Timer.getFPGATimestamp(),
@@ -143,7 +144,7 @@ public class PoseEstimator {
         //         //deez
         //     } 
         // }
-        
+
         resetLock.unlock();
 
     }
@@ -152,18 +153,18 @@ public class PoseEstimator {
         resetLock.lock();
         try {
             SwerveModulePosition[] swerveModulePositions = {
-                swerveModules[0].getModulePosition(),
-                swerveModules[1].getModulePosition(),
-                swerveModules[2].getModulePosition(),
-                swerveModules[3].getModulePosition()
+                    swerveModules[0].getModulePosition(),
+                    swerveModules[1].getModulePosition(),
+                    swerveModules[2].getModulePosition(),
+                    swerveModules[3].getModulePosition()
             };
             Rotation2d rotation = new Rotation2d();
-            if (DriverStation.getAlliance()==DriverStation.Alliance.Blue) {
-                rotation = new Rotation2d(gyro.getUnwrappedRotation2d().getRadians());          
+            if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) {
+                rotation = new Rotation2d(gyro.getUnwrappedRotation2d().getRadians());
             } else {
                 rotation = new Rotation2d(gyro.getUnwrappedRotation2d().getRadians());
             }
-            
+
             swerveDrivePoseEstimator.resetPosition(rotation, swerveModulePositions, this.getRobotPose());
         } finally {
             resetLock.unlock();
@@ -174,19 +175,18 @@ public class PoseEstimator {
         resetLock.lock();
         try {
             SwerveModulePosition[] swerveModulePositions = {
-                swerveModules[0].getModulePosition(),
-                swerveModules[1].getModulePosition(),
-                swerveModules[2].getModulePosition(),
-                swerveModules[3].getModulePosition()
+                    swerveModules[0].getModulePosition(),
+                    swerveModules[1].getModulePosition(),
+                    swerveModules[2].getModulePosition(),
+                    swerveModules[3].getModulePosition()
             };
             Rotation2d rotation = new Rotation2d();
-            if (DriverStation.getAlliance()==DriverStation.Alliance.Blue) {
+            if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) {
                 rotation = new Rotation2d(gyro.getUnwrappedRotation2d().getRadians());
             } else {
                 rotation = new Rotation2d(gyro.getUnwrappedRotation2d().getRadians());
             }
 
-            
             swerveDrivePoseEstimator.resetPosition(rotation, swerveModulePositions, pose2d);
             robotPose.set(swerveDrivePoseEstimator.getEstimatedPosition());
 
@@ -194,7 +194,6 @@ public class PoseEstimator {
             resetLock.unlock();
         }
     }
-    
 
     public void updateRobotPose(Pose2d pose2d) {
         resetLock.lock();
