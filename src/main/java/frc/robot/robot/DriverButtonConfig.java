@@ -28,10 +28,10 @@ import frc.robot.util.PoseFinder;
 public class DriverButtonConfig {
 	public void initTeleop() {
 		// DRIVER LEFT
-		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
-		// .onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITHOUT_PIECE));
+		//Button 1 reserved for Hippo In
+		//Button 2 reserved for Hippo Out
 
-		//Button 2 reserved for substation auto drive
+		//Button 3 reserved for victory dance
 
 		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
 		// .onTrue(new SmartEject());
@@ -49,10 +49,12 @@ public class DriverButtonConfig {
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 7).onTrue(new CollectCone());
 		//Button 8 Reserved for Hippo Intake
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 9).onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITHOUT_PIECE));
+
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 11).onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITH_PIECE));
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
 				.whileTrue(new SetDriverAssist(true));
+
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
 				.whileFalse(new SetDriverAssist(false));
 
@@ -84,16 +86,16 @@ public class DriverButtonConfig {
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 1)
 				.onTrue(new CollectCone());
 
-		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
-				.onTrue(new CollectConeSubstation());
+		// Button 2 reserved for Hippo Intake
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 3)
-				.onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITH_PIECE));
+				.onTrue(new CollectConeSubstation());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
 				.onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITHOUT_PIECE));
+
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 5)
-				.onTrue(new IntakeOutWithTimeout());
+				.onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITH_PIECE));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 6)
 				.whileTrue(new ArmZero());
@@ -122,12 +124,30 @@ public class DriverButtonConfig {
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
 				.onTrue(new InstantCommand(() -> Light.getInstance().setStrobeAnimationPurple()));
+
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 14)
 				.onTrue(new InstantCommand(() -> Light.getInstance().setStrobeAnimationYellow()));
+
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
 				.onFalse(new InstantCommand(() -> Light.getInstance().setStrobeAnimationRed()));
+
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 14)
 				.onFalse(new InstantCommand(() -> Light.getInstance().setStrobeAnimationRed()));
+
+		//Switch 15 reserved for manual override
+
+		//Co-Driver Joystick Left
+
+		//Button 1 reserved for Hippo In
+
+		//Button 2 reserved for Hippo out
+
+		//Driver Joystick Right
+		new JoystickButton(ControlMap.CO_DRIVER_RIGHT, 1)
+				.onTrue(new IntakeIn());
+
+		new JoystickButton(ControlMap.CO_DRIVER_RIGHT, 2)
+				.onTrue(new IntakeOutWithTimeout());
 
 		////END CO-DRIVER//////////////////////////
 	}
