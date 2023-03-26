@@ -71,7 +71,7 @@ public class PoseEstimator {
                 new Pose2d(0, 0, gyro.getRotation2d()),
                 // //Standard deviations of model states. Increase these numbers to trust your model's state estimates less.
                 // //This matrix is in the form [x, y, theta]^T, with units in meters and radians.
-                new MatBuilder<>(Nat.N3(), Nat.N1()).fill(0.2, 0.2, 0.1),
+                new MatBuilder<>(Nat.N3(), Nat.N1()).fill(0.01, 0.01, 0.1),
                 // // Standard deviations of the encoder and gyro measurements. Increase these numbers to trust sensor
                 // // readings from encoders and gyros less. This matrix is in the form [theta], with units in radians.
                 // new MatBuilder<>(Nat.N1(), Nat.N1()).fill(0.01),

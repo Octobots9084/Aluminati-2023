@@ -32,6 +32,7 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
 import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
 import frc.robot.util.Gyro;
@@ -132,6 +133,9 @@ public class DriveTrain extends SubsystemBase {
     */
     public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
         //driver assist """implementation"""
+            if (Robot.isAutoFlag()) {
+                return;
+            };
         if (useDriverAssist) {
             this.targetRotationAngle = targetRotationAngle + (Math.toDegrees(rot) * .02);
             //SmartDashboard.putNumber("controt", rot);

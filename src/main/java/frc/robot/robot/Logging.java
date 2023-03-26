@@ -60,7 +60,9 @@ public class Logging {
         // autoChooser.addOption("DONNOTUSEPlaceConeAndBalanceAndCommunity", PathPlannerAutos.PlaceConeAndBalanceAndCommunity());
         autoChooser.addOption("nALANCEv2", new AutoDriveOntoChargeStation());
         autoChooser.addOption("Onemeter", PathPlannerAutos.Onemeter());
-        
+        autoChooser.addOption("square", PathPlannerAutos.square());
+        autoChooser.addOption("square spin", PathPlannerAutos.squarespiiin());
+    
         // autoChooser.addOption("DONOTUSEnALANCEv3", new AutoDriveOntoChargeStationAndCommunity());
         
 

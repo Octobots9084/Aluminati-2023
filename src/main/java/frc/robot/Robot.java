@@ -49,7 +49,11 @@ import frc.robot.util.Gyro;
 
 public class Robot extends TimedRobot {
     public static double autoStartTime = 0.0;
-    private boolean autoFlag = false;
+    private static boolean autoFlag = false;
+
+    public static boolean isAutoFlag() {
+        return autoFlag;
+    }
 
     @Override
     public void disabledPeriodic() {
@@ -142,7 +146,7 @@ public class Robot extends TimedRobot {
         Robot.autoStartTime = Timer.getFPGATimestamp();
         Gyro.getInstance().setAngleAdjustment(0);
         Gyro.getInstance().resetGyro();
-        DriveTrain.getInstance().setUseDriverAssist(true);
+        // DriveTrain.getInstance().setUseDriverAssist(true);
         try {
             var command = Logging.getAutoChooser().getSelected();
             if (command != null) {
@@ -182,7 +186,7 @@ public class Robot extends TimedRobot {
     private void resetRobotPoseAndGyro() {
         Gyro.getInstance().resetGyro();
         DriveTrain.getInstance().setTargetRotationAngle(0);
-        DriveTrain.getInstance().drive(0, 0, 0, true);
+        // DriveTrain.getInstance().drive(0, 0, 0, true);
         DriveTrain.getInstance().getPoseEstimator().resetPose(new Pose2d(0,0, new Rotation2d()));
     }
 
