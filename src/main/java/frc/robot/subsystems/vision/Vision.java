@@ -70,15 +70,27 @@ public class Vision extends SubsystemBase {
 
 	public PhotonTrackedTarget getClosestTarget() {
 		if (tagResult.hasTargets() && tapeResult.hasTargets()) {
-			if (this.getBestTarget().getYaw() > this.getBestTargetWithID().getYaw()) {
-				return tapeResult.getBestTarget(); // Returns the best (closest) reflective target
+			if (this.getBestTarget() != null && this.getBestTargetWithID() != null) {
+				if (this.getBestTarget().getYaw() > this.getBestTargetWithID().getYaw()) {
+					return tapeResult.getBestTarget(); // Returns the best (closest) reflective target
+				} else {
+					return tagResult.getBestTarget(); // Returns the best (closest) april tag target
+				}
 			} else {
-				return tagResult.getBestTarget(); // Returns the best (closest) april tag target
+				return null;
 			}
 		} else if (tapeResult.hasTargets() && !tagResult.hasTargets()) {
-			return tapeResult.getBestTarget(); // Returns the best (closest) reflective target
+			if (this.getBestTarget() != null) {
+				return tapeResult.getBestTarget(); // Returns the best (closest) reflective target
+			} else {
+				return null;
+			}
 		} else if (tagResult.hasTargets() && !tapeResult.hasTargets()) {
-			return tagResult.getBestTarget(); // Returns the best (closest) april tag target
+			if (this.getBestTargetWithID() != null) {
+				return tagResult.getBestTarget(); // Returns the best (closest) april tag target
+			} else {
+				return null;
+			}
 		} else {
 			return null; // Otherwise, returns null if no targets are currently found
 		}

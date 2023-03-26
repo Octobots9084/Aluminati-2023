@@ -24,7 +24,11 @@ public class GoTowardsTargetWithID extends CommandBase {
     public void initialize() {
         try {
             if (vision.getTagCamHasTarget()) {
-                cameraToTarget = vision.getBestTargetWithID();
+                if (vision.getBestTargetWithID() != null) {
+                    cameraToTarget = vision.getBestTargetWithID();
+                } else {
+                    end(true);
+                }
             }
         } catch (Exception e) {
             // TODO: handle exception
@@ -36,8 +40,11 @@ public class GoTowardsTargetWithID extends CommandBase {
     public void execute() {
         try {
             if (vision.getTagCamHasTarget()) {
-                cameraToTarget = vision.getBestTargetWithID();
-
+                if (vision.getBestTargetWithID() != null) {
+                    cameraToTarget = vision.getBestTargetWithID();
+                } else {
+                    end(true);
+                }
                 ySpeed = cameraToTarget.getYaw() * 0.1;
                 SmartDashboard.putNumber("Y_SPED", ySpeed);
 
