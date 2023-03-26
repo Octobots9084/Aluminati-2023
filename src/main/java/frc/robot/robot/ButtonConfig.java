@@ -20,8 +20,8 @@ import frc.robot.commands.autonomous.DriveToPosition;
 import frc.robot.commands.swerve.SetDriveAngle;
 import frc.robot.commands.swerve.SetDriverAssist;
 import frc.robot.commands.swerve.ZeroGyro;
-import frc.robot.commands.vision.GoTowardsTarget;
-import frc.robot.commands.vision.GoTowardsTargetWithID;
+import frc.robot.commands.vision.AutoAlign;
+import frc.robot.commands.vision.AutoAlignWithID;
 import frc.robot.subsystems.Light;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.util.PoseFinder;
@@ -35,9 +35,9 @@ public class ButtonConfig {
 		// Button 2 reserved for substation auto drive
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
-				.whileTrue(new GoTowardsTarget());
+				.whileTrue(new AutoAlign());
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
-				.whileTrue(new GoTowardsTargetWithID());
+				.whileTrue(new AutoAlignWithID());
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
 				.onTrue(new SmartEject());

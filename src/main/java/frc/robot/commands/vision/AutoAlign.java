@@ -7,13 +7,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.subsystems.vision.Vision;
 
-public class GoTowardsTargetWithID extends CommandBase {
+public class AutoAlign extends CommandBase {
     private final DriveTrain driveTrain;
     private final Vision vision;
     private PhotonTrackedTarget cameraToTarget;
     private double ySpeed = 0;
 
-    public GoTowardsTargetWithID() {
+    public AutoAlign() {
         // Initialization
         this.driveTrain = DriveTrain.getInstance();
         this.vision = Vision.getInstance();
@@ -23,9 +23,9 @@ public class GoTowardsTargetWithID extends CommandBase {
     @Override
     public void initialize() {
         try {
-            if (vision.getTagCamHasTarget()) {
-                if (vision.getBestTargetWithID() != null) {
-                    cameraToTarget = vision.getBestTargetWithID();
+            if (vision.getTapeCamHasTarget()) {
+                if (vision.getBestTarget() != null) {
+                    cameraToTarget = vision.getBestTarget();
                 } else {
                     end(true);
                 }
@@ -33,19 +33,19 @@ public class GoTowardsTargetWithID extends CommandBase {
         } catch (Exception e) {
             // TODO: handle exception
         }
-
     }
 
     @Override
     public void execute() {
         try {
-            if (vision.getTagCamHasTarget()) {
-                if (vision.getBestTargetWithID() != null) {
-                    cameraToTarget = vision.getBestTargetWithID();
+            if (vision.getTapeCamHasTarget()) {
+                if (vision.getBestTarget() != null) {
+                    cameraToTarget = vision.getBestTarget();
                 } else {
                     end(true);
                 }
-                ySpeed = cameraToTarget.getYaw() * 0.1;
+
+                ySpeed = cameraToTarget.getYaw() * 0.05;
                 SmartDashboard.putNumber("Y_SPED", ySpeed);
 
                 driveTrain.drive(0, ySpeed, 0, true);

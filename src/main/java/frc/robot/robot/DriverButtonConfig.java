@@ -19,6 +19,8 @@ import frc.robot.commands.autonomous.DriveToPosition;
 import frc.robot.commands.swerve.SetDriveAngle;
 import frc.robot.commands.swerve.SetDriverAssist;
 import frc.robot.commands.swerve.ZeroGyro;
+import frc.robot.commands.vision.AutoAlign;
+import frc.robot.commands.vision.AutoAlignWithID;
 import frc.robot.subsystems.Light;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.util.PoseFinder;
@@ -26,17 +28,17 @@ import frc.robot.util.PoseFinder;
 public class DriverButtonConfig {
 	public void initTeleop() {
 		// DRIVER LEFT
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
-				.onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITHOUT_PIECE));
+		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
+		// .onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITHOUT_PIECE));
 
 		//Button 2 reserved for substation auto drive
 
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
-				.onTrue(new SmartEject());
+		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
+		// .onTrue(new SmartEject());
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 4)
 				.onTrue(new IntakeIn());
-		
+
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 5)
 				.onTrue(new IntakeOutWithTimeout());
 
@@ -44,56 +46,16 @@ public class DriverButtonConfig {
 				.onTrue(new ZeroGyro());
 
 		//buttons 8-12 reserved for AutoAlign
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
-				.onTrue(new SequentialCommandGroup(
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(1, true)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(3, false)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(5, false)),
-					new DriveToPosition(PoseFinder.getPositionFromID(PoseFinder.getGrid(), 1))));
-
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 8)
-				.onTrue(new SequentialCommandGroup(
-					new InstantCommand(() -> PoseFinder.setGrid(1)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(2, true)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(4, false)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(6, false))));
-
-				
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 9)
-				.onTrue(new SequentialCommandGroup(
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(1, false)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(3, true)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(5, false)),
-					new DriveToPosition(PoseFinder.getPositionFromID(PoseFinder.getGrid(), 2))));
-		
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 10)
-				.onTrue(new SequentialCommandGroup(
-					new InstantCommand(() -> PoseFinder.setGrid(2)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(2, false)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(4, true)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(6, false))));
-			
-				
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 11)
-				.onTrue(new SequentialCommandGroup(
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(1, false)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(3, false)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(5, true)),
-					new DriveToPosition(PoseFinder.getPositionFromID(PoseFinder.getGrid(), 3))));
-
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 12)
-				.onTrue(new SequentialCommandGroup(
-					new InstantCommand(() -> PoseFinder.setGrid(3)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(2, false)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(4, false)), 
-					new InstantCommand(() -> ControlMap.DRIVER_BUTTONS.setOutput(6, true))));
-
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 7).onTrue(new CollectCone());
+		//Button 8 Reserved for Hippo Intake
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 9).onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITHOUT_PIECE));
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 11).onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITH_PIECE));
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
 				.whileTrue(new SetDriverAssist(true));
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
 				.whileFalse(new SetDriverAssist(false));
-	
+
 		//switch 14 reserved for feild-centric toggle, testing to be moved to codriver
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 15)
@@ -103,17 +65,17 @@ public class DriverButtonConfig {
 
 		//Driver Joystick Left
 		new JoystickButton(ControlMap.DRIVER_LEFT, 1)
-				.onTrue(new SetDriveAngle(0).withTimeout(1));
+				.whileTrue(new AutoAlign());
 
 		new JoystickButton(ControlMap.DRIVER_LEFT, 2)
-				.onTrue(new SetDriveAngle(180).withTimeout(1));
+				.whileTrue(new AutoAlignWithID());
 
 		//Driver Joystick Right
 		new JoystickButton(ControlMap.DRIVER_RIGHT, 1)
-				.onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITH_PIECE));
+				.onTrue(new SetDriveAngle(0).withTimeout(1));
 
 		new JoystickButton(ControlMap.DRIVER_RIGHT, 2)
-				.onTrue(new CollectCone());
+				.onTrue(new SetDriveAngle(180).withTimeout(1));
 
 		////END DRIVER 1//////////////////////////
 
@@ -137,16 +99,20 @@ public class DriverButtonConfig {
 				.whileTrue(new ArmZero());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 7)
-				.onTrue(new SequentialCommandGroup(new SetItemMode(false), new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_HIGH)));
+				.onTrue(new SequentialCommandGroup(new SetItemMode(false),
+						new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_HIGH)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 8)
-				.onTrue(new SequentialCommandGroup(new SetItemMode(true), new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_HIGH)));
+				.onTrue(new SequentialCommandGroup(new SetItemMode(true),
+						new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_HIGH)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 9)
-				.onTrue(new SequentialCommandGroup(new SetItemMode(false), new MoveArmToPositionGoingUp(ArmPositions.CONE_PLACE_MID)));
+				.onTrue(new SequentialCommandGroup(new SetItemMode(false),
+						new MoveArmToPositionGoingUp(ArmPositions.CONE_PLACE_MID)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 10)
-				.onTrue(new SequentialCommandGroup(new SetItemMode(true), new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_MID)));
+				.onTrue(new SequentialCommandGroup(new SetItemMode(true),
+						new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_MID)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 11)
 				.onTrue(new CubeInject());
