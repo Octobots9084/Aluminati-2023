@@ -69,6 +69,14 @@ public class Tuning {
             0.0);
     public static final double CALI_BOTTOM_ENCODER_RESOLUTION = 1.0;
 
+    public static final PIDConfig SPATULA_PID = new PIDConfig(3, 0.00, 0, 0.05);
+    public static final SmartMotionConfig SPATULA_SM = new SmartMotionConfig(true,
+            1.0,
+            0.0,
+            1.0,
+            0.0);
+    public static final double SPATULA_ENCODER_RESOLUTION = 1.0;
+
     //Extension
     public static final PIDConfig EXTENSION_PID = new PIDConfig(0.1, 0, 0);
     public static final SmartMotionConfig EXTENSION_SM = new SmartMotionConfig(true,

@@ -10,7 +10,7 @@ import frc.robot.robot.Tuning;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 import frc.robot.robot.Logging;
 
-public class SpatulaFlip extends SubsystemBase{
+public class SpatulaFlip extends SubsystemBase {
     private CANSparkMax spatulaMotor;
     public double lastPosSpatula;
     private SparkMaxPIDController pidControllerSpatula;
@@ -22,7 +22,8 @@ public class SpatulaFlip extends SubsystemBase{
         }
         return spatulaFlip;
     }
-    public SpatulaFlip(){
+
+    public SpatulaFlip() {
         //Spatula Angle Motor
         this.spatulaMotor = new CANSparkMax(MotorIDs.SPATULA_ANGLE, MotorType.kBrushless);
         spatulaMotor.setSmartCurrentLimit(Tuning.SPATULA_ANGLE_TUNE);
@@ -30,10 +31,10 @@ public class SpatulaFlip extends SubsystemBase{
         //Spatula Angle PID
         this.pidControllerSpatula = spatulaMotor.getPIDController();
         pidControllerSpatula.setFeedbackDevice(spatulaMotor.getAbsoluteEncoder(Type.kDutyCycle));
-        pidControllerSpatula.setP(Tuning.CALI_TOP_PID.getP());
-        pidControllerSpatula.setI(Tuning.CALI_TOP_PID.getI());
-        pidControllerSpatula.setD(Tuning.CALI_TOP_PID.getD());
-        pidControllerSpatula.setFF(Tuning.CALI_TOP_PID.getF());
+        pidControllerSpatula.setP(Tuning.SPATULA_PID.getP());
+        pidControllerSpatula.setI(Tuning.SPATULA_PID.getI());
+        pidControllerSpatula.setD(Tuning.SPATULA_PID.getD());
+        pidControllerSpatula.setFF(Tuning.SPATULA_PID.getF());
         pidControllerSpatula.setOutputRange(-1.0, 1.0);
 
         //Spatula Angle Position
