@@ -32,7 +32,6 @@ public class MotorIDs {
     public static final int BACK_RIGHT_STEER = 7;
 
     //Arm
-    public static final int INTAKE_RIGHT_CLAW = 14;
     public static final int ARM_ROLLER = 11;
     public static final int INTAKE_EXTENSION = 10;
     public static final int ARM_WRIST_ANGLE = 12;
