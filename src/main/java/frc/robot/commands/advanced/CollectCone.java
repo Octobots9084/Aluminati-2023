@@ -7,6 +7,6 @@ import frc.robot.subsystems.arm.ArmPositions;
 public class CollectCone extends SequentialCommandGroup{
 
     public CollectCone() {
-        addCommands(new Arm2PosCollect(ArmPositions.CONE_INTAKE_GROUND), new IntakeIn());
+        addCommands(new Arm2PosCollect(ArmPositions.INTAKE_GROUND), new IntakeIn());
     }
 }

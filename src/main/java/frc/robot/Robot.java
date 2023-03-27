@@ -180,7 +180,7 @@ public class Robot extends TimedRobot {
         Roller.getInstance();
         Logging.getInstance();
         Light.getInstance();
-        new ParallalMoveArm(ArmPositions.DRIVE_WITH_PIECE);
+        new ParallalMoveArm(ArmPositions.STOW);
     }
 
     private void resetRobotPoseAndGyro() {
@@ -191,9 +191,9 @@ public class Robot extends TimedRobot {
     }
 
     private void initializeDefaultCommands() {
-        CaliGirls.getInstance().lastPosBottom = ArmPositions.DRIVE_WITH_PIECE.armAngle;
-        CaliGirls.getInstance().lastPosTop = ArmPositions.DRIVE_WITH_PIECE.wrist;
-        ArmExtension.getInstance().lastpos = ArmPositions.DRIVE_WITH_PIECE.extension;
+        CaliGirls.getInstance().lastPosBottom = ArmPositions.STOW.armAngle;
+        CaliGirls.getInstance().lastPosTop = ArmPositions.STOW.wrist;
+        ArmExtension.getInstance().lastpos = ArmPositions.STOW.extension;
         CommandScheduler.getInstance().setDefaultCommand(DriveTrain.getInstance(), new SwerveControl());
         CommandScheduler.getInstance().setDefaultCommand(CaliGirls.getInstance(), new TiltControl());
         CommandScheduler.getInstance().setDefaultCommand(ArmExtension.getInstance(), new ArmControl());

@@ -48,7 +48,7 @@ public class ButtonConfig {
 		//buttons 8-12 reserved for AutoAlign
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 7).onTrue(new CollectCone());
 		//Button 8 Reserved for Hippo Intake
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 9).onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITHOUT_PIECE));
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 9).onTrue(new Arm2PosStow(ArmPositions.STOW));
 
 		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 11).onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITH_PIECE));
 
@@ -92,10 +92,10 @@ public class ButtonConfig {
 				.onTrue(new CollectConeSubstation());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
-				.onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITHOUT_PIECE));
+				.onTrue(new Arm2PosStow(ArmPositions.STOW));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 5)
-				.onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITH_PIECE));
+				.onTrue(new Arm2PosStow(ArmPositions.STOW));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 6)
 				.whileTrue(new ArmZero());
@@ -110,7 +110,7 @@ public class ButtonConfig {
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 9)
 				.onTrue(new SequentialCommandGroup(new SetItemMode(false),
-						new MoveArmToPositionGoingUp(ArmPositions.CONE_PLACE_MID)));
+						new MoveArmToPositionGoingUp(ArmPositions.DEPRECIATED_CONE_PLACE_MID)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 10)
 				.onTrue(new SequentialCommandGroup(new SetItemMode(true),

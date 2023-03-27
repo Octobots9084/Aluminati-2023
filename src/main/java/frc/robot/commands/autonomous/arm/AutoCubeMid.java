@@ -19,7 +19,7 @@ public class AutoCubeMid extends SequentialCommandGroup{
 
     public AutoCubeMid() {
         this.aPosition = ArmPositions.CUBE_PLACE_MID;
-        this.drivePosition = ArmPositions.DRIVE_WITH_PIECE;
+        this.drivePosition = ArmPositions.STOW;
         this.caliGirls = CaliGirls.getInstance();
         this.armExtension = ArmExtension.getInstance();
         addCommands(new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension),

@@ -23,7 +23,7 @@ public class AutoConeTopBalance extends SequentialCommandGroup{
 
     public AutoConeTopBalance() {
         this.aPosition = ArmPositions.PRE_CONE_PLACE_HIGH;
-        this.drivePosition = ArmPositions.DRIVE_WITHOUT_PIECE;
+        this.drivePosition = ArmPositions.STOW;
         this.caliGirls = CaliGirls.getInstance();
         this.armExtension = ArmExtension.getInstance();
         addCommands(
