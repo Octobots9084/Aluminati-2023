@@ -11,7 +11,7 @@ import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 import frc.robot.robot.Logging;
 
 public class SpatulaFlip extends SubsystemBase {
-    private CANSparkMax spatulaMotor;
+    public CANSparkMax spatulaMotor;
     public double lastPosSpatula;
     private SparkMaxPIDController pidControllerSpatula;
     private static SpatulaFlip spatulaFlip;
@@ -38,12 +38,9 @@ public class SpatulaFlip extends SubsystemBase {
         pidControllerSpatula.setOutputRange(-1.0, 1.0);
 
         //Spatula Angle Position
-        this.lastPosSpatula = 0.5;
-        this.spatulaMotor.getAbsoluteEncoder(Type.kDutyCycle).setInverted(false);
-        this.spatulaMotor.setInverted(true);
+        this.lastPosSpatula = 0.15;
         this.spatulaMotor.getPIDController().setPositionPIDWrappingEnabled(false);
-        this.spatulaMotor.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(0.636);
-        pidControllerSpatula.setSmartMotionAllowedClosedLoopError(0.1, 0);
+        // pidControllerSpatula.setSmartMotionAllowedClosedLoopError(0.1, 0);
 
     }
 
@@ -51,10 +48,10 @@ public class SpatulaFlip extends SubsystemBase {
 
     public void setSpatulaPos(double angle) {
         //Current values are placeholders
-        if (angle > 0.67) {
-            angle = 0.67;
-        } else if (angle < 0.252) {
-            angle = 0.252;
+        if (angle > 0.25) {
+            angle = 0.25;
+        } else if (angle < 0.02) {
+            angle = 0.02;
         }
         lastPosSpatula = angle;
         pidControllerSpatula.setReference(angle, ControlType.kPosition);

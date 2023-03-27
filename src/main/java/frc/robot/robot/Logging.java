@@ -1,5 +1,6 @@
 package frc.robot.robot;
 
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.autonomous.AutoDriveOntoChargeStation;
@@ -8,6 +9,7 @@ import frc.robot.commands.autonomous.PathPlannerAutos;
 import frc.robot.commands.autonomous.arm.AutoConeTop;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.CaliGirls;
+import frc.robot.subsystems.spatula.SpatulaFlip;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 import frc.robot.util.shuffleboard.RSTab;
@@ -77,10 +79,15 @@ public class Logging {
 
         // driveDashboard.setEntry("Gyro Pitch", gyro.getRoll());
 
+        armDashboard.setEntry("spatula", SpatulaFlip.getInstance().getSpatulaPos());
+        armDashboard.setEntry("spatula set", SpatulaFlip.getInstance().lastPosSpatula);
+        // armDashboard.setEntry("spatula pos", SpatulaFlip.getInstance());
+        
+
         // //Arm
-        // armDashboard.setEntry("Arm Extension", armExtension.getPosition());
-        // armDashboard.setEntry("Claw Rotation", caliGirls.getTopPos());
-        // armDashboard.setEntry("Arm Rotation", caliGirls.getBottomPos());
+        armDashboard.setEntry("Arm Extension", armExtension.lastpos);
+        armDashboard.setEntry("Claw Rotation", caliGirls.lastPosTop);
+        armDashboard.setEntry("Arm Rotation", caliGirls.lastPosBottom);
 
     }
 

@@ -23,6 +23,8 @@ import frc.robot.commands.vision.AutoAlign;
 import frc.robot.commands.vision.AutoAlignWithID;
 import frc.robot.subsystems.Light;
 import frc.robot.subsystems.arm.ArmPositions;
+import frc.robot.subsystems.spatula.RollingPins;
+import frc.robot.subsystems.spatula.SpatulaFlip;
 import frc.robot.util.PoseFinder;
 
 public class DriverButtonConfig {
@@ -33,8 +35,11 @@ public class DriverButtonConfig {
 
 		//Button 3 reserved for victory dance
 
-		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
-		// .onTrue(new SmartEject());
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
+		.onTrue(new InstantCommand(() -> RollingPins.getInstance().setRollingPinVoltage(-5)));
+
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
+		.onTrue(new InstantCommand(() -> RollingPins.getInstance().setRollingPinVoltage(3)));
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 4)
 				.onTrue(new IntakeIn());
@@ -50,7 +55,7 @@ public class DriverButtonConfig {
 		//Button 8 Reserved for Hippo Intake
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 9).onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITHOUT_PIECE));
 
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 11).onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITH_PIECE));
+		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 11).onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITH_PIECE));
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
 				.whileTrue(new SetDriverAssist(true));
