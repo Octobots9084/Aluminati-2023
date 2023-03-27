@@ -4,12 +4,15 @@ import org.photonvision.targeting.PhotonTrackedTarget;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.arm.ArmPositions;
+import frc.robot.subsystems.arm.CaliGirls;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.subsystems.vision.Vision;
 
 public class AutoAlignWithID extends CommandBase {
     private final DriveTrain driveTrain;
     private final Vision vision;
+    private final CaliGirls caliGirls;
     private PhotonTrackedTarget cameraToTarget;
     private double ySpeed = 0;
 
@@ -17,6 +20,7 @@ public class AutoAlignWithID extends CommandBase {
         // Initialization
         this.driveTrain = DriveTrain.getInstance();
         this.vision = Vision.getInstance();
+        this.caliGirls = CaliGirls.getInstance();
         this.cameraToTarget = null;
     }
 
@@ -26,6 +30,8 @@ public class AutoAlignWithID extends CommandBase {
             if (vision.getTagCamHasTarget()) {
                 if (vision.getBestTargetWithID() != null) {
                     cameraToTarget = vision.getBestTargetWithID();
+                    caliGirls.setBottomPos(ArmPositions.AUTO_ALIGN.armAngle);
+                    caliGirls.setBottomKf();
                 } else {
                     end(true);
                 }
