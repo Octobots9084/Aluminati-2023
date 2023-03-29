@@ -21,7 +21,7 @@ public class AutoAlign extends CommandBase {
         this.driveTrain = DriveTrain.getInstance();
         this.vision = Vision.getInstance();
         this.caliGirls = CaliGirls.getInstance();
-        // this.cameraToTarget = null;
+        this.cameraToTarget = null;
     }
 
     @Override
@@ -48,6 +48,7 @@ public class AutoAlign extends CommandBase {
                 if (vision.getBestTarget() != null) {
                     cameraToTarget = vision.getBestTarget();
                 } else {
+                    end(true);
                     // driveTrain.drive(0, 0, 0, true);
                 }
 
