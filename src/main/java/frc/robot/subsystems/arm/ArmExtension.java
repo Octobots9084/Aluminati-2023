@@ -66,7 +66,7 @@ public class ArmExtension extends SubsystemBase {
     }
 
     public double getPosition() {
-        return motor.getEncoder().getPosition();
+        return motor.getEncoder().getPosition() / gearing;
     }
 
     public void zeroArm() {

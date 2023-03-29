@@ -22,6 +22,6 @@ public class ArmExtension2PosTolerance extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return MathUtil.isWithinTolerance(armExtension.getPosition(), target, 0.1);
+        return MathUtil.isWithinTolerance(armExtension.getPosition(), target, 8);
     }
 }
