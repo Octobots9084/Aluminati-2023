@@ -7,8 +7,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.3865911864840363,
-        "y": 5.712296460222374
+        "x": 2.0353907374481417,
+        "y": 6.703051696701684
       },
       "holonomicAngle": 180.0,
       "isReversal": false,
@@ -16,7 +16,9 @@
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "ConeTop"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
@@ -24,12 +26,12 @@
     },
     {
       "anchorPoint": {
-        "x": 4.500140876766316,
-        "y": 6.026472765534605
+        "x": 4.170775179157196,
+        "y": 6.7487283692516105
       },
       "prevControl": {
-        "x": 3.786103819238518,
-        "y": 3.494021334836019
+        "x": 4.159356011019715,
+        "y": 3.4600079456569177
       },
       "nextControl": null,
       "holonomicAngle": 180.0,

@@ -111,7 +111,7 @@ public final class PathPlannerAutos {
     }
 
     public static CommandBase ConHigConHigBal() {
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ConHigConHigBal", new PathConstraints(4, 3)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ConHigOut", new PathConstraints(4, 3)));
     }
 
     private PathPlannerAutos() {
