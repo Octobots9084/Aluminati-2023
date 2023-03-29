@@ -1,14 +1,14 @@
 package frc.robot.subsystems.arm;
 
 public enum ArmPositions {
-    AUTO_ALIGN(0.71, 0.06, 0, 0), //wrong
-    STOW(.5, 0, 0, .242), //meh 3/27
-    PRE_CONE_PLACE_HIGH(.782, 0.09, 66.63, .647), //correct 3/27
-    PRE_CONE_PLACE_MID(.72, 0.06, 20, .542), //old
-    INTAKE_GROUND(.55, 0.03, 36.3, 0.5), //correct 3/27
-    INTAKE_SUBSTATION(.746, 0, 0, .69), //old
-    CUBE_PLACE_HIGH(.763, 0.09, 19.9, .69), //old
-    CUBE_PLACE_MID(0.71, 0.06, 0, .69), //old
+    AUTO_ALIGN(0.71, 0.06, 0, 0), //good 3/28
+    STOW(.48, 0, 0, .242), //good 3/28
+    PRE_CONE_PLACE_HIGH(.785, 0.09, 74, .621), //correct 3/27
+    PRE_CONE_PLACE_MID(.742, 0.06, 12.1, .619), //good 3/28
+    INTAKE_GROUND(.562, 0.03, 33.744, 0.534), //correctish 3/27
+    INTAKE_SUBSTATION(.771, 0, 0, .69), //good 3/28
+    CUBE_PLACE_HIGH(.763, 0.09, 40, .69), //good 3/28
+    CUBE_PLACE_MID(.642, 0.06, 0, .493), //good 3/28
     // CUBE_INTAKE_SUBSTATION(.736, 0, 0, .69), //old
 
 

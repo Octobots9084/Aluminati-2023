@@ -1,11 +1,12 @@
 package frc.robot.robot;
-
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.advanced.CollectCone;
 import frc.robot.commands.advanced.CollectConeSubstation;
-import frc.robot.commands.arm.intake.advanced.ConeInject;
+import frc.robot.commands.arm.intake.advanced.ConeInjectHigh;
+import frc.robot.commands.arm.intake.advanced.ConeInjectMid;
 import frc.robot.commands.arm.intake.advanced.CubeInject;
 import frc.robot.commands.arm.intake.advanced.IntakeOutWithTimeout;
 import frc.robot.commands.arm.intake.advanced.SmartEject;
@@ -16,6 +17,7 @@ import frc.robot.commands.arm.slow.MoveArmToPositionGoingUp;
 import frc.robot.commands.arm.yeet.Arm2PosStow;
 import frc.robot.commands.autonomous.BalanceChargeStation;
 import frc.robot.commands.autonomous.DriveToPosition;
+import frc.robot.commands.spatula.SetSpatulaVoltageAndPos;
 import frc.robot.commands.swerve.SetDriveAngle;
 import frc.robot.commands.swerve.SetDriverAssist;
 import frc.robot.commands.swerve.ZeroGyro;
@@ -35,27 +37,13 @@ public class DriverButtonConfig {
 
 		//Button 3 reserved for victory dance
 
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 2)
-		.onTrue(new InstantCommand(() -> RollingPins.getInstance().setRollingPinVoltage(-5)));
-
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
-		.onTrue(new InstantCommand(() -> RollingPins.getInstance().setRollingPinVoltage(3)));
-
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 4)
-				.onTrue(new IntakeIn());
-
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 5)
-				.onTrue(new IntakeOutWithTimeout());
-
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
 				.onTrue(new ZeroGyro());
+		
+		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 8).onTrue(new SetSpatulaVoltageAndPos(-12, 0));
+		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 10).onTrue(new SetSpatulaVoltageAndPos(0, 0.34));
+		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 12).onTrue(new SetSpatulaVoltageAndPos(4, 0.2).andThen(new WaitCommand(1.5)).andThen(new SetSpatulaVoltageAndPos(0, 0.34)));
 
-		//buttons 8-12 reserved for AutoAlign
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 7).onTrue(new CollectCone());
-		//Button 8 Reserved for Hippo Intake
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 9).onTrue(new Arm2PosStow(ArmPositions.STOW));
-
-		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 11).onTrue(new Arm2PosStow(ArmPositions.DRIVE_WITH_PIECE));
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
 				.whileTrue(new SetDriverAssist(true));
@@ -71,17 +59,17 @@ public class DriverButtonConfig {
 		//Switch 16 reserved for auto align toggle
 
 		//Driver Joystick Left
-		new JoystickButton(ControlMap.DRIVER_LEFT, 1)
+		new JoystickButton(ControlMap.DRIVER_RIGHT, 1)
 				.whileTrue(new AutoAlign());
 
-		new JoystickButton(ControlMap.DRIVER_LEFT, 2)
+		new JoystickButton(ControlMap.DRIVER_RIGHT, 2)
 				.whileTrue(new AutoAlignWithID());
 
 		//Driver Joystick Right
-		new JoystickButton(ControlMap.DRIVER_RIGHT, 1)
+		new JoystickButton(ControlMap.DRIVER_LEFT, 1)
 				.onTrue(new SetDriveAngle(0).withTimeout(1));
 
-		new JoystickButton(ControlMap.DRIVER_RIGHT, 2)
+		new JoystickButton(ControlMap.DRIVER_LEFT, 2)
 				.onTrue(new SetDriveAngle(180).withTimeout(1));
 
 		////END DRIVER 1//////////////////////////
@@ -91,41 +79,42 @@ public class DriverButtonConfig {
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 1)
 				.onTrue(new CollectCone());
 
-		// Button 2 reserved for Hippo Intake
+		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
+				.onTrue(new SetSpatulaVoltageAndPos(-12, 0));
 
-		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 3)
+		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
 				.onTrue(new CollectConeSubstation());
 
-		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
-				.onTrue(new Arm2PosStow(ArmPositions.STOW));
+		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 3)
+				.onTrue(new SetSpatulaVoltageAndPos(-0.5, 0.34).andThen(new Arm2PosStow(ArmPositions.STOW)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 5)
-				.onTrue(new Arm2PosStow(ArmPositions.STOW));
+				.onTrue(new SetSpatulaVoltageAndPos(0, 0.1).andThen(new WaitCommand(0.5)).andThen(new SetSpatulaVoltageAndPos(4, 0.1)).andThen(new WaitCommand(1.2)).andThen(new SetSpatulaVoltageAndPos(0, 0.34)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 6)
 				.whileTrue(new ArmZero());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 7)
 				.onTrue(new SequentialCommandGroup(new SetItemMode(false),
-						new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_HIGH)));
+						new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_HIGH), new WaitCommand(0), new CubeInject()));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 8)
 				.onTrue(new SequentialCommandGroup(new SetItemMode(true),
-						new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_HIGH)));
+						new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_HIGH), new WaitCommand(0.75), new ConeInjectHigh()));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 9)
 				.onTrue(new SequentialCommandGroup(new SetItemMode(false),
-						new MoveArmToPositionGoingUp(ArmPositions.DEPRECIATED_CONE_PLACE_MID)));
+						new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_MID), new WaitCommand(0), new CubeInject()));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 10)
 				.onTrue(new SequentialCommandGroup(new SetItemMode(true),
-						new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_MID)));
+						new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_MID), new WaitCommand(0.5), new ConeInjectMid()));
 
-		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 11)
-				.onTrue(new CubeInject());
+		// new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 11)
+		// 		.onTrue(new CubeInject());
 
-		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 12)
-				.onTrue(new ConeInject());
+		// new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 12)
+		// 		.onTrue(new ConeInject());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
 				.onTrue(new InstantCommand(() -> Light.getInstance().setStrobeAnimationPurple()));

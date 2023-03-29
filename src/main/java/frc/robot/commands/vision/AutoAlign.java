@@ -21,7 +21,7 @@ public class AutoAlign extends CommandBase {
         this.driveTrain = DriveTrain.getInstance();
         this.vision = Vision.getInstance();
         this.caliGirls = CaliGirls.getInstance();
-        this.cameraToTarget = null;
+        // this.cameraToTarget = null;
     }
 
     @Override
@@ -48,10 +48,10 @@ public class AutoAlign extends CommandBase {
                 if (vision.getBestTarget() != null) {
                     cameraToTarget = vision.getBestTarget();
                 } else {
-                    end(true);
+                    // driveTrain.drive(0, 0, 0, true);
                 }
 
-                ySpeed = cameraToTarget.getYaw() * 0.05;
+                ySpeed = (cameraToTarget.getYaw()+1) * 0.05;
                 SmartDashboard.putNumber("Y_SPED", ySpeed);
 
                 driveTrain.drive(0, ySpeed, 0, true);

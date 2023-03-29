@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.advanced.CollectCone;
 import frc.robot.commands.advanced.CollectConeSubstation;
-import frc.robot.commands.arm.intake.advanced.ConeInject;
+import frc.robot.commands.arm.intake.advanced.ConeInjectHigh;
 import frc.robot.commands.arm.intake.advanced.CubeInject;
 import frc.robot.commands.arm.intake.advanced.IntakeOutWithTimeout;
 import frc.robot.commands.arm.intake.advanced.SmartEject;
@@ -120,7 +120,7 @@ public class ButtonConfig {
 				.onTrue(new CubeInject());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 12)
-				.onTrue(new ConeInject());
+				.onTrue(new ConeInjectHigh());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
 				.onTrue(new InstantCommand(() -> Light.getInstance().setStrobeAnimationPurple()));

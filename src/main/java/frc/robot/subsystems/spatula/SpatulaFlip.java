@@ -39,6 +39,7 @@ public class SpatulaFlip extends SubsystemBase {
 
         //Spatula Angle Position
         this.lastPosSpatula = 0.15;
+        spatulaMotor.setInverted(true);
         this.spatulaMotor.getPIDController().setPositionPIDWrappingEnabled(false);
         // pidControllerSpatula.setSmartMotionAllowedClosedLoopError(0.1, 0);
 
@@ -47,10 +48,10 @@ public class SpatulaFlip extends SubsystemBase {
     
 
     public void setSpatulaPos(double angle) {
-        if (angle > 0.25) {
-            angle = 0.25;
-        } else if (angle < 0.02) {
-            angle = 0.02;
+        if (angle > 0.35) {
+            angle = 0.35;
+        } else if (angle < 0.05) {
+            angle = 0.05;
         }
         lastPosSpatula = angle;
         pidControllerSpatula.setReference(angle, ControlType.kPosition);

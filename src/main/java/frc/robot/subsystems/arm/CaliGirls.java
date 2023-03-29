@@ -24,7 +24,8 @@ public class CaliGirls extends SubsystemBase {
 
 
     //these values are likely wrong right now, just testing. also, kA may be unnecessary
-    private ArmFeedforward feedforward = new ArmFeedforward(0.01, 0.2, 0);
+    private ArmFeedforward feedforward = new ArmFeedforward(0.01, 0.18
+    , 0);
     private static CaliGirls caliGirls;
 
     public static CaliGirls getInstance() {
@@ -56,7 +57,7 @@ public class CaliGirls extends SubsystemBase {
         this.motorTop.setInverted(false);
         this.motorTop.getPIDController().setPositionPIDWrappingEnabled(false);
         this.motorTop.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(0.163);
-        pidControllerTop.setSmartMotionAllowedClosedLoopError(0.01, 0);
+        pidControllerTop.setSmartMotionAllowedClosedLoopError(0.001, 0);
         //setTopPos(lastPosTop);
 
         // Bottom Motor PID
@@ -110,10 +111,10 @@ public class CaliGirls extends SubsystemBase {
 
 
     public void setTopPos(double angle) {
-        if (angle > 0.67) {
-            angle = 0.67;
-        } else if (angle < 0.252) {
-            angle = 0.252;
+        if (angle > 0.69) {
+            angle = 0.69;
+        } else if (angle < 0.232) {
+            angle = 0.232;
         }
         lastPosTop = angle;
         pidControllerTop.setReference(angle, ControlType.kPosition);

@@ -85,9 +85,11 @@ public class Logging {
         
 
         // //Arm
-        armDashboard.setEntry("Arm Extension", armExtension.lastpos);
+        armDashboard.setEntry("Arm Extension", armExtension.getPosition());
         armDashboard.setEntry("Claw Rotation", caliGirls.lastPosTop);
         armDashboard.setEntry("Arm Rotation", caliGirls.lastPosBottom);
+        armDashboard.setEntry("Arm Real", caliGirls.getBottomPos());
+
 
     }
 

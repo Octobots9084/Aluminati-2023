@@ -44,6 +44,8 @@ import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
 import frc.robot.subsystems.arm.Roller;
+import frc.robot.subsystems.spatula.RollingPins;
+import frc.robot.subsystems.spatula.SpatulaFlip;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 
@@ -126,6 +128,7 @@ public class Robot extends TimedRobot {
             resetRobotPoseAndGyro();
         }
         this.autoFlag = false;
+        DriveTrain.getInstance().setUseDriverAssist(true);
         //Gyro.getInstance().setAngleAdjustment(180);
 
         //DriveTrain.getInstance().getPoseEstimator().useAprilTags.set(true);
@@ -180,6 +183,8 @@ public class Robot extends TimedRobot {
         Roller.getInstance();
         Logging.getInstance();
         Light.getInstance();
+        SpatulaFlip.getInstance();
+        RollingPins.getInstance();
         new ParallalMoveArm(ArmPositions.STOW);
     }
 
