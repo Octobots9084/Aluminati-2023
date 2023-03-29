@@ -83,7 +83,7 @@ public class DriveTrain extends SubsystemBase {
     private final PoseEstimator swerveDrivePoseEstimator;
 
     private DriveTrain() {
-        this.daController = new PIDController(0.1, 0.00001, 0);
+        this.daController = new PIDController(0.1, 0.0001, 0);
         //Position relative to center of robot -> (0,0) is the center (m)
         // swervePosition[0] = new Translation2d(WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
         // swervePosition[1] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);

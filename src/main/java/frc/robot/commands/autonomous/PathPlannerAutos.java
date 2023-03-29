@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.arm.yeet.Arm2PosStow;
 import frc.robot.commands.autonomous.arm.AutoConeLow;
 import frc.robot.commands.autonomous.arm.AutoConeMid;
 import frc.robot.commands.autonomous.arm.AutoConeTop;
@@ -25,6 +27,7 @@ import frc.robot.commands.autonomous.arm.AutoCubeMid;
 import frc.robot.commands.autonomous.arm.AutoCubeTop;
 import frc.robot.commands.autonomous.arm.AutoGroundIntakeCone;
 import frc.robot.commands.autonomous.arm.AutoGroundIntakeCube;
+import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.swerve.DriveTrain;
 
 public final class PathPlannerAutos {
@@ -39,13 +42,15 @@ public final class PathPlannerAutos {
             Map.entry("CubeMid", new AutoCubeMid()),
             Map.entry("CubeLow", new AutoCubeLow()),
             Map.entry("IntakeCone", new AutoGroundIntakeCone()),
-            Map.entry("IntakeCube", new AutoGroundIntakeCube())
+            Map.entry("IntakeCube", new AutoGroundIntakeCube()),
+            Map.entry("StowArm", new Arm2PosStow(ArmPositions.STOW)),
+            Map.entry("Wait1", new WaitCommand(1))
             ));
 
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
             DriveTrain.getInstance()::getPose2d,
             DriveTrain.getInstance().getPoseEstimator()::resetPose,
-            new PIDConstants(0, 0, 0),
+            new PIDConstants(0, 0.001, 0),
             new PIDConstants(2, 0, 0),
             DriveTrain.getInstance()::driveAutos,
             eventMap,
@@ -103,6 +108,10 @@ public final class PathPlannerAutos {
     
     public static CommandBase none() {
         return Commands.none();
+    }
+
+    public static CommandBase ConHigConHigBal() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ConHigConHigBal", new PathConstraints(4, 3)));
     }
 
     private PathPlannerAutos() {

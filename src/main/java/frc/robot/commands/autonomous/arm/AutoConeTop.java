@@ -41,7 +41,7 @@ public class AutoConeTop extends SequentialCommandGroup{
             new IntakeIn(),
             // new WaitCommand(0.6),
             // new SetItemMode(true),
-            new SetWristAngle(caliGirls.getBottomPos()),
+            new SetWristAngle(caliGirls.getTopPos()),
             new ArmExtension2PosTolerance(0).withTimeout(2),
             new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold).withTimeout(2),
             new MoveArmWristToPos(aPosition.wrist),
@@ -54,7 +54,7 @@ public class AutoConeTop extends SequentialCommandGroup{
             new WaitCommand(0.05),
             new SetArmAngle(ArmPositions.PRE_CONE_PLACE_HIGH.armAngle, CaliGirls.getInstance().getBottomKf()),
             new WaitCommand(0.75),
-            new MoveArmToPositionGoingDown(ArmPositions.STOW),
+            new Arm2PosStow(ArmPositions.STOW),
             new IntakeNone()
 
             // new SetArmAngle(aPosition.armAngle, aPosition.angleHold), 

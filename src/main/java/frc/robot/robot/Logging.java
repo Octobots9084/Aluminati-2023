@@ -61,9 +61,9 @@ public class Logging {
         // autoChooser.addOption("DONNOTUSEthreedcCones", PathPlannerAutos.threedc2Cones());
         // autoChooser.addOption("DONNOTUSEPlaceConeAndBalanceAndCommunity", PathPlannerAutos.PlaceConeAndBalanceAndCommunity());
         autoChooser.addOption("nALANCEv2", new AutoDriveOntoChargeStation());
-        autoChooser.addOption("Onemeter", PathPlannerAutos.Onemeter());
-        autoChooser.addOption("square", PathPlannerAutos.square());
-        autoChooser.addOption("square spin", PathPlannerAutos.squarespiiin());
+        // autoChooser.addOption("Onemeter", PathPlannerAutos.Onemeter());
+        // autoChooser.addOption("square", PathPlannerAutos.square());
+        autoChooser.addOption("ConHigConHigBal", PathPlannerAutos.ConHigConHigBal());
     
         // autoChooser.addOption("DONOTUSEnALANCEv3", new AutoDriveOntoChargeStationAndCommunity());
         

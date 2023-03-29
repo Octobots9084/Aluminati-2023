@@ -99,16 +99,14 @@ public class DriverButtonConfig {
 						new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_HIGH), new WaitCommand(0), new CubeInject()));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 8)
-				.onTrue(new SequentialCommandGroup(new SetItemMode(true),
-						new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_HIGH), new WaitCommand(0.75), new ConeInjectHigh()));
+				.onTrue(new ConeInjectHigh());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 9)
 				.onTrue(new SequentialCommandGroup(new SetItemMode(false),
 						new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_MID), new WaitCommand(0), new CubeInject()));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 10)
-				.onTrue(new SequentialCommandGroup(new SetItemMode(true),
-						new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_MID), new WaitCommand(0.5), new ConeInjectMid()));
+				.onTrue(new ConeInjectMid());
 
 		// new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 11)
 		// 		.onTrue(new CubeInject());

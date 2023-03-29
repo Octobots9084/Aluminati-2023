@@ -5,6 +5,9 @@ import frc.robot.commands.advanced.CollectCone;
 import frc.robot.commands.arm.basic.MoveArmExtensionToPos;
 import frc.robot.commands.arm.basic.MoveArmRotationToPos;
 import frc.robot.commands.arm.basic.MoveArmWristToPos;
+import frc.robot.commands.arm.intake.basic.IntakeIn;
+import frc.robot.commands.arm.manual.ArmZero;
+import frc.robot.commands.arm.yeet.Arm2PosCollect;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
@@ -16,7 +19,7 @@ public class AutoGroundIntakeCone extends SequentialCommandGroup{
 
     public AutoGroundIntakeCone() {
         this.aPosition = ArmPositions.STOW;
-        addCommands(new CollectCone(), new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmExtensionToPos(aPosition.extension), new MoveArmWristToPos(aPosition.wrist));
+        addCommands(new ArmZero().withTimeout(0.2),new Arm2PosCollect(ArmPositions.INTAKE_GROUND), new IntakeIn());
         
     }
 }

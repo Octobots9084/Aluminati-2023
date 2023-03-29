@@ -26,7 +26,7 @@ public class AutoAlign extends CommandBase {
 
     @Override
     public void initialize() {
-        try {
+        // try {
             if (vision.getTapeCamHasTarget()) {
                 if (vision.getBestTarget() != null) {
                     cameraToTarget = vision.getBestTarget();
@@ -36,9 +36,9 @@ public class AutoAlign extends CommandBase {
                     end(true);
                 }
             }
-        } catch (Exception e) {
-            // TODO: handle exception
-        }
+        // } catch (Exception e) {
+        //     // TODO: handle exception
+        // }
     }
 
     @Override
@@ -51,7 +51,7 @@ public class AutoAlign extends CommandBase {
                     // driveTrain.drive(0, 0, 0, true);
                 }
 
-                ySpeed = (cameraToTarget.getYaw()+1) * 0.05;
+                ySpeed = (cameraToTarget.getYaw()) * 0.05;
                 SmartDashboard.putNumber("Y_SPED", ySpeed);
 
                 driveTrain.drive(0, ySpeed, 0, true);
