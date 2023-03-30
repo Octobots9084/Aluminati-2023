@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.autonomous.AutoDriveOntoChargeStation;
 import frc.robot.commands.autonomous.AutoDriveOntoChargeStationAndCommunity;
+import frc.robot.commands.autonomous.BalanceChargeStation;
 import frc.robot.commands.autonomous.PathPlannerAutos;
 import frc.robot.commands.autonomous.arm.AutoConeTop;
 import frc.robot.subsystems.arm.ArmExtension;
@@ -61,6 +62,7 @@ public class Logging {
         // autoChooser.addOption("DONNOTUSEthreedcCones", PathPlannerAutos.threedc2Cones());
         // autoChooser.addOption("DONNOTUSEPlaceConeAndBalanceAndCommunity", PathPlannerAutos.PlaceConeAndBalanceAndCommunity());
         autoChooser.addOption("nALANCEv2", new AutoDriveOntoChargeStation());
+        autoChooser.addOption("AutoDriveOntoChargeStationAndCommunity", PathPlannerAutos.PlaceConeAndBalanceAndCommunity().andThen(new BalanceChargeStation()));
         // autoChooser.addOption("Onemeter", PathPlannerAutos.Onemeter());
         // autoChooser.addOption("square", PathPlannerAutos.square());
         autoChooser.addOption("ConHigConHigBal", PathPlannerAutos.ConHigConHigBal());

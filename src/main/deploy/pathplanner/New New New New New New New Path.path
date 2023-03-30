@@ -2,40 +2,13 @@
   "waypoints": [
     {
       "anchorPoint": {
-        "x": 1.7863518751288567,
-        "y": 2.996089986473838
+        "x": 1.8092227910561378,
+        "y": 3.0532672762920416
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.7863518751288563,
-        "y": 2.996089986473838
-      },
-      "holonomicAngle": 180.0,
-      "isReversal": false,
-      "velOverride": null,
-      "isLocked": false,
-      "isStopPoint": false,
-      "stopEvent": {
-        "names": [
-          "ConeTop"
-        ],
-        "executionBehavior": "sequential",
-        "waitBehavior": "none",
-        "waitTime": 0
-      }
-    },
-    {
-      "anchorPoint": {
-        "x": 6.669292425603397,
-        "y": 3.064702734255682
-      },
-      "prevControl": {
-        "x": 6.6578569676397565,
-        "y": 3.064702734255682
-      },
-      "nextControl": {
-        "x": 6.680727883567038,
-        "y": 3.064702734255682
+        "x": 2.809222791056138,
+        "y": 3.0532672762920416
       },
       "holonomicAngle": 180.0,
       "isReversal": false,
@@ -44,19 +17,44 @@
       "isStopPoint": false,
       "stopEvent": {
         "names": [],
-        "executionBehavior": "sequential",
+        "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
       }
     },
     {
       "anchorPoint": {
-        "x": 3.959088888220572,
+        "x": 6.120390443348647,
         "y": 3.0303963603647603
       },
       "prevControl": {
-        "x": 3.4704323721582533,
+        "x": 5.120390443348647,
         "y": 3.0303963603647603
+      },
+      "nextControl": {
+        "x": 7.120390443348647,
+        "y": 3.0303963603647603
+      },
+      "holonomicAngle": 180.0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 3.856169766547807,
+        "y": 3.087573650182963
+      },
+      "prevControl": {
+        "x": 4.356169766547807,
+        "y": 3.087573650182963
       },
       "nextControl": null,
       "holonomicAngle": 180.0,
@@ -65,15 +63,14 @@
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "BalanceChargeStation"
+        ],
         "executionBehavior": "sequential",
         "waitBehavior": "none",
         "waitTime": 0
       }
     }
   ],
-  "maxVelocity": 20.0,
-  "maxAcceleration": 20.0,
-  "isReversed": null,
   "markers": []
 }

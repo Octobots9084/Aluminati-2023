@@ -105,12 +105,12 @@
     },
     {
       "anchorPoint": {
-        "x": 3.8967151438576377,
-        "y": 1.9526777515093496
+        "x": 2.106544698107932,
+        "y": 1.8296732741852748
       },
       "prevControl": {
-        "x": 2.1163827470883314,
-        "y": 1.5528169992937835
+        "x": 2.106544698107932,
+        "y": 1.8182378162216326
       },
       "nextControl": null,
       "holonomicAngle": 180.0,
@@ -120,7 +120,7 @@
       "isStopPoint": false,
       "stopEvent": {
         "names": [
-          "BalanceChargeStation"
+          "AutoDriveOntoChargeStation"
         ],
         "executionBehavior": "sequential",
         "waitBehavior": "none",

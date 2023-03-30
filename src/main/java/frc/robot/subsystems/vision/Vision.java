@@ -18,7 +18,7 @@ public class Vision extends SubsystemBase {
 		return INSTANCE;
 	}
 
-	private final PhotonCamera tapeCamera = new PhotonCamera("TapeCam");
+	private final PhotonCamera tapeCamera = new PhotonCamera("Microsoft_LifeCam_HD-3000");
 	private final PhotonCamera tagCamera = new PhotonCamera("TagCam");
 	// public boolean hasTarget;
 	private PhotonPipelineResult tapeResult;
@@ -97,10 +97,18 @@ public class Vision extends SubsystemBase {
 	}
 
 	public boolean getTapeCamHasTarget() {
-		return tapeResult.hasTargets(); // Returns whether a target was found
+		if (tapeResult==null) {
+			return false;
+		}
+		return tapeResult.hasTargets(); 
+		
+		// Returns whether a target was found
 	}
 
 	public boolean getTagCamHasTarget() {
-		return tagResult.hasTargets(); // Returns whether a target was found
+		if (tagResult==null) {
+			return false;
+		}
+		return tagResult.hasTargets();  // Returns whether a target was found
 	}
 }

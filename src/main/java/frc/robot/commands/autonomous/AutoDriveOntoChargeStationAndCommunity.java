@@ -41,10 +41,9 @@ import frc.robot.util.MathUtil;
 public class AutoDriveOntoChargeStationAndCommunity extends SequentialCommandGroup {
     public AutoDriveOntoChargeStationAndCommunity() {
         addCommands(
-            new AutoConeTop(),
+            /*new AutoConeTop(),*/
             new DriveBackwards(0.5).withTimeout(2),
             new DriveBackwards(0.1).withTimeout(2.8),
-            new SetDriveAngle(180),
             new DriveForwards(0.0).withTimeout(2),
             new DriveBackwards(0.5).withTimeout(2),
             new BalanceChargeStation()

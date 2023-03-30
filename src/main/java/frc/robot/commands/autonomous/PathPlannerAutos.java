@@ -44,7 +44,8 @@ public final class PathPlannerAutos {
             Map.entry("IntakeCone", new AutoGroundIntakeCone()),
             Map.entry("IntakeCube", new AutoGroundIntakeCube()),
             Map.entry("StowArm", new Arm2PosStow(ArmPositions.STOW)),
-            Map.entry("Wait1", new WaitCommand(1))
+            Map.entry("Wait1", new WaitCommand(1)),
+            Map.entry("AutoDriveOntoChargeStation", new AutoDriveOntoChargeStation())
             ));
 
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
@@ -75,12 +76,13 @@ public final class PathPlannerAutos {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("TestingPath", new PathConstraints(1, 1)));
     }
 
+
     public static CommandBase PlaceConeAndBalance() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStationMove", new PathConstraints(20, 20)));
     }
 
     public static CommandBase PlaceConeAndBalanceAndCommunity() {
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStationMoveAndGoOutsideCommunity", new PathConstraints(20, 20)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStationMoveAndGoOutsideCommunity", new PathConstraints(1, 0.5)));
     }
     public static CommandBase PlaceConeAndMoveBackBottom() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("MoveAndGrabConeBottom", new PathConstraints(2, 1)));
@@ -114,6 +116,8 @@ public final class PathPlannerAutos {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ConHigOut", new PathConstraints(4, 3)));
     }
 
+    
+    
     private PathPlannerAutos() {
         throw new UnsupportedOperationException("This is a utility class!");
     }
