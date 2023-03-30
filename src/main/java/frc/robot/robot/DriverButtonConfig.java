@@ -8,12 +8,14 @@ import frc.robot.commands.advanced.CollectCone;
 import frc.robot.commands.advanced.CollectConeSubstation;
 import frc.robot.commands.arm.intake.advanced.ConeInjectHigh;
 import frc.robot.commands.arm.intake.advanced.ConeInjectMid;
+import frc.robot.commands.arm.intake.advanced.CubeInjectHigh;
 import frc.robot.commands.arm.intake.advanced.CubeInjectMid;
 import frc.robot.commands.arm.intake.advanced.IntakeOutWithTimeout;
 import frc.robot.commands.arm.intake.advanced.SmartEject;
 import frc.robot.commands.arm.intake.basic.IntakeIn;
 import frc.robot.commands.arm.intake.basic.SetItemMode;
 import frc.robot.commands.arm.manual.ArmZero;
+import frc.robot.commands.arm.slow.MoveArmToPositionGoingDown;
 import frc.robot.commands.arm.slow.MoveArmToPositionGoingUp;
 import frc.robot.commands.arm.yeet.Arm2PosStow;
 import frc.robot.commands.autonomous.BalanceChargeStation;
@@ -91,23 +93,22 @@ public class DriverButtonConfig {
 				.onTrue(new CollectConeSubstation().alongWith(new SetSpatulaVoltageAndPos(0, 0.34)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 3)
-				.onTrue(new SetSpatulaVoltageAndPos(-0.5, 0.34).alongWith(new Arm2PosStow(ArmPositions.STOW)));
+				.onTrue(new SetSpatulaVoltageAndPos(-0.5, 0.34).alongWith(new Arm2PosStow(ArmPositions.DRIVE_POSITION)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 5)
-				.onTrue(new SetSpatulaVoltageAndPos(0, 0.1).alongWith(new Arm2PosStow(ArmPositions.STOW)).andThen(new WaitCommand(0.5)).andThen(new SetSpatulaVoltageAndPos(4, 0.1)).andThen(new WaitCommand(1.2)).andThen(new SetSpatulaVoltageAndPos(0, 0.34)));
+				.onTrue(new SetSpatulaVoltageAndPos(0, 0.1).alongWith(new Arm2PosStow(ArmPositions.STOW)).andThen(new WaitCommand(0.15)).andThen(new SetSpatulaVoltageAndPos(4, 0.1)).andThen(new WaitCommand(1.2)).andThen(new SetSpatulaVoltageAndPos(0, 0.34)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 6)
 				.whileTrue(new ArmZero());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 7)
-				.onTrue(new SequentialCommandGroup(new SetItemMode(false), new SetSpatulaVoltageAndPos(0, 0.34), new WaitCommand(0), new CubeInjectMid()));
+				.onTrue(new SequentialCommandGroup(new SetItemMode(false).alongWith(new SetSpatulaVoltageAndPos(0, 0.34)), new CubeInjectHigh()));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 8)
 				.onTrue(new ConeInjectHigh().alongWith(new SetSpatulaVoltageAndPos(0, 0.34)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 9)
-				.onTrue(new SequentialCommandGroup(new SetItemMode(false),
-						new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_MID).alongWith(new SetSpatulaVoltageAndPos(0, 0.34)), new WaitCommand(0), new CubeInjectMid()));
+				.onTrue(new SequentialCommandGroup(new SetItemMode(false).alongWith(new SetSpatulaVoltageAndPos(0, 0.34)), new WaitCommand(0), new CubeInjectMid()));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 10)
 				.onTrue(new ConeInjectMid().alongWith(new SetSpatulaVoltageAndPos(0, 0.34)));
@@ -115,8 +116,8 @@ public class DriverButtonConfig {
 		// new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 11)
 		// 		.onTrue(new CubeInject());
 
-		// new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 12)
-		// 		.onTrue(new ConeInject());
+		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 12)
+				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.STOW).alongWith(new SetSpatulaVoltageAndPos(-0.5, 0.34)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
 				.onTrue(new InstantCommand(() -> Light.getInstance().setStrobeAnimationPurple()));

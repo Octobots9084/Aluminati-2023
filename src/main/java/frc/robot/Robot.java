@@ -129,7 +129,7 @@ public class Robot extends TimedRobot {
         }
         this.autoFlag = false;
         DriveTrain.getInstance().setUseDriverAssist(true);
-        //Gyro.getInstance().setAngleAdjustment(180);
+        Gyro.getInstance().setAngleAdjustment(180);
 
         //DriveTrain.getInstance().getPoseEstimator().useAprilTags.set(true);
 
@@ -141,6 +141,7 @@ public class Robot extends TimedRobot {
         this.autoFlag = true;
         initializeAllSubsystems();
 
+        
         //new driveToPos(new Pose2d(14.16, 1.4, new Rotation2d()));
         //CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
         // CommandScheduler.getInstance().schedule(PathPlannerAutos.TestAutoOne());

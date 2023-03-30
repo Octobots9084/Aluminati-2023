@@ -4,6 +4,8 @@ import org.photonvision.targeting.PhotonTrackedTarget;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.commands.swerve.SetDriveAngle;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
 import frc.robot.subsystems.swerve.DriveTrain;
@@ -54,7 +56,7 @@ public class AutoAlign extends CommandBase {
 
                 ySpeed = (cameraToTarget.getYaw()-3) * 0.1;
                 SmartDashboard.putNumber("Y_SPED", ySpeed);
-
+                CommandScheduler.getInstance().schedule(new SetDriveAngle(180));
                 driveTrain.drive(0, ySpeed, 0, true);
             }
         } catch (Exception e) {
