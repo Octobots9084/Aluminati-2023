@@ -3,6 +3,7 @@ package frc.robot.commands.swerve;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
+import frc.robot.util.MathUtil;
 
 
 /**
@@ -18,22 +19,17 @@ public class SetDriveAngle extends InstantCommand {
 
     @Override
     public void initialize() {
-        dt.setTargetRotationAngle((Gyro.getInstance().getUnwrappedAngle()-(Gyro.getInstance().getUnwrappedAngle()%360))+angle);
+        
+        double gyroUnwrappedAngle = Gyro.getInstance().getUnwrappedAngle();
+        double diff = MathUtil.wrapToCircle(angle) - MathUtil.wrapToCircle(gyroUnwrappedAngle);
+
+        if (Math.abs(diff)>180) {
+            diff = -Math.signum(diff)*360 + diff;
+        }
+
+        dt.setTargetRotationAngle(gyroUnwrappedAngle+diff);
     }
 
-    // Maybe better
-    // @Override
-    // public void initialize() {
-    //     double gyroUnwrappedAngle = Gyro.getInstance().getUnwrappedAngle();
-    //     if (Math.abs((gyroUnwrappedAngle-(gyroUnwrappedAngle%360)+angle)-gyroUnwrappedAngle) < Math.abs(gyroUnwrappedAngle-(gyroUnwrappedAngle+(360-(gyroUnwrappedAngle%360))-(360-angle)))) {
-    //         dt.setTargetRotationAngle((gyroUnwrappedAngle-(gyroUnwrappedAngle%360))+angle);
-
-    //     } else {
-    //         dt.setTargetRotationAngle((gyroUnwrappedAngle+(360-(gyroUnwrappedAngle%360))-(360-angle)));
-    //     }
-
-
-        
-    // }
+    //dt.setTargetRotationAngle((Gyro.getInstance().getUnwrappedAngle()-(Gyro.getInstance().getUnwrappedAngle()%360))+angle);
 
 }
