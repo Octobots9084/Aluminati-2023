@@ -7,7 +7,7 @@ import frc.robot.commands.advanced.CollectCone;
 import frc.robot.commands.advanced.CollectConeSubstation;
 import frc.robot.commands.arm.intake.advanced.ConeInjectHigh;
 import frc.robot.commands.arm.intake.advanced.ConeInjectMid;
-import frc.robot.commands.arm.intake.advanced.CubeInject;
+import frc.robot.commands.arm.intake.advanced.CubeInjectMid;
 import frc.robot.commands.arm.intake.advanced.IntakeOutWithTimeout;
 import frc.robot.commands.arm.intake.advanced.SmartEject;
 import frc.robot.commands.arm.intake.basic.IntakeIn;
@@ -95,15 +95,14 @@ public class DriverButtonConfig {
 				.whileTrue(new ArmZero());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 7)
-				.onTrue(new SequentialCommandGroup(new SetItemMode(false),
-						new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_HIGH).alongWith(new SetSpatulaVoltageAndPos(0, 0.34)), new WaitCommand(0), new CubeInject()));
+				.onTrue(new SequentialCommandGroup(new SetItemMode(false), new SetSpatulaVoltageAndPos(0, 0.34), new WaitCommand(0), new CubeInjectMid()));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 8)
 				.onTrue(new ConeInjectHigh().alongWith(new SetSpatulaVoltageAndPos(0, 0.34)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 9)
 				.onTrue(new SequentialCommandGroup(new SetItemMode(false),
-						new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_MID).alongWith(new SetSpatulaVoltageAndPos(0, 0.34)), new WaitCommand(0), new CubeInject()));
+						new MoveArmToPositionGoingUp(ArmPositions.CUBE_PLACE_MID).alongWith(new SetSpatulaVoltageAndPos(0, 0.34)), new WaitCommand(0), new CubeInjectMid()));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 10)
 				.onTrue(new ConeInjectMid().alongWith(new SetSpatulaVoltageAndPos(0, 0.34)));

@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.advanced.CollectCone;
 import frc.robot.commands.advanced.CollectConeSubstation;
 import frc.robot.commands.arm.intake.advanced.ConeInjectHigh;
-import frc.robot.commands.arm.intake.advanced.CubeInject;
+import frc.robot.commands.arm.intake.advanced.CubeInjectMid;
 import frc.robot.commands.arm.intake.advanced.IntakeOutWithTimeout;
 import frc.robot.commands.arm.intake.advanced.SmartEject;
 import frc.robot.commands.arm.intake.basic.IntakeIn;
@@ -117,7 +117,7 @@ public class ButtonConfig {
 						new MoveArmToPositionGoingUp(ArmPositions.PRE_CONE_PLACE_MID)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 11)
-				.onTrue(new CubeInject());
+				.onTrue(new CubeInjectMid());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 12)
 				.onTrue(new ConeInjectHigh());

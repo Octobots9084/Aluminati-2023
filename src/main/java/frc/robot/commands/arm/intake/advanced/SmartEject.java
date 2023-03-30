@@ -20,7 +20,7 @@ public class SmartEject extends InstantCommand{
         if (itemMode) {
             CommandScheduler.getInstance().schedule(new ConeInjectHigh());
         } else {
-            CommandScheduler.getInstance().schedule(new CubeInject());
+            CommandScheduler.getInstance().schedule(new CubeInjectMid());
         }
     }
 
