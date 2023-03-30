@@ -157,9 +157,9 @@ public class ButtonConfig {
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 14)
 				.onTrue(new InstantCommand(() -> Light.getInstance().setStrobeAnimationYellow()));
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
-				.onFalse(new InstantCommand(() -> Light.getInstance().setStrobeAnimationRed()));
+				.onFalse(new InstantCommand(() -> Light.getInstance().setAnimationRainbow()));
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 14)
-				.onFalse(new InstantCommand(() -> Light.getInstance().setStrobeAnimationRed()));
+				.onFalse(new InstantCommand(() -> Light.getInstance().setAnimationRainbow()));
 
 		////END CO-DRIVER//////////////////////////
 	}

@@ -1,6 +1,9 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.CANifier.LEDChannel;
+import com.ctre.phoenix.led.Animation;
 import com.ctre.phoenix.led.CANdle;
+import com.ctre.phoenix.led.RainbowAnimation;
 import com.ctre.phoenix.led.StrobeAnimation;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -15,7 +18,8 @@ public class Light extends SubsystemBase{
         }
         return light;
     }
-    private StrobeAnimation strobeAnimation = new StrobeAnimation(0, 0, 0, 0, 1, 8);
+    private RainbowAnimation rainbowAnimation = new RainbowAnimation(0.9 , 0.99, 272);
+    private StrobeAnimation strobeAnimation = new StrobeAnimation(0, 0, 0, 0, 0.9, 272);
     
     public Light() {
         this.candle = new CANdle(MotorIDs.CANDLE_ID);
@@ -29,25 +33,29 @@ public class Light extends SubsystemBase{
         strobeAnimation.setR(255);
         strobeAnimation.setG(0);
         strobeAnimation.setB(255);
-        candle.animate(strobeAnimation);
+        animation = (strobeAnimation);
+    }
+    public void setAnimationRainbow     () {
+        animation = (rainbowAnimation);
     }
 
     public void setStrobeAnimationYellow() {
         strobeAnimation.setR(255);
         strobeAnimation.setG(255);
         strobeAnimation.setB(0);
-        candle.animate(strobeAnimation);
+        animation = (strobeAnimation);
     }
 
     public void setStrobeAnimationRed() {
-        strobeAnimation.setR(255);
+       strobeAnimation.setR(255);
         strobeAnimation.setG(0);
         strobeAnimation.setB(0);
-        candle.animate(strobeAnimation);
+        animation = (strobeAnimation);
     }
+    private Animation animation = strobeAnimation;
     @Override
     public void periodic() {
-        candle.animate(strobeAnimation);
+        candle.animate(animation);
         
     }
 
