@@ -132,10 +132,8 @@ public class DriveTrain extends SubsystemBase {
     * @param fieldRelative Whether the provided x and y speeds are relative to the field.
     */
     public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
+        SmartDashboard.putNumber("xSpeed", xSpeed);
         //driver assist """implementation"""
-            if (Robot.isAutoFlag()) {
-                return;
-            };
         if (useDriverAssist) {
             this.targetRotationAngle = targetRotationAngle + (Math.toDegrees(rot) * .02);
             //SmartDashboard.putNumber("controt", rot);

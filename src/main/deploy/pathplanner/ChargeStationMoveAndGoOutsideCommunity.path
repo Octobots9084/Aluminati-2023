@@ -51,11 +51,11 @@
     },
     {
       "anchorPoint": {
-        "x": 3.959088888220572,
+        "x": 4.256410795275228,
         "y": 3.0303963603647603
       },
       "prevControl": {
-        "x": 3.4704323721582533,
+        "x": 4.2678462532388695,
         "y": 3.0303963603647603
       },
       "nextControl": null,
@@ -65,15 +65,17 @@
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
-        "names": [],
-        "executionBehavior": "sequential",
+        "names": [
+          "BalanceChargeStation"
+        ],
+        "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
       }
     }
   ],
-  "maxVelocity": 20.0,
-  "maxAcceleration": 20.0,
+  "maxVelocity": 4.0,
+  "maxAcceleration": 3.0,
   "isReversed": null,
   "markers": []
 }

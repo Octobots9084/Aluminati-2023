@@ -45,7 +45,7 @@ public final class PathPlannerAutos {
             Map.entry("IntakeCube", new AutoGroundIntakeCube()),
             Map.entry("StowArm", new Arm2PosStow(ArmPositions.STOW)),
             Map.entry("Wait1", new WaitCommand(1)),
-            Map.entry("AutoDriveOntoChargeStation", new AutoDriveOntoChargeStation())
+            Map.entry("AutoDriveOntoChargeStation", new AutoDriveOntoChargeStationforwards())
             ));
 
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
@@ -82,7 +82,7 @@ public final class PathPlannerAutos {
     }
 
     public static CommandBase PlaceConeAndBalanceAndCommunity() {
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStationMoveAndGoOutsideCommunity", new PathConstraints(1, 0.5)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStationMoveAndGoOutsideCommunity", new PathConstraints(1, 0.8)));
     }
     public static CommandBase PlaceConeAndMoveBackBottom() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("MoveAndGrabConeBottom", new PathConstraints(2, 1)));

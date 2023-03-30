@@ -52,7 +52,7 @@ public class AutoAlign extends CommandBase {
                     // driveTrain.drive(0, 0, 0, true);
                 }
 
-                ySpeed = (cameraToTarget.getYaw()) * 0.05;
+                ySpeed = (cameraToTarget.getYaw()-3) * 0.1;
                 SmartDashboard.putNumber("Y_SPED", ySpeed);
 
                 driveTrain.drive(0, ySpeed, 0, true);

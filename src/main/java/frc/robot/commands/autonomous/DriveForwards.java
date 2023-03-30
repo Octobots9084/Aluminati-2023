@@ -5,10 +5,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.MathUtil;
 
-public class DriveForwards extends CommandBase{
+public class DriveForwards extends CommandBase
+{
     double speed = 0;
     DriveForwards(double speed) {
         this.speed = speed;
+        addRequirements(DriveTrain.getInstance());
     }
 
     @Override
