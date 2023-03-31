@@ -53,7 +53,7 @@ public class AutoConeTop extends SequentialCommandGroup{
             new SetArmExtension(0),
             new WaitCommand(0.05),
             new SetArmAngle(ArmPositions.PRE_CONE_PLACE_HIGH.armAngle, CaliGirls.getInstance().getBottomKf()),
-            new WaitCommand(0.75),
+            new WaitCommand(0.2),
             new Arm2PosStow(ArmPositions.STOW),
             new IntakeNone()
 
