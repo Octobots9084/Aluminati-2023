@@ -31,7 +31,7 @@ public class BalanceChargeStationAuto extends PIDCommand {
 
     public BalanceChargeStationAuto() {
         super(
-                new PIDController(0.045, 0.000, 0.01),
+                new PIDController(0.05, 0.000, 0.015),
                 Gyro.getInstance()::getPitch,
                 0,
                 output -> DriveTrain.getInstance().drive(-output * 0.55/*0.55*/, 0, 0, true),
