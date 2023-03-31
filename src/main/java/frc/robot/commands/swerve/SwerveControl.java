@@ -55,11 +55,11 @@ public class SwerveControl extends CommandBase {
 
 
         // Get speeds from joysticks
-        xSpeed = MathUtil.fitDeadband(-leftJoystick.getY()) * DriveTrain.MAX_TURN_SPEED;
-        ySpeed = MathUtil.fitDeadband(-leftJoystick.getX()) * DriveTrain.MAX_TURN_SPEED;
+        xSpeed = MathUtil.fitDeadband(-leftJoystick.getY(),0.02) * DriveTrain.MAX_TURN_SPEED;
+        ySpeed = MathUtil.fitDeadband(-leftJoystick.getX(),0.02) * DriveTrain.MAX_TURN_SPEED;
 
         // Calculate the deadband
-        rot = MathUtil.fitDeadband(-rightJoystick.getX()) * DriveTrain.MAX_ANGULAR_SPEED;
+        rot = MathUtil.fitDeadband(-rightJoystick.getX(),0.02) * DriveTrain.MAX_ANGULAR_SPEED;
         
         //just drive lol
         driveTrain.drive(xSpeed, ySpeed, rot, driveTrain.getFieldCentric());
