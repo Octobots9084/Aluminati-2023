@@ -122,7 +122,7 @@ public final class PathPlannerAutos {
 
     
     public static CommandBase GetOutOfDaWay() {
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("GetOutOfDaWay", new PathConstraints(4, 3)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("GetOutOfDaWayCable", new PathConstraints(2, 1)));
     }
     private PathPlannerAutos() {
         throw new UnsupportedOperationException("This is a utility class!");
