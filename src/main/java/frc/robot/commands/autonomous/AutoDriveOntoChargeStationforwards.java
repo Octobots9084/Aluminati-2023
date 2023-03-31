@@ -43,10 +43,10 @@ import frc.robot.util.MathUtil;
 public class AutoDriveOntoChargeStationforwards extends SequentialCommandGroup {
     public AutoDriveOntoChargeStationforwards() {
         addCommands(
-            new InstantCommand(() -> SmartDashboard.putBoolean("sus", true)),
+            //new InstantCommand(() -> SmartDashboard.putBoolean("sus", true)),
             new DriveForwards(0.7).withTimeout(1.2),
             new InstantCommand(() -> DriveTrain.getInstance().drive(0,0, 0, false)),
-            new InstantCommand(() -> SmartDashboard.putBoolean("sus", false)),
+            //new InstantCommand(() -> SmartDashboard.putBoolean("sus", false)),
             new BalanceChargeStation()
             
 

@@ -55,7 +55,7 @@ public class AutoAlignWithID extends CommandBase {
                 }
                 ySpeed = (cameraToTarget.getYaw()+ 0.5) * 0.1;
                 CommandScheduler.getInstance().schedule(new SetDriveAngle(180));
-                SmartDashboard.putNumber("Y_SPED", ySpeed);
+                //SmartDashboard.putNumber("Y_SPED", ySpeed);
 
                 driveTrain.drive(driveTrain.previousXSpeed, ySpeed, 0, true);
             }

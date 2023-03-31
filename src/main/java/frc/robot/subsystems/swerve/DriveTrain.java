@@ -136,7 +136,7 @@ public class DriveTrain extends SubsystemBase {
     */
     public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
         
-        SmartDashboard.putNumber("xSpeed", xSpeed);
+        // SmartDashboard.putNumber("xSpeed", xSpeed);
         //driver assist """implementation"""
         
         if (useDriverAssist) {
@@ -153,7 +153,7 @@ public class DriveTrain extends SubsystemBase {
                 }
                 rot = getRotationSpeed();
             }
-            SmartDashboard.putNumber("rot", rot);
+            //SmartDashboard.putNumber("rot", rot);
             
             //SmartDashboard.putNumber("darot", rot);
             }

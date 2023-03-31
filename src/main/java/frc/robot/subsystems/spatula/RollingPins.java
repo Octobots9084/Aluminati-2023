@@ -21,8 +21,14 @@ public class RollingPins {
 
     public RollingPins() {
         this.motor = new CANSparkMax(MotorIDs.SPATULA_ROLLER, CANSparkMaxLowLevel.MotorType.kBrushless);
-        this.motor.setSmartCurrentLimit(10, 10);
+        this.motor.setSmartCurrentLimit(20, 20);
         this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 255);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 255);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 255);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
         
     }
 

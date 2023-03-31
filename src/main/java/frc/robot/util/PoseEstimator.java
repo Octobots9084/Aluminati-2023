@@ -87,7 +87,7 @@ public class PoseEstimator {
     }
 
     public Pose2d getRobotPose() {
-        SmartDashboard.putNumber("RotationPoseEstimation", robotPose.get().getRotation().getDegrees());
+        //SmartDashboard.putNumber("RotationPoseEstimation", robotPose.get().getRotation().getDegrees());
         return robotPose.get();
     }
 

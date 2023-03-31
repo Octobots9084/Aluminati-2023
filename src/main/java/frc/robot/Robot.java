@@ -111,13 +111,13 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
-        SmartDashboard.putNumber("Initialized", 1);
-        SmartDashboard.putBoolean("14actual", ControlMap.DRIVER_BUTTONS.getRawButton(14));
+        // SmartDashboard.putNumber("Initialized", 1);
+        // SmartDashboard.putBoolean("14actual", ControlMap.DRIVER_BUTTONS.getRawButton(14));
         if (!ControlMap.DRIVER_BUTTONS.getRawButton(14)) {
-            SmartDashboard.putBoolean("14", true);
+            // SmartDashboard.putBoolean("14", true);
             new DriverButtonConfig().initTeleop();
         } else {
-            SmartDashboard.putBoolean("14", false);
+            // SmartDashboard.putBoolean("14", false);
             new ButtonConfig().initTeleop();
         }
         CommandScheduler.getInstance().cancelAll();
