@@ -48,8 +48,8 @@ public class DriverButtonConfig {
 				.onTrue(new BalanceChargeStation());
 		
 		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 8).onTrue(new SetSpatulaVoltageAndPos(-12, 0));
-		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 10).onTrue(new SetSpatulaVoltageAndPos(0, 0.34));
-		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 12).onTrue(new SetSpatulaVoltageAndPos(4, 0.2).andThen(new WaitCommand(1.5)).andThen(new SetSpatulaVoltageAndPos(0, 0.34)));
+		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 10).onTrue(new SetSpatulaVoltageAndPos(0, 0.36));
+		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 12).onTrue(new SetSpatulaVoltageAndPos(4, 0.2).andThen(new WaitCommand(1.5)).andThen(new SetSpatulaVoltageAndPos(0, 0.36)));
 
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
@@ -84,40 +84,40 @@ public class DriverButtonConfig {
 		////CO DRIVER////////////////
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 1)
-				.onTrue(new CollectCone().alongWith(new SetSpatulaVoltageAndPos(0, 0.34)));
+				.onTrue(new CollectCone().alongWith(new SetSpatulaVoltageAndPos(0, 0.36)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
 				.onTrue(new SetSpatulaVoltageAndPos(-12, 0).alongWith(new Arm2PosStow(ArmPositions.STOW)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
-				.onTrue(new CollectConeSubstation().alongWith(new SetSpatulaVoltageAndPos(0, 0.34)));
+				.onTrue(new CollectConeSubstation().alongWith(new SetSpatulaVoltageAndPos(0, 0.36)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 3)
-				.onTrue(new SetSpatulaVoltageAndPos(-0.5, 0.34).alongWith(new Arm2PosStow(ArmPositions.DRIVE_POSITION)));
+				.onTrue(new SetSpatulaVoltageAndPos(-0.5, 0.36).alongWith(new Arm2PosStow(ArmPositions.DRIVE_POSITION)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 5)
-				.onTrue(new SetSpatulaVoltageAndPos(0, 0.1).alongWith(new Arm2PosStow(ArmPositions.STOW)).andThen(new WaitCommand(0.15)).andThen(new SetSpatulaVoltageAndPos(4, 0.1)).andThen(new WaitCommand(1.2)).andThen(new SetSpatulaVoltageAndPos(0, 0.34)));
+				.onTrue(new SetSpatulaVoltageAndPos(0, 0.1).alongWith(new Arm2PosStow(ArmPositions.STOW)).andThen(new WaitCommand(0.15)).andThen(new SetSpatulaVoltageAndPos(4, 0.1)).andThen(new WaitCommand(1.2)).andThen(new SetSpatulaVoltageAndPos(0, 0.36)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 6)
 				.whileTrue(new ArmZero());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 7)
-				.onTrue(new SequentialCommandGroup(new SetItemMode(false).alongWith(new SetSpatulaVoltageAndPos(0, 0.34)), new CubeInjectHigh()));
+				.onTrue(new SequentialCommandGroup(new SetItemMode(false).alongWith(new SetSpatulaVoltageAndPos(0, 0.36)), new CubeInjectHigh()));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 8)
-				.onTrue(new ConeInjectHigh().alongWith(new SetSpatulaVoltageAndPos(0, 0.34)));
+				.onTrue(new ConeInjectHigh().alongWith(new SetSpatulaVoltageAndPos(0, 0.36)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 9)
-				.onTrue(new SequentialCommandGroup(new SetItemMode(false).alongWith(new SetSpatulaVoltageAndPos(0, 0.34)), new WaitCommand(0), new CubeInjectMid()));
+				.onTrue(new SequentialCommandGroup(new SetItemMode(false).alongWith(new SetSpatulaVoltageAndPos(0, 0.36)), new CubeInjectMid()));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 10)
-				.onTrue(new ConeInjectMid().alongWith(new SetSpatulaVoltageAndPos(0, 0.34)));
+				.onTrue(new ConeInjectMid().alongWith(new SetSpatulaVoltageAndPos(0, 0.36)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 11)
 				.onTrue(new MoveArmToPositionGoingUp(ArmPositions.AUTO_ALIGN));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 12)
-				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.STOW).alongWith(new SetSpatulaVoltageAndPos(-0.5, 0.34)));
+				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.STOW).alongWith(new SetSpatulaVoltageAndPos(-0.5, 0.36)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
 				.onTrue(new InstantCommand(() -> Light.getInstance().setStrobeAnimationPurple()));

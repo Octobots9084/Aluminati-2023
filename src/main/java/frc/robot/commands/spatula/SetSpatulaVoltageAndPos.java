@@ -11,7 +11,7 @@ public class SetSpatulaVoltageAndPos extends InstantCommand{
     private double voltage, pos;
     public SetSpatulaVoltageAndPos(double voltage, double pos) {
         this.spatulaFlip = SpatulaFlip.getInstance();
-        this.voltage = voltage;
+        this.voltage = -voltage;
         this.rollingPins = RollingPins.getInstance();
         this.pos = pos;
     }    
