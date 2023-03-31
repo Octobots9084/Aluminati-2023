@@ -17,11 +17,11 @@ public class CubeInjectMid extends SequentialCommandGroup {
         addCommands(
                 // new SetArmAngle(pos - 0.1, caliGirls.getBottomKf()),
                 // new MoveArmRotationToPos(pos, caliGirls.getBottomKf()),
-                new ArmExtension2PosTolerance(ArmPositions.CUBE_PLACE_MID.extension),
+                new ArmExtension2PosTolerance(ArmPositions.CUBE_PLACE_MID.extension).withTimeout(1),
                 new SetWristAngle(ArmPositions.CUBE_PLACE_MID.wrist),
                 new MoveArmRotationToPos(ArmPositions.CUBE_PLACE_MID.armAngle, 0),
                 new IntakeOut(),
-                new WaitCommand(0.5),
+                new WaitCommand(0.25),
                 new Arm2PosCooldown(ArmPositions.STOW),
                 new IntakeNone());
     }
