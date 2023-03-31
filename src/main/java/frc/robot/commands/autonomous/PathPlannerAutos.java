@@ -27,6 +27,7 @@ import frc.robot.commands.autonomous.arm.AutoCubeMid;
 import frc.robot.commands.autonomous.arm.AutoCubeTop;
 import frc.robot.commands.autonomous.arm.AutoGroundIntakeCone;
 import frc.robot.commands.autonomous.arm.AutoGroundIntakeCube;
+import frc.robot.commands.spatula.SetSpatulaVoltageAndPos;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.swerve.DriveTrain;
 
@@ -45,7 +46,10 @@ public final class PathPlannerAutos {
             Map.entry("IntakeCube", new AutoGroundIntakeCube()),
             Map.entry("StowArm", new Arm2PosStow(ArmPositions.STOW)),
             Map.entry("Wait1", new WaitCommand(1)),
-            Map.entry("AutoDriveOntoChargeStation", new AutoDriveOntoChargeStationforwards())
+            Map.entry("AutoDriveOntoChargeStation", new AutoDriveOntoChargeStationforwards()),
+            Map.entry("AutoDriveOntoChargeStationBack", new AutoDriveOntoChargeStation()),
+            Map.entry("OtherCollect",new SetSpatulaVoltageAndPos(-12, 0).alongWith(new Arm2PosStow(ArmPositions.STOW))),
+            Map.entry("OtherIntakeIn",new SetSpatulaVoltageAndPos(-0.5, 0.34))
             ));
 
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
@@ -82,7 +86,7 @@ public final class PathPlannerAutos {
     }
 
     public static CommandBase PlaceConeAndBalanceAndCommunity() {
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStationMoveAndGoOutsideCommunity", new PathConstraints(2, 1)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStationMoveAndGoOutsideCommunity", new PathConstraints(3, 2)));
     }
     public static CommandBase PlaceConeAndMoveBackBottom() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("MoveAndGrabConeBottom", new PathConstraints(2, 1)));
@@ -113,11 +117,13 @@ public final class PathPlannerAutos {
     }
 
     public static CommandBase ConHigConHigBal() {
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ConHigConHigBal", new PathConstraints(4, 3)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ConHigConHigBal", new PathConstraints(5, 3)));
     }
 
     
-    
+    public static CommandBase GetOutOfDaWay() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("GetOutOfDaWay", new PathConstraints(4, 3)));
+    }
     private PathPlannerAutos() {
         throw new UnsupportedOperationException("This is a utility class!");
     }

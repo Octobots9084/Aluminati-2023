@@ -37,7 +37,7 @@
         "x": 5.038631957605795,
         "y": 4.750373945192335
       },
-      "holonomicAngle": -7.90716270295835,
+      "holonomicAngle": 180.0,
       "isReversal": false,
       "velOverride": 1.0,
       "isLocked": false,
@@ -112,20 +112,50 @@
         "x": 2.106544698107932,
         "y": 1.8182378162216326
       },
-      "nextControl": null,
+      "nextControl": {
+        "x": 2.106544698107932,
+        "y": 1.841108732148917
+      },
       "holonomicAngle": 180.0,
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "AutoDriveOntoChargeStationBack"
+        ],
         "executionBehavior": "sequential",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 2.152286529965356,
+        "y": 1.8296732741824968
+      },
+      "prevControl": {
+        "x": 2.129415614036644,
+        "y": 1.8353910031657068
+      },
+      "nextControl": null,
+      "holonomicAngle": 0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
       }
     }
   ],
+  "maxVelocity": 5.0,
+  "maxAcceleration": 4.0,
+  "isReversed": null,
   "markers": [
     {
       "position": 0.5236363636363778,

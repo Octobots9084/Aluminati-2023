@@ -33,6 +33,7 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Robot;
+import frc.robot.commands.swerve.SwerveControl;
 import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
 import frc.robot.util.Gyro;
@@ -76,6 +77,8 @@ public class DriveTrain extends SubsystemBase {
     private double turnSpeedP = 0.05;
     private double minTurnSpeed = 0.42;
     private PIDController daController;
+    private double previousRot = 0;
+    public double previousXSpeed = 0;
 
     private final HolonomicDriveController holonomicDriveController;
 
@@ -132,13 +135,26 @@ public class DriveTrain extends SubsystemBase {
     * @param fieldRelative Whether the provided x and y speeds are relative to the field.
     */
     public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
+        
         SmartDashboard.putNumber("xSpeed", xSpeed);
         //driver assist """implementation"""
+        
         if (useDriverAssist) {
-            this.targetRotationAngle = targetRotationAngle + (Math.toDegrees(rot) * .02);
+            
             //SmartDashboard.putNumber("controt", rot);
-
-            rot = getRotationSpeed();
+            if (!MathUtil.isWithinTolerance(rot,0,0.01) && SwerveControl.hasTurnControl) {
+                this.setTargetRotationAngle(gyro.getUnwrappedAngle());
+                previousRot = rot;
+                
+            } else {
+                if (MathUtil.isWithinTolerance(rot, 0, 0.01)&&!MathUtil.isWithinTolerance(previousRot,0,0.01)) {
+                    this.setTargetRotationAngle(gyro.getUnwrappedAngle());
+                    previousRot = rot;
+                }
+                rot = getRotationSpeed();
+            }
+            SmartDashboard.putNumber("rot", rot);
+            
             //SmartDashboard.putNumber("darot", rot);
             }
         // Calculate swerve states
@@ -158,6 +174,8 @@ public class DriveTrain extends SubsystemBase {
                 swerveModules[i].setDesiredState(swerveModuleStates[i]);
             }
         }
+
+        previousXSpeed = xSpeed;
 
     }
 

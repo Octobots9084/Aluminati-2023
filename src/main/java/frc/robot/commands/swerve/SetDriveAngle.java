@@ -16,6 +16,7 @@ public class SetDriveAngle extends CommandBase {
     private final double angle;
     private double startTime;
     private double currentTime;
+    private double targetRotationAngle;
 
     public SetDriveAngle(double angle) {
         this.dt = DriveTrain.getInstance();
@@ -27,10 +28,7 @@ public class SetDriveAngle extends CommandBase {
     @Override
     public void initialize() {
         this.startTime = Timer.getFPGATimestamp();
-    }
-    @Override
-    public void execute() {
-        this.currentTime = Timer.getFPGATimestamp();
+        
         double gyroUnwrappedAngle = Gyro.getInstance().getUnwrappedAngle();
         double diff = MathUtil.wrapToCircle(angle) - MathUtil.wrapToCircle(gyroUnwrappedAngle);
 
@@ -38,16 +36,25 @@ public class SetDriveAngle extends CommandBase {
             diff = -Math.signum(diff)*360 + diff;
         }
 
-        dt.setTargetRotationAngle(gyroUnwrappedAngle+diff);
+        this.targetRotationAngle = gyroUnwrappedAngle+diff;
+
+        SwerveControl.hasTurnControl = false;
+
+        
+    }
+    @Override
+    public void execute() {
+        this.currentTime = Timer.getFPGATimestamp();
+        dt.setTargetRotationAngle(this.targetRotationAngle);
     }
 
     @Override
     public boolean isFinished() {
-        if (Math.abs(dt.getRotationSpeed())<0.1 && !MathUtil.isWithinTolerance(startTime, currentTime, 0.1)) {
+        if (MathUtil.isWithinTolerance(Gyro.getInstance().getUnwrappedAngle(), dt.getTargetRotationAngle(),1)) {
+            SwerveControl.hasTurnControl = true;
             return true;
-        }
-
-        if (!MathUtil.isWithinTolerance(startTime, currentTime, 0.5)) {
+        }        if (!MathUtil.isWithinTolerance(startTime, currentTime, 0.5)) {
+            SwerveControl.hasTurnControl = true;
             return true;
         }
         return false;

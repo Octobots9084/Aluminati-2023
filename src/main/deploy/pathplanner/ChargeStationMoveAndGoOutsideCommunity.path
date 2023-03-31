@@ -74,8 +74,23 @@
       }
     }
   ],
-  "maxVelocity": 4.0,
-  "maxAcceleration": 3.0,
+  "maxVelocity": 3.0,
+  "maxAcceleration": 2.0,
   "isReversed": null,
-  "markers": []
+  "markers": [
+    {
+      "position": 0.6690909090908876,
+      "names": [
+        "event",
+        "OtherCollect"
+      ]
+    },
+    {
+      "position": 1.5127272727272736,
+      "names": [
+        "event",
+        "OtherIntakeIn"
+      ]
+    }
+  ]
 }

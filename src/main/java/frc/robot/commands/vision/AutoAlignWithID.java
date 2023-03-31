@@ -57,7 +57,7 @@ public class AutoAlignWithID extends CommandBase {
                 CommandScheduler.getInstance().schedule(new SetDriveAngle(180));
                 SmartDashboard.putNumber("Y_SPED", ySpeed);
 
-                driveTrain.drive(0, ySpeed, 0, true);
+                driveTrain.drive(driveTrain.previousXSpeed, ySpeed, 0, true);
             }
         } catch (Exception e) {
             //

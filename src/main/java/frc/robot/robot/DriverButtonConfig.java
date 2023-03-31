@@ -113,8 +113,8 @@ public class DriverButtonConfig {
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 10)
 				.onTrue(new ConeInjectMid().alongWith(new SetSpatulaVoltageAndPos(0, 0.34)));
 
-		// new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 11)
-		// 		.onTrue(new CubeInject());
+		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 11)
+				.onTrue(new MoveArmToPositionGoingUp(ArmPositions.AUTO_ALIGN));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 12)
 				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.STOW).alongWith(new SetSpatulaVoltageAndPos(-0.5, 0.34)));

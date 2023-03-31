@@ -33,6 +33,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.arm.ParallalMoveArm;
 import frc.robot.commands.arm.manual.ArmControl;
 import frc.robot.commands.arm.manual.TiltControl;
+import frc.robot.commands.spatula.SetSpatulaVoltageAndPos;
 import frc.robot.commands.swerve.SwerveControl;
 import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.robot.ButtonConfig;
@@ -203,5 +204,6 @@ public class Robot extends TimedRobot {
         CommandScheduler.getInstance().setDefaultCommand(DriveTrain.getInstance(), new SwerveControl());
         CommandScheduler.getInstance().setDefaultCommand(CaliGirls.getInstance(), new TiltControl());
         CommandScheduler.getInstance().setDefaultCommand(ArmExtension.getInstance(), new ArmControl());
+        CommandScheduler.getInstance().schedule(new SetSpatulaVoltageAndPos(0, 0.34));
     }
 }
