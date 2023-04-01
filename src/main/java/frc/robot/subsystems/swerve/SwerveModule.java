@@ -106,6 +106,7 @@ public class SwerveModule {
         this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
         this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
         this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
+        this.steeringMotor.setCANTimeout(1000);
 
 
         try {

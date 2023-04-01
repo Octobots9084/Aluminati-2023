@@ -40,7 +40,6 @@ import frc.robot.robot.ButtonConfig;
 import frc.robot.robot.ControlMap;
 import frc.robot.robot.DriverButtonConfig;
 import frc.robot.robot.Logging;
-import frc.robot.subsystems.Light;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
@@ -184,7 +183,6 @@ public class Robot extends TimedRobot {
         ArmExtension.getInstance();
         Roller.getInstance();
         Logging.getInstance();
-        Light.getInstance();
         SpatulaFlip.getInstance();
         RollingPins.getInstance();
         new ParallalMoveArm(ArmPositions.STOW);

@@ -21,7 +21,6 @@ import frc.robot.commands.swerve.SetDriverAssist;
 import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.commands.vision.AutoAlign;
 import frc.robot.commands.vision.AutoAlignWithID;
-import frc.robot.subsystems.Light;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.util.PoseFinder;
 
@@ -121,18 +120,6 @@ public class ButtonConfig {
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 12)
 				.onTrue(new ConeInjectHigh());
-
-		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
-				.onTrue(new InstantCommand(() -> Light.getInstance().setStrobeAnimationPurple()));
-
-		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 14)
-				.onTrue(new InstantCommand(() -> Light.getInstance().setStrobeAnimationYellow()));
-
-		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
-				.onFalse(new InstantCommand(() -> Light.getInstance().setStrobeAnimationRed()));
-
-		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 14)
-				.onFalse(new InstantCommand(() -> Light.getInstance().setStrobeAnimationRed()));
 
 		//Switch 15 reserved for manual override
 

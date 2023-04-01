@@ -29,6 +29,7 @@ public class RollingPins {
         this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
         this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
         this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
+        this.motor.setCANTimeout(1000);
         
     }
 

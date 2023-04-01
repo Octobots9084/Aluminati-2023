@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.advanced.CollectCone;
 import frc.robot.commands.advanced.CollectConeSubstation;
+import frc.robot.commands.arm.basic.MoveArmExtensionToPos;
 import frc.robot.commands.arm.intake.advanced.ConeInjectHigh;
 import frc.robot.commands.arm.intake.advanced.ConeInjectMid;
 import frc.robot.commands.arm.intake.advanced.CubeInjectHigh;
@@ -26,7 +27,6 @@ import frc.robot.commands.swerve.SetDriverAssist;
 import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.commands.vision.AutoAlign;
 import frc.robot.commands.vision.AutoAlignWithID;
-import frc.robot.subsystems.Light;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.spatula.RollingPins;
 import frc.robot.subsystems.spatula.SpatulaFlip;
@@ -93,7 +93,7 @@ public class DriverButtonConfig {
 				.onTrue(new CollectConeSubstation().alongWith(new SetSpatulaVoltageAndPos(0, 0.36)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 3)
-				.onTrue(new SetSpatulaVoltageAndPos(-0.5, 0.36).alongWith(new Arm2PosStow(ArmPositions.DRIVE_POSITION)));
+				.onTrue(new SetSpatulaVoltageAndPos(-0.5, 0.36).alongWith(new MoveArmToPositionGoingDown(ArmPositions.DRIVE_POSITION)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 5)
 				.onTrue(new SetSpatulaVoltageAndPos(0, 0.1).alongWith(new WaitCommand(0.1)).andThen(new SetSpatulaVoltageAndPos(4, 0.1)).andThen(new WaitCommand(0.3)).andThen(new SetSpatulaVoltageAndPos(0, 0.36)));
@@ -119,17 +119,7 @@ public class DriverButtonConfig {
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 12)
 				.onTrue(new MoveArmToPositionGoingDown(ArmPositions.STOW).alongWith(new SetSpatulaVoltageAndPos(-0.5, 0.36)));
 
-		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
-				.onTrue(new InstantCommand(() -> Light.getInstance().setStrobeAnimationPurple()));
 
-		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 14)
-				.onTrue(new InstantCommand(() -> Light.getInstance().setStrobeAnimationYellow()));
-
-		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
-				.onFalse(new InstantCommand(() -> Light.getInstance().setStrobeAnimationRed()));
-
-		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 14)
-				.onFalse(new InstantCommand(() -> Light.getInstance().setStrobeAnimationRed()));
 
 		//Switch 15 reserved for manual override
 

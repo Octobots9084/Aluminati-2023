@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 import com.revrobotics.SparkMaxPIDController;
 import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
@@ -37,6 +38,14 @@ public class SpatulaFlip extends SubsystemBase {
         pidControllerSpatula.setFF(Tuning.SPATULA_PID.getF());
         pidControllerSpatula.setOutputRange(-1.0, 1.0);
 
+        this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);
+        this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 255);
+        this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 255);
+        this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 255);
+        this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
+        this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
+        this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
+        this.spatulaMotor.setCANTimeout(1000);
         //Spatula Angle Position
         this.lastPosSpatula = 0.15;
         spatulaMotor.setInverted(true);
