@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.advanced.CollectCone;
 import frc.robot.commands.advanced.CollectConeSubstation;
 import frc.robot.commands.arm.basic.MoveArmExtensionToPos;
+import frc.robot.commands.arm.basic.MoveArmRotationToPos;
+import frc.robot.commands.arm.basic.MoveArmWristToPos;
 import frc.robot.commands.arm.intake.advanced.ConeInjectHigh;
 import frc.robot.commands.arm.intake.advanced.ConeInjectMid;
 import frc.robot.commands.arm.intake.advanced.CubeInjectHigh;
@@ -28,6 +30,7 @@ import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.commands.vision.AutoAlign;
 import frc.robot.commands.vision.AutoAlignWithID;
 import frc.robot.subsystems.arm.ArmPositions;
+import frc.robot.subsystems.arm.CaliGirls;
 import frc.robot.subsystems.spatula.RollingPins;
 import frc.robot.subsystems.spatula.SpatulaFlip;
 import frc.robot.util.PoseFinder;
@@ -93,7 +96,7 @@ public class DriverButtonConfig {
 				.onTrue(new CollectConeSubstation().alongWith(new SetSpatulaVoltageAndPos(0, 0.36)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 3)
-				.onTrue(new SetSpatulaVoltageAndPos(-0.5, 0.36).alongWith(new MoveArmToPositionGoingDown(ArmPositions.DRIVE_POSITION)));
+				.onTrue(new SetSpatulaVoltageAndPos(-0.5, 0.36).andThen(new MoveArmExtensionToPos(0.0)).andThen(new MoveArmWristToPos(ArmPositions.PRE_DRIVE_POSITION.wrist)).andThen(new MoveArmRotationToPos(ArmPositions.PRE_DRIVE_POSITION.armAngle, CaliGirls.getInstance().getBottomKf())).alongWith(new WaitCommand(0.3)).andThen(new MoveArmWristToPos(ArmPositions.DRIVE_POSITION.wrist)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 5)
 				.onTrue(new SetSpatulaVoltageAndPos(0, 0.1).alongWith(new WaitCommand(0.1)).andThen(new SetSpatulaVoltageAndPos(4, 0.1)).andThen(new WaitCommand(0.3)).andThen(new SetSpatulaVoltageAndPos(0, 0.36)));
