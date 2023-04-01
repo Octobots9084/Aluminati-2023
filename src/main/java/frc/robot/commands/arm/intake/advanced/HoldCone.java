@@ -7,6 +7,6 @@ import frc.robot.subsystems.arm.ArmPositions;
 public class HoldCone extends SequentialCommandGroup{
 
     public HoldCone() {
-        addCommands(new MoveArmToPositionGoingDown(ArmPositions.DRIVE_WITH_PIECE), new IntakeIn());
+        addCommands(new MoveArmToPositionGoingDown(ArmPositions.STOW), new IntakeIn());
     }
 }

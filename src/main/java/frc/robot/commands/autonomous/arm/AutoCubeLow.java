@@ -18,8 +18,8 @@ public class AutoCubeLow extends SequentialCommandGroup{
     ArmExtension armExtension;
 
     public AutoCubeLow() {
-        this.aPosition = ArmPositions.CONE_INTAKE_GROUND;
-        this.drivePosition = ArmPositions.DRIVE_WITH_PIECE;
+        this.aPosition = ArmPositions.INTAKE_GROUND;
+        this.drivePosition = ArmPositions.STOW;
         this.caliGirls = CaliGirls.getInstance();
         this.armExtension = ArmExtension.getInstance();
         addCommands(new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension),

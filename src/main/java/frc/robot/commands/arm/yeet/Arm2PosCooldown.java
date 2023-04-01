@@ -22,7 +22,7 @@ public class Arm2PosCooldown extends SequentialCommandGroup {
                 new SetWristAngle(aPosition.wrist),
                 new SetArmExtension(aPosition.extension),
                 new WaitCommand(0.4),
-                new SetArmAngle(ArmPositions.DRIVE_WITH_PIECE.armAngle, ArmPositions.DRIVE_WITH_PIECE.armAngle),
+                new SetArmAngle(ArmPositions.STOW.armAngle, ArmPositions.STOW.armAngle),
                 new WaitCommand(0.1),
                 new Arm2PosStow(aPosition));
 

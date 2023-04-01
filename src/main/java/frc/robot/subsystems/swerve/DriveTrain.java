@@ -30,7 +30,10 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
+import frc.robot.commands.swerve.SwerveControl;
 import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
 import frc.robot.util.Gyro;
@@ -59,7 +62,7 @@ public class DriveTrain extends SubsystemBase {
     public static double MAX_TURN_SPEED = 10;
     public static double TOLERANCE = 1.5;
     //Module Mappings / Measurements
-    private static final double WHEEL_DIST_TO_CENTER = 0.29; //m
+    private static final double WHEEL_DIST_TO_CENTER = 0.3115; //m
 
     private final Gyro gyro;
     //Modules
@@ -74,6 +77,8 @@ public class DriveTrain extends SubsystemBase {
     private double turnSpeedP = 0.05;
     private double minTurnSpeed = 0.42;
     private PIDController daController;
+    private double previousRot = 0;
+    public double previousXSpeed = 0;
 
     private final HolonomicDriveController holonomicDriveController;
 
@@ -81,12 +86,17 @@ public class DriveTrain extends SubsystemBase {
     private final PoseEstimator swerveDrivePoseEstimator;
 
     private DriveTrain() {
-        this.daController = new PIDController(0.09, 0, 0);
+        this.daController = new PIDController(0.1, 0.0001, 0);
         //Position relative to center of robot -> (0,0) is the center (m)
-        swervePosition[0] = new Translation2d(-WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
-        swervePosition[1] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
-        swervePosition[2] = new Translation2d(WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
-        swervePosition[3] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
+        // swervePosition[0] = new Translation2d(WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
+        // swervePosition[1] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
+        // swervePosition[2] = new Translation2d(-WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
+        // swervePosition[3] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
+
+        swervePosition[0] = new Translation2d(WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
+        swervePosition[1] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
+        swervePosition[2] = new Translation2d(-WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
+        swervePosition[3] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
         
 
         swerveModules[0] = new SwerveModule(MotorIDs.FRONT_LEFT_DRIVE, MotorIDs.FRONT_LEFT_STEER, false,
@@ -125,22 +135,37 @@ public class DriveTrain extends SubsystemBase {
     * @param fieldRelative Whether the provided x and y speeds are relative to the field.
     */
     public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
-        //driver assist """implimentation"""
+        
+        // SmartDashboard.putNumber("xSpeed", xSpeed);
+        //driver assist """implementation"""
+        
         if (useDriverAssist) {
-            this.targetRotationAngle = targetRotationAngle + (Math.toDegrees(rot) * .02);
-            rot = getRotationSpeed();
             
+            //SmartDashboard.putNumber("controt", rot);
+            if (!MathUtil.isWithinTolerance(rot,0,0.01) && SwerveControl.hasTurnControl) {
+                this.setTargetRotationAngle(gyro.getUnwrappedAngle());
+                previousRot = rot;
+                
+            } else {
+                if (MathUtil.isWithinTolerance(rot, 0, 0.01)&&!MathUtil.isWithinTolerance(previousRot,0,0.01)) {
+                    this.setTargetRotationAngle(gyro.getUnwrappedAngle());
+                    previousRot = rot;
+                }
+                rot = getRotationSpeed();
+            }
+            //SmartDashboard.putNumber("rot", rot);
             
-        }
+            //SmartDashboard.putNumber("darot", rot);
+            }
         // Calculate swerve states
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(
-                fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, -rot, gyro.getRotation2d())
+                fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, gyro.getRotation2d())
                         : new ChassisSpeeds(xSpeed, ySpeed, rot));
 
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, MAX_SPEED);
 
         // Set states
-        if (Math.abs(xSpeed) <= 0.01 && Math.abs(ySpeed) <= 0.01 && rot == 0) {
+        if (Math.abs(xSpeed) <= 0.01 && Math.abs(ySpeed) <= 0.01 && Math.abs(rot) <= 0.2) {
             for (int i = 0; i < swerveModuleStates.length; i++) {
                 swerveModules[i].setDesiredState(new SwerveModuleState(0, new Rotation2d(0/*swerveModules[i].getAngle()*/)), true);
             }
@@ -149,6 +174,8 @@ public class DriveTrain extends SubsystemBase {
                 swerveModules[i].setDesiredState(swerveModuleStates[i]);
             }
         }
+
+        previousXSpeed = xSpeed;
 
     }
 
@@ -162,7 +189,7 @@ public class DriveTrain extends SubsystemBase {
         // driveDashboard.setEntry("Rot Path", chassisSpeeds.omegaRadiansPerSecond);
 
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(new ChassisSpeeds(
-            chassisSpeeds.vxMetersPerSecond,chassisSpeeds.vyMetersPerSecond, -chassisSpeeds.omegaRadiansPerSecond));
+            chassisSpeeds.vxMetersPerSecond,chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond));
         SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, MAX_SPEED);
         for (int i = 0; i < swerveModuleStates.length; i++) {
             swerveModules[i].setDesiredState(swerveModuleStates[i]);
@@ -182,17 +209,45 @@ public class DriveTrain extends SubsystemBase {
         return this.getPoseEstimator().getRobotPose();
     }
 
+    public Pose2d getPose2dPathplanner() {
+        return new Pose2d(0,0, gyro.getUnwrappedRotation2d());
+    }
+    public void resetPosePathplanner(Pose2d pose2d) {
+    }
+
     public double getRotationSpeed() {
         double gyroAngle = gyro.getUnwrappedAngle();
         // if (MathUtil.isWithinTolerance(gyroAngle, targetRotationAngle, TOLERANCE)) {
         //     return 0.0;
         // }
         double targetAngle = targetRotationAngle;
-        var diff = gyroAngle-targetAngle;
+
+        double otherDiff = gyroAngle-(targetAngle+360);
+        double diff = gyroAngle-targetAngle;
+        if (Math.abs(diff)>Math.abs(otherDiff)) {
+            diff = otherDiff;
+        }
         
         double vel = daController.calculate(diff);
         if (MathUtil.isWithinTolerance(diff, 0, 0.03));
+        if (vel > 5) {
+            vel = 5;
+        }
         return vel;
+    }
+    public double getShortestRotationDiff() {
+        double gyroAngle = gyro.getUnwrappedAngle();
+        // if (MathUtil.isWithinTolerance(gyroAngle, targetRotationAngle, TOLERANCE)) {
+        //     return 0.0;
+        // }
+        double targetAngle = targetRotationAngle;
+
+        double otherDiff = gyroAngle-(targetAngle+360);
+        double diff = gyroAngle-targetAngle;
+        if (Math.abs(diff)>Math.abs(otherDiff)) {
+            diff = otherDiff;
+        }
+        return diff;
     }
 
     public void setSwerveModuleAngle(double angle) {
@@ -201,6 +256,7 @@ public class DriveTrain extends SubsystemBase {
             m.setDesiredState(new SwerveModuleState(0, new Rotation2d(angle)));
         }
     }
+    
 
     public void setSwerveModuleVelocity(double vel) {
         for (var m : swerveModules) {

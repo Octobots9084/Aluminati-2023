@@ -3,6 +3,7 @@ package frc.robot.subsystems.arm;
 import com.revrobotics.CANSparkMax;
 import frc.robot.robot.MotorIDs;
 import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 public class Roller {
     private static Roller INSTANCE;
 
@@ -19,7 +20,16 @@ public class Roller {
 
     public Roller() {
         this.motor = new CANSparkMax(MotorIDs.ARM_ROLLER, CANSparkMaxLowLevel.MotorType.kBrushless);
-        this.motor.setSmartCurrentLimit(30, 30);
+        this.motor.setSmartCurrentLimit(20, 35);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 255);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 255);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 255);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
+        this.motor.setCANTimeout(1000);
+        
     }
 
     public void SetItemMode(boolean itemMode) {
@@ -27,7 +37,7 @@ public class Roller {
     }
 
     public boolean getItemMode() {
-        return itemMode;
+        return this.itemMode;
     }
 
     public void setRollerVoltage(double v) {

@@ -18,9 +18,9 @@ public class SmartEject extends InstantCommand{
     public void initialize() {
         this.itemMode = roller.getItemMode();
         if (itemMode) {
-            CommandScheduler.getInstance().schedule(new ConeInject());
+            CommandScheduler.getInstance().schedule(new ConeInjectHigh());
         } else {
-            CommandScheduler.getInstance().schedule(new CubeInject());
+            CommandScheduler.getInstance().schedule(new CubeInjectMid());
         }
     }
 

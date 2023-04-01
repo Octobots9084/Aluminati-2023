@@ -2,6 +2,7 @@ package frc.robot.commands.arm.yeet;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.arm.basic.MoveArmRotationToPos;
 import frc.robot.commands.arm.basic.SetArmAngle;
 import frc.robot.commands.arm.basic.SetArmExtension;
 import frc.robot.commands.arm.basic.SetWristAngle;
@@ -20,8 +21,8 @@ public class Arm2PosFull extends SequentialCommandGroup {
         this.armExtension = ArmExtension.getInstance();
         addCommands(
                 new SetWristAngle(aPosition.wrist),
-                new SetArmAngle(aPosition.armAngle, aPosition.armAngle),
-                new WaitCommand(0.5),
+                new MoveArmRotationToPos(aPosition.armAngle, aPosition.armAngle),
+                new WaitCommand(0),
                 new SetArmExtension(aPosition.extension));
 
     }

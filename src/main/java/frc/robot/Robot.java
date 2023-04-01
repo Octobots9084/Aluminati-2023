@@ -33,22 +33,29 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.arm.ParallalMoveArm;
 import frc.robot.commands.arm.manual.ArmControl;
 import frc.robot.commands.arm.manual.TiltControl;
+import frc.robot.commands.spatula.SetSpatulaVoltageAndPos;
 import frc.robot.commands.swerve.SwerveControl;
+import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.robot.ButtonConfig;
 import frc.robot.robot.ControlMap;
 import frc.robot.robot.DriverButtonConfig;
 import frc.robot.robot.Logging;
-import frc.robot.subsystems.Light;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
 import frc.robot.subsystems.arm.Roller;
+import frc.robot.subsystems.spatula.RollingPins;
+import frc.robot.subsystems.spatula.SpatulaFlip;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 
 public class Robot extends TimedRobot {
     public static double autoStartTime = 0.0;
-    private boolean autoFlag = false;
+    private static boolean autoFlag = false;
+
+    public static boolean isAutoFlag() {
+        return autoFlag;
+    }
 
     @Override
     public void disabledPeriodic() {
@@ -67,7 +74,6 @@ public class Robot extends TimedRobot {
     public void robotInit() {
 
         initializeAllSubsystems();
-        initializeDefaultCommands();
 
         // var drive = Shuffleboard.getTab("Drive");
         // drive.add(field2d)
@@ -88,42 +94,45 @@ public class Robot extends TimedRobot {
 
     @Override
     public void robotPeriodic() {
-        SmartDashboard.putNumber("X-Pos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getX());
-        SmartDashboard.putNumber("Y-Pos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getY());
-        SmartDashboard.putNumber("Rot Deg",
-                DriveTrain.getInstance().getPoseEstimator().getRobotPose().getRotation().getDegrees());
+        // SmartDashboard.putNumber("X-Pos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getX());
+        // SmartDashboard.putNumber("Y-Pos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getY());
+        // SmartDashboard.putNumber("Rot Deg",
+        // DriveTrain.getInstance().getPoseEstimator().getRobotPose().getRotation().getDegrees());
     }
 
     @Override
     public void teleopPeriodic() {
         DriveTrain.getInstance().updateSwerveStates();
         CommandScheduler.getInstance().run();
-        Logging.updateLogging();
 
-        // Logging.updateLogging();
+        Logging.updateLogging();
     }
 
     @Override
     public void teleopInit() {
-        SmartDashboard.putNumber("Initialized", 1);
-        SmartDashboard.putBoolean("14actual", ControlMap.DRIVER_BUTTONS.getRawButton(14));
+        // SmartDashboard.putNumber("Initialized", 1);
+        // SmartDashboard.putBoolean("14actual", ControlMap.DRIVER_BUTTONS.getRawButton(14));
         if (!ControlMap.DRIVER_BUTTONS.getRawButton(14)) {
-            SmartDashboard.putBoolean("14", true);
+            // SmartDashboard.putBoolean("14", true);
             new DriverButtonConfig().initTeleop();
         } else {
-            SmartDashboard.putBoolean("14", false);
+            // SmartDashboard.putBoolean("14", false);
             new ButtonConfig().initTeleop();
         }
         CommandScheduler.getInstance().cancelAll();
         initializeAllSubsystems();
+        DriveTrain.getInstance().setUseDriverAssist(false);
         initializeDefaultCommands();
         ArmExtension.getInstance().setOffset();
         if (!autoFlag) {
             resetRobotPoseAndGyro();
         }
         this.autoFlag = false;
+        DriveTrain.getInstance().setUseDriverAssist(true);
+        Gyro.getInstance().setAngleAdjustment(180);
 
-        Logging.updateLogging();
+        //DriveTrain.getInstance().getPoseEstimator().useAprilTags.set(true);
+
 
     }
 
@@ -132,14 +141,16 @@ public class Robot extends TimedRobot {
         this.autoFlag = true;
         initializeAllSubsystems();
 
-        resetRobotPoseAndGyro();
+        
         //new driveToPos(new Pose2d(14.16, 1.4, new Rotation2d()));
         //CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
         // CommandScheduler.getInstance().schedule(PathPlannerAutos.TestAutoOne());
         //CommandScheduler.getInstance().schedule(new driveToPos(new Pose2d(0.0, FieldConstants.length/2, new Rotation2d(0,0))));
 
         Robot.autoStartTime = Timer.getFPGATimestamp();
-
+        Gyro.getInstance().setAngleAdjustment(0);
+        Gyro.getInstance().resetGyro();
+        // DriveTrain.getInstance().setUseDriverAssist(true);
         try {
             var command = Logging.getAutoChooser().getSelected();
             if (command != null) {
@@ -153,7 +164,9 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousPeriodic() {
+        DriveTrain.getInstance().getPoseEstimator().updateOdometry();
         CommandScheduler.getInstance().run();
+        Logging.updateLogging();
     }
 
     @Override
@@ -170,23 +183,25 @@ public class Robot extends TimedRobot {
         ArmExtension.getInstance();
         Roller.getInstance();
         Logging.getInstance();
-        Light.getInstance();
-        new ParallalMoveArm(ArmPositions.DRIVE_WITH_PIECE);
+        SpatulaFlip.getInstance();
+        RollingPins.getInstance();
+        new ParallalMoveArm(ArmPositions.STOW);
     }
 
     private void resetRobotPoseAndGyro() {
         Gyro.getInstance().resetGyro();
         DriveTrain.getInstance().setTargetRotationAngle(0);
-        DriveTrain.getInstance().drive(0, 0, 0, true);
+        // DriveTrain.getInstance().drive(0, 0, 0, true);
         DriveTrain.getInstance().getPoseEstimator().resetPose(new Pose2d(0,0, new Rotation2d()));
     }
 
     private void initializeDefaultCommands() {
-        CaliGirls.getInstance().lastPosBottom = ArmPositions.DRIVE_WITH_PIECE.armAngle;
-        CaliGirls.getInstance().lastPosTop = ArmPositions.DRIVE_WITH_PIECE.wrist;
-        ArmExtension.getInstance().lastpos = ArmPositions.DRIVE_WITH_PIECE.extension;
+        CaliGirls.getInstance().lastPosBottom = ArmPositions.STOW.armAngle;
+        CaliGirls.getInstance().lastPosTop = ArmPositions.STOW.wrist;
+        ArmExtension.getInstance().lastpos = ArmPositions.STOW.extension;
         CommandScheduler.getInstance().setDefaultCommand(DriveTrain.getInstance(), new SwerveControl());
         CommandScheduler.getInstance().setDefaultCommand(CaliGirls.getInstance(), new TiltControl());
         CommandScheduler.getInstance().setDefaultCommand(ArmExtension.getInstance(), new ArmControl());
+        CommandScheduler.getInstance().schedule(new SetSpatulaVoltageAndPos(0, 0.34));
     }
 }

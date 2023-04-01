@@ -4,6 +4,7 @@ package frc.robot.subsystems.arm;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 import com.revrobotics.SparkMaxPIDController;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -16,7 +17,7 @@ public class ArmExtension extends SubsystemBase {
     private static ArmExtension armExtension;
     public SparkMaxPIDController pidController;
     //gear reduction 1:25
-    private double gearing = 1.0 / 1.0;
+    private double gearing = 15.0 / 15.0;
     public double lastpos = 0;
 
     public static ArmExtension getInstance() {
@@ -38,6 +39,14 @@ public class ArmExtension extends SubsystemBase {
         MotorUtil.setupSmartMotion(null, Tuning.EXTENSION_PID, Tuning.EXTENSION_SM, 1, motor);
         pidController.setPositionPIDWrappingEnabled(false);
         motor.setInverted(true);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 255);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 255);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 255);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
+        this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
+        this.motor.setCANTimeout(1000);
     }
 
     public void setOffset() {
@@ -46,8 +55,8 @@ public class ArmExtension extends SubsystemBase {
     }
 
     public void setPosition(double position, boolean override) {
-        if (position > 78 && !override) {
-            position = 78;
+        if (position > 75 && !override) {
+            position = 75;
         }
         if (position < 0 && !override) {
             position = 0;
@@ -58,7 +67,7 @@ public class ArmExtension extends SubsystemBase {
     }
 
     public double getPosition() {
-        return motor.getEncoder().getPosition();
+        return motor.getEncoder().getPosition() / gearing;
     }
 
     public void zeroArm() {

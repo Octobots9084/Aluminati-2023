@@ -2,13 +2,13 @@
   "waypoints": [
     {
       "anchorPoint": {
-        "x": 2.0,
-        "y": 3.0
+        "x": 1.7863518751288567,
+        "y": 2.996089986473838
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.999999999999999,
-        "y": 3.0
+        "x": 2.7863518751288563,
+        "y": 2.996089986473838
       },
       "holonomicAngle": 180.0,
       "isReversal": false,
@@ -26,26 +26,24 @@
     },
     {
       "anchorPoint": {
-        "x": 6.2004386490941314,
-        "y": 3.0
+        "x": 6.92087250080349,
+        "y": 2.755945369237385
       },
       "prevControl": {
-        "x": 5.2004386490941314,
-        "y": 3.0
+        "x": 6.9094370428398495,
+        "y": 2.755945369237385
       },
       "nextControl": {
-        "x": 7.2004386490941314,
-        "y": 3.0
+        "x": 6.9094370428398495,
+        "y": 2.755945369237385
       },
       "holonomicAngle": 180.0,
-      "isReversal": false,
+      "isReversal": true,
       "velOverride": null,
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
-        "names": [
-          "BalanceChargeStation"
-        ],
+        "names": [],
         "executionBehavior": "sequential",
         "waitBehavior": "none",
         "waitTime": 0
@@ -53,12 +51,12 @@
     },
     {
       "anchorPoint": {
-        "x": 3.6,
-        "y": 3.0
+        "x": 3.970524346184213,
+        "y": 2.698768079419182
       },
       "prevControl": {
-        "x": 3.1113434839376812,
-        "y": 3.0
+        "x": 3.981959804147855,
+        "y": 2.698768079419182
       },
       "nextControl": null,
       "holonomicAngle": 180.0,
@@ -76,5 +74,23 @@
       }
     }
   ],
-  "markers": []
+  "maxVelocity": 3.0,
+  "maxAcceleration": 2.0,
+  "isReversed": null,
+  "markers": [
+    {
+      "position": 0.5963636363636311,
+      "names": [
+        "event",
+        "OtherCollect"
+      ]
+    },
+    {
+      "position": 1.4836363636362924,
+      "names": [
+        "event",
+        "OtherIntakeIn"
+      ]
+    }
+  ]
 }

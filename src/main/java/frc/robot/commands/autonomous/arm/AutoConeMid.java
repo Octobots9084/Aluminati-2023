@@ -21,7 +21,7 @@ public class AutoConeMid extends SequentialCommandGroup{
 
     public AutoConeMid() {
         this.aPosition = ArmPositions.PRE_CONE_PLACE_MID;
-        this.drivePosition = ArmPositions.DRIVE_WITH_PIECE;
+        this.drivePosition = ArmPositions.STOW;
         this.caliGirls = CaliGirls.getInstance();
         this.armExtension = ArmExtension.getInstance();
         addCommands(

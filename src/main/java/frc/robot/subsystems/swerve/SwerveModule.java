@@ -29,6 +29,7 @@ import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -43,9 +44,10 @@ import frc.robot.util.SwerveUtil;
 
 public class SwerveModule {
     // Physical Constants
-    private static final double WHEEL_RADIUS = 0.03915;
+    private static final double WHEEL_RADIUS = 0.038;
     private static final double ENCODER_RESOLUTION = 1;
     private static final double GEARING = 11.0 / 40.0;
+    //private static final double DRIVE_CONSTANT = 0.21736;
     private static final double GEARING_TURN_MOTORS = 1.0 / 1.0;
     private static final double STEER_MOTOR_TICK_TO_ANGLE = 2.0 * Math.PI / ENCODER_RESOLUTION / GEARING_TURN_MOTORS; // radians
     private static final double DRIVE_MOTOR_TICK_TO_METERS = (GEARING * 2.0 * Math.PI * WHEEL_RADIUS) / 2048.0;
@@ -78,8 +80,8 @@ public class SwerveModule {
         TM_SM_PID.setTolerance(0);
         this.steeringMotor.restoreFactoryDefaults();
         MotorUtil.setupSmartMotion(Type.kDutyCycle, TM_SM_PID, Tuning.TM_SM_CONFIG, ENCODER_RESOLUTION, steeringMotor);
-        this.steeringMotor.getAbsoluteEncoder(Type.kDutyCycle).setInverted(false);
-
+        this.steeringMotor.getAbsoluteEncoder(Type.kDutyCycle).setInverted(true);
+        this.steeringMotor.setInverted(true);
         // Initialize position of steering motor encoder to the same as the rio encoder
         // this.steeringMotor.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(zeroTicks);
 
@@ -97,6 +99,15 @@ public class SwerveModule {
         this.driveMotor.configStatorCurrentLimit(Tuning.DRIVE_STATOR_LIMIT); //How much current the motor can use (outputwise)
         this.driveMotor.configSupplyCurrentLimit(Tuning.DRIVE_SUPPLY_LIMIT); //How much current the supply can give (inputwise)
         this.steeringMotor.setSmartCurrentLimit(Tuning.TURN_MOTOR_STALL, Tuning.TURN_MOTOR_FREE);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 255);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 255);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 255);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
+        this.steeringMotor.setCANTimeout(1000);
+
 
         try {
             Thread.sleep(200);
@@ -115,7 +126,7 @@ public class SwerveModule {
 
     public SwerveModulePosition getModulePosition() {
         return new SwerveModulePosition(DRIVE_MOTOR_TICK_TO_METERS * this.getDriveTicks(),
-                new Rotation2d(this.getAngle() * -1));
+                new Rotation2d(this.getAngle()));
     }
 
     public double convertAngleToTick(double angleInRads) {

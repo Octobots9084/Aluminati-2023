@@ -1,11 +1,18 @@
 package frc.robot.robot;
 
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.autonomous.AutoDriveOntoChargeStation;
+import frc.robot.commands.autonomous.AutoDriveOntoChargeStationAndCommunity;
+import frc.robot.commands.autonomous.AutoDriveOntoChargeStationforwards;
+import frc.robot.commands.autonomous.BalanceChargeStation;
+import frc.robot.commands.autonomous.BalanceChargeStationAuto;
 import frc.robot.commands.autonomous.PathPlannerAutos;
 import frc.robot.commands.autonomous.arm.AutoConeTop;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.CaliGirls;
+import frc.robot.subsystems.spatula.SpatulaFlip;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 import frc.robot.util.shuffleboard.RSTab;
@@ -48,27 +55,47 @@ public class Logging {
     private void addAutoOptions() {
         //
         autoChooser.setDefaultOption("No Movement", new AutoConeTop());
-        // autoChooser.addOption("OneMeterSpin", PathPlannerAutos.OneMeterSpin());
-        autoChooser.addOption("Balance Charge Station", PathPlannerAutos.PlaceConeAndBalance());
-        autoChooser.addOption("Move and Grab Cone Bottom", PathPlannerAutos.PlaceConeAndMoveBackBottom());
-        autoChooser.addOption("Move and Grab Cone Top", PathPlannerAutos.PlaceConeAndMoveBackTop());
-        autoChooser.addOption("2 Cones", PathPlannerAutos.Place2Cone());
+        autoChooser.addOption("GetOutOfDaWay", PathPlannerAutos.GetOutOfDaWay());
+        // autoChooser.addOption("DONNOTUSEBalance Charge Station", PathPlannerAutos.PlaceConeAndBalance());
+        // autoChooser.addOption("Move and Grab Cone Bottom", PathPlannerAutos.PlaceConeAndMoveBackBottom());
+        // autoChooser.addOption("Move and Grab Cone Top", PathPlannerAutos.PlaceConeAndMoveBackTop());
+        // autoChooser.addOption("DONNOTUSE2 Cones", PathPlannerAutos.Place2Cone());
+
+        // autoChooser.addOption("DONNOTUSEthreedcCones", PathPlannerAutos.threedc2Cones());
+        // autoChooser.addOption("DONNOTUSEPlaceConeAndBalanceAndCommunity", PathPlannerAutos.PlaceConeAndBalanceAndCommunity());
+        // autoChooser.addOption("nALANCEv2", new AutoDriveOntoChargeStation());
+        autoChooser.addOption("AutoDriveOntoChargeStationAndCommunity", PathPlannerAutos.PlaceConeAndBalanceAndCommunity());
+        // autoChooser.addOption("Onemeter", PathPlannerAutos.Onemeter());
+        // autoChooser.addOption("square", PathPlannerAutos.square());
+        autoChooser.addOption("ConHigConHigBal", PathPlannerAutos.ConHigConHigBal());
+    
+        // autoChooser.addOption("DONOTUSEnALANCEv3", new AutoDriveOntoChargeStationAndCommunity());
+        
 
 
     }
 
     public static void updateLogging() {
-        //Drive
-        driveDashboard.setEntry("X-Pos", drive.getPoseEstimator().getRobotPose().getX());
-        driveDashboard.setEntry("Y-Pos", drive.getPoseEstimator().getRobotPose().getY());
-        driveDashboard.setEntry("Rot Deg", drive.getPoseEstimator().getRobotPose().getRotation().getDegrees());
+        // //Drive
+        // driveDashboard.setEntry("X-Pos", drive.getPoseEstimator().getRobotPose().getX());
+        // driveDashboard.setEntry("Y-Pos", drive.getPoseEstimator().getRobotPose().getY());
+        // driveDashboard.setEntry("Rot Deg", drive.getPoseEstimator().getRobotPose().getRotation().getDegrees());
 
-        driveDashboard.setEntry("Gyro Pitch", gyro.getRoll());
+        // // driveDashboard.setEntry("Gyro Pitch", gyro.getRoll());
 
-        //Arm
-        armDashboard.setEntry("Arm Extension", armExtension.getPosition());
+        // armDashboard.setEntry("spatula", SpatulaFlip.getInstance().getSpatulaPos());
+        // armDashboard.setEntry("spatula set", SpatulaFlip.getInstance().lastPosSpatula);
+        // // armDashboard.setEntry("spatula pos", SpatulaFlip.getInstance());
+        
+
+        // // //Arm
+        // armDashboard.setEntry("Arm Extension", armExtension.getPosition());
+        // armDashboard.setEntry("Ext Set", armExtension.lastpos);
         armDashboard.setEntry("Claw Rotation", caliGirls.getTopPos());
-        armDashboard.setEntry("Arm Rotation", caliGirls.getBottomPos());
+        // armDashboard.setEntry("Claw Set Rotation", caliGirls.lastPosTop);
+        armDashboard.setEntry("Arm Rotation", caliGirls.lastPosBottom);
+        // armDashboard.setEntry("Arm Real", caliGirls.getBottomPos());
+
 
     }
 

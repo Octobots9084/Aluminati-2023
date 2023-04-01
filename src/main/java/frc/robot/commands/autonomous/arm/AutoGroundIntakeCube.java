@@ -18,8 +18,8 @@ public class AutoGroundIntakeCube extends SequentialCommandGroup{
     ArmExtension armExtension;
 
     public AutoGroundIntakeCube() {
-        this.aPosition = ArmPositions.CUBE_INTAKE_FLOOR;
-        this.drivePosition = ArmPositions.DRIVE_WITH_PIECE;
+        this.aPosition = ArmPositions.DEPRECIATED_CUBE_INTAKE_FLOOR;
+        this.drivePosition = ArmPositions.STOW;
         this.caliGirls = CaliGirls.getInstance();
         addCommands(new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension), new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold),
         new IntakeIn(),

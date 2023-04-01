@@ -20,8 +20,8 @@ public class Arm2PosStow extends SequentialCommandGroup {
         this.armExtension = ArmExtension.getInstance();
         addCommands(
                     new SetArmExtension(aPosition.extension),
+                    new WaitCommand(.55),
                     new SetWristAngle(aPosition.wrist),
-                    new WaitCommand(.3),
                     new SetArmAngle(aPosition.armAngle, aPosition.angleHold));
     }
 }

@@ -1,0 +1,182 @@
+{
+  "waypoints": [
+    {
+      "anchorPoint": {
+        "x": 1.9358355848492061,
+        "y": 4.798887804213243
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 2.935835584849209,
+        "y": 4.798887804213243
+      },
+      "holonomicAngle": 180.0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [
+          "ConeTop"
+        ],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 4.055269031692601,
+        "y": 4.867732417836253
+      },
+      "prevControl": {
+        "x": 3.682968972683295,
+        "y": 4.8592723840354415
+      },
+      "nextControl": {
+        "x": 4.972204432804389,
+        "y": 4.8885685802242165
+      },
+      "holonomicAngle": 180.0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 5.920214004971847,
+        "y": 4.641666785589076
+      },
+      "prevControl": {
+        "x": 5.716127526822701,
+        "y": 4.641666785589076
+      },
+      "nextControl": {
+        "x": 5.98691367519711,
+        "y": 4.641666785589076
+      },
+      "holonomicAngle": 0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 6.213829814833028,
+        "y": 4.65
+      },
+      "prevControl": {
+        "x": 6.211359338399253,
+        "y": 4.684586670072821
+      },
+      "nextControl": {
+        "x": 6.216288731283713,
+        "y": 4.615575169690436
+      },
+      "holonomicAngle": 0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": true,
+      "isStopPoint": true,
+      "stopEvent": {
+        "names": [
+          "IntakeCone"
+        ],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 5.261780404795965,
+        "y": 4.588878156378641
+      },
+      "prevControl": {
+        "x": 5.699560324306122,
+        "y": 4.573606763837589
+      },
+      "nextControl": {
+        "x": 4.443017912164091,
+        "y": 4.617439638679753
+      },
+      "holonomicAngle": -179.22577983507193,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 1.95,
+        "y": 3.8732429056985187
+      },
+      "prevControl": {
+        "x": 2.02397156931066,
+        "y": 5.252817343241524
+      },
+      "nextControl": {
+        "x": 1.949279107055515,
+        "y": 3.8597982067731835
+      },
+      "holonomicAngle": -180.0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": true,
+      "stopEvent": {
+        "names": [
+          "ConeTop"
+        ],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 4.068002665919861,
+        "y": 3.4029121049695097
+      },
+      "prevControl": {
+        "x": 1.7384923658736207,
+        "y": 3.037498724570099
+      },
+      "nextControl": null,
+      "holonomicAngle": 180.0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [
+          "BalanceChargeStation"
+        ],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    }
+  ],
+  "markers": []
+}
