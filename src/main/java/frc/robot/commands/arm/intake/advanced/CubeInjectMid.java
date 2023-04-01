@@ -22,7 +22,7 @@ public class CubeInjectMid extends SequentialCommandGroup {
                 new WaitCommand(0.2),
                 new SetWristAngle(ArmPositions.CUBE_PLACE_MID.wrist),
                 new IntakeOut(),
-                new WaitCommand(0.25),
+                new WaitCommand(0.5),
                 new Arm2PosCooldown(ArmPositions.STOW),
                 new IntakeNone());
     }
