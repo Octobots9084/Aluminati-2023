@@ -9,7 +9,7 @@ public enum ArmPositions {
     INTAKE_SUBSTATION(.7687, 0, 0, .69), //good 3/28
     CUBE_PLACE_HIGH(.763, 0.09, 40, .69), //good 3/28
     CUBE_PLACE_MID(.642, 0.06, 0, .493),
-    DRIVE_POSITION(.48, 0, 0, .31), //good 3/28
+    DRIVE_POSITION(.5149, 0, 0, .3754), //good 3/28
     // CUBE_INTAKE_SUBSTATION(.736, 0, 0, .69), //old
 
 
