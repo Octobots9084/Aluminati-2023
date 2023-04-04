@@ -1,12 +1,13 @@
 package frc.robot.robot;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.advanced.CollectCone;
 import frc.robot.commands.advanced.CollectConeSubstation;
-import frc.robot.commands.arm.intake.advanced.ConeInjectHigh;
-import frc.robot.commands.arm.intake.advanced.CubeInjectMid;
-import frc.robot.commands.arm.intake.advanced.IntakeOutWithTimeout;
+import frc.robot.commands.advanced.ConeInjectHigh;
+import frc.robot.commands.advanced.CubeInjectMid;
+import frc.robot.commands.arm.basic.instant.IntakeSpeedInstant;
 import frc.robot.commands.arm.intake.basic.IntakeIn;
 import frc.robot.commands.arm.intake.basic.SetItemMode;
 import frc.robot.commands.arm.manual.ArmZero;
@@ -35,7 +36,7 @@ public class ButtonConfig {
 				.onTrue(new IntakeIn());
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 5)
-				.onTrue(new IntakeOutWithTimeout());
+				.onTrue(new SequentialCommandGroup(new IntakeSpeedInstant(3), new WaitCommand(2), new IntakeSpeedInstant(0)));
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
 				.onTrue(new ZeroGyro());
@@ -130,7 +131,7 @@ public class ButtonConfig {
 				.onTrue(new IntakeIn());
 
 		new JoystickButton(ControlMap.CO_DRIVER_RIGHT, 2)
-				.onTrue(new IntakeOutWithTimeout());
+				.onTrue(new SequentialCommandGroup(new IntakeSpeedInstant(3), new WaitCommand(2), new IntakeSpeedInstant(0)));
 
 		////END CO-DRIVER//////////////////////////
 	}

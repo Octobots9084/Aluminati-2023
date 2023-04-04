@@ -2,7 +2,7 @@ package frc.robot.commands.autonomous;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.swerve.DriveTrain;
-
+@Deprecated
 public class DriveLeft extends CommandBase{
     double speed = 0;
     DriveLeft(double speed) {

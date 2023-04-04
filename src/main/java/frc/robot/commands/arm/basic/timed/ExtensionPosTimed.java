@@ -2,25 +2,27 @@ package frc.robot.commands.arm.basic.timed;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.arm.CaliGirls;
+import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.util.MathUtil;
 
 @Deprecated
-public class MoveArmWristToPos extends CommandBase{
+public class ExtensionPosTimed extends CommandBase {
     double target;
 
-    CaliGirls caliGirls;
+    ArmExtension armExtension;
     double startTime;
     double currentTime;
-    public MoveArmWristToPos(double pos) {
-        this.caliGirls = CaliGirls.getInstance();
+
+    public ExtensionPosTimed(double pos) {
+
         this.target = pos;
+        this.armExtension = ArmExtension.getInstance();
     }
 
     @Override
     public void initialize() {
         startTime = Timer.getFPGATimestamp();
-        caliGirls.setTopPos(target);
+        armExtension.setPosition(target, false);
     }
 
     @Override
@@ -30,7 +32,7 @@ public class MoveArmWristToPos extends CommandBase{
 
     @Override
     public boolean isFinished() {
-        boolean timeout = !MathUtil.isWithinTolerance(startTime, currentTime, 0.2);
+        boolean timeout = !MathUtil.isWithinTolerance(startTime, currentTime, 0.4);
         return (timeout);
     }
 }

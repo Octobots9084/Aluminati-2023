@@ -4,12 +4,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.arm.CaliGirls;
 import frc.robot.util.MathUtil;
 
-public class MoveArmRotationToPos extends CommandBase {
+public class CaliBottomPosTolerance extends CommandBase {
     double target;
 
     CaliGirls caliGirls;
 
-    public MoveArmRotationToPos(double pos, double kf) {
+    public CaliBottomPosTolerance(double pos, double kf) {
         this.caliGirls = CaliGirls.getInstance();
         this.target = pos;
     }

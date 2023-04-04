@@ -2,16 +2,16 @@ package frc.robot.commands.autonomous.arm;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.advanced.ConeInjectHigh;
+import frc.robot.commands.advanced.ConeInjectMid;
 import frc.robot.commands.arm.CaliGirlsBottomMoveDownALittle;
-import frc.robot.commands.arm.basic.instant.SetArmAngle;
-import frc.robot.commands.arm.basic.instant.SetArmExtension;
-import frc.robot.commands.arm.basic.instant.SetWristAngle;
-import frc.robot.commands.arm.basic.timed.MoveArmExtensionToPos;
-import frc.robot.commands.arm.basic.timed.MoveArmWristToPos;
-import frc.robot.commands.arm.basic.tolerance.ArmExtension2PosTolerance;
-import frc.robot.commands.arm.basic.tolerance.MoveArmRotationToPos;
-import frc.robot.commands.arm.intake.advanced.ConeInjectHigh;
-import frc.robot.commands.arm.intake.advanced.ConeInjectMid;
+import frc.robot.commands.arm.basic.instant.CaliBottomPosInstant;
+import frc.robot.commands.arm.basic.instant.ExtensionPosInstant;
+import frc.robot.commands.arm.basic.instant.CaliTopPosInstant;
+import frc.robot.commands.arm.basic.timed.ExtensionPosTimed;
+import frc.robot.commands.arm.basic.timed.CaliTopPosTimed;
+import frc.robot.commands.arm.basic.tolerance.ExtensionPosTolerance;
+import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
 import frc.robot.commands.arm.intake.basic.IntakeIn;
 import frc.robot.commands.arm.intake.basic.IntakeNone;
 import frc.robot.commands.arm.intake.basic.IntakeOut;
@@ -41,18 +41,18 @@ public class AutoConeTop extends SequentialCommandGroup{
             new IntakeIn(),
             // new WaitCommand(0.6),
             // new SetItemMode(true),
-            new SetWristAngle(caliGirls.getTopPos()),
-            new ArmExtension2PosTolerance(0).withTimeout(2),
-            new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold).withTimeout(2),
-            new MoveArmWristToPos(aPosition.wrist),
-            new ArmExtension2PosTolerance(aPosition.extension).withTimeout(5),
+            new CaliTopPosInstant(caliGirls.getTopPos()),
+            new ExtensionPosTolerance(0).withTimeout(2),
+            new CaliBottomPosTolerance(aPosition.armAngle, aPosition.angleHold).withTimeout(2),
+            new CaliTopPosTimed(aPosition.wrist),
+            new ExtensionPosTolerance(aPosition.extension).withTimeout(5),
             new CaliGirlsBottomMoveDownALittle(),
             new WaitCommand(0.25),
             new IntakeOut(),
             new WaitCommand(0.05),
-            new SetArmExtension(0),
+            new ExtensionPosInstant(0),
             new WaitCommand(0.05),
-            new SetArmAngle(ArmPositions.PRE_CONE_PLACE_HIGH.armAngle, CaliGirls.getInstance().getBottomKf()),
+            new CaliBottomPosInstant(ArmPositions.PRE_CONE_PLACE_HIGH.armAngle, CaliGirls.getInstance().getBottomKf()),
             new WaitCommand(0.2),
             new Arm2PosStow(ArmPositions.STOW),
             new IntakeNone()

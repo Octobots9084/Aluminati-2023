@@ -1,12 +1,12 @@
-package frc.robot.commands.arm.intake.advanced;
+package frc.robot.commands.advanced;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.arm.CaliGirlsBottomMoveDownALittle;
-import frc.robot.commands.arm.basic.instant.SetArmExtension;
-import frc.robot.commands.arm.basic.timed.MoveArmWristToPos;
-import frc.robot.commands.arm.basic.tolerance.ArmExtension2PosTolerance;
-import frc.robot.commands.arm.basic.tolerance.MoveArmRotationToPos;
+import frc.robot.commands.arm.basic.instant.ExtensionPosInstant;
+import frc.robot.commands.arm.basic.timed.CaliTopPosTimed;
+import frc.robot.commands.arm.basic.tolerance.ExtensionPosTolerance;
+import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
 import frc.robot.commands.arm.intake.basic.IntakeNone;
 import frc.robot.commands.arm.intake.basic.IntakeOutALittle;
 import frc.robot.commands.arm.slow.MoveArmToPositionGoingDown;
@@ -17,10 +17,10 @@ public class ConeInjectMid extends SequentialCommandGroup {
     public ConeInjectMid() {
         ArmPositions aPosition = ArmPositions.PRE_CONE_PLACE_MID;
         addCommands(
-                new ArmExtension2PosTolerance(0).withTimeout(2),
-                new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold).withTimeout(2),
-                new MoveArmWristToPos(aPosition.wrist),
-                new ArmExtension2PosTolerance(aPosition.extension).withTimeout(5),
+                new ExtensionPosTolerance(0).withTimeout(2),
+                new CaliBottomPosTolerance(aPosition.armAngle, aPosition.angleHold).withTimeout(2),
+                new CaliTopPosTimed(aPosition.wrist),
+                new ExtensionPosTolerance(aPosition.extension).withTimeout(5),
                 // new SetArmAngle(pos - 0.1, caliGirls.getBottomKf()),
                 // new MoveArmRotationToPos(pos, caliGirls.getBottomKf()),
                 new CaliGirlsBottomMoveDownALittle(),
@@ -28,7 +28,7 @@ public class ConeInjectMid extends SequentialCommandGroup {
                 new IntakeOutALittle(),
                 // new IntakeOut(),
                 new WaitCommand(0.15),
-                new SetArmExtension(0),
+                new ExtensionPosInstant(0),
                 new MoveArmToPositionGoingDown(ArmPositions.STOW));
                 new IntakeNone();
     }
