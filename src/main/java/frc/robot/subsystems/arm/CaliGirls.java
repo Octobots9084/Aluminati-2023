@@ -21,9 +21,8 @@ public class CaliGirls extends SubsystemBase {
     private SparkMaxPIDController pidControllerBottom;
 
 
-    //these values are likely wrong right now, just testing. also, kA may be unnecessary
-    private ArmFeedforward feedforward = new ArmFeedforward(0.01, 0.18
-    , 0);
+    //these values are likely wrong right now, just testing. also, kA may be unnecessaryz
+    private ArmFeedforward feedforward = new ArmFeedforward(0.01, 0.18, 0);
     private static CaliGirls caliGirls;
 
     public static CaliGirls getInstance() {
