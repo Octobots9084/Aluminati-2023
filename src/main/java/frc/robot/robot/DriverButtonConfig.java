@@ -1,20 +1,17 @@
 package frc.robot.robot;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.advanced.CollectCone;
 import frc.robot.commands.advanced.CollectConeSubstation;
-import frc.robot.commands.arm.basic.MoveArmExtensionToPos;
-import frc.robot.commands.arm.basic.MoveArmRotationToPos;
-import frc.robot.commands.arm.basic.MoveArmWristToPos;
+import frc.robot.commands.arm.basic.timed.MoveArmExtensionToPos;
+import frc.robot.commands.arm.basic.timed.MoveArmWristToPos;
+import frc.robot.commands.arm.basic.tolerance.MoveArmRotationToPos;
 import frc.robot.commands.arm.intake.advanced.ConeInjectHigh;
 import frc.robot.commands.arm.intake.advanced.ConeInjectMid;
 import frc.robot.commands.arm.intake.advanced.CubeInjectHigh;
 import frc.robot.commands.arm.intake.advanced.CubeInjectMid;
 import frc.robot.commands.arm.intake.advanced.IntakeOutWithTimeout;
-import frc.robot.commands.arm.intake.advanced.SmartEject;
 import frc.robot.commands.arm.intake.basic.IntakeIn;
 import frc.robot.commands.arm.intake.basic.SetItemMode;
 import frc.robot.commands.arm.manual.ArmZero;
@@ -22,7 +19,6 @@ import frc.robot.commands.arm.slow.MoveArmToPositionGoingDown;
 import frc.robot.commands.arm.slow.MoveArmToPositionGoingUp;
 import frc.robot.commands.arm.yeet.Arm2PosStow;
 import frc.robot.commands.autonomous.BalanceChargeStation;
-import frc.robot.commands.autonomous.DriveToPosition;
 import frc.robot.commands.spatula.SetSpatulaVoltageAndPos;
 import frc.robot.commands.swerve.SetDriveAngle;
 import frc.robot.commands.swerve.SetDriverAssist;
@@ -31,9 +27,6 @@ import frc.robot.commands.vision.AutoAlign;
 import frc.robot.commands.vision.AutoAlignWithID;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
-import frc.robot.subsystems.spatula.RollingPins;
-import frc.robot.subsystems.spatula.SpatulaFlip;
-import frc.robot.util.PoseFinder;
 
 public class DriverButtonConfig {
 	public void initTeleop() {

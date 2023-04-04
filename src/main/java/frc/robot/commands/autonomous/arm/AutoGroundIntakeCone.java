@@ -1,10 +1,6 @@
 package frc.robot.commands.autonomous.arm;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.advanced.CollectCone;
-import frc.robot.commands.arm.basic.MoveArmExtensionToPos;
-import frc.robot.commands.arm.basic.MoveArmRotationToPos;
-import frc.robot.commands.arm.basic.MoveArmWristToPos;
 import frc.robot.commands.arm.intake.basic.IntakeIn;
 import frc.robot.commands.arm.manual.ArmZero;
 import frc.robot.commands.arm.yeet.Arm2PosCollect;

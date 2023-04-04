@@ -28,14 +28,12 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.commands.arm.ParallalMoveArm;
-import frc.robot.commands.arm.manual.ArmControl;
-import frc.robot.commands.arm.manual.TiltControl;
+import frc.robot.commands.arm.manual.ExtensionControl;
+import frc.robot.commands.arm.basic.instant.ParallalMoveArm;
+import frc.robot.commands.arm.manual.CGControl;
 import frc.robot.commands.spatula.SetSpatulaVoltageAndPos;
 import frc.robot.commands.swerve.SwerveControl;
-import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.robot.ButtonConfig;
 import frc.robot.robot.ControlMap;
 import frc.robot.robot.DriverButtonConfig;
@@ -127,7 +125,7 @@ public class Robot extends TimedRobot {
         if (!autoFlag) {
             resetRobotPoseAndGyro();
         }
-        this.autoFlag = false;
+        Robot.autoFlag = false;
         DriveTrain.getInstance().setUseDriverAssist(true);
         Gyro.getInstance().setAngleAdjustment(180);
 
@@ -138,7 +136,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-        this.autoFlag = true;
+        Robot.autoFlag = true;
         initializeAllSubsystems();
 
         
@@ -200,8 +198,8 @@ public class Robot extends TimedRobot {
         CaliGirls.getInstance().lastPosTop = ArmPositions.STOW.wrist;
         ArmExtension.getInstance().lastpos = ArmPositions.STOW.extension;
         CommandScheduler.getInstance().setDefaultCommand(DriveTrain.getInstance(), new SwerveControl());
-        CommandScheduler.getInstance().setDefaultCommand(CaliGirls.getInstance(), new TiltControl());
-        CommandScheduler.getInstance().setDefaultCommand(ArmExtension.getInstance(), new ArmControl());
+        CommandScheduler.getInstance().setDefaultCommand(CaliGirls.getInstance(), new CGControl());
+        CommandScheduler.getInstance().setDefaultCommand(ArmExtension.getInstance(), new ExtensionControl());
         CommandScheduler.getInstance().schedule(new SetSpatulaVoltageAndPos(0, 0.34));
     }
 }

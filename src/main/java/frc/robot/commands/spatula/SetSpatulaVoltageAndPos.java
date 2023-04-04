@@ -1,6 +1,5 @@
 package frc.robot.commands.spatula;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.spatula.RollingPins;
 import frc.robot.subsystems.spatula.SpatulaFlip;
