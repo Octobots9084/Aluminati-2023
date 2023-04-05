@@ -3,13 +3,13 @@ package frc.robot.commands.advanced;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.arm.CaliGirlsBottomMoveDownALittle;
+import frc.robot.commands.arm.basic.instant.ArmPosInstant;
 import frc.robot.commands.arm.basic.instant.CaliBottomPosInstant;
 import frc.robot.commands.arm.basic.instant.ExtensionPosInstant;
 import frc.robot.commands.arm.basic.instant.IntakeSpeedInstant;
 import frc.robot.commands.arm.basic.tolerance.ExtensionPosTolerance;
 import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
 import frc.robot.commands.arm.basic.tolerance.CaliTopPosTolerance;
-import frc.robot.commands.arm.slow.MoveArmToPositionGoingDown;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
 
@@ -33,7 +33,7 @@ public class ConeInjectHigh extends SequentialCommandGroup {
             new WaitCommand(0.05),
             new CaliBottomPosInstant(ArmPositions.PRE_CONE_PLACE_HIGH.armAngle, CaliGirls.getInstance().getBottomKf()),
             new WaitCommand(0.75),
-            new MoveArmToPositionGoingDown(ArmPositions.STOW),
+            new ArmPosInstant(ArmPositions.STOW),
             new IntakeSpeedInstant(0));
     }
 
