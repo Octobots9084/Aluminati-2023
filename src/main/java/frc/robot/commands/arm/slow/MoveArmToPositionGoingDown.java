@@ -1,7 +1,6 @@
 package frc.robot.commands.arm.slow;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.arm.basic.timed.ExtensionPosTimed;
 import frc.robot.commands.arm.basic.instant.ExtensionPosInstant;
 import frc.robot.commands.arm.basic.timed.CaliTopPosTimed;
 import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
