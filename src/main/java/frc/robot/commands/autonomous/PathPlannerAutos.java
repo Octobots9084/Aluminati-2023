@@ -46,8 +46,6 @@ public final class PathPlannerAutos {
             Map.entry("IntakeCube", new AutoGroundIntakeCube()),
             Map.entry("StowArm", new Arm2PosStow(ArmPositions.STOW)),
             Map.entry("Wait1", new WaitCommand(1)),
-            Map.entry("AutoDriveOntoChargeStation", new AutoDriveOntoChargeStationforwards()),
-            Map.entry("AutoDriveOntoChargeStationBack", new AutoDriveOntoChargeStation()),
             Map.entry("OtherCollect",new SetSpatulaVoltageAndPos(-12, 0).alongWith(new Arm2PosStow(ArmPositions.STOW))),
             Map.entry("OtherIntakeIn",new SetSpatulaVoltageAndPos(-0.5, 0.34))
             ));
