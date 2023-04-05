@@ -9,6 +9,7 @@ import frc.robot.commands.arm.basic.instant.IntakeSpeedInstant;
 import frc.robot.commands.arm.basic.timed.CaliTopPosTimed;
 import frc.robot.commands.arm.basic.tolerance.ExtensionPosTolerance;
 import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
+import frc.robot.commands.arm.basic.tolerance.CaliTopPosTolerance;
 import frc.robot.commands.arm.slow.MoveArmToPositionGoingDown;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
@@ -23,7 +24,7 @@ public class ConeInjectHigh extends SequentialCommandGroup {
         addCommands(
             new ExtensionPosTolerance(0).withTimeout(2),
             new CaliBottomPosTolerance(aPosition.armAngle, aPosition.angleHold).withTimeout(2),
-            new CaliTopPosTimed(aPosition.wrist),
+            new CaliTopPosTolerance(aPosition.wrist),
             new ExtensionPosTolerance(aPosition.extension).withTimeout(5),
             new CaliGirlsBottomMoveDownALittle(),
             new WaitCommand(0.25),

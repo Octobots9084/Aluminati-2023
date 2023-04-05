@@ -9,7 +9,7 @@ public class CaliTopPosTolerance extends CommandBase {
 
     CaliGirls caliGirls;
 
-    public CaliTopPosTolerance(double pos, double kf) {
+    public CaliTopPosTolerance(double pos) {
         this.caliGirls = CaliGirls.getInstance();
         this.target = pos;
     }
