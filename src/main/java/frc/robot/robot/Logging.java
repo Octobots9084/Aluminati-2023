@@ -66,7 +66,7 @@ public class Logging {
         // autoChooser.addOption("nALANCEv2", new AutoDriveOntoChargeStation());
         autoChooser.addOption("AutoDriveOntoChargeStationAndCommunity", PathPlannerAutos.PlaceConeAndBalanceAndCommunity());
         // autoChooser.addOption("Onemeter", PathPlannerAutos.Onemeter());
-        // autoChooser.addOption("square", PathPlannerAutos.square());
+        autoChooser.addOption("square", PathPlannerAutos.Square());
         autoChooser.addOption("ConHigConHigBal", PathPlannerAutos.ConHigConHigBal());
     
         // autoChooser.addOption("DONOTUSEnALANCEv3", new AutoDriveOntoChargeStationAndCommunity());
