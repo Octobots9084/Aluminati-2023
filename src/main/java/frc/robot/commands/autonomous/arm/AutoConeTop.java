@@ -5,18 +5,15 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.advanced.ConeInjectHigh;
 import frc.robot.commands.advanced.ConeInjectMid;
 import frc.robot.commands.arm.CaliGirlsBottomMoveDownALittle;
+import frc.robot.commands.arm.basic.SetItemMode;
 import frc.robot.commands.arm.basic.instant.CaliBottomPosInstant;
 import frc.robot.commands.arm.basic.instant.ExtensionPosInstant;
+import frc.robot.commands.arm.basic.instant.IntakeSpeedInstant;
 import frc.robot.commands.arm.basic.instant.CaliTopPosInstant;
 import frc.robot.commands.arm.basic.timed.ExtensionPosTimed;
 import frc.robot.commands.arm.basic.timed.CaliTopPosTimed;
 import frc.robot.commands.arm.basic.tolerance.ExtensionPosTolerance;
 import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
-import frc.robot.commands.arm.intake.basic.IntakeIn;
-import frc.robot.commands.arm.intake.basic.IntakeNone;
-import frc.robot.commands.arm.intake.basic.IntakeOut;
-import frc.robot.commands.arm.intake.basic.IntakeOutALittle;
-import frc.robot.commands.arm.intake.basic.SetItemMode;
 import frc.robot.commands.arm.slow.MoveArmToPositionGoingDown;
 import frc.robot.commands.arm.slow.MoveArmToPositionGoingUp;
 import frc.robot.commands.arm.yeet.Arm2PosStow;
@@ -38,7 +35,7 @@ public class AutoConeTop extends SequentialCommandGroup{
         this.armExtension = ArmExtension.getInstance();
         addCommands(
             // new SetWristAngle(ArmPositions.STOW.wrist+0.1),
-            new IntakeIn(),
+            new IntakeSpeedInstant(-10),
             // new WaitCommand(0.6),
             // new SetItemMode(true),
             new CaliTopPosInstant(caliGirls.getTopPos()),
@@ -48,14 +45,14 @@ public class AutoConeTop extends SequentialCommandGroup{
             new ExtensionPosTolerance(aPosition.extension).withTimeout(5),
             new CaliGirlsBottomMoveDownALittle(),
             new WaitCommand(0.25),
-            new IntakeOut(),
+            new IntakeSpeedInstant(3),
             new WaitCommand(0.05),
             new ExtensionPosInstant(0),
             new WaitCommand(0.05),
             new CaliBottomPosInstant(ArmPositions.PRE_CONE_PLACE_HIGH.armAngle, CaliGirls.getInstance().getBottomKf()),
             new WaitCommand(0.2),
             new Arm2PosStow(ArmPositions.STOW),
-            new IntakeNone()
+            new IntakeSpeedInstant(0)
 
             // new SetArmAngle(aPosition.armAngle, aPosition.angleHold), 
             // new WaitCommand(.5),
@@ -65,9 +62,9 @@ public class AutoConeTop extends SequentialCommandGroup{
             // new WaitCommand(.35),
             // new CaliGirlsBottomMoveDownALittle(),
             // new WaitCommand(.25),
-            // new IntakeOutALittle(),
+            // new IntakeSpeedInstant(1),
             // new WaitCommand(0.05),
-            // new IntakeNone(),
+            // new IntakeSpeedInstant(0),
             // new SetArmExtension(ArmExtension.getInstance().lastpos-10),
             // new WaitCommand(.25),
             // new SetArmAngle(aPosition.armAngle, aPosition.angleHold),

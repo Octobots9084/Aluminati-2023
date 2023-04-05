@@ -3,10 +3,9 @@ package frc.robot.commands.advanced;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.arm.basic.instant.CaliTopPosInstant;
+import frc.robot.commands.arm.basic.instant.IntakeSpeedInstant;
 import frc.robot.commands.arm.basic.tolerance.ExtensionPosTolerance;
 import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
-import frc.robot.commands.arm.intake.basic.IntakeNone;
-import frc.robot.commands.arm.intake.basic.IntakeOut;
 import frc.robot.commands.arm.yeet.Arm2PosCooldown;
 import frc.robot.subsystems.arm.ArmPositions;
 
@@ -19,10 +18,10 @@ public class CubeInjectMid extends SequentialCommandGroup {
                 new CaliBottomPosTolerance(ArmPositions.CUBE_PLACE_MID.armAngle, 0),
                 new WaitCommand(0.2),
                 new CaliTopPosInstant(ArmPositions.CUBE_PLACE_MID.wrist),
-                new IntakeOut(),
+                new IntakeSpeedInstant(3),
                 new WaitCommand(0.5),
                 new Arm2PosCooldown(ArmPositions.STOW),
-                new IntakeNone());
+                new IntakeSpeedInstant(0));
     }
 
 }

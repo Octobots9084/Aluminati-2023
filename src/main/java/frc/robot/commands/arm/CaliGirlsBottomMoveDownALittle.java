@@ -10,7 +10,6 @@ public class CaliGirlsBottomMoveDownALittle extends InstantCommand {
     public void initialize() {
         // Units of 0.04 are in PERCENT OF ARM ROTATION
         double pos = CaliGirls.getInstance().lastPosBottom-0.04;
-        System.out.println(pos);
         CaliGirls.getInstance().setBottomPos(pos);
     }
 

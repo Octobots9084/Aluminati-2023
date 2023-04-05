@@ -3,13 +3,12 @@ package frc.robot.robot;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.advanced.CollectCone;
-import frc.robot.commands.advanced.CollectConeSubstation;
+import frc.robot.commands.advanced.CollectFloor;
+import frc.robot.commands.advanced.CollectSubstation;
 import frc.robot.commands.advanced.ConeInjectHigh;
 import frc.robot.commands.advanced.CubeInjectMid;
+import frc.robot.commands.arm.basic.SetItemMode;
 import frc.robot.commands.arm.basic.instant.IntakeSpeedInstant;
-import frc.robot.commands.arm.intake.basic.IntakeIn;
-import frc.robot.commands.arm.intake.basic.SetItemMode;
 import frc.robot.commands.arm.manual.ArmZero;
 import frc.robot.commands.arm.slow.MoveArmToPositionGoingUp;
 import frc.robot.commands.arm.yeet.Arm2PosStow;
@@ -33,7 +32,7 @@ public class ButtonConfig {
 		// .onTrue(new SmartEject());
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 4)
-				.onTrue(new IntakeIn());
+				.onTrue(new IntakeSpeedInstant(-10));
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 5)
 				.onTrue(new SequentialCommandGroup(new IntakeSpeedInstant(3), new WaitCommand(2), new IntakeSpeedInstant(0)));
@@ -42,7 +41,7 @@ public class ButtonConfig {
 				.onTrue(new ZeroGyro());
 
 		//buttons 8-12 reserved for AutoAlign
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 7).onTrue(new CollectCone());
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 7).onTrue(new CollectFloor());
 		//Button 8 Reserved for Hippo Intake
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 9).onTrue(new Arm2PosStow(ArmPositions.STOW));
 
@@ -80,12 +79,12 @@ public class ButtonConfig {
 		////CO DRIVER////////////////
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 1)
-				.onTrue(new CollectCone());
+				.onTrue(new CollectFloor());
 
 		// Button 2 reserved for Hippo Intake
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 3)
-				.onTrue(new CollectConeSubstation());
+				.onTrue(new CollectSubstation());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
 				.onTrue(new Arm2PosStow(ArmPositions.STOW));
@@ -128,7 +127,7 @@ public class ButtonConfig {
 
 		//Driver Joystick Right
 		new JoystickButton(ControlMap.CO_DRIVER_RIGHT, 1)
-				.onTrue(new IntakeIn());
+				.onTrue(new IntakeSpeedInstant(-10));
 
 		new JoystickButton(ControlMap.CO_DRIVER_RIGHT, 2)
 				.onTrue(new SequentialCommandGroup(new IntakeSpeedInstant(3), new WaitCommand(2), new IntakeSpeedInstant(0)));

@@ -2,18 +2,17 @@ package frc.robot.robot;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.advanced.CollectCone;
-import frc.robot.commands.advanced.CollectConeSubstation;
+import frc.robot.commands.advanced.CollectFloor;
+import frc.robot.commands.advanced.CollectSubstation;
 import frc.robot.commands.advanced.ConeInjectHigh;
 import frc.robot.commands.advanced.ConeInjectMid;
 import frc.robot.commands.advanced.CubeInjectHigh;
 import frc.robot.commands.advanced.CubeInjectMid;
 import frc.robot.commands.arm.basic.timed.ExtensionPosTimed;
+import frc.robot.commands.arm.basic.SetItemMode;
 import frc.robot.commands.arm.basic.instant.IntakeSpeedInstant;
 import frc.robot.commands.arm.basic.timed.CaliTopPosTimed;
 import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
-import frc.robot.commands.arm.intake.basic.IntakeIn;
-import frc.robot.commands.arm.intake.basic.SetItemMode;
 import frc.robot.commands.arm.manual.ArmZero;
 import frc.robot.commands.arm.slow.MoveArmToPositionGoingDown;
 import frc.robot.commands.arm.slow.MoveArmToPositionGoingUp;
@@ -80,13 +79,13 @@ public class DriverButtonConfig {
 		////CO DRIVER////////////////
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 1)
-				.onTrue(new CollectCone().alongWith(new SetSpatulaVoltageAndPos(0, 0.36)));
+				.onTrue(new CollectFloor().alongWith(new SetSpatulaVoltageAndPos(0, 0.36)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
 				.onTrue(new SetSpatulaVoltageAndPos(-12, 0).alongWith(new Arm2PosStow(ArmPositions.STOW)).andThen(new WaitCommand(0.2)).andThen(new SetSpatulaVoltageAndPos(-8, 0)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
-				.onTrue(new CollectConeSubstation().alongWith(new SetSpatulaVoltageAndPos(0, 0.36)));
+				.onTrue(new CollectSubstation().alongWith(new SetSpatulaVoltageAndPos(0, 0.36)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 3)
 				.onTrue(new SetSpatulaVoltageAndPos(-0.5, 0.36).andThen(new ExtensionPosTimed(0.0)).andThen(new CaliTopPosTimed(ArmPositions.PRE_DRIVE_POSITION.wrist)).andThen(new CaliBottomPosTolerance(ArmPositions.PRE_DRIVE_POSITION.armAngle, CaliGirls.getInstance().getBottomKf())).alongWith(new WaitCommand(0.3)).andThen(new CaliTopPosTimed(ArmPositions.DRIVE_POSITION.wrist)));
@@ -127,7 +126,7 @@ public class DriverButtonConfig {
 
 		//Driver Joystick Right
 		new JoystickButton(ControlMap.CO_DRIVER_RIGHT, 1)
-				.onTrue(new IntakeIn());
+				.onTrue(new IntakeSpeedInstant(-10));
 
 		new JoystickButton(ControlMap.CO_DRIVER_RIGHT, 2)
 				.onTrue(new SequentialCommandGroup(new IntakeSpeedInstant(3), new WaitCommand(2), new IntakeSpeedInstant(0)));

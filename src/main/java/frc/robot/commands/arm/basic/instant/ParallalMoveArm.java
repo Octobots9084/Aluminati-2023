@@ -5,7 +5,7 @@ import frc.robot.commands.arm.basic.timed.ExtensionPosTimed;
 import frc.robot.commands.arm.basic.timed.CaliTopPosTimed;
 import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
 import frc.robot.subsystems.arm.ArmPositions;
-
+@Deprecated
 public class ParallalMoveArm extends ParallelCommandGroup{
     public ParallalMoveArm(ArmPositions armPositions) {
         addCommands(

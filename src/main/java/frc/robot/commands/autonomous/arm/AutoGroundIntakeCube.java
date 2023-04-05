@@ -3,10 +3,9 @@ package frc.robot.commands.autonomous.arm;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.arm.basic.timed.ExtensionPosTimed;
+import frc.robot.commands.arm.basic.instant.IntakeSpeedInstant;
 import frc.robot.commands.arm.basic.timed.CaliTopPosTimed;
 import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
-import frc.robot.commands.arm.intake.basic.IntakeIn;
-import frc.robot.commands.arm.intake.basic.IntakeNone;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
@@ -22,9 +21,9 @@ public class AutoGroundIntakeCube extends SequentialCommandGroup{
         this.drivePosition = ArmPositions.STOW;
         this.caliGirls = CaliGirls.getInstance();
         addCommands(new CaliTopPosTimed(aPosition.wrist), new ExtensionPosTimed(aPosition.extension), new CaliBottomPosTolerance(aPosition.armAngle, aPosition.angleHold),
-        new IntakeIn(),
+        new IntakeSpeedInstant(-10),
         new WaitCommand(0.1),
-        new IntakeNone(),
+        new IntakeSpeedInstant(0),
         new CaliBottomPosTolerance(drivePosition.armAngle, drivePosition.angleHold), new CaliTopPosTimed(drivePosition.wrist), new ExtensionPosTimed(drivePosition.extension)
         );
             }

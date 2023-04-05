@@ -1,4 +1,4 @@
-package frc.robot.commands.arm.intake.basic;
+package frc.robot.commands.arm.basic;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.arm.Roller;
