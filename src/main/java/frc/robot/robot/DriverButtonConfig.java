@@ -1,28 +1,23 @@
 package frc.robot.robot;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.advanced.CollectCone;
-import frc.robot.commands.advanced.CollectConeSubstation;
-import frc.robot.commands.arm.basic.MoveArmExtensionToPos;
-import frc.robot.commands.arm.basic.MoveArmRotationToPos;
-import frc.robot.commands.arm.basic.MoveArmWristToPos;
-import frc.robot.commands.arm.intake.advanced.ConeInjectHigh;
-import frc.robot.commands.arm.intake.advanced.ConeInjectMid;
-import frc.robot.commands.arm.intake.advanced.CubeInjectHigh;
-import frc.robot.commands.arm.intake.advanced.CubeInjectMid;
-import frc.robot.commands.arm.intake.advanced.IntakeOutWithTimeout;
-import frc.robot.commands.arm.intake.advanced.SmartEject;
-import frc.robot.commands.arm.intake.basic.IntakeIn;
-import frc.robot.commands.arm.intake.basic.SetItemMode;
+import frc.robot.commands.advanced.CollectFloor;
+import frc.robot.commands.advanced.CollectSubstation;
+import frc.robot.commands.advanced.ConeInjectHigh;
+import frc.robot.commands.advanced.ConeInjectMid;
+import frc.robot.commands.advanced.CubeInjectHigh;
+import frc.robot.commands.advanced.CubeInjectMid;
+import frc.robot.commands.arm.basic.timed.ExtensionPosTimed;
+import frc.robot.commands.arm.basic.SetItemMode;
+import frc.robot.commands.arm.basic.instant.IntakeSpeedInstant;
+import frc.robot.commands.arm.basic.timed.CaliTopPosTimed;
+import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
 import frc.robot.commands.arm.manual.ArmZero;
 import frc.robot.commands.arm.slow.MoveArmToPositionGoingDown;
 import frc.robot.commands.arm.slow.MoveArmToPositionGoingUp;
 import frc.robot.commands.arm.yeet.Arm2PosStow;
 import frc.robot.commands.autonomous.BalanceChargeStation;
-import frc.robot.commands.autonomous.DriveToPosition;
 import frc.robot.commands.spatula.SetSpatulaVoltageAndPos;
 import frc.robot.commands.swerve.SetDriveAngle;
 import frc.robot.commands.swerve.SetDriverAssist;
@@ -31,9 +26,6 @@ import frc.robot.commands.vision.AutoAlign;
 import frc.robot.commands.vision.AutoAlignWithID;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
-import frc.robot.subsystems.spatula.RollingPins;
-import frc.robot.subsystems.spatula.SpatulaFlip;
-import frc.robot.util.PoseFinder;
 
 public class DriverButtonConfig {
 	public void initTeleop() {
@@ -87,16 +79,16 @@ public class DriverButtonConfig {
 		////CO DRIVER////////////////
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 1)
-				.onTrue(new CollectCone().alongWith(new SetSpatulaVoltageAndPos(0, 0.36)));
+				.onTrue(new CollectFloor().alongWith(new SetSpatulaVoltageAndPos(0, 0.36)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
 				.onTrue(new SetSpatulaVoltageAndPos(-12, 0).alongWith(new Arm2PosStow(ArmPositions.STOW)).andThen(new WaitCommand(0.2)).andThen(new SetSpatulaVoltageAndPos(-8, 0)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
-				.onTrue(new CollectConeSubstation().alongWith(new SetSpatulaVoltageAndPos(0, 0.36)));
+				.onTrue(new CollectSubstation().alongWith(new SetSpatulaVoltageAndPos(0, 0.36)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 3)
-				.onTrue(new SetSpatulaVoltageAndPos(-0.5, 0.36).andThen(new MoveArmExtensionToPos(0.0)).andThen(new MoveArmWristToPos(ArmPositions.PRE_DRIVE_POSITION.wrist)).andThen(new MoveArmRotationToPos(ArmPositions.PRE_DRIVE_POSITION.armAngle, CaliGirls.getInstance().getBottomKf())).alongWith(new WaitCommand(0.3)).andThen(new MoveArmWristToPos(ArmPositions.DRIVE_POSITION.wrist)));
+				.onTrue(new SetSpatulaVoltageAndPos(-0.5, 0.36).andThen(new ExtensionPosTimed(0.0)).andThen(new CaliTopPosTimed(ArmPositions.PRE_DRIVE_POSITION.wrist)).andThen(new CaliBottomPosTolerance(ArmPositions.PRE_DRIVE_POSITION.armAngle, CaliGirls.getInstance().getBottomKf())).alongWith(new WaitCommand(0.3)).andThen(new CaliTopPosTimed(ArmPositions.DRIVE_POSITION.wrist)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 5)
 				.onTrue(new SetSpatulaVoltageAndPos(0, 0.1).alongWith(new WaitCommand(0.1)).andThen(new SetSpatulaVoltageAndPos(4, 0.1)).andThen(new WaitCommand(0.3)).andThen(new SetSpatulaVoltageAndPos(0, 0.36)));
@@ -134,10 +126,10 @@ public class DriverButtonConfig {
 
 		//Driver Joystick Right
 		new JoystickButton(ControlMap.CO_DRIVER_RIGHT, 1)
-				.onTrue(new IntakeIn());
+				.onTrue(new IntakeSpeedInstant(-10));
 
 		new JoystickButton(ControlMap.CO_DRIVER_RIGHT, 2)
-				.onTrue(new IntakeOutWithTimeout());
+				.onTrue(new SequentialCommandGroup(new IntakeSpeedInstant(3), new WaitCommand(2), new IntakeSpeedInstant(0)));
 
 		////END CO-DRIVER//////////////////////////
 	}

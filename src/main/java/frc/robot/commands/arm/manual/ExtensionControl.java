@@ -5,11 +5,11 @@ import frc.robot.robot.ControlMap;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.util.MathUtil;
 
-public class ArmControl extends CommandBase {
+public class ExtensionControl extends CommandBase {
     private ArmExtension armExtension;
     // private XboxController xboxController;
 
-    public ArmControl() {
+    public ExtensionControl() {
         this.armExtension = ArmExtension.getInstance();
         // this.xboxController = ControlMap.XBOX;
         addRequirements(armExtension);

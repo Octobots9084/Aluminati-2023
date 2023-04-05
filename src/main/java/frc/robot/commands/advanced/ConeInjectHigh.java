@@ -1,0 +1,40 @@
+package frc.robot.commands.advanced;
+
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.arm.CaliGirlsBottomMoveDownALittle;
+import frc.robot.commands.arm.basic.instant.CaliBottomPosInstant;
+import frc.robot.commands.arm.basic.instant.ExtensionPosInstant;
+import frc.robot.commands.arm.basic.instant.IntakeSpeedInstant;
+import frc.robot.commands.arm.basic.timed.CaliTopPosTimed;
+import frc.robot.commands.arm.basic.tolerance.ExtensionPosTolerance;
+import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
+import frc.robot.commands.arm.slow.MoveArmToPositionGoingDown;
+import frc.robot.subsystems.arm.ArmPositions;
+import frc.robot.subsystems.arm.CaliGirls;
+
+public class ConeInjectHigh extends SequentialCommandGroup {
+    
+    private ArmPositions aPosition;
+
+    public ConeInjectHigh() {
+        this.aPosition = ArmPositions.PRE_CONE_PLACE_HIGH;
+
+        addCommands(
+            new ExtensionPosTolerance(0).withTimeout(2),
+            new CaliBottomPosTolerance(aPosition.armAngle, aPosition.angleHold).withTimeout(2),
+            new CaliTopPosTimed(aPosition.wrist),
+            new ExtensionPosTolerance(aPosition.extension).withTimeout(5),
+            new CaliGirlsBottomMoveDownALittle(),
+            new WaitCommand(0.25),
+            new IntakeSpeedInstant(3),
+            new WaitCommand(0.05),
+            new ExtensionPosInstant(0),
+            new WaitCommand(0.05),
+            new CaliBottomPosInstant(ArmPositions.PRE_CONE_PLACE_HIGH.armAngle, CaliGirls.getInstance().getBottomKf()),
+            new WaitCommand(0.75),
+            new MoveArmToPositionGoingDown(ArmPositions.STOW),
+            new IntakeSpeedInstant(0));
+    }
+
+}

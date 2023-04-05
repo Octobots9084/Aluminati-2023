@@ -1,17 +1,18 @@
-package frc.robot.commands.arm.basic;
+package frc.robot.commands.arm.basic.timed;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.arm.CaliGirls;
 import frc.robot.util.MathUtil;
 
-public class MoveArmWristToPos extends CommandBase{
+@Deprecated
+public class CaliTopPosTimed extends CommandBase{
     double target;
 
     CaliGirls caliGirls;
     double startTime;
     double currentTime;
-    public MoveArmWristToPos(double pos) {
+    public CaliTopPosTimed(double pos) {
         this.caliGirls = CaliGirls.getInstance();
         this.target = pos;
     }

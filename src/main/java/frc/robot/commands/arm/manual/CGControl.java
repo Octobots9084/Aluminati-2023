@@ -6,10 +6,10 @@ import frc.robot.subsystems.arm.CaliGirls;
 import frc.robot.util.MathUtil;
 
 //CURRENTLY BROKEN REWRITE BEFORE USE!
-public class TiltControl extends CommandBase {
+public class CGControl extends CommandBase {
     private CaliGirls caliGirls;
 
-    public TiltControl() {
+    public CGControl() {
         this.caliGirls = CaliGirls.getInstance();
         addRequirements(caliGirls);
     }

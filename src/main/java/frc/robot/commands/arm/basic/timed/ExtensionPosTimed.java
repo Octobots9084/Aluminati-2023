@@ -1,18 +1,19 @@
-package frc.robot.commands.arm.basic;
+package frc.robot.commands.arm.basic.timed;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.util.MathUtil;
 
-public class MoveArmExtensionToPos extends CommandBase {
+@Deprecated
+public class ExtensionPosTimed extends CommandBase {
     double target;
 
     ArmExtension armExtension;
     double startTime;
     double currentTime;
 
-    public MoveArmExtensionToPos(double pos) {
+    public ExtensionPosTimed(double pos) {
 
         this.target = pos;
         this.armExtension = ArmExtension.getInstance();

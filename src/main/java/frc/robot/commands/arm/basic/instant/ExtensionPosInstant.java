@@ -1,13 +1,13 @@
-package frc.robot.commands.arm.basic;
+package frc.robot.commands.arm.basic.instant;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.arm.ArmExtension;
 
-public class SetArmExtension extends InstantCommand {
+public class ExtensionPosInstant extends InstantCommand {
     ArmExtension armExtension;
     double target;
 
-    public SetArmExtension(double pos) {
+    public ExtensionPosInstant(double pos) {
         this.armExtension = ArmExtension.getInstance();
         this.target = pos;
     }

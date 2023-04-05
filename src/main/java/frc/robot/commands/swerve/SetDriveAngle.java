@@ -2,7 +2,6 @@ package frc.robot.commands.swerve;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 import frc.robot.util.MathUtil;

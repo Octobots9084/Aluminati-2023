@@ -1,19 +1,19 @@
-package frc.robot.commands.arm.basic;
+package frc.robot.commands.arm.basic.instant;
 
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.arm.CaliGirls;
 
-public class SetWristAngle extends InstantCommand {
+public class CaliBottomPosInstant extends InstantCommand {
     private CaliGirls caliGirls;
     private double angle;
 
-    public SetWristAngle(double angle) {
+    public CaliBottomPosInstant(double angle, double kf) {
         this.caliGirls = CaliGirls.getInstance();
         this.angle = angle;
     }
 
     @Override
     public void initialize() {
-        caliGirls.setTopPos(angle);
+        caliGirls.setBottomPos(angle);
     }
 }
