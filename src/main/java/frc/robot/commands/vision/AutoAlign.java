@@ -37,9 +37,6 @@ public class AutoAlign extends CommandBase {
                     end(true);
                 }
             }
-        // } catch (Exception e) {
-        //     // TODO: handle exception
-        // }
     }
 
     @Override
