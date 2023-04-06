@@ -52,15 +52,13 @@ public class AutoAlign extends CommandBase {
                 if (vision.getBestTarget() != null) {
                     cameraToTarget = vision.getBestTarget();
                 } else {
+                    light.sendInfo(-1, 420, false);
                     end(true);
                     // driveTrain.drive(0, 0, 0, true);
                 }
 
                 ySpeed = (cameraToTarget.getYaw()-3) * 0.1;
-                light.SpeedInverseOfDistance_recieve_HorDist(cameraToTarget.getYaw()-3);
-                //light.recieve_HorDist_Degrees_From_AutoAlign_For_LinusIndicatorSystem(cameraToTarget.getYaw()-3);
-                //light.recieve_HorDist_Degrees_From_AutoAlign_forSideDependantStrobeColor(cameraToTarget.getYaw()-3);
-                //light.fourStateProximity(cameraToTarget.getYaw()-3);
+                light.sendInfo(-1, cameraToTarget.getYaw()-3, true);
 
                 //SmartDashboard.putNumber("Y_SPED", ySpeed);
                 CommandScheduler.getInstance().schedule(new SetDriveAngle(180));
