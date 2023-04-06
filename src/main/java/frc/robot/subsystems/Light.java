@@ -34,6 +34,9 @@ public class Light extends SubsystemBase {
     public int getMode(){
         return mode;
     }
+    public void cycleMode(){
+        mode+=1;
+    }
 
     private boolean hasTarget;
     public boolean getHasTarget(){
