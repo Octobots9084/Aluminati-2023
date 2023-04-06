@@ -32,7 +32,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.arm.manual.ExtensionControl;
-import frc.robot.commands.arm.basic.instant.ParallalMoveArm;
+import frc.robot.commands.arm.basic.instant.ArmPosInstant;
 import frc.robot.commands.arm.manual.CGControl;
 import frc.robot.commands.spatula.SetSpatulaVoltageAndPos;
 import frc.robot.commands.swerve.SwerveControl;
@@ -186,7 +186,7 @@ public class Robot extends TimedRobot {
         Logging.getInstance();
         SpatulaFlip.getInstance();
         RollingPins.getInstance();
-        new ParallalMoveArm(ArmPositions.STOW);
+        new ArmPosInstant(ArmPositions.STOW);
     }
 
     private void resetRobotPoseAndGyro() {

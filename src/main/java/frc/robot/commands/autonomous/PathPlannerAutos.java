@@ -46,8 +46,6 @@ public final class PathPlannerAutos {
             Map.entry("IntakeCube", new AutoGroundIntakeCube()),
             Map.entry("StowArm", new Arm2PosStow(ArmPositions.STOW)),
             Map.entry("Wait1", new WaitCommand(1)),
-            Map.entry("AutoDriveOntoChargeStation", new AutoDriveOntoChargeStationforwards()),
-            Map.entry("AutoDriveOntoChargeStationBack", new AutoDriveOntoChargeStation()),
             Map.entry("OtherCollect",new SetSpatulaVoltageAndPos(-12, 0).alongWith(new Arm2PosStow(ArmPositions.STOW))),
             Map.entry("OtherIntakeIn",new SetSpatulaVoltageAndPos(-0.5, 0.34))
             ));
@@ -55,8 +53,8 @@ public final class PathPlannerAutos {
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
             DriveTrain.getInstance()::getPose2d,
             DriveTrain.getInstance().getPoseEstimator()::resetPose,
-            new PIDConstants(0, 0.001, 0),
-            new PIDConstants(2, 0, 0),
+            new PIDConstants(0, 0.00, 0),
+            new PIDConstants(.1, 0, 0),
             DriveTrain.getInstance()::driveAutos,
             eventMap,
             true,
@@ -76,7 +74,7 @@ public final class PathPlannerAutos {
 
     
 
-    public static CommandBase OneMeterSpin() {
+    public static CommandBase Square() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("TestingPath", new PathConstraints(1, 1)));
     }
 
