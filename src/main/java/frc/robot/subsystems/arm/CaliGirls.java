@@ -20,7 +20,7 @@ public class CaliGirls extends SubsystemBase {
     private SparkMaxPIDController pidControllerBottom;
 
     //this will disable the subsystem if set to false
-    private boolean isEnabled = true;
+    public boolean isEnabled = true;
 
     //these values are likely wrong right now, just testing. also, kA may be unnecessary
     private ArmFeedforward feedforward = new ArmFeedforward(0.01, 0.18, 0);
