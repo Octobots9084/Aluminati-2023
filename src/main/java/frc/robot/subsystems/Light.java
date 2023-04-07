@@ -68,7 +68,7 @@ public class Light extends SubsystemBase {
     public void lightAnimation_noDetection(){
 
     }
-    public void lightAnimation_ramseyTricolor(){
+    /*public void lightAnimation_ramseyTricolor(){
         if(hasTarget){
             if(Math.abs(degrees)<=2){
                 AdrUpdateStrobe(0, 255, 0, 1);
@@ -77,6 +77,18 @@ public class Light extends SubsystemBase {
             }
         } else {
             AdrUpdateStrobe(255, 0, 0, 1);
+        }
+        mode = LEDmodeNumber_ramseyThreeColor;
+    }*/
+    public void lightAnimation_ramseyTricolor(double degrees){
+        if(hasTarget){
+            if(Math.abs(degrees)<=2){
+                AdrUpdateStrobe(0, 255, 0, 1);
+            } else {
+                AdrUpdateStrobe(255, 0, 0, 1);
+            }
+        } else {
+            AdrUpdateStrobe(255, 0, 255, 1);
         }
         mode = LEDmodeNumber_ramseyThreeColor;
     }
@@ -178,7 +190,7 @@ public class Light extends SubsystemBase {
             break;
 
             case LEDmodeNumber_ramseyThreeColor:
-                lightAnimation_ramseyTricolor();
+                lightAnimation_ramseyTricolor(degrees);
             break;
 
             case LEDmodeNumber_Linus:
