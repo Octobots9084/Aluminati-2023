@@ -142,7 +142,7 @@ public class Robot extends TimedRobot {
     public void autonomousInit() {
         Robot.autoFlag = true;
         initializeAllSubsystems();
-
+        initializeDefaultCommands();
         
         //new driveToPos(new Pose2d(14.16, 1.4, new Rotation2d()));
         //CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
@@ -166,6 +166,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousPeriodic() {
+        DriveTrain.getInstance().updateSwerveStates();
         DriveTrain.getInstance().getPoseEstimator().updateOdometry();
         CommandScheduler.getInstance().run();
         Logging.updateLogging();

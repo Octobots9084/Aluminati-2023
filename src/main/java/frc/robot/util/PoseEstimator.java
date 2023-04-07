@@ -54,7 +54,7 @@ public class PoseEstimator {
 
     public final AtomicReference<Boolean> useAprilTags = new AtomicReference<Boolean>(false);
     public final AtomicReference<Double> prevTime = new AtomicReference<Double>(0.0);
-    public Field2d m_field;
+    public Field2d m_field = new Field2d();
 
     public PoseEstimator(Gyro gyro, SwerveDriveKinematics swerveDriveKinematics, SwerveModule[] swerveModules) {
         // this.leftCameraWrapper = new LeftCameraWrapper();
@@ -108,7 +108,7 @@ public class PoseEstimator {
         };
         Rotation2d rotation = new Rotation2d();
         if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) {
-            rotation = new Rotation2d(gyro.getUnwrappedRotation2d().getRadians());
+            rotation = new Rotation2d(gyro.getUnwrappedRotation2d().getRadians()+Math.PI);
         } else {
             rotation = new Rotation2d(gyro.getUnwrappedRotation2d().getRadians());
         }
@@ -175,7 +175,7 @@ public class PoseEstimator {
             };
             Rotation2d rotation = new Rotation2d();
             if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) {
-                rotation = new Rotation2d(gyro.getUnwrappedRotation2d().getRadians());
+                rotation = new Rotation2d(gyro.getUnwrappedRotation2d().getRadians()+Math.PI);
             } else {
                 rotation = new Rotation2d(gyro.getUnwrappedRotation2d().getRadians());
             }
@@ -197,7 +197,7 @@ public class PoseEstimator {
             };
             Rotation2d rotation = new Rotation2d();
             if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) {
-                rotation = new Rotation2d(gyro.getUnwrappedRotation2d().getRadians());
+                rotation = new Rotation2d(gyro.getUnwrappedRotation2d().getRadians()+Math.PI);
             } else {
                 rotation = new Rotation2d(gyro.getUnwrappedRotation2d().getRadians());
             }
