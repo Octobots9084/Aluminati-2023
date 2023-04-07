@@ -39,7 +39,7 @@ public class Logging {
     private Logging(CaliGirls caliGirls, ArmExtension armExtension, DriveTrain driveTrain, Gyro gyro) {
         Logging.caliGirls = caliGirls;
         // Logging.armExtension = armExtension;
-        // Logging.drive = driveTrain;
+        Logging.drive = driveTrain;
         // Logging.gyro = gyro;
         Logging.autoChooser = new SendableChooser<Command>();
         addAutoOptions();
