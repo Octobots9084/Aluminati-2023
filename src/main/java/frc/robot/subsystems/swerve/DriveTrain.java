@@ -181,7 +181,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     
-    public void driveAutos(SwerveModuleState[] states) {
+    public void driveAutos(ChassisSpeeds chassisSpeeds) {
         // SmartDashboard.putNumber("xSppedpath", chassisSpeeds.vxMetersPerSecond);
         // SmartDashboard.putNumber("ySppedpath", chassisSpeeds.vyMetersPerSecond);
         // SmartDashboard.putNumber("rotpoath", chassisSpeeds.omegaRadiansPerSecond);
@@ -189,9 +189,11 @@ public class DriveTrain extends SubsystemBase {
         // driveDashboard.setEntry("Y-Speed Path", chassisSpeeds.vyMetersPerSecond);
         // driveDashboard.setEntry("Rot Path", chassisSpeeds.omegaRadiansPerSecond);
 
-
-        for (int i = 0; i < states.length; i++) {
-            swerveModules[i].setDesiredState(states[i]);
+        var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(new ChassisSpeeds(
+            chassisSpeeds.vxMetersPerSecond,chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond));
+        
+        for (int i = 0; i < swerveModuleStates.length; i++) {
+            swerveModules[i].setDesiredState(swerveModuleStates[i]);
         }
     }
 

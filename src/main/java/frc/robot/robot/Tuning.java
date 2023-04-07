@@ -78,7 +78,7 @@ public class Tuning {
     public static final double SPATULA_ENCODER_RESOLUTION = 1.0;
 
     //Extension
-    public static final PIDConfig EXTENSION_PID = new PIDConfig(0.2, 0, 0);
+    public static final PIDConfig EXTENSION_PID = new PIDConfig(0.1, 0, 0);
     public static final SmartMotionConfig EXTENSION_SM = new SmartMotionConfig(true,
             0.7,
             0.0,
@@ -88,14 +88,14 @@ public class Tuning {
     public static final double EXTENSION_MIN_OUT = -1;
 
     //Drive Motors
-    public static final PIDConfig FL_DRIVE_PID = new PIDConfig(0.06, 0.00, 0, 0.06);
-    public static final PIDConfig FR_DRIVE_PID = new PIDConfig(0.06, 0.00, 0, 0.06);
-    public static final PIDConfig BL_DRIVE_PID = new PIDConfig(0.06, 0.00, 0, 0.06);
-    public static final PIDConfig BR_DRIVE_PID = new PIDConfig(0.06, 0.000, 0, 0.06);
+    public static final PIDConfig FL_DRIVE_PID = new PIDConfig(0.25, 0.1, 0, 0.025);
+    public static final PIDConfig FR_DRIVE_PID = new PIDConfig(0.25, 0.1, 0, 0.025);
+    public static final PIDConfig BL_DRIVE_PID = new PIDConfig(0.25, 0.1, 0, 0.025);
+    public static final PIDConfig BR_DRIVE_PID = new PIDConfig(0.25, 0.1, 0, 0.025);
     public static final MotionMagicConfig DM_MM_CONFIG = new MotionMagicConfig(
             new ArrayList<>(), true,
-            10000.0, 10000.0,
-            300, 2,
+            10000.0, 5000.0,
+            100, 1,
             60, 10);
 
     //Turn

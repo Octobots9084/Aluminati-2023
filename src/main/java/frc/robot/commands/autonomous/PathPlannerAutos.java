@@ -17,6 +17,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
+import frc.robot.commands.arm.basic.tolerance.CaliTopPosTolerance;
+import frc.robot.commands.arm.basic.tolerance.ExtensionPosTolerance;
 import frc.robot.commands.arm.yeet.Arm2PosStow;
 import frc.robot.commands.autonomous.arm.AutoConeLow;
 import frc.robot.commands.autonomous.arm.AutoConeMid;
@@ -29,6 +32,7 @@ import frc.robot.commands.autonomous.arm.AutoGroundIntakeCone;
 import frc.robot.commands.autonomous.arm.AutoGroundIntakeCube;
 import frc.robot.commands.spatula.SetSpatulaVoltageAndPos;
 import frc.robot.subsystems.arm.ArmPositions;
+import frc.robot.subsystems.arm.CaliGirls;
 import frc.robot.subsystems.swerve.DriveTrain;
 
 public final class PathPlannerAutos {
@@ -45,6 +49,7 @@ public final class PathPlannerAutos {
             Map.entry("IntakeCone", new AutoGroundIntakeCone()),
             Map.entry("IntakeCube", new AutoGroundIntakeCube()),
             Map.entry("StowArm", new Arm2PosStow(ArmPositions.STOW)),
+            Map.entry("DrivePosition", new ExtensionPosTolerance(0.0).andThen(new CaliTopPosTolerance(ArmPositions.PRE_DRIVE_POSITION.wrist)).andThen(new CaliBottomPosTolerance(ArmPositions.PRE_DRIVE_POSITION.armAngle, CaliGirls.getInstance().getBottomKf())).alongWith(new WaitCommand(0.3)).andThen(new CaliTopPosTolerance(ArmPositions.DRIVE_POSITION.wrist))),
             Map.entry("Wait1", new WaitCommand(1)),
             Map.entry("OtherCollect",new SetSpatulaVoltageAndPos(-12, 0).alongWith(new Arm2PosStow(ArmPositions.STOW))),
             Map.entry("OtherIntakeIn",new SetSpatulaVoltageAndPos(-0.5, 0.34))
@@ -53,9 +58,8 @@ public final class PathPlannerAutos {
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
             DriveTrain.getInstance()::getPose2d,
             DriveTrain.getInstance().getPoseEstimator()::resetPose,
-            DriveTrain.getInstance().getSwerveDriveKinematics(),
-            new PIDConstants(0.1, 0.00, 0),
-            new PIDConstants(0, 0, 0),
+            new PIDConstants(3.5, 0, 0),
+            new PIDConstants(2, 0, 0),
             DriveTrain.getInstance()::driveAutos,
             eventMap,
             true,
@@ -76,7 +80,7 @@ public final class PathPlannerAutos {
     
 
     public static CommandBase Square() {
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("TestingPath", new PathConstraints(1, 1)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("PlacingTesting", new PathConstraints(2, 2)));
     }
 
 
