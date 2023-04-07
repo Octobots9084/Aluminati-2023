@@ -32,14 +32,14 @@ public class Logging {
 
     private static CaliGirls caliGirls;
     // private static ArmExtension armExtension;
-    // private static DriveTrain drive;
+    private static DriveTrain drive;
     // private static Gyro gyro;
     private static SendableChooser<Command> autoChooser;
 
     private Logging(CaliGirls caliGirls, ArmExtension armExtension, DriveTrain driveTrain, Gyro gyro) {
         Logging.caliGirls = caliGirls;
         // Logging.armExtension = armExtension;
-        // Logging.drive = driveTrain;
+        Logging.drive = driveTrain;
         // Logging.gyro = gyro;
         Logging.autoChooser = new SendableChooser<Command>();
         addAutoOptions();
