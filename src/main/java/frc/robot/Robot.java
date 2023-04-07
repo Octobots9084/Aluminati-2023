@@ -91,6 +91,14 @@ public class Robot extends TimedRobot {
         LiveWindow.setEnabled(false);
         Logging.addAutoChooser();
         PathPlannerServer.startServer(5811);
+
+        if (!ControlMap.DRIVER_BUTTONS.getRawButton(14)) {
+            // SmartDashboard.putBoolean("14", true);
+            new DriverButtonConfig().initTeleop();
+        } else {
+            // SmartDashboard.putBoolean("14", false);
+            new ButtonConfig().initTeleop();
+        }
     }
 
     @Override
@@ -114,13 +122,6 @@ public class Robot extends TimedRobot {
     public void teleopInit() {
         // SmartDashboard.putNumber("Initialized", 1);
         // SmartDashboard.putBoolean("14actual", ControlMap.DRIVER_BUTTONS.getRawButton(14));
-        if (!ControlMap.DRIVER_BUTTONS.getRawButton(14)) {
-            // SmartDashboard.putBoolean("14", true);
-            new DriverButtonConfig().initTeleop();
-        } else {
-            // SmartDashboard.putBoolean("14", false);
-            new ButtonConfig().initTeleop();
-        }
         CommandScheduler.getInstance().cancelAll();
         initializeAllSubsystems();
         DriveTrain.getInstance().setUseDriverAssist(false);
