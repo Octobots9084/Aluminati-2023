@@ -7,7 +7,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 import com.revrobotics.SparkMaxPIDController;
-
 import edu.wpi.first.math.controller.ArmFeedforward;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.robot.Logging;
@@ -20,6 +19,8 @@ public class CaliGirls extends SubsystemBase {
     private SparkMaxPIDController pidControllerTop;
     private SparkMaxPIDController pidControllerBottom;
 
+    //this will disable the subsystem if set to false
+    private boolean isEnabled = true;
 
     //these values are likely wrong right now, just testing. also, kA may be unnecessary
     private ArmFeedforward feedforward = new ArmFeedforward(0.01, 0.18, 0);
@@ -110,9 +111,13 @@ public class CaliGirls extends SubsystemBase {
 
     public void setTopPos(double angle) {
         if (angle > 0.69) {
+            if(isEnabled){
             angle = 0.69;
+            }
         } else if (angle < 0.232) {
+            if(isEnabled){
             angle = 0.232;
+            }
         }
         lastPosTop = angle;
         pidControllerTop.setReference(angle, ControlType.kPosition);
@@ -123,9 +128,13 @@ public class CaliGirls extends SubsystemBase {
     public void setBottomPos(double angle) {
         double lower = 0;//getLowerBounding();
         if (angle > 0.84) {
+            if(isEnabled){
             angle = 0.84;
+            }
         } else if (angle < lower) {
+            if(isEnabled){
             angle = lower;
+            }
         }
 
         lastPosBottom = angle;

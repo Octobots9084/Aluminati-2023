@@ -31,16 +31,16 @@ public class Logging {
     public static final RSTab autoDashboard = robotShuffleboard.getTab("auto");
 
     private static CaliGirls caliGirls;
-    private static ArmExtension armExtension;
-    private static DriveTrain drive;
-    private static Gyro gyro;
+    // private static ArmExtension armExtension;
+    // private static DriveTrain drive;
+    // private static Gyro gyro;
     private static SendableChooser<Command> autoChooser;
 
     private Logging(CaliGirls caliGirls, ArmExtension armExtension, DriveTrain driveTrain, Gyro gyro) {
         Logging.caliGirls = caliGirls;
-        Logging.armExtension = armExtension;
-        Logging.drive = driveTrain;
-        Logging.gyro = gyro;
+        // Logging.armExtension = armExtension;
+        // Logging.drive = driveTrain;
+        // Logging.gyro = gyro;
         Logging.autoChooser = new SendableChooser<Command>();
         addAutoOptions();
     }
@@ -70,9 +70,9 @@ public class Logging {
 
     public static void updateLogging() {
         // //Drive
-        // driveDashboard.setEntry("X-Pos", drive.getPoseEstimator().getRobotPose().getX());
-        // driveDashboard.setEntry("Y-Pos", drive.getPoseEstimator().getRobotPose().getY());
-        // driveDashboard.setEntry("Rot Deg", drive.getPoseEstimator().getRobotPose().getRotation().getDegrees());
+        driveDashboard.setEntry("X-Pos", drive.getPoseEstimator().getRobotPose().getX());
+        driveDashboard.setEntry("Y-Pos", drive.getPoseEstimator().getRobotPose().getY());
+        driveDashboard.setEntry("Rot Deg", drive.getPoseEstimator().getRobotPose().getRotation().getDegrees());
 
         // // driveDashboard.setEntry("Gyro Pitch", gyro.getRoll());
 
