@@ -110,6 +110,9 @@ public class DriveTrain extends SubsystemBase {
         this.gyro = Gyro.getInstance();
         this.swerveDriveKinematics = new SwerveDriveKinematics(
                 swervePosition[0], swervePosition[1], swervePosition[2], swervePosition[3]);
+            
+
+        
 
         swerveDrivePoseEstimator = new PoseEstimator(this.gyro, swerveDriveKinematics, swerveModules);
 
@@ -178,7 +181,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     
-    public void driveAutos(ChassisSpeeds chassisSpeeds) {
+    public void driveAutos(SwerveModuleState[] states) {
         // SmartDashboard.putNumber("xSppedpath", chassisSpeeds.vxMetersPerSecond);
         // SmartDashboard.putNumber("ySppedpath", chassisSpeeds.vyMetersPerSecond);
         // SmartDashboard.putNumber("rotpoath", chassisSpeeds.omegaRadiansPerSecond);
@@ -186,11 +189,9 @@ public class DriveTrain extends SubsystemBase {
         // driveDashboard.setEntry("Y-Speed Path", chassisSpeeds.vyMetersPerSecond);
         // driveDashboard.setEntry("Rot Path", chassisSpeeds.omegaRadiansPerSecond);
 
-        var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(new ChassisSpeeds(
-            chassisSpeeds.vxMetersPerSecond,chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond));
-        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, MAX_SPEED);
-        for (int i = 0; i < swerveModuleStates.length; i++) {
-            swerveModules[i].setDesiredState(swerveModuleStates[i]);
+
+        for (int i = 0; i < states.length; i++) {
+            swerveModules[i].setDesiredState(states[i]);
         }
     }
 
