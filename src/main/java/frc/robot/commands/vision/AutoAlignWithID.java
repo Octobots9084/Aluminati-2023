@@ -38,7 +38,7 @@ public class AutoAlignWithID extends CommandBase {
                 }
             }
         } catch (Exception e) {
-            // TODO: handle exception
+            //null pointer haha
         }
 
     }
