@@ -5,6 +5,7 @@ import org.photonvision.targeting.PhotonTrackedTarget;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.swerve.SetDriveAngle;
+import frc.robot.subsystems.Light;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
 import frc.robot.subsystems.swerve.DriveTrain;
@@ -16,6 +17,7 @@ public class AutoAlign extends CommandBase {
     private final CaliGirls caliGirls;
     private PhotonTrackedTarget cameraToTarget;
     private double ySpeed = 0;
+    private Light light;
 
     public AutoAlign() {
         // Initialization
@@ -23,6 +25,7 @@ public class AutoAlign extends CommandBase {
         this.vision = Vision.getInstance();
         this.caliGirls = CaliGirls.getInstance();
         this.cameraToTarget = null;
+        this.light = Light.getInstance();
     }
 
     @Override
@@ -37,6 +40,9 @@ public class AutoAlign extends CommandBase {
                     end(true);
                 }
             }
+        // } catch (Exception e) {
+        //     // TO DO: handle exception
+        // }
     }
 
     @Override
@@ -46,11 +52,14 @@ public class AutoAlign extends CommandBase {
                 if (vision.getBestTarget() != null) {
                     cameraToTarget = vision.getBestTarget();
                 } else {
+                    light.sendInfo(-1, 420, false);
                     end(true);
                     // driveTrain.drive(0, 0, 0, true);
                 }
 
                 ySpeed = (cameraToTarget.getYaw()-3) * 0.1;
+                light.sendInfo(-1, cameraToTarget.getYaw()-3, true);
+
                 //SmartDashboard.putNumber("Y_SPED", ySpeed);
                 CommandScheduler.getInstance().schedule(new SetDriveAngle(180));
                 driveTrain.drive(driveTrain.previousXSpeed, ySpeed, 0, true);
