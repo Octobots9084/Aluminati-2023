@@ -36,6 +36,7 @@ public class SpatulaFlip extends SubsystemBase {
         pidControllerSpatula.setI(Tuning.SPATULA_PID.getI());
         pidControllerSpatula.setD(Tuning.SPATULA_PID.getD());
         pidControllerSpatula.setFF(Tuning.SPATULA_PID.getF());
+        pidControllerSpatula.setIZone(.1);
         pidControllerSpatula.setOutputRange(-1.0, 1.0);
 
         this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);

@@ -1,4 +1,5 @@
 package frc.robot.robot;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -23,6 +24,7 @@ import frc.robot.commands.swerve.SetDriverAssist;
 import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.commands.vision.AutoAlign;
 import frc.robot.commands.vision.AutoAlignWithID;
+import frc.robot.subsystems.Light;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
 
@@ -33,6 +35,9 @@ public class DriverButtonConfig {
 		//Button 2 reserved for Hippo Out
 
 		//Button 3 reserved for victory dance
+
+
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 5).onTrue(new InstantCommand(() -> Light.getInstance().cycleMode()));
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
 				.onTrue(new ZeroGyro());
