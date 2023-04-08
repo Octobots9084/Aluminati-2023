@@ -88,7 +88,7 @@ public class SwerveModule {
         // Drive Motor
         this.driveMotor = new WPI_TalonFX(driveMotorChannel);
         MotorUtil.setupMotionMagic(FeedbackDevice.IntegratedSensor, DM_MM_PID, Tuning.DM_MM_CONFIG, driveMotor);
-        driveMotor.configAllowableClosedloopError(0, 5);
+        driveMotor.configAllowableClosedloopError(0, 200);
         driveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         driveMotor.setStatusFramePeriod(21, 10);
         driveMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
