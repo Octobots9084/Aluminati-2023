@@ -29,10 +29,8 @@ public class ConeInjectHigh extends SequentialCommandGroup {
             new WaitCommand(0.25),
             new IntakeSpeedInstant(3),
             new WaitCommand(0.05),
-            new ExtensionPosInstant(0),
-            new WaitCommand(0.05),
-            new CaliBottomPosInstant(ArmPositions.PRE_CONE_PLACE_HIGH.armAngle, CaliGirls.getInstance().getBottomKf()),
-            new WaitCommand(0.75),
+            new ExtensionPosTolerance(0),
+            new CaliBottomPosTolerance(ArmPositions.PRE_CONE_PLACE_HIGH.armAngle, CaliGirls.getInstance().getBottomKf()),
             new ArmPosInstant(ArmPositions.STOW),
             new IntakeSpeedInstant(0));
     }

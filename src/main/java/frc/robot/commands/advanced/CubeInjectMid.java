@@ -16,7 +16,6 @@ public class CubeInjectMid extends SequentialCommandGroup {
                 // new MoveArmRotationToPos(pos, caliGirls.getBottomKf()),
                 new ExtensionPosTolerance(0).withTimeout(1),
                 new CaliBottomPosTolerance(ArmPositions.CUBE_PLACE_MID.armAngle, 0),
-                new WaitCommand(0.2),
                 new CaliTopPosInstant(ArmPositions.CUBE_PLACE_MID.wrist),
                 new IntakeSpeedInstant(3),
                 new WaitCommand(0.5),
