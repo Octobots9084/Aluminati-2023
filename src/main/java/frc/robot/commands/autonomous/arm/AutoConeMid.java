@@ -25,9 +25,7 @@ public class AutoConeMid extends SequentialCommandGroup{
         addCommands(
             new IntakeSpeedInstant(-10),
             new CaliBottomPosTolerance(aPosition.armAngle, aPosition.angleHold), new CaliTopPosTolerance(aPosition.wrist), 
-            new WaitCommand(.2),
             new ExtensionPosTolerance(aPosition.extension),
-            new WaitCommand(0.4),
             new CaliGirlsBottomMoveDownALittle(),
             new WaitCommand(.25),
             new IntakeSpeedInstant(1),

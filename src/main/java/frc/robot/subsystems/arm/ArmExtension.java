@@ -20,7 +20,7 @@ public class ArmExtension extends SubsystemBase {
     private double gearing = 5.0 / 15.0;
     public double lastpos = 0;
 
-    private boolean isEnabled = new CaliGirls().isEnabled;
+    private boolean isEnabled = CaliGirls.isEnabled;
 
     public static ArmExtension getInstance() {
         if (armExtension == null) {

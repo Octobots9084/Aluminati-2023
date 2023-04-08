@@ -59,7 +59,7 @@ public final class PathPlannerAutos {
             DriveTrain.getInstance()::getPose2d,
             DriveTrain.getInstance().getPoseEstimator()::resetPose,
             new PIDConstants(3.4,0, 0),
-            new PIDConstants(1.5, 0, 0),
+            new PIDConstants(1, 0.05, 0),
             DriveTrain.getInstance()::driveAutos,
             eventMap,
             true,
@@ -80,7 +80,9 @@ public final class PathPlannerAutos {
     
 
     public static CommandBase Square() {
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("TestingPath", new PathConstraints(3, 2)));
+
+
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("PlacingTesting", new PathConstraints(3, 2)));
     }
 
 
