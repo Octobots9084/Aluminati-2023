@@ -201,9 +201,9 @@ public class Robot extends TimedRobot {
     }
 
     private void initializeDefaultCommands() {
-        CaliGirls.getInstance().lastPosBottom = ArmPositions.STOW.armAngle;
-        CaliGirls.getInstance().lastPosTop = ArmPositions.STOW.wrist;
-        ArmExtension.getInstance().lastpos = ArmPositions.STOW.extension;
+        CaliGirls.getInstance().lastPosBottom = CaliGirls.getInstance().getBottomPos();
+        CaliGirls.getInstance().lastPosTop = CaliGirls.getInstance().getTopPos();
+        ArmExtension.getInstance().lastpos = ArmExtension.getInstance().getPosition();
         CommandScheduler.getInstance().setDefaultCommand(DriveTrain.getInstance(), new SwerveControl());
         CommandScheduler.getInstance().setDefaultCommand(CaliGirls.getInstance(), new CGControl());
         CommandScheduler.getInstance().setDefaultCommand(ArmExtension.getInstance(), new ExtensionControl());

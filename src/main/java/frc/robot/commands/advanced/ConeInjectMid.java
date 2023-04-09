@@ -28,6 +28,7 @@ public class ConeInjectMid extends SequentialCommandGroup {
                 // new IntakeSpeedInstant(3),
                 new WaitCommand(0.15),
                 new ExtensionPosInstant(0),
+                new WaitCommand(0.25),
                 new ArmPosInstant(ArmPositions.STOW));
                 new IntakeSpeedInstant(0);
     }

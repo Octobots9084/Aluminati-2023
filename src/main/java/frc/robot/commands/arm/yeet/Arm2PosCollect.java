@@ -13,7 +13,8 @@ public class Arm2PosCollect extends SequentialCommandGroup {
     CaliGirls caliGirls;
     ArmExtension armExtension;
 
-    public Arm2PosCollect(ArmPositions aPosition) {
+    public 
+    Arm2PosCollect(ArmPositions aPosition) {
         this.aPosition = aPosition;
         this.caliGirls = CaliGirls.getInstance();
         this.armExtension = ArmExtension.getInstance();
