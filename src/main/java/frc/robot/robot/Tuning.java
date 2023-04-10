@@ -78,7 +78,7 @@ public class Tuning {
     public static final double SPATULA_ENCODER_RESOLUTION = 1.0;
 
     //Extension
-    public static final PIDConfig EXTENSION_PID = new PIDConfig(0.8, 0, 0);
+    public static final PIDConfig EXTENSION_PID = new PIDConfig(0.5, 0, 0);
     public static final SmartMotionConfig EXTENSION_SM = new SmartMotionConfig(true,
             0.7,
             0.0,
