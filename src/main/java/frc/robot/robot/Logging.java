@@ -49,7 +49,7 @@ public class Logging {
     private void addAutoOptions() {
         //
         autoChooser.setDefaultOption("No Movement", new AutoConeTop());
-        autoChooser.addOption("GetOutOfDaWay", PathPlannerAutos.GetOutOfDaWay());
+        autoChooser.addOption("DriveForward", PathPlannerAutos.CableSide());
         // autoChooser.addOption("DONNOTUSEBalance Charge Station", PathPlannerAutos.PlaceConeAndBalance());
         // autoChooser.addOption("Move and Grab Cone Bottom", PathPlannerAutos.PlaceConeAndMoveBackBottom());
         // autoChooser.addOption("Move and Grab Cone Top", PathPlannerAutos.PlaceConeAndMoveBackTop());
