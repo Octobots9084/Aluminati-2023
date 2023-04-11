@@ -85,8 +85,8 @@ public class PoseEstimator {
                 new MatBuilder<>(Nat.N3(), Nat.N1()).fill(0.01, 0.01, 0.01) //Vision Measurement stdev
         );
 
-        // var e = Executors.newScheduledThreadPool(2);
-        // e.scheduleWithFixedDelay(this::updateOdometry, 5, 15, TimeUnit.MILLISECONDS);
+        var e = Executors.newScheduledThreadPool(1);
+        e.scheduleWithFixedDelay(this::updateOdometry, 5, 15, TimeUnit.MILLISECONDS);
         robotPose.set(new Pose2d());
         prevTime.set(Timer.getFPGATimestamp());
         this.swerveDrivePoseEstimator.getEstimatedPosition();
