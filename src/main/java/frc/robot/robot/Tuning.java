@@ -87,11 +87,12 @@ public class Tuning {
     public static final double EXTENSION_MAX_OUT = 1;
     public static final double EXTENSION_MIN_OUT = -1;
 
+    
     //Drive Motors
-    public static final PIDConfig FL_DRIVE_PID = new PIDConfig(0.3, 0.00, 0.0, 0.);
-    public static final PIDConfig FR_DRIVE_PID = new PIDConfig(0.3, 0.00, 0.0, 0.);
-    public static final PIDConfig BL_DRIVE_PID = new PIDConfig(0.3, 0.00, 0.0, 0.);
-    public static final PIDConfig BR_DRIVE_PID = new PIDConfig(0.3, 0.000, 0.0, 0.);
+    public static final PIDConfig FL_DRIVE_PID = new PIDConfig(0.76235, 0.00, 0.0, 0.);
+    public static final PIDConfig FR_DRIVE_PID = new PIDConfig(0.65149, 0.00, 0.0, 0.);
+    public static final PIDConfig BL_DRIVE_PID = new PIDConfig(0.35147, 0.00, 0.0, 0.);
+    public static final PIDConfig BR_DRIVE_PID = new PIDConfig(0.33818, 0.000, 0.0, 0.);
 //     public static final PIDConfig FL_DRIVE_PID = new PIDConfig(0.5, 0.00, 0.02, 0.);
 //     public static final PIDConfig FR_DRIVE_PID = new PIDConfig(0.5, 0.00, 0.02, 0.);
 //     public static final PIDConfig BL_DRIVE_PID = new PIDConfig(0.5, 0.00, 0.02, 0.);
