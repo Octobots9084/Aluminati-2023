@@ -46,6 +46,8 @@ public class AutoAlign extends CommandBase {
         // }
     }
 
+    public int detectioncycles = 0;
+
     @Override
     public void execute() {
         try {
@@ -53,18 +55,29 @@ public class AutoAlign extends CommandBase {
                 if (vision.getBestTarget() != null) {
                     cameraToTarget = vision.getBestTarget();
                             SmartDashboard.putNumber("Degrees", cameraToTarget.getYaw()-3);
-                            light.setDegrees(cameraToTarget.getYaw()-3);
-                            light.setHasTarget(true);
-                            light.lightUpdateControl(-1);
+                            //light.setDegrees(cameraToTarget.getYaw()-3);
+                            //light.setHasTarget(true);
+                            //light.lightUpdateControl(-1);
+                            ySpeed = (cameraToTarget.getYaw()-3) * 0.1;
+                            SmartDashboard.putNumber("Degrees to target", cameraToTarget.getYaw()-3);
+                            
+                            if(cameraToTarget.getYaw()-3<0){
+                                light.AdrUpdateStrobe(0, 0, 255, 1);
+                            } else {
+                                light.AdrUpdateStrobe(255, 0, 255, 1);
+                            }
+                            
                 } else {
-                            SmartDashboard.putString("target?", "no target");
-                            light.setHasTarget(false);
-                            light.lightUpdateControl(-1);
+                            ySpeed = 0;
+                            //light.setHasTarget(false);
+                            //light.lightUpdateControl(-1);
+                            light.AdrUpdateStrobe(255, 0, 0, 1);
                     end(true);
                     // driveTrain.drive(0, 0, 0, true);
                 }
 
-                ySpeed = (cameraToTarget.getYaw()-3) * 0.1;
+                
+                
 
 
                 //SmartDashboard.putNumber("Y_SPED", ySpeed);

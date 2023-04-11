@@ -37,7 +37,8 @@ public class DriverButtonConfig {
 		//Button 3 reserved for victory dance
 
 
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 5).onTrue(new InstantCommand(() -> Light.getInstance().cycleMode()));
+		//new JoystickButton(ControlMap.DRIVER_BUTTONS, 5).onTrue(new InstantCommand(() -> Light.getInstance().cycleMode()));
+		//new JoystickButton(ControlMap.DRIVER_BUTTONS, 15).onTrue(new InstantCommand(() -> Light.getInstance().AdrUpdateStrobe(255, 255, 255, 0)));
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
 				.onTrue(new ZeroGyro());

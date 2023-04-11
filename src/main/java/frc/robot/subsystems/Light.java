@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.led.Animation;
 import com.ctre.phoenix.led.CANdle;
 import com.ctre.phoenix.led.StrobeAnimation;
 
@@ -8,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.robot.MotorIDs;
 
 public class Light extends SubsystemBase {
-    private CANdle candle;
+    public CANdle candle;
     private static Light light;
     private int strobeSpeed = 1; // must be between 0 and 1
     private double lastStrobeSpeedThatWasSet; // we can't get speed from BaseTwoSizeAnimation, so we have to store it.
@@ -26,6 +27,7 @@ public class Light extends SubsystemBase {
     public final int LEDmodeNumber_fourState = 3;
     public final int LEDmodeNumber_sideDependant = 4;
     public final int LEDmodeNumber_InverseOfDistance = 5;
+    public final int LEDmodeNumber_Annie3d = 6;
 
     private int mode = 1;
     public void setMode(int modeID){
@@ -66,13 +68,10 @@ public class Light extends SubsystemBase {
     }
 
 
-    private int RTC_iterations = 0;
     public void lightAnimation_noDetection(){
 
     }
-    public void lightAnimation_ramseyTricolor(){
-        RTC_iterations+=1;
-        SmartDashboard.putNumber("RTC_iterations", RTC_iterations);
+    public void lightAnimation_ramseyThreeColor(){
         if(hasTarget){
             if(Math.abs(degrees)<=1){
                 AdrUpdateStrobe(0, 255, 0, 1);
@@ -134,10 +133,21 @@ public class Light extends SubsystemBase {
         candle.animate(strobeAnimation);
         mode = LEDmodeNumber_InverseOfDistance;
     }
-
+    public void lightAnimation_Annie3d(){
+        if(hasTarget){
+            if(Math.abs(degrees /*&& Is close enough*/)<=1){
+                AdrUpdateStrobe(0, 255, 0, 1);
+            } else {
+                AdrUpdateStrobe(255, 0, 0, 1);
+            }
+        } else {
+            AdrUpdateStrobe(0, 0, 0, 1);
+        }
+        mode = LEDmodeNumber_Annie3d;
+    }
 
     public void AdrUpdateStrobe(int Red, int Green, int Blue, double Speed){
-        if(printCANdleDataToSmartDashboard){
+        /*if(printCANdleDataToSmartDashboard){
             SmartDashboard.putNumber("LastAssigned_Red", Red);
             SmartDashboard.putNumber("LastAssigned_Green", Green);
             SmartDashboard.putNumber("LastAssigned_Blue", Blue);
@@ -171,6 +181,11 @@ public class Light extends SubsystemBase {
                 SmartDashboard.putNumber("CurrentSpeed", Speed);
             }
         }
+        candle.animate(strobeAnimation);*/
+        strobeAnimation.setR(Red);
+        strobeAnimation.setG(Green);
+        strobeAnimation.setB(Blue);
+        strobeAnimation.setSpeed(Speed);
         candle.animate(strobeAnimation);
     }
 
@@ -188,7 +203,7 @@ public class Light extends SubsystemBase {
 
             //case LEDmodeNumber_ramseyThreeColor:
             case 1:
-                lightAnimation_ramseyTricolor();
+                lightAnimation_ramseyThreeColor();
             break;
 
             //case LEDmodeNumber_Linus:
@@ -211,6 +226,10 @@ public class Light extends SubsystemBase {
                 lightAnimation_InverseOfDistance();
             break;
 
+            case 6:
+                lightAnimation_Annie3d();
+            break;
+
             default:
                 lightUpdateControl(DEFAULT_MODE);
             break;
@@ -223,7 +242,7 @@ public class Light extends SubsystemBase {
 
     @Override
     public void periodic() {
-        lightUpdateControl(mode);
-        SmartDashboard.putNumber("degrees", degrees);
+        //lightUpdateControl(mode);
+        //SmartDashboard.putNumber("degrees", degrees);
     }
 }
