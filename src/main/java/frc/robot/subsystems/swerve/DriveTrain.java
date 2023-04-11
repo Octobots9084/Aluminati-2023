@@ -52,7 +52,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     //Drive Speed Constants
-    public static final double MAX_SPEED = 10; // m/s
+    public static final double MAX_SPEED = 5; // m/s
     public static final double MAX_ACCELERATION = 0.5; // m/s
     public static final double MAX_ANGULAR_SPEED = Math.PI * 3 * 0.8; // rad/s
     public static final double MAX_ANGULAR_ACCELERATION = Math.PI * 3; // rad/s
@@ -84,7 +84,7 @@ public class DriveTrain extends SubsystemBase {
     private final PoseEstimator swerveDrivePoseEstimator;
 
     private DriveTrain() {
-        this.daController = new PIDController(0.1, 0.0001, 0);
+        this.daController = new PIDController(0.07, 0.001, 0.0);
         //Position relative to center of robot -> (0,0) is the center (m)
         // swervePosition[0] = new Translation2d(WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
         // swervePosition[1] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);

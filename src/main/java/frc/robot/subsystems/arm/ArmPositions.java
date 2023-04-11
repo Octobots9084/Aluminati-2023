@@ -2,6 +2,7 @@ package frc.robot.subsystems.arm;
 
 public enum ArmPositions {
     AUTO_ALIGN(0.785, 0.06, 0, 0.35), //good 3/28
+    
     STOW(.48, 0, 0, .242), //good 3/28
     PRE_CONE_PLACE_HIGH(.785, 0.09, 71, .567), //correct 3/27
     PRE_CONE_PLACE_MID(.742, 0.06, 19.1, .619), //good 3/28

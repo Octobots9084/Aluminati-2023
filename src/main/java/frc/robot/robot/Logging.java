@@ -6,6 +6,7 @@ import frc.robot.commands.autonomous.PathPlannerAutos;
 import frc.robot.commands.autonomous.arm.AutoConeTop;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.CaliGirls;
+import frc.robot.subsystems.spatula.SpatulaFlip;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 import frc.robot.util.shuffleboard.RSTab;
@@ -31,14 +32,14 @@ public class Logging {
     public static final RSTab autoDashboard = robotShuffleboard.getTab("auto");
 
     private static CaliGirls caliGirls;
-    // private static ArmExtension armExtension;
+    private static ArmExtension armExtension;
     private static DriveTrain drive;
     // private static Gyro gyro;
     private static SendableChooser<Command> autoChooser;
 
     private Logging(CaliGirls caliGirls, ArmExtension armExtension, DriveTrain driveTrain, Gyro gyro) {
         Logging.caliGirls = caliGirls;
-        // Logging.armExtension = armExtension;
+        Logging.armExtension = armExtension;
         Logging.drive = driveTrain;
         // Logging.gyro = gyro;
         Logging.autoChooser = new SendableChooser<Command>();
@@ -77,17 +78,17 @@ public class Logging {
         // // driveDashboard.setEntry("Gyro Pitch", gyro.getRoll());
 
         // armDashboard.setEntry("spatula", SpatulaFlip.getInstance().getSpatulaPos());
-        // armDashboard.setEntry("spatula set", SpatulaFlip.getInstance().lastPosSpatula);
+        armDashboard.setEntry("spatula set", SpatulaFlip.getInstance().lastPosSpatula);
         // // armDashboard.setEntry("spatula pos", SpatulaFlip.getInstance());
         
 
         // // //Arm
         // armDashboard.setEntry("Arm Extension", armExtension.getPosition());
-        // armDashboard.setEntry("Ext Set", armExtension.lastpos);
-        armDashboard.setEntry("Claw Rotation", caliGirls.getTopPos());
-        // armDashboard.setEntry("Claw Set Rotation", caliGirls.lastPosTop);
-        armDashboard.setEntry("Arm Rotation", caliGirls.lastPosBottom);
-        // armDashboard.setEntry("Arm Real", caliGirls.getBottomPos());
+        armDashboard.setEntry("Ext Set", armExtension.lastpos);
+        // armDashboard.setEntry("Claw Rotation", caliGirls.getTopPos());
+        armDashboard.setEntry("Claw Set Rotation", caliGirls.lastPosTop);
+        // armDashboard.setEntry("Arm Rotation", caliGirls.lastPosBottom);
+        armDashboard.setEntry("Arm Real", caliGirls.getBottomPos());
 
 
     }
