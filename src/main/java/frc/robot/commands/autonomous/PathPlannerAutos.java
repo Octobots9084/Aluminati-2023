@@ -58,8 +58,8 @@ public final class PathPlannerAutos {
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
             DriveTrain.getInstance()::getPose2d,
             DriveTrain.getInstance().getPoseEstimator()::resetPose,
-            new PIDConstants(3.4,0, 0),
-            new PIDConstants(1, 0.05, 0),
+            new PIDConstants(1.5,0, 0),
+            new PIDConstants(0.3, 0, 0),
             DriveTrain.getInstance()::driveAutos,
             eventMap,
             true,
@@ -72,9 +72,9 @@ public final class PathPlannerAutos {
         return autoBuilder.fullAuto(pathgroup);
     }
 
-    public static CommandBase Onemeter() {
+    public static CommandBase CableSide() {
         DriveTrain.getInstance().setUseDriverAssist(false);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("1MeterForward", new PathConstraints(1, 0.1)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("1-a-b 2 ALL CONES Engage", new PathConstraints(3.5, 2.5)));
     }
 
     
