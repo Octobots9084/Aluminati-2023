@@ -262,8 +262,11 @@ public class DriveTrain extends SubsystemBase {
         
         double vel = daController.calculate(diff);
         if (MathUtil.isWithinTolerance(diff, 0, 0.03));
-        if (vel > 5) {
-            vel = 5;
+        if (vel > 2.5) {
+            vel = 2.5;
+        }
+        if (vel < -2.5) {
+            vel = -2.5;
         }
         return vel;
     }
