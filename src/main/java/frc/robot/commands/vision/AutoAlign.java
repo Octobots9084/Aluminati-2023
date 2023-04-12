@@ -46,7 +46,10 @@ public class AutoAlign extends CommandBase {
         // }
     }
 
-    public int detectioncycles = 0;
+    private double degreesToTarget;
+    private boolean isCloseEnough; // to reliably place high cone
+    private boolean isAligned;
+    private double ALIGNMENT_TOLERANCE; // THIS NEEDS TO BE TUNED
 
     @Override
     public void execute() {
@@ -54,24 +57,24 @@ public class AutoAlign extends CommandBase {
             if (vision.getTapeCamHasTarget()) {
                 if (vision.getBestTarget() != null) {
                     cameraToTarget = vision.getBestTarget();
-                            SmartDashboard.putNumber("Degrees", cameraToTarget.getYaw()-3);
-                            //light.setDegrees(cameraToTarget.getYaw()-3);
-                            //light.setHasTarget(true);
-                            //light.lightUpdateControl(-1);
-                            ySpeed = (cameraToTarget.getYaw()-3) * 0.1;
-                            SmartDashboard.putNumber("Degrees to target", cameraToTarget.getYaw()-3);
-                            
-                            if(cameraToTarget.getYaw()-3<0){
-                                light.AdrUpdateStrobe(0, 0, 255, 1);
-                            } else {
-                                light.AdrUpdateStrobe(255, 0, 255, 1);
-                            }
+                    degreesToTarget = cameraToTarget.getYaw()-3;
+                    ySpeed = degreesToTarget * 0.1;
+                    SmartDashboard.putNumber("areaFilled", cameraToTarget.getArea());
+                    if(Math.abs(degreesToTarget)<ALIGNMENT_TOLERANCE){
+                        isAligned = true;
+                    } else {
+                        isAligned = false;
+                    }
+
+                    // To Do:
+                    // if no target, red flash
+                    // if target unaligned, red solid
+                    // if aligned & far away, blue
+                    // if ready, green
+                    
                             
                 } else {
-                            ySpeed = 0;
-                            //light.setHasTarget(false);
-                            //light.lightUpdateControl(-1);
-                            light.AdrUpdateStrobe(255, 0, 0, 1);
+                    ySpeed = 0;
                     end(true);
                     // driveTrain.drive(0, 0, 0, true);
                 }

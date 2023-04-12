@@ -21,6 +21,7 @@ public class Light extends SubsystemBase {
 
     private final int DEFAULT_MODE = 1;
 
+    /*
     public final int LEDmodeNumber_noDetection = 0;
     public final int LEDmodeNumber_ramseyThreeColor = 1;
     public final int LEDmodeNumber_Linus = 2;
@@ -28,8 +29,10 @@ public class Light extends SubsystemBase {
     public final int LEDmodeNumber_sideDependant = 4;
     public final int LEDmodeNumber_InverseOfDistance = 5;
     public final int LEDmodeNumber_Annie3d = 6;
+    */
 
-    private int mode = 1;
+
+    /*private int mode = 1;
     public void setMode(int modeID){
         mode = modeID;
     }
@@ -38,7 +41,7 @@ public class Light extends SubsystemBase {
     }
     public void cycleMode(){
         mode+=1;
-    }
+    }*/
 
     private boolean hasTarget;
     public boolean getHasTarget(){
@@ -67,7 +70,7 @@ public class Light extends SubsystemBase {
         this.candle = new CANdle(MotorIDs.CANDLE_ID);
     }
 
-
+    /*
     public void lightAnimation_noDetection(){
 
     }
@@ -81,7 +84,7 @@ public class Light extends SubsystemBase {
         } else {
             AdrUpdateStrobe(255, 0, 255, 1);
         }
-        mode = LEDmodeNumber_ramseyThreeColor;
+        //mode = LEDmodeNumber_ramseyThreeColor;
     }
     public void lightAnimation_Linus(){
         if(degrees<0){// distance needs to be positive
@@ -94,7 +97,7 @@ public class Light extends SubsystemBase {
         } else {
             AdrUpdateStrobe(0, 0, 0, 0);
         }
-        mode = LEDmodeNumber_Linus;
+        //mode = LEDmodeNumber_Linus;
     }
     public void lightAnimation_fourState(){
         if(degrees<0){degrees*=-1;}
@@ -107,7 +110,7 @@ public class Light extends SubsystemBase {
         } else {
             AdrUpdateStrobe(0, 0, 0, 0);
         }
-        mode = LEDmodeNumber_fourState;
+        //mode = LEDmodeNumber_fourState;
     }
     public void lightAnimation_sideDependant(){
         if(Math.abs(degrees)<=2){
@@ -121,7 +124,7 @@ public class Light extends SubsystemBase {
         } else {
             AdrUpdateStrobe(0, 0, 0, 0);        // off if more than 30 degrees from target
         }
-        mode = LEDmodeNumber_sideDependant;
+       //mode = LEDmodeNumber_sideDependant;
     }
     public void lightAnimation_InverseOfDistance(){
         if(degrees<0){
@@ -131,11 +134,11 @@ public class Light extends SubsystemBase {
         strobeAnimation.setSpeed(speed);
         lastStrobeSpeedThatWasSet=speed;
         candle.animate(strobeAnimation);
-        mode = LEDmodeNumber_InverseOfDistance;
+        //mode = LEDmodeNumber_InverseOfDistance;
     }
     public void lightAnimation_Annie3d(){
         if(hasTarget){
-            if(Math.abs(degrees /*&& Is close enough*/)<=1){
+            if(Math.abs(degrees)<=1){
                 AdrUpdateStrobe(0, 255, 0, 1);
             } else {
                 AdrUpdateStrobe(255, 0, 0, 1);
@@ -143,8 +146,9 @@ public class Light extends SubsystemBase {
         } else {
             AdrUpdateStrobe(0, 0, 0, 1);
         }
-        mode = LEDmodeNumber_Annie3d;
+        //mode = LEDmodeNumber_Annie3d;
     }
+    */
 
     public void AdrUpdateStrobe(int Red, int Green, int Blue, double Speed){
         /*if(printCANdleDataToSmartDashboard){
@@ -189,12 +193,12 @@ public class Light extends SubsystemBase {
         candle.animate(strobeAnimation);
     }
 
-    public void lightUpdateControl(int modeID){
+    /*public void lightUpdateControl(int modeID){
         switch(modeID){
 
-            case -1:
-                lightUpdateControl(mode);
-            break;
+            //case -1:
+            //    lightUpdateControl(mode);
+            //break;
             
             //case LEDmodeNumber_noDetection:
             case 0:
@@ -234,7 +238,7 @@ public class Light extends SubsystemBase {
                 lightUpdateControl(DEFAULT_MODE);
             break;
         }
-    } // overlode constructor pls
+    } // overlode constructor pls*/
 
 
     
