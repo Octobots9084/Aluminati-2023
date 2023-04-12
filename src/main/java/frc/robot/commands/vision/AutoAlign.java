@@ -46,10 +46,15 @@ public class AutoAlign extends CommandBase {
         // }
     }
 
+
+    
+
+
+
+
+    private boolean hasTarget;
     private double degreesToTarget;
-    private boolean isCloseEnough; // to reliably place high cone
-    private boolean isAligned;
-    private double ALIGNMENT_TOLERANCE; // THIS NEEDS TO BE TUNED
+    private double areaFilledByTarget;
 
     @Override
     public void execute() {
@@ -57,36 +62,22 @@ public class AutoAlign extends CommandBase {
             if (vision.getTapeCamHasTarget()) {
                 if (vision.getBestTarget() != null) {
                     cameraToTarget = vision.getBestTarget();
-                    degreesToTarget = cameraToTarget.getYaw()-3;
+                    hasTarget = true; // for lights
+                    degreesToTarget = cameraToTarget.getYaw()-3; // for lights
+                    areaFilledByTarget = cameraToTarget.getArea(); // for lights
                     ySpeed = degreesToTarget * 0.1;
-                    SmartDashboard.putNumber("areaFilled", cameraToTarget.getArea());
-                    if(Math.abs(degreesToTarget)<ALIGNMENT_TOLERANCE){
-                        isAligned = true;
-                    } else {
-                        isAligned = false;
-                    }
-
-                    // To Do:
-                    // if no target, red flash
-                    // if target unaligned, red solid
-                    // if aligned & far away, blue
-                    // if ready, green
-                    
-                            
+                    SmartDashboard.putNumber("areaFilled", areaFilledByTarget);  // for light tuning
                 } else {
+                    hasTarget = false; // for lights
                     ySpeed = 0;
                     end(true);
                     // driveTrain.drive(0, 0, 0, true);
                 }
-
-                
-                
-
-
                 //SmartDashboard.putNumber("Y_SPED", ySpeed);
                 CommandScheduler.getInstance().schedule(new SetDriveAngle(180));
                 driveTrain.drive(driveTrain.previousXSpeed, ySpeed, 0, true);
             }
+            light.updateStrobeFromAutoAlign(hasTarget, degreesToTarget, areaFilledByTarget);
         } catch (Exception e) {
             //
         }
