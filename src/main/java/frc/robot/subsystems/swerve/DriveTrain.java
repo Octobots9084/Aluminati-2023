@@ -20,6 +20,14 @@
 
 package frc.robot.subsystems.swerve;
 
+import java.util.HashMap;
+
+import com.pathplanner.lib.PathConstraints;
+import com.pathplanner.lib.PathPlanner;
+import com.pathplanner.lib.PathPlannerTrajectory;
+import com.pathplanner.lib.commands.FollowPathWithEvents;
+import com.pathplanner.lib.commands.PPSwerveControllerCommand;
+
 import edu.wpi.first.math.controller.HolonomicDriveController;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -30,6 +38,9 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.commands.swerve.SwerveControl;
 import frc.robot.robot.MotorIDs;
@@ -84,7 +95,7 @@ public class DriveTrain extends SubsystemBase {
     private final PoseEstimator swerveDrivePoseEstimator;
 
     private DriveTrain() {
-        this.daController = new PIDController(0.07, 0.001, 0.0);
+        this.daController = new PIDController(0.04, 0.001, 0.0);
         //Position relative to center of robot -> (0,0) is the center (m)
         // swervePosition[0] = new Translation2d(WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
         // swervePosition[1] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
@@ -126,6 +137,7 @@ public class DriveTrain extends SubsystemBase {
                         new TrapezoidProfile.Constraints(MAX_ANGULAR_SPEED * 5, MAX_ANGULAR_ACCELERATION * 5)));
 
     }
+
 
     /**
      * Method to drive the robot using joystick info.
@@ -189,11 +201,30 @@ public class DriveTrain extends SubsystemBase {
         // driveDashboard.setEntry("Y-Speed Path", chassisSpeeds.vyMetersPerSecond);
         // driveDashboard.setEntry("Rot Path", chassisSpeeds.omegaRadiansPerSecond);
 
+        if (Math.abs(chassisSpeeds.omegaRadiansPerSecond)>DriveTrain.MAX_ANGULAR_SPEED) {
+            chassisSpeeds.omegaRadiansPerSecond = DriveTrain.MAX_ANGULAR_SPEED * Math.signum(chassisSpeeds.omegaRadiansPerSecond);
+        }
+        // targetRotationAngle = targetRotationAngle + chassisSpeeds.omegaRadiansPerSecond*0.02;
+        // double rot = getRotationSpeed();
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(new ChassisSpeeds(
             chassisSpeeds.vxMetersPerSecond,chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond));
         
         for (int i = 0; i < swerveModuleStates.length; i++) {
             swerveModules[i].setDesiredState(swerveModuleStates[i]);
+        }
+
+
+    }
+
+    public void driveWithStates(SwerveModuleState[] states) {
+        // SmartDashboard.putNumber("xSppedpath", chassisSpeeds.vxMetersPerSecond);
+        // SmartDashboard.putNumber("ySppedpath", chassisSpeeds.vyMetersPerSecond);
+        // SmartDashboard.putNumber("rotpoath", chassisSpeeds.omegaRadiansPerSecond);
+        // driveDashboard.setEntry("X-Speed Path", chassisSpeeds.vxMetersPerSecond);
+        // driveDashboard.setEntry("Y-Speed Path", chassisSpeeds.vyMetersPerSecond);
+
+        for (int i = 0; i < states.length; i++) {
+            swerveModules[i].setDesiredState(states[i]);
         }
     }
 
@@ -211,7 +242,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public Pose2d getPose2dPathplanner() {
-        return new Pose2d(0,0, gyro.getUnwrappedRotation2d());
+        return new Pose2d(this.getPoseEstimator().getRobotPose().getX(),this.getPoseEstimator().getRobotPose().getY(), new Rotation2d((Math.abs(this.getPoseEstimator().getRobotPose().getRotation().getRadians())%180)*Math.signum(this.getPoseEstimator().getRobotPose().getRotation().getRadians())));
     }
     public void resetPosePathplanner(Pose2d pose2d) {
     }

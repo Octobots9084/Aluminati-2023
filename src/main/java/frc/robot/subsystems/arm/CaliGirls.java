@@ -68,7 +68,7 @@ public class CaliGirls extends SubsystemBase {
             pidControllerBottom.setI(Tuning.CALI_BOTTOM_PID.getI());
             pidControllerBottom.setD(Tuning.CALI_BOTTOM_PID.getD());
             pidControllerBottom.setFF(Tuning.CALI_BOTTOM_PID.getF());
-            pidControllerBottom.setIZone(0.1);
+            pidControllerBottom.setIZone(0.009);
             pidControllerBottom.setOutputRange(-1.0, 1.0);
             motorBottom.getAbsoluteEncoder(Type.kDutyCycle).setZeroOffset(0.72+(-.258)-(1/6)+0.07
             );
@@ -152,7 +152,7 @@ public class CaliGirls extends SubsystemBase {
     public void periodic() {
         if(isEnabled){
             // pidControllerBottom();
-            setBottomKf();
+            // setBottomKf();
 
             Logging.armDashboard.setEntry("bottom_kf", getBottomKf());
 

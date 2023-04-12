@@ -33,8 +33,8 @@ public class Tuning {
     public static final int CALI_TOP_FOLLOWER_STALL = 30;
     public static final int CALI_TOP_FOLLOWER_FREE = 30;
     //Extension
-    public static final int EXTENSION_FREE = 20;
-    public static final int EXTENSION_STALL = 20;
+    public static final int EXTENSION_FREE = 30;
+    public static final int EXTENSION_STALL = 30;
 
     //Extension Zeroing
     public static final int EXTENSION_FREE_ZERO = 5;
@@ -61,7 +61,7 @@ public class Tuning {
     //     public static final PIDConfig CALI_BOTTOM_PID = new PIDConfig(3, 0.0005, 0.2, 0.03);
 
     //should be 0.1 for kf testing
-    public static final PIDConfig CALI_BOTTOM_PID = new PIDConfig(3.5, 0.00, 2, 0.05);
+    public static final PIDConfig CALI_BOTTOM_PID = new PIDConfig(4, 0.0, 1, 0);
     public static final SmartMotionConfig CALI_BOTTOM_SM = new SmartMotionConfig(true,
             1.0,
             0.0,
@@ -78,7 +78,7 @@ public class Tuning {
     public static final double SPATULA_ENCODER_RESOLUTION = 1.0;
 
     //Extension
-    public static final PIDConfig EXTENSION_PID = new PIDConfig(0.5, 0, 0);
+    public static final PIDConfig EXTENSION_PID = new PIDConfig(0.5, 0, 0.4,0.0);
     public static final SmartMotionConfig EXTENSION_SM = new SmartMotionConfig(true,
             0.7,
             0.0,

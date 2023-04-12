@@ -9,9 +9,16 @@ public class CaliBottomPosTolerance extends CommandBase {
 
     CaliGirls caliGirls;
 
+    double tolerance = 0.05;
     public CaliBottomPosTolerance(double pos, double kf) {
         this.caliGirls = CaliGirls.getInstance();
         this.target = pos;
+    }
+
+    public CaliBottomPosTolerance(double pos, double kf, double tolerance) {
+        this.caliGirls = CaliGirls.getInstance();
+        this.target = pos;
+        this.tolerance = tolerance;
     }
 
     @Override
@@ -21,6 +28,6 @@ public class CaliBottomPosTolerance extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return MathUtil.isWithinTolerance(target, caliGirls.getBottomPos(), 0.05);
+        return MathUtil.isWithinTolerance(target, caliGirls.getBottomPos(), tolerance);
     }
 }

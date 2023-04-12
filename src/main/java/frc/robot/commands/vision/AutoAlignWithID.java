@@ -32,7 +32,7 @@ public class AutoAlignWithID extends CommandBase {
                 if (vision.getBestTargetWithID() != null) {
                     cameraToTarget = vision.getBestTargetWithID();
                     caliGirls.setBottomPos(ArmPositions.AUTO_ALIGN.armAngle);
-                    caliGirls.setBottomKf();
+                    //caliGirls.setBottomKf();
                 } else {
                     end(true);
                 }

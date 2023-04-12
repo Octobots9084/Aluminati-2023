@@ -11,6 +11,7 @@ import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.subsystems.vision.Vision;
+import frc.robot.util.MathUtil;
 
 public class AutoAlign extends CommandBase {
     private final DriveTrain driveTrain;
@@ -36,7 +37,7 @@ public class AutoAlign extends CommandBase {
                 if (vision.getBestTarget() != null) {
                     cameraToTarget = vision.getBestTarget();
                     caliGirls.setBottomPos(ArmPositions.AUTO_ALIGN.armAngle);
-                    caliGirls.setBottomKf();
+                    //caliGirls.setBottomKf();
                 } else {
                     end(true);
                 }
@@ -61,8 +62,8 @@ public class AutoAlign extends CommandBase {
                             ySpeed = (cameraToTarget.getYaw()-3) * 0.1;
                             SmartDashboard.putNumber("Degrees to target", cameraToTarget.getYaw()-3);
                             
-                            if(cameraToTarget.getYaw()-3<0){
-                                light.AdrUpdateStrobe(0, 0, 255, 1);
+                            if(MathUtil.isWithinTolerance(cameraToTarget.getYaw()-3,0,1)){
+                                light.AdrUpdateStrobe(0, 255, 255, 1);
                             } else {
                                 light.AdrUpdateStrobe(255, 0, 255, 1);
                             }

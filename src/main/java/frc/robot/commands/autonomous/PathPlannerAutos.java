@@ -57,7 +57,7 @@ public final class PathPlannerAutos {
             ));
 
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
-            DriveTrain.getInstance()::getPose2d,
+            DriveTrain.getInstance()::getPose2dPathplanner,
             DriveTrain.getInstance().getPoseEstimator()::resetPose,
             new PIDConstants(1.5,0, 0),
             new PIDConstants(0.7, 0, 0),
@@ -66,6 +66,7 @@ public final class PathPlannerAutos {
             true,
             DriveTrain.getInstance());
 
+    
     public static CommandBase testPath() {
         List<PathPlannerTrajectory> pathgroup = PathPlanner.loadPathGroup("New New Path", new PathConstraints(1, 0.5));
         SmartDashboard.putString("TEST", "Test");

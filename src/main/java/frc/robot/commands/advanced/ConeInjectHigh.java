@@ -27,6 +27,7 @@ public class ConeInjectHigh extends SequentialCommandGroup {
             new WaitCommand(0.3),
             new IntakeSpeedInstant(1),
             new WaitCommand(0.1),
+            new ExtensionPosTolerance(5),
             new ExtensionPosTolerance(0),
             new WaitCommand(0.15),
             new ArmPosInstant(ArmPositions.STOW),

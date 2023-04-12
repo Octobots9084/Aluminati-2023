@@ -19,7 +19,7 @@ public class Arm2PosCollect extends SequentialCommandGroup {
         this.caliGirls = CaliGirls.getInstance();
         this.armExtension = ArmExtension.getInstance();
         addCommands(
-                new CaliBottomPosTolerance(aPosition.armAngle, aPosition.angleHold),
+                new CaliBottomPosTolerance(aPosition.armAngle, aPosition.angleHold,0.02),
                 new CaliTopPosTolerance(aPosition.wrist),
                 new ExtensionPosTolerance(aPosition.extension));
     }
