@@ -48,8 +48,8 @@ public class DriverButtonConfig {
 				.onTrue(new BalanceChargeStation());
 		
 		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 8).onTrue(new SetSpatulaVoltageAndPos(-12, 0));
-		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 10).onTrue(new SetSpatulaVoltageAndPos(0, 0.36));
-		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 12).onTrue(new SetSpatulaVoltageAndPos(4, 0.2).andThen(new WaitCommand(1.5)).andThen(new SetSpatulaVoltageAndPos(0, 0.36)));
+		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 10).onTrue(new SetSpatulaVoltageAndPos(0, 0.45));
+		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 12).onTrue(new SetSpatulaVoltageAndPos(4, 0.2).andThen(new WaitCommand(1.5)).andThen(new SetSpatulaVoltageAndPos(0, 0.45)));
 
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
@@ -84,40 +84,40 @@ public class DriverButtonConfig {
 		////CO DRIVER////////////////
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 1)
-				.onTrue(new CollectFloor().alongWith(new SetSpatulaVoltageAndPos(0, 0.36)));
+				.onTrue(new CollectFloor().alongWith(new SetSpatulaVoltageAndPos(0, 0.45)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
-				.onTrue(new SetSpatulaVoltageAndPos(-12, 0).alongWith(new Arm2PosStow(ArmPositions.STOW)).andThen(new WaitCommand(0.2)).andThen(new SetSpatulaVoltageAndPos(-8, 0)));
+				.onTrue(new SetSpatulaVoltageAndPos(-12, .12).alongWith(new Arm2PosStow(ArmPositions.STOW)).andThen(new WaitCommand(0.2)).andThen(new SetSpatulaVoltageAndPos(-8, .12)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
-				.onTrue(new CollectSubstation().alongWith(new SetSpatulaVoltageAndPos(0, 0.36)));
+				.onTrue(new CollectSubstation().alongWith(new SetSpatulaVoltageAndPos(0, 0.45)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 3)
-				.onTrue(new SetSpatulaVoltageAndPos(-0.5, 0.36).andThen(new ExtensionPosTolerance(0.0)).andThen(new CaliTopPosTolerance(ArmPositions.PRE_DRIVE_POSITION.wrist)).andThen(new CaliBottomPosTolerance(ArmPositions.PRE_DRIVE_POSITION.armAngle, CaliGirls.getInstance().getBottomKf())).alongWith(new WaitCommand(0.3)).andThen(new CaliTopPosTolerance(ArmPositions.DRIVE_POSITION.wrist)));
+				.onTrue(new SetSpatulaVoltageAndPos(-0.5, 0.45).andThen(new ExtensionPosTolerance(0.0)).andThen(new CaliTopPosTolerance(ArmPositions.PRE_DRIVE_POSITION.wrist)).andThen(new CaliBottomPosTolerance(ArmPositions.PRE_DRIVE_POSITION.armAngle, CaliGirls.getInstance().getBottomKf())).alongWith(new WaitCommand(0.3)).andThen(new CaliTopPosTolerance(ArmPositions.DRIVE_POSITION.wrist)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 5)
-				.onTrue(new SetSpatulaVoltageAndPos(0, 0.1).alongWith(new WaitCommand(0.1)).andThen(new SetSpatulaVoltageAndPos(4, 0.1)).andThen(new WaitCommand(0.3)).andThen(new SetSpatulaVoltageAndPos(0, 0.36)));
+				.onTrue(new SetSpatulaVoltageAndPos(0, 0.12).alongWith(new WaitCommand(0.12)).andThen(new SetSpatulaVoltageAndPos(4, 0.12)).andThen(new WaitCommand(0.3)).andThen(new SetSpatulaVoltageAndPos(0, 0.45)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 6)
 				.whileTrue(new ArmZero());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 7)
-				.onTrue(new SequentialCommandGroup(new SetItemMode(false).alongWith(new SetSpatulaVoltageAndPos(0, 0.36)), new CubeInjectHigh()));
+				.onTrue(new SequentialCommandGroup(new SetItemMode(false).alongWith(new SetSpatulaVoltageAndPos(0, 0.45)), new CubeInjectHigh()));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 8)
-				.onTrue(new ConeInjectHigh().alongWith(new SetSpatulaVoltageAndPos(0, 0.36)));
+				.onTrue(new ConeInjectHigh().alongWith(new SetSpatulaVoltageAndPos(0, 0.45)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 9)
-				.onTrue(new SequentialCommandGroup(new SetItemMode(false).alongWith(new SetSpatulaVoltageAndPos(0, 0.36)), new CubeInjectMid()));
+				.onTrue(new SequentialCommandGroup(new SetItemMode(false).alongWith(new SetSpatulaVoltageAndPos(0, 0.45)), new CubeInjectMid()));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 10)
-				.onTrue(new ConeInjectMid().alongWith(new SetSpatulaVoltageAndPos(0, 0.36)));
+				.onTrue(new ConeInjectMid().alongWith(new SetSpatulaVoltageAndPos(0, 0.45)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 11)
 				.onTrue(new ArmPosInstant(ArmPositions.AUTO_ALIGN));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 12)
-				.onTrue(new ArmPosInstant(ArmPositions.STOW).alongWith(new SetSpatulaVoltageAndPos(-0.5, 0.36)));
+				.onTrue(new ArmPosInstant(ArmPositions.STOW).alongWith(new SetSpatulaVoltageAndPos(-0.5, 0.45)));
 
 
 

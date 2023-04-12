@@ -36,7 +36,7 @@ public class SpatulaFlip extends SubsystemBase {
         pidControllerSpatula.setI(Tuning.SPATULA_PID.getI());
         pidControllerSpatula.setD(Tuning.SPATULA_PID.getD());
         pidControllerSpatula.setFF(Tuning.SPATULA_PID.getF());
-        pidControllerSpatula.setIZone(.1);
+        pidControllerSpatula.setIZone(.07);
         pidControllerSpatula.setOutputRange(-1.0, 1.0);
 
         this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);
@@ -58,8 +58,8 @@ public class SpatulaFlip extends SubsystemBase {
     
 
     public void setSpatulaPos(double angle) {
-        if (angle > 0.35) {
-            angle = 0.35;
+        if (angle > 0.48) {
+            angle = 0.48;
         } else if (angle < 0.05) {
             angle = 0.05;
         }
