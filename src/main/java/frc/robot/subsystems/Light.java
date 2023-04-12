@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.led.Animation;
 import com.ctre.phoenix.led.CANdle;
 import com.ctre.phoenix.led.StrobeAnimation;
 
@@ -8,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.robot.MotorIDs;
 
 public class Light extends SubsystemBase {
-    private CANdle candle;
+    public CANdle candle;
     private static Light light;
     private int strobeSpeed = 1; // must be between 0 and 1
     private double lastStrobeSpeedThatWasSet; // we can't get speed from BaseTwoSizeAnimation, so we have to store it.
@@ -26,8 +27,9 @@ public class Light extends SubsystemBase {
     public final int LEDmodeNumber_fourState = 3;
     public final int LEDmodeNumber_sideDependant = 4;
     public final int LEDmodeNumber_InverseOfDistance = 5;
+    public final int LEDmodeNumber_Annie3d = 6;
 
-    public int mode = 1;
+    private int mode = 1;
     public void setMode(int modeID){
         mode = modeID;
     }
@@ -65,24 +67,13 @@ public class Light extends SubsystemBase {
         this.candle = new CANdle(MotorIDs.CANDLE_ID);
     }
 
+
     public void lightAnimation_noDetection(){
 
     }
-    /*public void lightAnimation_ramseyTricolor(){
+    public void lightAnimation_ramseyThreeColor(){
         if(hasTarget){
-            if(Math.abs(degrees)<=2){
-                AdrUpdateStrobe(0, 255, 0, 1);
-            } else {
-                AdrUpdateStrobe(255, 127, 0, 1);
-            }
-        } else {
-            AdrUpdateStrobe(255, 0, 0, 1);
-        }
-        mode = LEDmodeNumber_ramseyThreeColor;
-    }*/
-    public void lightAnimation_ramseyTricolor(double degrees){
-        if(hasTarget){
-            if(Math.abs(degrees)<=2){
+            if(Math.abs(degrees)<=1){
                 AdrUpdateStrobe(0, 255, 0, 1);
             } else {
                 AdrUpdateStrobe(255, 0, 0, 1);
@@ -142,10 +133,21 @@ public class Light extends SubsystemBase {
         candle.animate(strobeAnimation);
         mode = LEDmodeNumber_InverseOfDistance;
     }
-
+    public void lightAnimation_Annie3d(){
+        if(hasTarget){
+            if(Math.abs(degrees /*&& Is close enough*/)<=1){
+                AdrUpdateStrobe(0, 255, 0, 1);
+            } else {
+                AdrUpdateStrobe(255, 0, 0, 1);
+            }
+        } else {
+            AdrUpdateStrobe(0, 0, 0, 1);
+        }
+        mode = LEDmodeNumber_Annie3d;
+    }
 
     public void AdrUpdateStrobe(int Red, int Green, int Blue, double Speed){
-        if(printCANdleDataToSmartDashboard){
+        /*if(printCANdleDataToSmartDashboard){
             SmartDashboard.putNumber("LastAssigned_Red", Red);
             SmartDashboard.putNumber("LastAssigned_Green", Green);
             SmartDashboard.putNumber("LastAssigned_Blue", Blue);
@@ -179,59 +181,68 @@ public class Light extends SubsystemBase {
                 SmartDashboard.putNumber("CurrentSpeed", Speed);
             }
         }
+        candle.animate(strobeAnimation);*/
+        strobeAnimation.setR(Red);
+        strobeAnimation.setG(Green);
+        strobeAnimation.setB(Blue);
+        strobeAnimation.setSpeed(Speed);
         candle.animate(strobeAnimation);
     }
 
-    public void lightUpdateControl(boolean hasTarget, int modeID){
+    public void lightUpdateControl(int modeID){
         switch(modeID){
 
-            case LEDmodeNumber_noDetection:
+            case -1:
+                lightUpdateControl(mode);
+            break;
+            
+            //case LEDmodeNumber_noDetection:
+            case 0:
                 lightAnimation_noDetection();
             break;
 
-            case LEDmodeNumber_ramseyThreeColor:
-                lightAnimation_ramseyTricolor(degrees);
+            //case LEDmodeNumber_ramseyThreeColor:
+            case 1:
+                lightAnimation_ramseyThreeColor();
             break;
 
-            case LEDmodeNumber_Linus:
+            //case LEDmodeNumber_Linus:
+            case 2:
                 lightAnimation_Linus();
             break;
             
-            case LEDmodeNumber_fourState: 
+            //case LEDmodeNumber_fourState: 
+            case 3:
                 lightAnimation_fourState();
             break;
 
-            case LEDmodeNumber_sideDependant:
+            //case LEDmodeNumber_sideDependant:
+            case 4:
                 lightAnimation_sideDependant();
             break;
 
-            case LEDmodeNumber_InverseOfDistance:
+            //case LEDmodeNumber_InverseOfDistance:
+            case 5:
                 lightAnimation_InverseOfDistance();
             break;
 
+            case 6:
+                lightAnimation_Annie3d();
+            break;
+
             default:
-                lightUpdateControl(hasTarget, DEFAULT_MODE);
+                lightUpdateControl(DEFAULT_MODE);
             break;
         }
     } // overlode constructor pls
 
 
-    public void sendInfo(int rMode, double rDegrees, boolean rHasTarget){
-        // degrees = 420 is ignored incase degrees don't have to be updated
-        // mode = -1 is ignored incase mode doesn't have to be updated
-        // use false unless hasTarget is true
-        if(rDegrees!= 420){
-            degrees = rDegrees;
-        }
-        if(rMode != -1){
-            mode = rMode;
-        }
-        hasTarget = rHasTarget;
-    }
+    
     
 
     @Override
     public void periodic() {
-        lightUpdateControl(hasTarget, mode);
+        //lightUpdateControl(mode);
+        //SmartDashboard.putNumber("degrees", degrees);
     }
 }

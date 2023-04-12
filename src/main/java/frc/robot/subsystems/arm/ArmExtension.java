@@ -5,9 +5,12 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
+import com.revrobotics.SparkMaxAbsoluteEncoder;
 import com.revrobotics.SparkMaxPIDController;
 
+import edu.wpi.first.math.controller.ElevatorFeedforward;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.robot.Logging;
 import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
 import frc.robot.util.MotorUtil;
@@ -16,6 +19,7 @@ public class ArmExtension extends SubsystemBase {
     private CANSparkMax motor;
     private static ArmExtension armExtension;
     public SparkMaxPIDController pidController;
+    private ElevatorFeedforward feedforward = new ElevatorFeedforward(0.25, 0.01, 0);
     //gear reduction 1:25
     private double gearing = 5.0 / 15.0;
     public double lastpos = 0;
@@ -50,6 +54,7 @@ public class ArmExtension extends SubsystemBase {
             this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
             this.motor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
             this.motor.setCANTimeout(1000);
+            setOffset();
         }
     }
 
@@ -89,6 +94,12 @@ public class ArmExtension extends SubsystemBase {
         }
     }
 
+    @Override
+    public void periodic(){
+        setMotorKf();
+        Logging.armDashboard.setEntry("Extension Kf", getMotorKf());
+    }
+
     public boolean zeroDone() {
         if(!isEnabled) return false;
         return motor.getOutputCurrent() > 3;
@@ -99,5 +110,24 @@ public class ArmExtension extends SubsystemBase {
             this.motor.setSmartCurrentLimit(Tuning.EXTENSION_STALL, Tuning.EXTENSION_FREE);
             pidController.setOutputRange(Tuning.EXTENSION_MIN_OUT, Tuning.EXTENSION_MAX_OUT);
         }
+    }
+
+    public double getMotorPos(){
+        if (!isEnabled) return 0;
+        return motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition();
+    }
+
+    public double getMotorVel(){
+        if(!isEnabled) return 0;
+        return motor.getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getVelocity();
+    }
+
+    public void setMotorKf(){
+        if(isEnabled) pidController.setFF(feedforward.calculate(getMotorPos(), getMotorVel()));
+    }
+
+    public double getMotorKf(){
+        if(!isEnabled) return 0;
+        return pidController.getFF();
     }
 }

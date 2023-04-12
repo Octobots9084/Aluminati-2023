@@ -24,12 +24,11 @@ public class ConeInjectHigh extends SequentialCommandGroup {
             new CaliTopPosTolerance(aPosition.wrist),
             new ExtensionPosTolerance(aPosition.extension).withTimeout(5),
             new CaliGirlsBottomMoveDownALittle(),
-            new WaitCommand(0.25),
-            new IntakeSpeedInstant(3),
-            new WaitCommand(0.15),
+            new WaitCommand(0.3),
+            new IntakeSpeedInstant(1),
+            new WaitCommand(0.1),
             new ExtensionPosTolerance(0),
-            new WaitCommand(0.25),
-            new CaliBottomPosTolerance(ArmPositions.PRE_CONE_PLACE_HIGH.armAngle, CaliGirls.getInstance().getBottomKf()),
+            new WaitCommand(0.15),
             new ArmPosInstant(ArmPositions.STOW),
             new IntakeSpeedInstant(0));
     }

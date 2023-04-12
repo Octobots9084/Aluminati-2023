@@ -90,7 +90,7 @@ public class Robot extends TimedRobot {
         LiveWindow.disableAllTelemetry();
         LiveWindow.setEnabled(false);
         Logging.addAutoChooser();
-        PathPlannerServer.startServer(5811);
+        // PathPlannerServer.startServer(5811);
 
         if (!ControlMap.DRIVER_BUTTONS.getRawButton(14)) {
             // SmartDashboard.putBoolean("14", true);
@@ -99,11 +99,13 @@ public class Robot extends TimedRobot {
             // SmartDashboard.putBoolean("14", false);
             new ButtonConfig().initTeleop();
         }
+
+        initializeAllSubsystems();
     }
 
     @Override
     public void robotPeriodic() {
-        DriveTrain.getInstance().getPoseEstimator().updateOdometry();
+        // DriveTrain.getInstance().getPoseEstimator().updateOdometry();
         // SmartDashboard.putNumber("X-Pos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getX());
         // SmartDashboard.putNumber("Y-Pos", DriveTrain.getInstance().getPoseEstimator().getRobotPose().getY());
         // SmartDashboard.putNumber("Rot Deg",
@@ -123,7 +125,6 @@ public class Robot extends TimedRobot {
         // SmartDashboard.putNumber("Initialized", 1);
         // SmartDashboard.putBoolean("14actual", ControlMap.DRIVER_BUTTONS.getRawButton(14));
         CommandScheduler.getInstance().cancelAll();
-        initializeAllSubsystems();
         DriveTrain.getInstance().setUseDriverAssist(false);
         initializeDefaultCommands();
         ArmExtension.getInstance().setOffset();
@@ -142,8 +143,7 @@ public class Robot extends TimedRobot {
     @Override
     public void autonomousInit() {
         Robot.autoFlag = true;
-        initializeAllSubsystems();
-        initializeDefaultCommands();
+        
         
         //new driveToPos(new Pose2d(14.16, 1.4, new Rotation2d()));
         //CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());

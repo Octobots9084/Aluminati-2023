@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.advanced.ConeInjectHigh;
 import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
 import frc.robot.commands.arm.basic.tolerance.CaliTopPosTolerance;
 import frc.robot.commands.arm.basic.tolerance.ExtensionPosTolerance;
@@ -39,7 +40,7 @@ public final class PathPlannerAutos {
     private static final Map<String, Command> eventMap = new HashMap<>(Map.ofEntries(
             Map.entry("driveToPos", new DriveToPosition(new Pose2d(14, 0.7, new Rotation2d(0)))),
             Map.entry("BalanceChargeStation", new BalanceChargeStation()),
-            Map.entry("ConeTop", new AutoConeTop()),
+            Map.entry("ConeTop", new ConeInjectHigh()),
             Map.entry("ConeTopBalance", new AutoConeTopBalance()),
             Map.entry("ConeMid", new AutoConeMid()),
             Map.entry("ConeLow", new AutoConeLow()),
@@ -59,7 +60,7 @@ public final class PathPlannerAutos {
             DriveTrain.getInstance()::getPose2d,
             DriveTrain.getInstance().getPoseEstimator()::resetPose,
             new PIDConstants(1.5,0, 0),
-            new PIDConstants(0.3, 0, 0),
+            new PIDConstants(0.7, 0, 0),
             DriveTrain.getInstance()::driveAutos,
             eventMap,
             true,
@@ -74,7 +75,7 @@ public final class PathPlannerAutos {
 
     public static CommandBase CableSide() {
         DriveTrain.getInstance().setUseDriverAssist(false);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("1-a-b 2 ALL CONES Engage", new PathConstraints(3.5, 2.5)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("1-a-b 2 ALL CONES Engage", new PathConstraints(2, 2)));
     }
 
     
