@@ -38,11 +38,13 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.simulation.RoboRioSim;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
 import frc.robot.commands.swerve.SwerveControl;
 import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
@@ -152,12 +154,12 @@ public class DriveTrain extends SubsystemBase {
         if (useDriverAssist) {
 
             //SmartDashboard.putNumber("controt", rot);
-            if (!MathUtil.isWithinTolerance(rot, 0, 0.01) && SwerveControl.hasTurnControl) {
+            if (!MathUtil.isWithinTolerance(rot, 0, 0.01) && SwerveControl.hasTurnControl && !Robot.isAutoFlag()) {
                 this.setTargetRotationAngle(gyro.getUnwrappedAngle());
                 previousRot = rot;
 
             } else {
-                if (MathUtil.isWithinTolerance(rot, 0, 0.01) && !MathUtil.isWithinTolerance(previousRot, 0, 0.01)) {
+                if (MathUtil.isWithinTolerance(rot, 0, 0.01) && !MathUtil.isWithinTolerance(previousRot, 0, 0.01) && !Robot.isAutoFlag()) {
                     this.setTargetRotationAngle(gyro.getUnwrappedAngle());
                     previousRot = rot;
                 }

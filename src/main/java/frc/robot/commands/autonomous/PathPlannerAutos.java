@@ -81,6 +81,7 @@ public final class PathPlannerAutos {
     }
 
     public static CommandBase CableSide() {
+        DriveTrain.getInstance().setTargetRotationAngle(0);
         DriveTrain.getInstance().setUseDriverAssist(true);
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("CableSide", new PathConstraints(2, 1)));
     }
