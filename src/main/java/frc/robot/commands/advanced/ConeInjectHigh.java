@@ -12,26 +12,26 @@ import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
 
 public class ConeInjectHigh extends SequentialCommandGroup {
-    
+
     private ArmPositions aPosition;
 
     public ConeInjectHigh() {
         this.aPosition = ArmPositions.PRE_CONE_PLACE_HIGH;
 
         addCommands(
-            new ExtensionPosTolerance(0).withTimeout(2),
-            new CaliBottomPosTolerance(aPosition.armAngle, aPosition.angleHold).withTimeout(2),
-            new CaliTopPosTolerance(aPosition.wrist),
-            new ExtensionPosTolerance(aPosition.extension).withTimeout(5),
-            new CaliGirlsBottomMoveDownALittle(),
-            new WaitCommand(0.3),
-            new IntakeSpeedInstant(1),
-            new WaitCommand(0.1),
-            new ExtensionPosTolerance(5),
-            new ExtensionPosTolerance(0),
-            new WaitCommand(0.15),
-            new ArmPosInstant(ArmPositions.STOW),
-            new IntakeSpeedInstant(0));
+                new ExtensionPosTolerance(0).withTimeout(0.25),
+                new CaliBottomPosTolerance(aPosition.armAngle, aPosition.angleHold).withTimeout(2),
+                new CaliTopPosTolerance(aPosition.wrist),
+                new ExtensionPosTolerance(aPosition.extension).withTimeout(5),
+                new WaitCommand(0.25),
+                new CaliGirlsBottomMoveDownALittle(),
+                new IntakeSpeedInstant(2),
+                new WaitCommand(0.3),
+                new ExtensionPosTolerance(5),
+                new ExtensionPosTolerance(0),
+                new WaitCommand(0.15),
+                new ArmPosInstant(ArmPositions.STOW),
+                new IntakeSpeedInstant(0));
     }
 
 }

@@ -21,6 +21,6 @@ public class CaliTopPosTolerance extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return MathUtil.isWithinTolerance(target, caliGirls.getTopPos(), 0.05);
+        return MathUtil.isWithinTolerance(target, caliGirls.getTopPos(), 0.1);
     }
 }

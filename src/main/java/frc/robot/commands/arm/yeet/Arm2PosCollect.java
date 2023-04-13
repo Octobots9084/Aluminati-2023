@@ -1,6 +1,7 @@
 package frc.robot.commands.arm.yeet;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.arm.basic.instant.CaliTopPosInstant;
 import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
 import frc.robot.commands.arm.basic.tolerance.CaliTopPosTolerance;
 import frc.robot.commands.arm.basic.tolerance.ExtensionPosTolerance;
@@ -13,14 +14,14 @@ public class Arm2PosCollect extends SequentialCommandGroup {
     CaliGirls caliGirls;
     ArmExtension armExtension;
 
-    public 
-    Arm2PosCollect(ArmPositions aPosition) {
+    public Arm2PosCollect(ArmPositions aPosition) {
         this.aPosition = aPosition;
         this.caliGirls = CaliGirls.getInstance();
         this.armExtension = ArmExtension.getInstance();
         addCommands(
-                new CaliBottomPosTolerance(aPosition.armAngle, aPosition.angleHold,0.02),
-                new CaliTopPosTolerance(aPosition.wrist),
+
+                new CaliBottomPosTolerance(aPosition.armAngle, aPosition.angleHold, 0.05),
+                new CaliTopPosInstant(aPosition.wrist),
                 new ExtensionPosTolerance(aPosition.extension));
     }
 }
