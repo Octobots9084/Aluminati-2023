@@ -63,9 +63,9 @@ public class AutoAlign extends CommandBase {
                             SmartDashboard.putNumber("Degrees to target", cameraToTarget.getYaw()-3);
                             
                             if(MathUtil.isWithinTolerance(cameraToTarget.getYaw()-3,0,1)){
-                                light.AdrUpdateStrobe(0, 255, 255, 1);
+                                light.AdrUpdateStrobe(0, 255, 0, 1);
                             } else {
-                                light.AdrUpdateStrobe(255, 0, 255, 1);
+                                light.AdrUpdateStrobe(0, 0, 255, 1);
                             }
                             
                 } else {
