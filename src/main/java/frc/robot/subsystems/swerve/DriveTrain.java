@@ -94,6 +94,7 @@ public class DriveTrain extends SubsystemBase {
 
     // Pose Estimator
     private final PoseEstimator swerveDrivePoseEstimator;
+
     private DriveTrain() {
         this.daController = new PIDController(0.1, 0.00, 0.0);
         //Position relative to center of robot -> (0,0) is the center (m)
@@ -106,24 +107,20 @@ public class DriveTrain extends SubsystemBase {
         swervePosition[1] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
         swervePosition[2] = new Translation2d(-WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
         swervePosition[3] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
-        
 
         swerveModules[0] = new SwerveModule(MotorIDs.FRONT_LEFT_DRIVE, MotorIDs.FRONT_LEFT_STEER, false,
-                Tuning.FL_TURN_PID, Tuning.FL_DRIVE_PID);
+                Tuning.FL_TURN_PID, Tuning.FL_DRIVE_PID, Tuning.FL_DRIVE_PID2);
         swerveModules[1] = new SwerveModule(MotorIDs.FRONT_RIGHT_DRIVE, MotorIDs.FRONT_RIGHT_STEER, false,
-                Tuning.FR_TURN_PID, Tuning.FR_DRIVE_PID);
+                Tuning.FR_TURN_PID, Tuning.FR_DRIVE_PID, Tuning.FR_DRIVE_PID2);
         swerveModules[2] = new SwerveModule(MotorIDs.BACK_LEFT_DRIVE, MotorIDs.BACK_LEFT_STEER, false,
-                Tuning.BL_TURN_PID, Tuning.BL_DRIVE_PID);
+                Tuning.BL_TURN_PID, Tuning.BL_DRIVE_PID, Tuning.BL_DRIVE_PID2);
         swerveModules[3] = new SwerveModule(MotorIDs.BACK_RIGHT_DRIVE, MotorIDs.BACK_RIGHT_STEER, false,
-                Tuning.BR_TURN_PID, Tuning.BR_DRIVE_PID);
+                Tuning.BR_TURN_PID, Tuning.BR_DRIVE_PID, Tuning.BR_DRIVE_PID2);
 
         // Setup gyro
         this.gyro = Gyro.getInstance();
         this.swerveDriveKinematics = new SwerveDriveKinematics(
                 swervePosition[0], swervePosition[1], swervePosition[2], swervePosition[3]);
-            
-
-        
 
         swerveDrivePoseEstimator = new PoseEstimator(this.gyro, swerveDriveKinematics, swerveModules);
 
@@ -138,7 +135,6 @@ public class DriveTrain extends SubsystemBase {
 
     }
 
-
     /**
      * Method to drive the robot using joystick info.
     *
@@ -148,28 +144,28 @@ public class DriveTrain extends SubsystemBase {
     * @param fieldRelative Whether the provided x and y speeds are relative to the field.
     */
     public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
-        
+
         // SmartDashboard.putNumber("xSpeed", xSpeed);
         //driver assist """implementation"""
-        
+
         if (useDriverAssist) {
-            
+
             //SmartDashboard.putNumber("controt", rot);
-            if (!MathUtil.isWithinTolerance(rot,0,0.01) && SwerveControl.hasTurnControl) {
+            if (!MathUtil.isWithinTolerance(rot, 0, 0.01) && SwerveControl.hasTurnControl) {
                 this.setTargetRotationAngle(gyro.getUnwrappedAngle());
                 previousRot = rot;
-                
+
             } else {
-                if (MathUtil.isWithinTolerance(rot, 0, 0.01)&&!MathUtil.isWithinTolerance(previousRot,0,0.01)) {
+                if (MathUtil.isWithinTolerance(rot, 0, 0.01) && !MathUtil.isWithinTolerance(previousRot, 0, 0.01)) {
                     this.setTargetRotationAngle(gyro.getUnwrappedAngle());
                     previousRot = rot;
                 }
                 rot = getRotationSpeed();
             }
             //SmartDashboard.putNumber("rot", rot);
-            
+
             //SmartDashboard.putNumber("darot", rot);
-            }
+        }
         // Calculate swerve states
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(
                 fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, gyro.getRotation2d())
@@ -180,7 +176,8 @@ public class DriveTrain extends SubsystemBase {
         // Set states
         if (Math.abs(xSpeed) <= 0.01 && Math.abs(ySpeed) <= 0.01 && Math.abs(rot) <= 0.2) {
             for (int i = 0; i < swerveModuleStates.length; i++) {
-                swerveModules[i].setDesiredState(new SwerveModuleState(0, new Rotation2d(0/*swerveModules[i].getAngle()*/)), true);
+                swerveModules[i].setDesiredState(
+                        new SwerveModuleState(0, new Rotation2d(0/*swerveModules[i].getAngle()*/)), true);
             }
         } else {
             for (int i = 0; i < swerveModuleStates.length; i++) {
@@ -192,7 +189,6 @@ public class DriveTrain extends SubsystemBase {
 
     }
 
-    
     public void driveAutos(ChassisSpeeds chassisSpeeds) {
         // SmartDashboard.putNumber("xSppedpath", chassisSpeeds.vxMetersPerSecond);
         // SmartDashboard.putNumber("ySppedpath", chassisSpeeds.vyMetersPerSecond);
@@ -207,12 +203,11 @@ public class DriveTrain extends SubsystemBase {
         // targetRotationAngle = targetRotationAngle + chassisSpeeds.omegaRadiansPerSecond*0.02;
         double rot = getRotationSpeed();
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(new ChassisSpeeds(
-            chassisSpeeds.vxMetersPerSecond,chassisSpeeds.vyMetersPerSecond, rot));
-        
+                chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, rot));
+
         for (int i = 0; i < swerveModuleStates.length; i++) {
             swerveModules[i].setDesiredState(swerveModuleStates[i]);
         }
-
 
     }
 
@@ -242,8 +237,11 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public Pose2d getPose2dPathplanner() {
-        return new Pose2d(this.getPoseEstimator().getRobotPose().getX(),this.getPoseEstimator().getRobotPose().getY(), new Rotation2d((Math.abs(this.getPoseEstimator().getRobotPose().getRotation().getRadians())%180)*Math.signum(this.getPoseEstimator().getRobotPose().getRotation().getRadians())));
+        return new Pose2d(this.getPoseEstimator().getRobotPose().getX(), this.getPoseEstimator().getRobotPose().getY(),
+                new Rotation2d((Math.abs(this.getPoseEstimator().getRobotPose().getRotation().getRadians()) % 180)
+                        * Math.signum(this.getPoseEstimator().getRobotPose().getRotation().getRadians())));
     }
+
     public void resetPosePathplanner(Pose2d pose2d) {
     }
 
@@ -254,14 +252,15 @@ public class DriveTrain extends SubsystemBase {
         // }
         double targetAngle = targetRotationAngle;
 
-        double otherDiff = gyroAngle-(targetAngle+360);
-        double diff = gyroAngle-targetAngle;
-        if (Math.abs(diff)>Math.abs(otherDiff)) {
+        double otherDiff = gyroAngle - (targetAngle + 360);
+        double diff = gyroAngle - targetAngle;
+        if (Math.abs(diff) > Math.abs(otherDiff)) {
             diff = otherDiff;
         }
-        
+
         double vel = daController.calculate(diff);
-        if (MathUtil.isWithinTolerance(diff, 0, 0.03));
+        if (MathUtil.isWithinTolerance(diff, 0, 0.03))
+            ;
         if (vel > 2.5) {
             vel = 2.5;
         }
@@ -269,9 +268,9 @@ public class DriveTrain extends SubsystemBase {
             vel = -2.5;
         }
 
-        
         return vel;
     }
+
     public double getShortestRotationDiff() {
         double gyroAngle = gyro.getUnwrappedAngle();
         // if (MathUtil.isWithinTolerance(gyroAngle, targetRotationAngle, TOLERANCE)) {
@@ -279,9 +278,9 @@ public class DriveTrain extends SubsystemBase {
         // }
         double targetAngle = targetRotationAngle;
 
-        double otherDiff = gyroAngle-(targetAngle+360);
-        double diff = gyroAngle-targetAngle;
-        if (Math.abs(diff)>Math.abs(otherDiff)) {
+        double otherDiff = gyroAngle - (targetAngle + 360);
+        double diff = gyroAngle - targetAngle;
+        if (Math.abs(diff) > Math.abs(otherDiff)) {
             diff = otherDiff;
         }
         return diff;
@@ -293,7 +292,6 @@ public class DriveTrain extends SubsystemBase {
             m.setDesiredState(new SwerveModuleState(0, new Rotation2d(angle)));
         }
     }
-    
 
     public void setSwerveModuleVelocity(double vel) {
         for (var m : swerveModules) {

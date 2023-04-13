@@ -71,7 +71,7 @@ public class SwerveModule {
      * @param steeringMotorChannel ID for the turning motor.
      */
     public SwerveModule(int driveMotorChannel, int steeringMotorChannel, boolean steerMotorInverted,
-            PIDConfig turnPidConfig, PIDConfig drivePidConfig) {//, double zeroTicks) {
+            PIDConfig turnPidConfig, PIDConfig drivePidConfig, PIDConfig pidConfig2) {//, double zeroTicks) {
 
         TM_SM_PID = turnPidConfig;
         DM_MM_PID = drivePidConfig;
@@ -93,6 +93,7 @@ public class SwerveModule {
         driveMotor.setStatusFramePeriod(21, 10);
         driveMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
         driveMotor.setNeutralMode(NeutralMode.Brake);
+        driveMotor.selectProfileSlot(driveMotorChannel, steeringMotorChannel);
         StatusFrameDemolisher.demolishStatusFrames(driveMotor, false);
 
         // Current Limits
@@ -107,7 +108,6 @@ public class SwerveModule {
         this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
         this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
         this.steeringMotor.setCANTimeout(1000);
-
 
         try {
             Thread.sleep(200);
@@ -190,7 +190,7 @@ public class SwerveModule {
      * @param state Desired state with speed and angle.
      */
     public void setDesiredState(SwerveModuleState state, boolean noAngle) {
-        if (!noAngle){
+        if (!noAngle) {
             setDesiredState(state);
             return;
         }
