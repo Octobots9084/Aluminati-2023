@@ -206,7 +206,6 @@ public class DriveTrain extends SubsystemBase {
         // }
         // targetRotationAngle = targetRotationAngle + chassisSpeeds.omegaRadiansPerSecond*0.02;
         double rot = getRotationSpeed();
-        SmartDashboard.putNumber("target angle", targetRotationAngle);
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(new ChassisSpeeds(
             chassisSpeeds.vxMetersPerSecond,chassisSpeeds.vyMetersPerSecond, rot));
         
@@ -269,6 +268,8 @@ public class DriveTrain extends SubsystemBase {
         if (vel < -2.5) {
             vel = -2.5;
         }
+
+        
         return vel;
     }
     public double getShortestRotationDiff() {

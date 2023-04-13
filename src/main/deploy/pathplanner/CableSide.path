@@ -17,7 +17,8 @@
       "isStopPoint": false,
       "stopEvent": {
         "names": [
-          "RotateTo0"
+          "RotateTo0",
+          "Delay2s"
         ],
         "executionBehavior": "sequential",
         "waitBehavior": "none",
@@ -26,16 +27,16 @@
     },
     {
       "anchorPoint": {
-        "x": 4.896796441239102,
-        "y": 0.7204338517093577
+        "x": 4.725264571784494,
+        "y": 0.7547402256002796
       },
       "prevControl": {
-        "x": 4.211165365934716,
-        "y": 0.6897339528151324
+        "x": 3.6624432736168213,
+        "y": 0.7104560048432962
       },
       "nextControl": {
-        "x": 5.662972124803022,
-        "y": 0.7547402256002784
+        "x": 4.999715562911868,
+        "y": 0.7661756835639195
       },
       "holonomicAngle": 180.0,
       "isReversal": false,
@@ -44,7 +45,8 @@
       "isStopPoint": true,
       "stopEvent": {
         "names": [
-          "RotateTo180"
+          "RotateTo180",
+          "Delay2s"
         ],
         "executionBehavior": "sequential",
         "waitBehavior": "none",
@@ -57,14 +59,14 @@
         "y": 0.9262720950548883
       },
       "prevControl": {
-        "x": 6.122563067801816,
-        "y": 0.6075276883750699
+        "x": 6.028906779639522,
+        "y": 0.9720139269094513
       },
       "nextControl": {
-        "x": 6.122563067801816,
-        "y": 0.6075276883750699
+        "x": 6.028906779639522,
+        "y": 0.9720139269094513
       },
-      "holonomicAngle": 180.0,
+      "holonomicAngle": 0.0,
       "isReversal": true,
       "velOverride": null,
       "isLocked": false,
@@ -72,7 +74,8 @@
       "stopEvent": {
         "names": [
           "DrivePosition",
-          "RotateTo0"
+          "RotateTo0",
+          "Delay2s"
         ],
         "executionBehavior": "sequential",
         "waitBehavior": "none",
@@ -85,8 +88,8 @@
         "y": 1.6009641149096854
       },
       "prevControl": {
-        "x": 1.8092227910561378,
-        "y": 0.5374665242911069
+        "x": 1.7291745853106537,
+        "y": 0.08004820574548265
       },
       "nextControl": null,
       "holonomicAngle": 180.0,
@@ -106,20 +109,7 @@
   ],
   "markers": [
     {
-      "position": 0.0,
-      "names": [
-        "event"
-      ]
-    },
-    {
-      "position": 0.0,
-      "names": [
-        "event",
-        "RotateTo180"
-      ]
-    },
-    {
-      "position": 1.4836363636363537,
+      "position": 1.7018181818181422,
       "names": [
         "event",
         "IntakeCone"

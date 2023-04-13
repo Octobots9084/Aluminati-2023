@@ -74,6 +74,8 @@ public class Logging {
         driveDashboard.setEntry("X-Pos", drive.getPoseEstimator().getRobotPose().getX());
         driveDashboard.setEntry("Y-Pos", drive.getPoseEstimator().getRobotPose().getY());
         driveDashboard.setEntry("Rot Deg", drive.getPoseEstimator().getRobotPose().getRotation().getDegrees());
+        driveDashboard.setEntry("target", drive.getTargetRotationAngle());
+        driveDashboard.setEntry("actual", Gyro.getInstance().getUnwrappedRotation2d().getDegrees());
 
         // // driveDashboard.setEntry("Gyro Pitch", gyro.getRoll());
 

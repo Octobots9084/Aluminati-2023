@@ -17,6 +17,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.advanced.ConeInjectHigh;
 import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
@@ -56,8 +58,8 @@ public final class PathPlannerAutos {
             Map.entry("Wait1", new WaitCommand(1)),
             Map.entry("OtherCollect",new SetSpatulaVoltageAndPos(-12, 0).alongWith(new Arm2PosStow(ArmPositions.STOW))),
             Map.entry("OtherIntakeIn",new SetSpatulaVoltageAndPos(-0.5, 0.34)),
-            Map.entry("RotateTo0", new SetDriveAngle(0).andThen(new WaitCommand(2))),
-            Map.entry("RotateTo180", new SetDriveAngle(180).andThen(new WaitCommand(2)))
+            Map.entry("RotateTo0", new SetDriveAngle(0)),
+            Map.entry("RotateTo180", new SetDriveAngle(180))
             ));
 
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
@@ -78,9 +80,8 @@ public final class PathPlannerAutos {
     }
 
     public static CommandBase CableSide() {
-        DriveTrain.getInstance().setTargetRotationAngle(0);
         DriveTrain.getInstance().setUseDriverAssist(true);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("CableSide", new PathConstraints(2, 2)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("CableSide", new PathConstraints(2, 1)));
     }
 
     
