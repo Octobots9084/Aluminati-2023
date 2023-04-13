@@ -23,8 +23,6 @@ package frc.robot;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import com.pathplanner.lib.server.PathPlannerServer;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.TimedRobot;

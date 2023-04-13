@@ -1,10 +1,8 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.led.Animation;
 import com.ctre.phoenix.led.CANdle;
 import com.ctre.phoenix.led.StrobeAnimation;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.robot.MotorIDs;
 
@@ -12,11 +10,11 @@ public class Light extends SubsystemBase {
     public CANdle candle;
     private static Light light;
     private int strobeSpeed = 1; // must be between 0 and 1
-    private double lastStrobeSpeedThatWasSet; // we can't get speed from BaseTwoSizeAnimation, so we have to store it.
-    private double lastRedThatWasSet;
-    private double lastGreenThatWasSet;
-    private double lastBlueThatWasSet;
-    private final boolean printCANdleDataToSmartDashboard = true;
+    // private double lastStrobeSpeedThatWasSet; // we can't get speed from BaseTwoSizeAnimation, so we have to store it.
+    // private double lastRedThatWasSet;
+    // private double lastGreenThatWasSet;
+    // private double lastBlueThatWasSet;
+    // private final boolean printCANdleDataToSmartDashboard = true;
     private final double STROBE_SCALER = .1;// high strobe speeds look solid, so we need to divide
 
     private final int DEFAULT_MODE = 1;
@@ -129,7 +127,7 @@ public class Light extends SubsystemBase {
         }
         double speed = (1-degrees/180)*STROBE_SCALER; //calculates speed // strobe scaler needs to be tuned.
         strobeAnimation.setSpeed(speed);
-        lastStrobeSpeedThatWasSet=speed;
+        // lastStrobeSpeedThatWasSet=speed;
         candle.animate(strobeAnimation);
         mode = LEDmodeNumber_InverseOfDistance;
     }

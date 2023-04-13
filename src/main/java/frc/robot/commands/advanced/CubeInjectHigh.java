@@ -2,8 +2,6 @@ package frc.robot.commands.advanced;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.arm.basic.instant.ArmPosInstant;
-import frc.robot.commands.arm.basic.instant.CaliTopPosInstant;
 import frc.robot.commands.arm.basic.instant.ExtensionPosInstant;
 import frc.robot.commands.arm.basic.instant.IntakeSpeedInstant;
 import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;

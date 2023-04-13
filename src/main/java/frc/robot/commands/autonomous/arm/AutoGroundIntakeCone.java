@@ -2,7 +2,6 @@ package frc.robot.commands.autonomous.arm;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.arm.basic.instant.IntakeSpeedInstant;
-import frc.robot.commands.arm.manual.ArmZero;
 import frc.robot.commands.arm.yeet.Arm2PosCollect;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;

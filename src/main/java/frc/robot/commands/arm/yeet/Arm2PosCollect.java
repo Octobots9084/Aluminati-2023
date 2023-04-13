@@ -3,7 +3,6 @@ package frc.robot.commands.arm.yeet;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.arm.basic.instant.CaliTopPosInstant;
 import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
-import frc.robot.commands.arm.basic.tolerance.CaliTopPosTolerance;
 import frc.robot.commands.arm.basic.tolerance.ExtensionPosTolerance;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;

@@ -9,7 +9,6 @@ import frc.robot.commands.arm.basic.tolerance.ExtensionPosTolerance;
 import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
 import frc.robot.commands.arm.basic.tolerance.CaliTopPosTolerance;
 import frc.robot.subsystems.arm.ArmPositions;
-import frc.robot.subsystems.arm.CaliGirls;
 
 public class ConeInjectHigh extends SequentialCommandGroup {
 
