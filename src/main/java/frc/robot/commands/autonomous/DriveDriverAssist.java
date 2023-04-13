@@ -34,7 +34,15 @@ import frc.robot.util.MathUtil;
  * Represents a swerve drive style drivetrain.
 */
 public class DriveDriverAssist extends CommandBase {
+    double rotation;
+    public DriveDriverAssist(double rotation) {
+        this.rotation = rotation;
+    }
 
+    @Override
+    public void initialize() {
+        DriveTrain.getInstance().setTargetRotationAngle(rotation);
+    }
     @Override
     public void execute() {
         DriveTrain.getInstance().drive(0, 0, DriveTrain.getInstance().getRotationSpeed(), true);

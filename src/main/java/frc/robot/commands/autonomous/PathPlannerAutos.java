@@ -59,8 +59,8 @@ public final class PathPlannerAutos {
             Map.entry("Wait1", new WaitCommand(1)),
             Map.entry("OtherCollect",new SetSpatulaVoltageAndPos(-12, 0).alongWith(new Arm2PosStow(ArmPositions.STOW))),
             Map.entry("OtherIntakeIn",new SetSpatulaVoltageAndPos(-0.5, 0.34)),
-            Map.entry("RotateTo0", new SetDriveAngle(0).andThen(new DriveDriverAssist())),
-            Map.entry("RotateTo180", new SetDriveAngle(180).andThen(new DriveDriverAssist()))
+            Map.entry("RotateTo0",new DriveDriverAssist(0)),
+            Map.entry("RotateTo180", new DriveDriverAssist(180))
             ));
 
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
