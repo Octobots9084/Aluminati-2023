@@ -124,7 +124,6 @@ public class Robot extends TimedRobot {
         // SmartDashboard.putNumber("Initialized", 1);
         // SmartDashboard.putBoolean("14actual", ControlMap.DRIVER_BUTTONS.getRawButton(14));
         CommandScheduler.getInstance().cancelAll();
-        DriveTrain.getInstance().setUseDriverAssist(false);
         initializeDefaultCommands();
         ArmExtension.getInstance().setOffset();
         if (!autoFlag) {
@@ -194,6 +193,7 @@ public class Robot extends TimedRobot {
 
     private void resetRobotPoseAndGyro() {
         Gyro.getInstance().resetGyro();
+        //TODO: possible issue 1 with autos, seems like this shouldn't just set this whenever pathplanner feels like
         DriveTrain.getInstance().setTargetRotationAngle(0);
         // DriveTrain.getInstance().drive(0, 0, 0, true);
         DriveTrain.getInstance().getPoseEstimator().resetPose(new Pose2d(0,0, new Rotation2d()));

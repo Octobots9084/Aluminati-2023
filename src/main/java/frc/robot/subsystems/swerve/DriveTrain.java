@@ -191,17 +191,6 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void driveAutos(ChassisSpeeds chassisSpeeds) {
-        // SmartDashboard.putNumber("xSppedpath", chassisSpeeds.vxMetersPerSecond);
-        // SmartDashboard.putNumber("ySppedpath", chassisSpeeds.vyMetersPerSecond);
-        // SmartDashboard.putNumber("rotpoath", chassisSpeeds.omegaRadiansPerSecond);
-        // driveDashboard.setEntry("X-Speed Path", chassisSpeeds.vxMetersPerSecond);
-        // driveDashboard.setEntry("Y-Speed Path", chassisSpeeds.vyMetersPerSecond);
-        // driveDashboard.setEntry("Rot Path", chassisSpeeds.omegaRadiansPerSecond);
-
-        // if (Math.abs(chassisSpeeds.omegaRadiansPerSecond)>DriveTrain.MAX_ANGULAR_SPEED) {
-        //     chassisSpeeds.omegaRadiansPerSecond = DriveTrain.MAX_ANGULAR_SPEED * Math.signum(chassisSpeeds.omegaRadiansPerSecond);
-        // }
-        // targetRotationAngle = targetRotationAngle + chassisSpeeds.omegaRadiansPerSecond*0.02;
         double rot = getRotationSpeed();
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(new ChassisSpeeds(
                 chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, rot));
@@ -210,18 +199,6 @@ public class DriveTrain extends SubsystemBase {
             swerveModules[i].setDesiredState(swerveModuleStates[i]);
         }
 
-    }
-
-    public void driveWithStates(SwerveModuleState[] states) {
-        // SmartDashboard.putNumber("xSppedpath", chassisSpeeds.vxMetersPerSecond);
-        // SmartDashboard.putNumber("ySppedpath", chassisSpeeds.vyMetersPerSecond);
-        // SmartDashboard.putNumber("rotpoath", chassisSpeeds.omegaRadiansPerSecond);
-        // driveDashboard.setEntry("X-Speed Path", chassisSpeeds.vxMetersPerSecond);
-        // driveDashboard.setEntry("Y-Speed Path", chassisSpeeds.vyMetersPerSecond);
-
-        for (int i = 0; i < states.length; i++) {
-            swerveModules[i].setDesiredState(states[i]);
-        }
     }
 
     public SwerveModuleState[] getModuleStates() {

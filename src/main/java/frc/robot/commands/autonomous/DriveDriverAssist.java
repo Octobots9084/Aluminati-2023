@@ -45,6 +45,7 @@ public class DriveDriverAssist extends CommandBase {
     }
     @Override
     public void execute() {
+        // TODO: possible issue 2, this probably screws with stuff. may need alternat drive command
         DriveTrain.getInstance().drive(0, 0, DriveTrain.getInstance().getRotationSpeed(), true);
     }
 
