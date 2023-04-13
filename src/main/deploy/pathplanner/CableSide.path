@@ -1,0 +1,129 @@
+{
+  "waypoints": [
+    {
+      "anchorPoint": {
+        "x": 1.9007064547652628,
+        "y": 0.5145956083638271
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 1.8664000808743408,
+        "y": 0.8233529733821224
+      },
+      "holonomicAngle": 180.0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [
+          "RotateTo0"
+        ],
+        "executionBehavior": "sequential",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 4.896796441239102,
+        "y": 0.7204338517093577
+      },
+      "prevControl": {
+        "x": 4.211165365934716,
+        "y": 0.6897339528151324
+      },
+      "nextControl": {
+        "x": 5.662972124803022,
+        "y": 0.7547402256002784
+      },
+      "holonomicAngle": 180.0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": true,
+      "stopEvent": {
+        "names": [
+          "RotateTo180"
+        ],
+        "executionBehavior": "sequential",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 6.600679677821552,
+        "y": 0.9262720950548883
+      },
+      "prevControl": {
+        "x": 6.122563067801816,
+        "y": 0.6075276883750699
+      },
+      "nextControl": {
+        "x": 6.122563067801816,
+        "y": 0.6075276883750699
+      },
+      "holonomicAngle": 180.0,
+      "isReversal": true,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": true,
+      "stopEvent": {
+        "names": [
+          "DrivePosition",
+          "RotateTo0"
+        ],
+        "executionBehavior": "sequential",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 1.9,
+        "y": 1.6009641149096854
+      },
+      "prevControl": {
+        "x": 1.8092227910561378,
+        "y": 0.5374665242911069
+      },
+      "nextControl": null,
+      "holonomicAngle": 180.0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [
+          "ConeTop"
+        ],
+        "executionBehavior": "sequential",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    }
+  ],
+  "markers": [
+    {
+      "position": 0.0,
+      "names": [
+        "event"
+      ]
+    },
+    {
+      "position": 0.0,
+      "names": [
+        "event",
+        "RotateTo180"
+      ]
+    },
+    {
+      "position": 1.4836363636363537,
+      "names": [
+        "event",
+        "IntakeCone"
+      ]
+    }
+  ]
+}

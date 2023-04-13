@@ -152,7 +152,8 @@ public class Robot extends TimedRobot {
 
         Robot.autoStartTime = Timer.getFPGATimestamp();
         Gyro.getInstance().setAngleAdjustment(0);
-        Gyro.getInstance().resetGyro();
+        resetRobotPoseAndGyro();
+        DriveTrain.getInstance().setTargetRotationAngle(0);
         // DriveTrain.getInstance().setUseDriverAssist(true);
         try {
             var command = Logging.getAutoChooser().getSelected();

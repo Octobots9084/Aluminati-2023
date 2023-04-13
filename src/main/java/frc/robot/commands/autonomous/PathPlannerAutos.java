@@ -8,6 +8,7 @@ import com.pathplanner.lib.PathConstraints;
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.auto.PIDConstants;
+import com.pathplanner.lib.auto.RamseteAutoBuilder;
 import com.pathplanner.lib.auto.SwerveAutoBuilder;
 
 import edu.wpi.first.math.geometry.Pose2d;
@@ -32,6 +33,7 @@ import frc.robot.commands.autonomous.arm.AutoCubeTop;
 import frc.robot.commands.autonomous.arm.AutoGroundIntakeCone;
 import frc.robot.commands.autonomous.arm.AutoGroundIntakeCube;
 import frc.robot.commands.spatula.SetSpatulaVoltageAndPos;
+import frc.robot.commands.swerve.SetDriveAngle;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
 import frc.robot.subsystems.swerve.DriveTrain;
@@ -53,20 +55,21 @@ public final class PathPlannerAutos {
             Map.entry("DrivePosition", new ExtensionPosTolerance(0.0).andThen(new CaliTopPosTolerance(ArmPositions.PRE_DRIVE_POSITION.wrist)).andThen(new CaliBottomPosTolerance(ArmPositions.PRE_DRIVE_POSITION.armAngle, CaliGirls.getInstance().getBottomKf())).alongWith(new WaitCommand(0.3)).andThen(new CaliTopPosTolerance(ArmPositions.DRIVE_POSITION.wrist))),
             Map.entry("Wait1", new WaitCommand(1)),
             Map.entry("OtherCollect",new SetSpatulaVoltageAndPos(-12, 0).alongWith(new Arm2PosStow(ArmPositions.STOW))),
-            Map.entry("OtherIntakeIn",new SetSpatulaVoltageAndPos(-0.5, 0.34))
+            Map.entry("OtherIntakeIn",new SetSpatulaVoltageAndPos(-0.5, 0.34)),
+            Map.entry("RotateTo0", new SetDriveAngle(0).andThen(new WaitCommand(2))),
+            Map.entry("RotateTo180", new SetDriveAngle(180).andThen(new WaitCommand(2)))
             ));
 
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
             DriveTrain.getInstance()::getPose2dPathplanner,
             DriveTrain.getInstance().getPoseEstimator()::resetPose,
             new PIDConstants(1.5,0, 0),
-            new PIDConstants(0.7, 0, 0),
+            new PIDConstants(0, 0, 0),
             DriveTrain.getInstance()::driveAutos,
             eventMap,
             true,
             DriveTrain.getInstance());
 
-    
     public static CommandBase testPath() {
         List<PathPlannerTrajectory> pathgroup = PathPlanner.loadPathGroup("New New Path", new PathConstraints(1, 0.5));
         SmartDashboard.putString("TEST", "Test");
@@ -75,8 +78,9 @@ public final class PathPlannerAutos {
     }
 
     public static CommandBase CableSide() {
-        DriveTrain.getInstance().setUseDriverAssist(false);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("1-a-b 2 ALL CONES Engage", new PathConstraints(2, 2)));
+        DriveTrain.getInstance().setTargetRotationAngle(0);
+        DriveTrain.getInstance().setUseDriverAssist(true);
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("CableSide", new PathConstraints(2, 2)));
     }
 
     

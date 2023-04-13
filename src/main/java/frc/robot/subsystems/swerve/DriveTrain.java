@@ -38,6 +38,7 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -71,7 +72,7 @@ public class DriveTrain extends SubsystemBase {
     public static double MAX_TURN_SPEED = 10;
     public static double TOLERANCE = 1.5;
     //Module Mappings / Measurements
-    private static final double WHEEL_DIST_TO_CENTER = 0.3115; //m
+    private static final double WHEEL_DIST_TO_CENTER = 0.3; //m
 
     private final Gyro gyro;
     //Modules
@@ -93,14 +94,13 @@ public class DriveTrain extends SubsystemBase {
 
     // Pose Estimator
     private final PoseEstimator swerveDrivePoseEstimator;
-
     private DriveTrain() {
-        this.daController = new PIDController(0.04, 0.001, 0.0);
+        this.daController = new PIDController(0.1, 0.00, 0.0);
         //Position relative to center of robot -> (0,0) is the center (m)
-        // swervePosition[0] = new Translation2d(WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
-        // swervePosition[1] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
-        // swervePosition[2] = new Translation2d(-WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
-        // swervePosition[3] = new Translation2d(-WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
+        // swervePosition[0] = new Translation2d(0.32, 0.32);
+        // swervePosition[1] = new Translation2d(0.32, -0.32);
+        // swervePosition[2] = new Translation2d(-0.32, 0.32);
+        // swervePosition[3] = new Translation2d(-0.32, 0.32);
 
         swervePosition[0] = new Translation2d(WHEEL_DIST_TO_CENTER, WHEEL_DIST_TO_CENTER);
         swervePosition[1] = new Translation2d(WHEEL_DIST_TO_CENTER, -WHEEL_DIST_TO_CENTER);
@@ -201,13 +201,14 @@ public class DriveTrain extends SubsystemBase {
         // driveDashboard.setEntry("Y-Speed Path", chassisSpeeds.vyMetersPerSecond);
         // driveDashboard.setEntry("Rot Path", chassisSpeeds.omegaRadiansPerSecond);
 
-        if (Math.abs(chassisSpeeds.omegaRadiansPerSecond)>DriveTrain.MAX_ANGULAR_SPEED) {
-            chassisSpeeds.omegaRadiansPerSecond = DriveTrain.MAX_ANGULAR_SPEED * Math.signum(chassisSpeeds.omegaRadiansPerSecond);
-        }
+        // if (Math.abs(chassisSpeeds.omegaRadiansPerSecond)>DriveTrain.MAX_ANGULAR_SPEED) {
+        //     chassisSpeeds.omegaRadiansPerSecond = DriveTrain.MAX_ANGULAR_SPEED * Math.signum(chassisSpeeds.omegaRadiansPerSecond);
+        // }
         // targetRotationAngle = targetRotationAngle + chassisSpeeds.omegaRadiansPerSecond*0.02;
-        // double rot = getRotationSpeed();
+        double rot = getRotationSpeed();
+        SmartDashboard.putNumber("target angle", targetRotationAngle);
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(new ChassisSpeeds(
-            chassisSpeeds.vxMetersPerSecond,chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond));
+            chassisSpeeds.vxMetersPerSecond,chassisSpeeds.vyMetersPerSecond, rot));
         
         for (int i = 0; i < swerveModuleStates.length; i++) {
             swerveModules[i].setDesiredState(swerveModuleStates[i]);
