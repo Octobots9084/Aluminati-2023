@@ -22,7 +22,6 @@ import frc.robot.commands.swerve.SetDriveAngle;
 import frc.robot.commands.swerve.SetDriverAssist;
 import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.commands.vision.AutoAlign;
-import frc.robot.commands.vision.AutoAlignWithID;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
 
@@ -67,8 +66,6 @@ public class DriverButtonConfig {
 		new JoystickButton(ControlMap.DRIVER_RIGHT, 1)
 				.whileTrue(new AutoAlign());
 
-		new JoystickButton(ControlMap.DRIVER_RIGHT, 2)
-				.whileTrue(new AutoAlignWithID());
 
 		//Driver Joystick Right
 		new JoystickButton(ControlMap.DRIVER_LEFT, 1)
