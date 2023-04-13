@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.advanced.CollectFloor;
 import frc.robot.commands.advanced.ConeInjectHigh;
 import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
 import frc.robot.commands.arm.basic.tolerance.CaliTopPosTolerance;
@@ -51,15 +52,15 @@ public final class PathPlannerAutos {
             Map.entry("CubeTop", new AutoCubeTop()),
             Map.entry("CubeMid", new AutoCubeMid()),
             Map.entry("CubeLow", new AutoCubeLow()),
-            Map.entry("IntakeCone", new AutoGroundIntakeCone()),
+            Map.entry("IntakeCone", new CollectFloor()),
             Map.entry("IntakeCube", new AutoGroundIntakeCube()),
             Map.entry("StowArm", new Arm2PosStow(ArmPositions.STOW)),
             Map.entry("DrivePosition", new ExtensionPosTolerance(0.0).andThen(new CaliTopPosTolerance(ArmPositions.PRE_DRIVE_POSITION.wrist)).andThen(new CaliBottomPosTolerance(ArmPositions.PRE_DRIVE_POSITION.armAngle, CaliGirls.getInstance().getBottomKf())).alongWith(new WaitCommand(0.3)).andThen(new CaliTopPosTolerance(ArmPositions.DRIVE_POSITION.wrist))),
             Map.entry("Wait1", new WaitCommand(1)),
             Map.entry("OtherCollect",new SetSpatulaVoltageAndPos(-12, 0).alongWith(new Arm2PosStow(ArmPositions.STOW))),
             Map.entry("OtherIntakeIn",new SetSpatulaVoltageAndPos(-0.5, 0.34)),
-            Map.entry("RotateTo0", new SetDriveAngle(0)),
-            Map.entry("RotateTo180", new SetDriveAngle(180))
+            Map.entry("RotateTo0", new SetDriveAngle(0).andThen(new DriveDriverAssist())),
+            Map.entry("RotateTo180", new SetDriveAngle(180).andThen(new DriveDriverAssist()))
             ));
 
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(

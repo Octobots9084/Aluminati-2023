@@ -15,7 +15,7 @@ public class AutoGroundIntakeCone extends SequentialCommandGroup{
 
     public AutoGroundIntakeCone() {
         this.aPosition = ArmPositions.STOW;
-        addCommands(new ArmZero().withTimeout(0.2),new Arm2PosCollect(ArmPositions.INTAKE_GROUND), new IntakeSpeedInstant(-10));
+        addCommands(new Arm2PosCollect(ArmPositions.INTAKE_GROUND), new IntakeSpeedInstant(-10));
         
     }
 }

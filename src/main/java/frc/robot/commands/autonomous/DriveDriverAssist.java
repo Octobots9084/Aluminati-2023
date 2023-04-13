@@ -34,29 +34,14 @@ import frc.robot.util.MathUtil;
  * Represents a swerve drive style drivetrain.
 */
 public class DriveDriverAssist extends CommandBase {
-    double startTime;
-    double currentTime;
-    @Override
-    public void initialize() {
-        startTime = Timer.getFPGATimestamp();
-    }
 
     @Override
     public void execute() {
-        currentTime = Timer.getFPGATimestamp();
         DriveTrain.getInstance().drive(0, 0, DriveTrain.getInstance().getRotationSpeed(), true);
     }
 
     @Override
     public boolean isFinished() {
-        // tolerances are a bit low
-        
-
-        return !(MathUtil.isWithinTolerance(currentTime, startTime, 5));
+        return (MathUtil.isWithinTolerance(DriveTrain.getInstance().getTargetRotationAngle(), Gyro.getInstance().getUnwrappedRotation2d().getDegrees(), 5));
     }
-
-    @Override
-    public void end(boolean interrupted) {
-    }
-
 }

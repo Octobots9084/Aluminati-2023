@@ -17,8 +17,7 @@
       "isStopPoint": false,
       "stopEvent": {
         "names": [
-          "RotateTo0",
-          "Delay2s"
+          "RotateTo0"
         ],
         "executionBehavior": "sequential",
         "waitBehavior": "none",
@@ -45,8 +44,7 @@
       "isStopPoint": true,
       "stopEvent": {
         "names": [
-          "RotateTo180",
-          "Delay2s"
+          "RotateTo180"
         ],
         "executionBehavior": "sequential",
         "waitBehavior": "none",
@@ -74,8 +72,7 @@
       "stopEvent": {
         "names": [
           "DrivePosition",
-          "RotateTo0",
-          "Delay2s"
+          "RotateTo0"
         ],
         "executionBehavior": "sequential",
         "waitBehavior": "none",
