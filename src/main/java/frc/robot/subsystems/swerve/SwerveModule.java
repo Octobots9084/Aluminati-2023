@@ -94,19 +94,10 @@ public class SwerveModule {
         driveMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
         driveMotor.setNeutralMode(NeutralMode.Brake);
         driveMotor.selectProfileSlot(driveMotorChannel, steeringMotorChannel);
-        StatusFrameDemolisher.demolishStatusFrames(driveMotor, false);
-
         // Current Limits
         this.driveMotor.configStatorCurrentLimit(Tuning.DRIVE_STATOR_LIMIT); //How much current the motor can use (outputwise)
         this.driveMotor.configSupplyCurrentLimit(Tuning.DRIVE_SUPPLY_LIMIT); //How much current the supply can give (inputwise)
         this.steeringMotor.setSmartCurrentLimit(Tuning.TURN_MOTOR_STALL, Tuning.TURN_MOTOR_FREE);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 255);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 255);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 255);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
         this.steeringMotor.setCANTimeout(1000);
 
         try {
@@ -142,7 +133,7 @@ public class SwerveModule {
     }
 
     public double getDriveTicks() {
-        return driveMotor.getSensorCollection().getIntegratedSensorPosition();
+        return driveMotor.getSelectedSensorPosition();
     }
 
     public double getVelocity() {
