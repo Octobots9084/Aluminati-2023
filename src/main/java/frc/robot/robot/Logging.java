@@ -49,10 +49,10 @@ public class Logging {
     private void addAutoOptions() {
         //
         autoChooser.setDefaultOption("No Movement", new AutoConeTop());
-        autoChooser.addOption("BBCableSideBB", PathPlannerAutos.CableSideBlue());
+        autoChooser.addOption("BBCableSideBB", PathPlannerAutos.CableSideBlue2());
         autoChooser.addOption("RRCableSideRR", PathPlannerAutos.CableSideRed());
-        autoChooser.addOption("RRCenterRR", PathPlannerAutos.CableSideBlue());
-        autoChooser.addOption("RRCenterRR", PathPlannerAutos.CableSideBlue());
+        autoChooser.addOption("RRCenterRR", PathPlannerAutos.DriveCollectChargeRed());
+        autoChooser.addOption("BBCenterBB", PathPlannerAutos.DriveCollectChargeBlue());
 
         // autoChooser.addOption("DONNOTUSEBalance Charge Station", PathPlannerAutos.PlaceConeAndBalance());
         // autoChooser.addOption("Move and Grab Cone Bottom", PathPlannerAutos.PlaceConeAndMoveBackBottom());

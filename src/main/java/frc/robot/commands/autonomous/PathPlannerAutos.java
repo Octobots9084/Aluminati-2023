@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.advanced.CollectFloor;
 import frc.robot.commands.advanced.ConeInjectHigh;
+import frc.robot.commands.advanced.CubeInjectHigh;
 import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
 import frc.robot.commands.arm.basic.tolerance.CaliTopPosTolerance;
 import frc.robot.commands.arm.basic.tolerance.ExtensionPosTolerance;
@@ -42,10 +43,11 @@ public final class PathPlannerAutos {
             Map.entry("BalanceChargeStation", new BalanceChargeStation()),
             Map.entry("ConeTop", new ConeInjectHigh()),
             Map.entry("AutoAlign", new AlignAndPlace()),
+            Map.entry("AlignArm", new CaliBottomPosTolerance(ArmPositions.AUTO_ALIGN.armAngle,0.0)),
             Map.entry("ConeTopBalance", new AutoConeTopBalance()),
             Map.entry("ConeMid", new AutoConeMid()),
             Map.entry("ConeLow", new AutoConeLow()),
-            Map.entry("CubeTop", new AutoCubeTop()),
+            Map.entry("CubeTop", new CubeInjectHigh()),
             Map.entry("CubeMid", new AutoCubeMid()),
             Map.entry("CubeLow", new AutoCubeLow()),
             Map.entry("IntakeCone", new CollectFloor()),
@@ -79,13 +81,33 @@ public final class PathPlannerAutos {
     public static CommandBase CableSideBlue() {
         DriveTrain.getInstance().setTargetRotationAngle(0);
         DriveTrain.getInstance().setUseDriverAssist(true);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("CableSide", new PathConstraints(4.5, 4)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("BluCableConHigCubLo", new PathConstraints(4.5, 4)));
     }
+
+    
+    public static CommandBase CableSideBlue2() {
+        DriveTrain.getInstance().setTargetRotationAngle(0);
+        DriveTrain.getInstance().setUseDriverAssist(true);
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("BluCableConHigCubHig", new PathConstraints(4.5, 4)));
+    }
+
 
     public static CommandBase CableSideRed() {
         DriveTrain.getInstance().setTargetRotationAngle(0);
         DriveTrain.getInstance().setUseDriverAssist(true);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("CableSide", new PathConstraints(4.5, 4)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("RedCableConHigCubLo", new PathConstraints(4.5, 4)));
+    }
+
+    public static CommandBase DriveCollectChargeBlue() {
+        DriveTrain.getInstance().setTargetRotationAngle(0);
+        DriveTrain.getInstance().setUseDriverAssist(true);
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("RedCableConHigCubLo", new PathConstraints(4.5, 4)));
+    }
+
+    public static CommandBase DriveCollectChargeRed() {
+        DriveTrain.getInstance().setTargetRotationAngle(0);
+        DriveTrain.getInstance().setUseDriverAssist(true);
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("RedCableConHigCubLo", new PathConstraints(4.5, 4)));
     }
 
     
