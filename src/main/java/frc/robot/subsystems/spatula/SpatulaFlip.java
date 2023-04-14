@@ -52,6 +52,7 @@ public class SpatulaFlip extends SubsystemBase {
         spatulaMotor.setInverted(true);
         this.spatulaMotor.getPIDController().setPositionPIDWrappingEnabled(false);
         // pidControllerSpatula.setSmartMotionAllowedClosedLoopError(0.1, 0);
+        setSpatulaPos(0.45);
 
     }
 

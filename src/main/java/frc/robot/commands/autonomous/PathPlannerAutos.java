@@ -31,6 +31,7 @@ import frc.robot.commands.autonomous.arm.AutoCubeMid;
 import frc.robot.commands.autonomous.arm.AutoCubeTop;
 import frc.robot.commands.autonomous.arm.AutoGroundIntakeCube;
 import frc.robot.commands.spatula.SetSpatulaVoltageAndPos;
+import frc.robot.commands.vision.AutoAutoAlign;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
 import frc.robot.subsystems.swerve.DriveTrain;
@@ -40,6 +41,7 @@ public final class PathPlannerAutos {
             Map.entry("driveToPos", new DriveToPosition(new Pose2d(14, 0.7, new Rotation2d(0)))),
             Map.entry("BalanceChargeStation", new BalanceChargeStation()),
             Map.entry("ConeTop", new ConeInjectHigh()),
+            Map.entry("AutoAlign", new AlignAndPlace()),
             Map.entry("ConeTopBalance", new AutoConeTopBalance()),
             Map.entry("ConeMid", new AutoConeMid()),
             Map.entry("ConeLow", new AutoConeLow()),
@@ -77,7 +79,7 @@ public final class PathPlannerAutos {
     public static CommandBase CableSide() {
         DriveTrain.getInstance().setTargetRotationAngle(0);
         DriveTrain.getInstance().setUseDriverAssist(true);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("CableSide", new PathConstraints(2, 1)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("CableSide", new PathConstraints(4.5, 4)));
     }
 
     
