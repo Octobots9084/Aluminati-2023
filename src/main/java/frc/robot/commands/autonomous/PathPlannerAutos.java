@@ -88,7 +88,7 @@ public final class PathPlannerAutos {
     public static CommandBase CableSideBlue2() {
         DriveTrain.getInstance().setTargetRotationAngle(0);
         DriveTrain.getInstance().setUseDriverAssist(true);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("BluCableConHigCubHig", new PathConstraints(4.5, 4)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("CableConHigCubHigBlue", new PathConstraints(4.5, 4)));
     }
 
 
