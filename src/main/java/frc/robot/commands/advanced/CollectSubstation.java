@@ -10,6 +10,6 @@ import frc.robot.subsystems.arm.ArmPositions;
 public class CollectSubstation extends SequentialCommandGroup{
 
     public CollectSubstation() {
-        addCommands(new ExtensionPosTolerance(0).withTimeout(0.1), new CaliTopPosInstant(ArmPositions.AUTO_ALIGN.wrist), new CaliBottomPosTolerance(0, 0, 0.1), new ArmPosInstant(ArmPositions.INTAKE_SUBSTATION), new IntakeSpeedInstant(-10));
+        addCommands(new ExtensionPosTolerance(0).withTimeout(0.1), new CaliTopPosInstant(ArmPositions.AUTO_ALIGN.wrist), new CaliBottomPosTolerance(ArmPositions.AUTO_ALIGN.armAngle, 0, 0.1), new ArmPosInstant(ArmPositions.INTAKE_SUBSTATION), new IntakeSpeedInstant(-10));
     }
 }

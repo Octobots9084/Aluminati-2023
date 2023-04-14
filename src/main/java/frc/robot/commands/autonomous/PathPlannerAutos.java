@@ -56,8 +56,8 @@ public final class PathPlannerAutos {
             Map.entry("OtherCollect",new SetSpatulaVoltageAndPos(-12, 0).alongWith(new Arm2PosStow(ArmPositions.STOW))),
             Map.entry("OtherIntakeIn",new SetSpatulaVoltageAndPos(-0.5, 0.34)),
             Map.entry("RotateTo0",new DriveDriverAssist(0)),
-            Map.entry("RotateTo180", new DriveDriverAssist(180))
-            ));
+            Map.entry("RotateTo180", new DriveDriverAssist(180)),
+            Map.entry("OtherPlace", new SetSpatulaVoltageAndPos(0, 0.12).alongWith(new WaitCommand(0.12)).andThen(new SetSpatulaVoltageAndPos(4, 0.12)).andThen(new WaitCommand(0.3)).andThen(new SetSpatulaVoltageAndPos(0, 0.45)))));
 
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
             DriveTrain.getInstance()::getPose2dPathplanner,
