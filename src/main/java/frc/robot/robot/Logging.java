@@ -49,7 +49,11 @@ public class Logging {
     private void addAutoOptions() {
         //
         autoChooser.setDefaultOption("No Movement", new AutoConeTop());
-        autoChooser.addOption("DriveForward", PathPlannerAutos.CableSide());
+        autoChooser.addOption("BBCableSideBB", PathPlannerAutos.CableSideBlue());
+        autoChooser.addOption("RRCableSideRR", PathPlannerAutos.CableSideRed());
+        autoChooser.addOption("RRCenterRR", PathPlannerAutos.CableSideBlue());
+        autoChooser.addOption("RRCenterRR", PathPlannerAutos.CableSideBlue());
+
         // autoChooser.addOption("DONNOTUSEBalance Charge Station", PathPlannerAutos.PlaceConeAndBalance());
         // autoChooser.addOption("Move and Grab Cone Bottom", PathPlannerAutos.PlaceConeAndMoveBackBottom());
         // autoChooser.addOption("Move and Grab Cone Top", PathPlannerAutos.PlaceConeAndMoveBackTop());
@@ -58,10 +62,10 @@ public class Logging {
         // autoChooser.addOption("DONNOTUSEthreedcCones", PathPlannerAutos.threedc2Cones());
         // autoChooser.addOption("DONNOTUSEPlaceConeAndBalanceAndCommunity", PathPlannerAutos.PlaceConeAndBalanceAndCommunity());
         // autoChooser.addOption("nALANCEv2", new AutoDriveOntoChargeStation());
-        autoChooser.addOption("AutoDriveOntoChargeStationAndCommunity", PathPlannerAutos.PlaceConeAndBalanceAndCommunity());
-        // autoChooser.addOption("Onemeter", PathPlannerAutos.Onemeter());
-        autoChooser.addOption("square", PathPlannerAutos.Square());
-        autoChooser.addOption("ConHigConHigBal", PathPlannerAutos.ConHigConHigBal());
+        // autoChooser.addOption("AutoDriveOntoChargeStationAndCommunity", PathPlannerAutos.PlaceConeAndBalanceAndCommunity());
+        // // autoChooser.addOption("Onemeter", PathPlannerAutos.Onemeter());
+        // autoChooser.addOption("square", PathPlannerAutos.Square());
+        // autoChooser.addOption("ConHigConHigBal", PathPlannerAutos.ConHigConHigBal());
     
         // autoChooser.addOption("DONOTUSEnALANCEv3", new AutoDriveOntoChargeStationAndCommunity());
         

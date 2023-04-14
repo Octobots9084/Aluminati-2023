@@ -69,14 +69,20 @@ public final class PathPlannerAutos {
             true,
             DriveTrain.getInstance());
 
-    public static CommandBase testPath() {
-        List<PathPlannerTrajectory> pathgroup = PathPlanner.loadPathGroup("New New Path", new PathConstraints(1, 0.5));
-        SmartDashboard.putString("TEST", "Test");
-        SmartDashboard.putString("P654375ath", pathgroup.get(0).getEndState().toString());
-        return autoBuilder.fullAuto(pathgroup);
+    // public static CommandBase testPath() {
+    //     List<PathPlannerTrajectory> pathgroup = PathPlanner.loadPathGroup("New New Path", new PathConstraints(1, 0.5));
+    //     SmartDashboard.putString("TEST", "Test");
+    //     SmartDashboard.putString("P654375ath", pathgroup.get(0).getEndState().toString());
+    //     return autoBuilder.fullAuto(pathgroup);
+    // }
+
+    public static CommandBase CableSideBlue() {
+        DriveTrain.getInstance().setTargetRotationAngle(0);
+        DriveTrain.getInstance().setUseDriverAssist(true);
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("CableSide", new PathConstraints(4.5, 4)));
     }
 
-    public static CommandBase CableSide() {
+    public static CommandBase CableSideRed() {
         DriveTrain.getInstance().setTargetRotationAngle(0);
         DriveTrain.getInstance().setUseDriverAssist(true);
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("CableSide", new PathConstraints(4.5, 4)));
@@ -84,11 +90,11 @@ public final class PathPlannerAutos {
 
     
 
-    public static CommandBase Square() {
+    // public static CommandBase Square() {
 
 
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("PlacingTesting", new PathConstraints(3, 2)));
-    }
+    //     return autoBuilder.fullAuto(PathPlanner.loadPathGroup("PlacingTesting", new PathConstraints(3, 2)));
+    // }
 
 
     public static CommandBase PlaceConeAndBalance() {
