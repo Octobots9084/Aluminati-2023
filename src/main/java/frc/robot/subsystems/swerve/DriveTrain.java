@@ -95,10 +95,11 @@ public class DriveTrain extends SubsystemBase {
 
 
 
-        swervePosition[0] = new Translation2d(.3048, .3175);
-        swervePosition[1] = new Translation2d(.3048, -.3175);
-        swervePosition[2] = new Translation2d(-.3048, .3175);
-        swervePosition[3] = new Translation2d(-.3048, -.3175);
+
+        swervePosition[0] = new Translation2d(.3556, .3556);
+        swervePosition[1] = new Translation2d(.3556, -.3556);
+        swervePosition[2] = new Translation2d(-.3556, .3556);
+        swervePosition[3] = new Translation2d(-.3556, -.3556);
 
         swerveModules[0] = new SwerveModule(MotorIDs.FRONT_LEFT_DRIVE, MotorIDs.FRONT_LEFT_STEER, false,
                 Tuning.FL_TURN_PID, Tuning.FL_DRIVE_PID, Tuning.FL_DRIVE_PID2);
