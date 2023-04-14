@@ -183,9 +183,8 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public void driveAutos(ChassisSpeeds chassisSpeeds) {
-        double rot = getRotationSpeed();
         var swerveModuleStates = swerveDriveKinematics.toSwerveModuleStates(new ChassisSpeeds(
-                chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, rot));
+                chassisSpeeds.vxMetersPerSecond, chassisSpeeds.vyMetersPerSecond, chassisSpeeds.omegaRadiansPerSecond));
 
         for (int i = 0; i < swerveModuleStates.length; i++) {
             swerveModules[i].setDesiredState(swerveModuleStates[i]);

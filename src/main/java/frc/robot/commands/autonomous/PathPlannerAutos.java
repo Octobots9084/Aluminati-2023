@@ -60,8 +60,8 @@ public final class PathPlannerAutos {
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
             DriveTrain.getInstance()::getPose2dPathplanner,
             DriveTrain.getInstance().getPoseEstimator()::resetPose,
-            new PIDConstants(1.5,0, 0),
-            new PIDConstants(0, 0, 0),
+            new PIDConstants(1.7,0, 0),
+            new PIDConstants(2, 0, 0),
             DriveTrain.getInstance()::driveAutos,
             eventMap,
             true,
