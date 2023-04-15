@@ -24,7 +24,7 @@ public class ConeInjectMid extends SequentialCommandGroup {
                 // new MoveArmRotationToPos(pos, caliGirls.getBottomKf()),
                 new CaliGirlsBottomMoveDownALittle(),
                 new WaitCommand(0.25),
-                new IntakeSpeedInstant(1),
+                new IntakeSpeedInstant(2),
                 // new IntakeSpeedInstant(3),
                 new WaitCommand(0.15),
                 new ExtensionPosInstant(0),
