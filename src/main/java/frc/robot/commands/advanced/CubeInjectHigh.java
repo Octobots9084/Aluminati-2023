@@ -18,7 +18,6 @@ public class CubeInjectHigh extends SequentialCommandGroup {
                 new CaliBottomPosTolerance(ArmPositions.CUBE_PLACE_HIGH.armAngle, 0),
                 new ExtensionPosInstant(ArmPositions.CUBE_PLACE_HIGH.extension),
                 new CaliTopPosTolerance(ArmPositions.CUBE_PLACE_HIGH.wrist),
-                new WaitCommand(.15),
                 new IntakeSpeedInstant(3),
                 new WaitCommand(.25),
                 new ExtensionPosTolerance(5),
