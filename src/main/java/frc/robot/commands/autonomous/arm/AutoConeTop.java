@@ -3,22 +3,11 @@ package frc.robot.commands.autonomous.arm;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.arm.CaliGirlsBottomMoveDownALittle;
-import frc.robot.commands.arm.basic.ArmExtension2PosTolerance;
-import frc.robot.commands.arm.basic.MoveArmExtensionToPos;
-import frc.robot.commands.arm.basic.MoveArmRotationToPos;
-import frc.robot.commands.arm.basic.MoveArmWristToPos;
-import frc.robot.commands.arm.basic.SetArmAngle;
-import frc.robot.commands.arm.basic.SetArmExtension;
-import frc.robot.commands.arm.basic.SetWristAngle;
-import frc.robot.commands.arm.intake.advanced.ConeInjectHigh;
-import frc.robot.commands.arm.intake.advanced.ConeInjectMid;
-import frc.robot.commands.arm.intake.basic.IntakeIn;
-import frc.robot.commands.arm.intake.basic.IntakeNone;
-import frc.robot.commands.arm.intake.basic.IntakeOut;
-import frc.robot.commands.arm.intake.basic.IntakeOutALittle;
-import frc.robot.commands.arm.intake.basic.SetItemMode;
-import frc.robot.commands.arm.slow.MoveArmToPositionGoingDown;
-import frc.robot.commands.arm.slow.MoveArmToPositionGoingUp;
+import frc.robot.commands.arm.basic.instant.IntakeSpeedInstant;
+import frc.robot.commands.arm.basic.instant.CaliTopPosInstant;
+import frc.robot.commands.arm.basic.tolerance.ExtensionPosTolerance;
+import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
+import frc.robot.commands.arm.basic.tolerance.CaliTopPosTolerance;
 import frc.robot.commands.arm.yeet.Arm2PosStow;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;
@@ -38,24 +27,22 @@ public class AutoConeTop extends SequentialCommandGroup{
         this.armExtension = ArmExtension.getInstance();
         addCommands(
             // new SetWristAngle(ArmPositions.STOW.wrist+0.1),
-            new IntakeIn(),
+            new IntakeSpeedInstant(-10),
             // new WaitCommand(0.6),
             // new SetItemMode(true),
-            new SetWristAngle(caliGirls.getTopPos()),
-            new ArmExtension2PosTolerance(0).withTimeout(2),
-            new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold).withTimeout(2),
-            new MoveArmWristToPos(aPosition.wrist),
-            new ArmExtension2PosTolerance(aPosition.extension).withTimeout(5),
+            new CaliTopPosInstant(caliGirls.getTopPos()),
+            new ExtensionPosTolerance(0).withTimeout(2),
+            new CaliBottomPosTolerance(aPosition.armAngle, aPosition.angleHold).withTimeout(2),
+            new CaliTopPosTolerance(aPosition.wrist),
+            new ExtensionPosTolerance(aPosition.extension).withTimeout(5),
             new CaliGirlsBottomMoveDownALittle(),
             new WaitCommand(0.25),
-            new IntakeOut(),
+            new IntakeSpeedInstant(3),
             new WaitCommand(0.05),
-            new SetArmExtension(0),
-            new WaitCommand(0.05),
-            new SetArmAngle(ArmPositions.PRE_CONE_PLACE_HIGH.armAngle, CaliGirls.getInstance().getBottomKf()),
-            new WaitCommand(0.2),
+            new ExtensionPosTolerance(0),
+            new CaliBottomPosTolerance(ArmPositions.PRE_CONE_PLACE_HIGH.armAngle, CaliGirls.getInstance().getBottomKf()),
             new Arm2PosStow(ArmPositions.STOW),
-            new IntakeNone()
+            new IntakeSpeedInstant(0)
 
             // new SetArmAngle(aPosition.armAngle, aPosition.angleHold), 
             // new WaitCommand(.5),
@@ -65,9 +52,9 @@ public class AutoConeTop extends SequentialCommandGroup{
             // new WaitCommand(.35),
             // new CaliGirlsBottomMoveDownALittle(),
             // new WaitCommand(.25),
-            // new IntakeOutALittle(),
+            // new IntakeSpeedInstant(1),
             // new WaitCommand(0.05),
-            // new IntakeNone(),
+            // new IntakeSpeedInstant(0),
             // new SetArmExtension(ArmExtension.getInstance().lastpos-10),
             // new WaitCommand(.25),
             // new SetArmAngle(aPosition.armAngle, aPosition.angleHold),

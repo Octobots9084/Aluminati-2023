@@ -71,7 +71,7 @@ public class SwerveModule {
      * @param steeringMotorChannel ID for the turning motor.
      */
     public SwerveModule(int driveMotorChannel, int steeringMotorChannel, boolean steerMotorInverted,
-            PIDConfig turnPidConfig, PIDConfig drivePidConfig) {//, double zeroTicks) {
+            PIDConfig turnPidConfig, PIDConfig drivePidConfig, PIDConfig pidConfig2) {//, double zeroTicks) {
 
         TM_SM_PID = turnPidConfig;
         DM_MM_PID = drivePidConfig;
@@ -88,26 +88,17 @@ public class SwerveModule {
         // Drive Motor
         this.driveMotor = new WPI_TalonFX(driveMotorChannel);
         MotorUtil.setupMotionMagic(FeedbackDevice.IntegratedSensor, DM_MM_PID, Tuning.DM_MM_CONFIG, driveMotor);
-        driveMotor.configAllowableClosedloopError(0, 5);
+        driveMotor.configAllowableClosedloopError(0, 0);
         driveMotor.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor);
         driveMotor.setStatusFramePeriod(21, 10);
         driveMotor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 10);
         driveMotor.setNeutralMode(NeutralMode.Brake);
-        StatusFrameDemolisher.demolishStatusFrames(driveMotor, false);
-
+        driveMotor.selectProfileSlot(driveMotorChannel, steeringMotorChannel);
         // Current Limits
         this.driveMotor.configStatorCurrentLimit(Tuning.DRIVE_STATOR_LIMIT); //How much current the motor can use (outputwise)
         this.driveMotor.configSupplyCurrentLimit(Tuning.DRIVE_SUPPLY_LIMIT); //How much current the supply can give (inputwise)
         this.steeringMotor.setSmartCurrentLimit(Tuning.TURN_MOTOR_STALL, Tuning.TURN_MOTOR_FREE);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 255);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 255);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 255);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
         this.steeringMotor.setCANTimeout(1000);
-
 
         try {
             Thread.sleep(200);
@@ -142,7 +133,7 @@ public class SwerveModule {
     }
 
     public double getDriveTicks() {
-        return driveMotor.getSensorCollection().getIntegratedSensorPosition();
+        return driveMotor.getSelectedSensorPosition();
     }
 
     public double getVelocity() {
@@ -190,7 +181,7 @@ public class SwerveModule {
      * @param state Desired state with speed and angle.
      */
     public void setDesiredState(SwerveModuleState state, boolean noAngle) {
-        if (!noAngle){
+        if (!noAngle) {
             setDesiredState(state);
             return;
         }

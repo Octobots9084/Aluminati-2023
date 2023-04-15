@@ -3,13 +3,10 @@ package frc.robot.commands.autonomous.arm;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.arm.CaliGirlsBottomMoveDownALittle;
-import frc.robot.commands.arm.basic.SetArmAngle;
-import frc.robot.commands.arm.basic.SetArmExtension;
-import frc.robot.commands.arm.basic.SetWristAngle;
-import frc.robot.commands.arm.intake.basic.IntakeIn;
-import frc.robot.commands.arm.intake.basic.IntakeNone;
-import frc.robot.commands.arm.intake.basic.IntakeOutALittle;
-import frc.robot.commands.arm.yeet.Arm2PosStow;
+import frc.robot.commands.arm.basic.instant.IntakeSpeedInstant;
+import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
+import frc.robot.commands.arm.basic.tolerance.CaliTopPosTolerance;
+import frc.robot.commands.arm.basic.tolerance.ExtensionPosTolerance;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
@@ -27,22 +24,18 @@ public class AutoConeTopBalance extends SequentialCommandGroup{
         this.caliGirls = CaliGirls.getInstance();
         this.armExtension = ArmExtension.getInstance();
         addCommands(
-            new IntakeIn(),
+            new IntakeSpeedInstant(-10),
             new WaitCommand(2),
-            new SetArmAngle(aPosition.armAngle, aPosition.angleHold), 
-            new WaitCommand(.5),
-            new SetArmExtension(aPosition.extension),
-            new WaitCommand(0.8),
-            new SetWristAngle(aPosition.wrist), 
-            new WaitCommand(.35),
+            new CaliBottomPosTolerance(aPosition.armAngle, aPosition.angleHold), 
+            new ExtensionPosTolerance(aPosition.extension),
+            new CaliTopPosTolerance(aPosition.wrist), 
             new CaliGirlsBottomMoveDownALittle(),
             new WaitCommand(.25),
-            new IntakeOutALittle(),
+            new IntakeSpeedInstant(1),
             new WaitCommand(0.05),
-            new IntakeNone(),
-            new SetArmExtension(ArmExtension.getInstance().lastpos-10),
-            new WaitCommand(.25),
-            new SetArmAngle(aPosition.armAngle, aPosition.angleHold)
+            new IntakeSpeedInstant(0),
+            new ExtensionPosTolerance(ArmExtension.getInstance().lastpos-10),
+            new CaliBottomPosTolerance(aPosition.armAngle, aPosition.angleHold)
             // new MoveArmWristToPos(drivePosition.wrist), new MoveArmExtensionToPos(drivePosition.extension),new MoveArmRotationToPos(drivePosition.armAngle, drivePosition.angleHold)
         );
     

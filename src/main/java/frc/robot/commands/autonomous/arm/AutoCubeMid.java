@@ -2,11 +2,10 @@ package frc.robot.commands.autonomous.arm;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.arm.basic.MoveArmExtensionToPos;
-import frc.robot.commands.arm.basic.MoveArmRotationToPos;
-import frc.robot.commands.arm.basic.MoveArmWristToPos;
-import frc.robot.commands.arm.intake.basic.IntakeNone;
-import frc.robot.commands.arm.intake.basic.IntakeOut;
+import frc.robot.commands.arm.basic.instant.IntakeSpeedInstant;
+import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
+import frc.robot.commands.arm.basic.tolerance.CaliTopPosTolerance;
+import frc.robot.commands.arm.basic.tolerance.ExtensionPosTolerance;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
@@ -22,11 +21,11 @@ public class AutoCubeMid extends SequentialCommandGroup{
         this.drivePosition = ArmPositions.STOW;
         this.caliGirls = CaliGirls.getInstance();
         this.armExtension = ArmExtension.getInstance();
-        addCommands(new MoveArmRotationToPos(aPosition.armAngle, aPosition.angleHold), new MoveArmWristToPos(aPosition.wrist), new MoveArmExtensionToPos(aPosition.extension),
-        new IntakeOut(),
+        addCommands(new CaliBottomPosTolerance(aPosition.armAngle, aPosition.angleHold), new CaliTopPosTolerance(aPosition.wrist), new ExtensionPosTolerance(aPosition.extension),
+        new IntakeSpeedInstant(3),
         new WaitCommand(.5),
-        new IntakeNone(),
-        new MoveArmExtensionToPos(drivePosition.extension), new MoveArmWristToPos(drivePosition.wrist), new MoveArmRotationToPos(drivePosition.armAngle, drivePosition.angleHold)
+        new IntakeSpeedInstant(0),
+        new ExtensionPosTolerance(drivePosition.extension), new CaliTopPosTolerance(drivePosition.wrist), new CaliBottomPosTolerance(drivePosition.armAngle, drivePosition.angleHold)
         );
     
     }

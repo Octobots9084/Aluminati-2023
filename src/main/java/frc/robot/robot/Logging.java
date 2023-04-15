@@ -1,13 +1,7 @@
 package frc.robot.robot;
 
-import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.commands.autonomous.AutoDriveOntoChargeStation;
-import frc.robot.commands.autonomous.AutoDriveOntoChargeStationAndCommunity;
-import frc.robot.commands.autonomous.AutoDriveOntoChargeStationforwards;
-import frc.robot.commands.autonomous.BalanceChargeStation;
-import frc.robot.commands.autonomous.BalanceChargeStationAuto;
 import frc.robot.commands.autonomous.PathPlannerAutos;
 import frc.robot.commands.autonomous.arm.AutoConeTop;
 import frc.robot.subsystems.arm.ArmExtension;
@@ -40,14 +34,14 @@ public class Logging {
     private static CaliGirls caliGirls;
     private static ArmExtension armExtension;
     private static DriveTrain drive;
-    private static Gyro gyro;
+    // private static Gyro gyro;
     private static SendableChooser<Command> autoChooser;
 
     private Logging(CaliGirls caliGirls, ArmExtension armExtension, DriveTrain driveTrain, Gyro gyro) {
         Logging.caliGirls = caliGirls;
         Logging.armExtension = armExtension;
         Logging.drive = driveTrain;
-        Logging.gyro = gyro;
+        // Logging.gyro = gyro;
         Logging.autoChooser = new SendableChooser<Command>();
         addAutoOptions();
     }
@@ -55,7 +49,11 @@ public class Logging {
     private void addAutoOptions() {
         //
         autoChooser.setDefaultOption("No Movement", new AutoConeTop());
-        autoChooser.addOption("GetOutOfDaWay", PathPlannerAutos.GetOutOfDaWay());
+        autoChooser.addOption("REDCableSide", PathPlannerAutos.CableSideBlue2());
+        autoChooser.addOption("CableSideBLUE", PathPlannerAutos.CableSideRed());
+        autoChooser.addOption("REDCenter", PathPlannerAutos.DriveCollectChargeRed());
+        autoChooser.addOption("CenterBLUE", PathPlannerAutos.DriveCollectChargeBlue());
+
         // autoChooser.addOption("DONNOTUSEBalance Charge Station", PathPlannerAutos.PlaceConeAndBalance());
         // autoChooser.addOption("Move and Grab Cone Bottom", PathPlannerAutos.PlaceConeAndMoveBackBottom());
         // autoChooser.addOption("Move and Grab Cone Top", PathPlannerAutos.PlaceConeAndMoveBackTop());
@@ -64,10 +62,10 @@ public class Logging {
         // autoChooser.addOption("DONNOTUSEthreedcCones", PathPlannerAutos.threedc2Cones());
         // autoChooser.addOption("DONNOTUSEPlaceConeAndBalanceAndCommunity", PathPlannerAutos.PlaceConeAndBalanceAndCommunity());
         // autoChooser.addOption("nALANCEv2", new AutoDriveOntoChargeStation());
-        autoChooser.addOption("AutoDriveOntoChargeStationAndCommunity", PathPlannerAutos.PlaceConeAndBalanceAndCommunity());
-        // autoChooser.addOption("Onemeter", PathPlannerAutos.Onemeter());
-        // autoChooser.addOption("square", PathPlannerAutos.square());
-        autoChooser.addOption("ConHigConHigBal", PathPlannerAutos.ConHigConHigBal());
+        // autoChooser.addOption("AutoDriveOntoChargeStationAndCommunity", PathPlannerAutos.PlaceConeAndBalanceAndCommunity());
+        // // autoChooser.addOption("Onemeter", PathPlannerAutos.Onemeter());
+        // autoChooser.addOption("square", PathPlannerAutos.Square());
+        // autoChooser.addOption("ConHigConHigBal", PathPlannerAutos.ConHigConHigBal());
     
         // autoChooser.addOption("DONOTUSEnALANCEv3", new AutoDriveOntoChargeStationAndCommunity());
         
@@ -80,20 +78,22 @@ public class Logging {
         // driveDashboard.setEntry("X-Pos", drive.getPoseEstimator().getRobotPose().getX());
         // driveDashboard.setEntry("Y-Pos", drive.getPoseEstimator().getRobotPose().getY());
         // driveDashboard.setEntry("Rot Deg", drive.getPoseEstimator().getRobotPose().getRotation().getDegrees());
+        // driveDashboard.setEntry("target", drive.getTargetRotationAngle());
+        // driveDashboard.setEntry("actual", Gyro.getInstance().getUnwrappedRotation2d().getDegrees());
 
-        // // driveDashboard.setEntry("Gyro Pitch", gyro.getRoll());
+        // // // driveDashboard.setEntry("Gyro Pitch", gyro.getRoll());
 
-        // armDashboard.setEntry("spatula", SpatulaFlip.getInstance().getSpatulaPos());
+        // // armDashboard.setEntry("spatula", SpatulaFlip.getInstance().getSpatulaPos());
         // armDashboard.setEntry("spatula set", SpatulaFlip.getInstance().lastPosSpatula);
-        // // armDashboard.setEntry("spatula pos", SpatulaFlip.getInstance());
+        // // // armDashboard.setEntry("spatula pos", SpatulaFlip.getInstance());
         
 
-        // // //Arm
-        // armDashboard.setEntry("Arm Extension", armExtension.getPosition());
+        // // // //Arm
+        // // armDashboard.setEntry("Arm Extension", armExtension.getPosition());
         // armDashboard.setEntry("Ext Set", armExtension.lastpos);
-        armDashboard.setEntry("Claw Rotation", caliGirls.getTopPos());
+        // // armDashboard.setEntry("Claw Rotation", caliGirls.getTopPos());
         // armDashboard.setEntry("Claw Set Rotation", caliGirls.lastPosTop);
-        armDashboard.setEntry("Arm Rotation", caliGirls.lastPosBottom);
+        // // armDashboard.setEntry("Arm Rotation", caliGirls.lastPosBottom);
         // armDashboard.setEntry("Arm Real", caliGirls.getBottomPos());
 
 

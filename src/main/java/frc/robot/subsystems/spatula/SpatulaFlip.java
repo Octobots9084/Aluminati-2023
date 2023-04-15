@@ -36,36 +36,38 @@ public class SpatulaFlip extends SubsystemBase {
         pidControllerSpatula.setI(Tuning.SPATULA_PID.getI());
         pidControllerSpatula.setD(Tuning.SPATULA_PID.getD());
         pidControllerSpatula.setFF(Tuning.SPATULA_PID.getF());
+        pidControllerSpatula.setIZone(.07);
         pidControllerSpatula.setOutputRange(-1.0, 1.0);
 
-        this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);
-        this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 255);
-        this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 255);
-        this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 255);
-        this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
-        this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
-        this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
-        this.spatulaMotor.setCANTimeout(1000);
+        // this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);
+        // this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 255);
+        // this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 255);
+        // this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 255);
+        // this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
+        // this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
+        // this.spatulaMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
+        // this.spatulaMotor.setCANTimeout(1000);
         //Spatula Angle Position
-        this.lastPosSpatula = 0.15;
+        // this.lastPosSpatula = 0.15;
         spatulaMotor.setInverted(true);
-        this.spatulaMotor.getPIDController().setPositionPIDWrappingEnabled(false);
+        // this.spatulaMotor.getPIDController().setPositionPIDWrappingEnabled(false);
         // pidControllerSpatula.setSmartMotionAllowedClosedLoopError(0.1, 0);
+        setSpatulaPos(0.45);
 
     }
 
     
 
     public void setSpatulaPos(double angle) {
-        if (angle > 0.35) {
-            angle = 0.35;
+        if (angle > 0.48) {
+            angle = 0.48;
         } else if (angle < 0.05) {
             angle = 0.05;
         }
         lastPosSpatula = angle;
         pidControllerSpatula.setReference(angle, ControlType.kPosition);
         // SmartDashboard.putNumber("Spatula Set Angle", angle);
-        Logging.armDashboard.setEntry("Spatula Set Angle", angle);
+        // Logging.armDashboard.setEntry("Spatula Set Angle", angle);
     }
 
     public double getSpatulaPos() {
