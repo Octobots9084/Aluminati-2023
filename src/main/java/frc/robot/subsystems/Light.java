@@ -60,7 +60,7 @@ public class Light extends SubsystemBase {
         }
         return light;
     }
-    private StrobeAnimation strobeAnimation = new StrobeAnimation(0, 100, 0, 0, strobeSpeed, 8);// default light settings
+    private StrobeAnimation strobeAnimation = new StrobeAnimation(0, 100, 0, 0, strobeSpeed, 60);// default light settings
     public Light() {
         this.candle = new CANdle(MotorIDs.CANDLE_ID);
     }
