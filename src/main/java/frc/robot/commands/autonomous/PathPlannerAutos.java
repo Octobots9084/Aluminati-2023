@@ -97,7 +97,7 @@ public final class PathPlannerAutos {
     public static CommandBase CableSideRed() {
         DriveTrain.getInstance().setTargetRotationAngle(0);
         DriveTrain.getInstance().setUseDriverAssist(true);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("RedCableConHigCubLo", new PathConstraints(4.5, 4)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("CableConHigCubHigRed", new PathConstraints(4.5, 4)));
     }
 
     public static CommandBase DriveCollectChargeBlue() {

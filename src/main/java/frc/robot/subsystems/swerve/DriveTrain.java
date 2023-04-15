@@ -206,9 +206,9 @@ public class DriveTrain extends SubsystemBase {
     }
 
     public Pose2d getPose2dPathplanner() {
-        return new Pose2d(this.getPoseEstimator().getRobotPose().getX(), this.getPoseEstimator().getRobotPose().getY(),
-                new Rotation2d((Math.abs(this.getPoseEstimator().getRobotPose().getRotation().getRadians()) % 180)
-                        * Math.signum(this.getPoseEstimator().getRobotPose().getRotation().getRadians())));
+        return this.getPoseEstimator().getRobotPose();//new Pose2d(this.getPoseEstimator().getRobotPose().getX(), this.getPoseEstimator().getRobotPose().getY(),
+                // new Rotation2d((Math.abs(this.getPoseEstimator().getRobotPose().getRotation().getRadians()) % 180)
+                //         * Math.signum(this.getPoseEstimator().getRobotPose().getRotation().getRadians())));
     }
 
     public void resetPosePathplanner(Pose2d pose2d) {
