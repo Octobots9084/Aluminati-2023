@@ -5,10 +5,10 @@ public enum ArmPositions {
 
     STOW(.48, 0, 0, .242), //good 3/28
     PRE_CONE_PLACE_HIGH(.785, 0.09, 71, .567), //correct 3/27
-    PRE_CONE_PLACE_MID(.742, 0.06, 19.1, .619), //good 3/28
+    PRE_CONE_PLACE_MID(.77, 0.06, 23.5, .619), //good 3/28
     INTAKE_GROUND(.585, 0.03, 31.4, 0.47), //correctish 3/27
     INTAKE_SUBSTATION(.78, 0, 0, .69), //good 3/28
-    CUBE_PLACE_HIGH(.763, 0.09, 40, .69), //good 3/28
+    CUBE_PLACE_HIGH(.77, 0.09, 47, .65), //good 3/28
     CUBE_PLACE_MID(.642, 0.06, 0, .493),
     DRIVE_POSITION(.5, 0, 0, .31), //good 3/28
     PRE_DRIVE_POSITION(.5, 0, 0, .45),

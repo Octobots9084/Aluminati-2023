@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.advanced.CollectFloor;
 import frc.robot.commands.advanced.ConeInjectHigh;
 import frc.robot.commands.advanced.CubeInjectHigh;
+import frc.robot.commands.arm.basic.instant.ArmPosInstant;
 import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
 import frc.robot.commands.arm.basic.tolerance.CaliTopPosTolerance;
 import frc.robot.commands.arm.basic.tolerance.ExtensionPosTolerance;
@@ -59,6 +60,7 @@ public final class PathPlannerAutos {
             Map.entry("OtherIntakeIn",new SetSpatulaVoltageAndPos(-0.5, 0.34)),
             Map.entry("RotateTo0",new DriveDriverAssist(0)),
             Map.entry("RotateTo180", new DriveDriverAssist(180)),
+            Map.entry("AlignPosition", new ArmPosInstant(ArmPositions.AUTO_ALIGN)),
             Map.entry("OtherPlace", new SetSpatulaVoltageAndPos(0, 0.12).alongWith(new WaitCommand(0.12)).andThen(new SetSpatulaVoltageAndPos(4, 0.12)).andThen(new WaitCommand(0.3)).andThen(new SetSpatulaVoltageAndPos(0, 0.45)))));
 
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
@@ -88,14 +90,14 @@ public final class PathPlannerAutos {
     public static CommandBase CableSideBlue2() {
         DriveTrain.getInstance().setTargetRotationAngle(0);
         DriveTrain.getInstance().setUseDriverAssist(true);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("BluCableConHigCubHig", new PathConstraints(4.5, 4)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("CableConHigCubHigBlue", new PathConstraints(4.5, 4)));
     }
 
 
     public static CommandBase CableSideRed() {
         DriveTrain.getInstance().setTargetRotationAngle(0);
         DriveTrain.getInstance().setUseDriverAssist(true);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("RedCableConHigCubLo", new PathConstraints(4.5, 4)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("CableConHigCubHigRed", new PathConstraints(4.5, 4)));
     }
 
     public static CommandBase DriveCollectChargeBlue() {

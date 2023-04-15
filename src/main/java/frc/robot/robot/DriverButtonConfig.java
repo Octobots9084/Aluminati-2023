@@ -88,7 +88,7 @@ public class DriverButtonConfig {
 				.onTrue(new CollectSubstation().alongWith(new SetSpatulaVoltageAndPos(0, 0.45)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 3)
-				.onTrue(new SetSpatulaVoltageAndPos(-0.5, 0.45).andThen(new ExtensionPosTolerance(0.0)).andThen(new CaliTopPosTolerance(ArmPositions.PRE_DRIVE_POSITION.wrist)).andThen(new CaliBottomPosTolerance(ArmPositions.PRE_DRIVE_POSITION.armAngle, CaliGirls.getInstance().getBottomKf())).alongWith(new WaitCommand(0.3)).andThen(new CaliTopPosTolerance(ArmPositions.DRIVE_POSITION.wrist)));
+				.onTrue(new SetSpatulaVoltageAndPos(-0.5, 0.45).andThen(new Arm2PosStow(ArmPositions.DRIVE_POSITION)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 5)
 				.onTrue(new SetSpatulaVoltageAndPos(0, 0.12).alongWith(new WaitCommand(0.12)).andThen(new SetSpatulaVoltageAndPos(4, 0.12)).andThen(new WaitCommand(0.3)).andThen(new SetSpatulaVoltageAndPos(0, 0.45)));

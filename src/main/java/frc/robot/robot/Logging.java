@@ -75,26 +75,26 @@ public class Logging {
 
     public static void updateLogging() {
         // //Drive
-        driveDashboard.setEntry("X-Pos", drive.getPoseEstimator().getRobotPose().getX());
-        driveDashboard.setEntry("Y-Pos", drive.getPoseEstimator().getRobotPose().getY());
-        driveDashboard.setEntry("Rot Deg", drive.getPoseEstimator().getRobotPose().getRotation().getDegrees());
-        driveDashboard.setEntry("target", drive.getTargetRotationAngle());
-        driveDashboard.setEntry("actual", Gyro.getInstance().getUnwrappedRotation2d().getDegrees());
+        // driveDashboard.setEntry("X-Pos", drive.getPoseEstimator().getRobotPose().getX());
+        // driveDashboard.setEntry("Y-Pos", drive.getPoseEstimator().getRobotPose().getY());
+        // driveDashboard.setEntry("Rot Deg", drive.getPoseEstimator().getRobotPose().getRotation().getDegrees());
+        // driveDashboard.setEntry("target", drive.getTargetRotationAngle());
+        // driveDashboard.setEntry("actual", Gyro.getInstance().getUnwrappedRotation2d().getDegrees());
 
-        // // driveDashboard.setEntry("Gyro Pitch", gyro.getRoll());
+        // // // driveDashboard.setEntry("Gyro Pitch", gyro.getRoll());
 
-        // armDashboard.setEntry("spatula", SpatulaFlip.getInstance().getSpatulaPos());
-        armDashboard.setEntry("spatula set", SpatulaFlip.getInstance().lastPosSpatula);
-        // // armDashboard.setEntry("spatula pos", SpatulaFlip.getInstance());
+        // // armDashboard.setEntry("spatula", SpatulaFlip.getInstance().getSpatulaPos());
+        // armDashboard.setEntry("spatula set", SpatulaFlip.getInstance().lastPosSpatula);
+        // // // armDashboard.setEntry("spatula pos", SpatulaFlip.getInstance());
         
 
-        // // //Arm
-        // armDashboard.setEntry("Arm Extension", armExtension.getPosition());
-        armDashboard.setEntry("Ext Set", armExtension.lastpos);
-        // armDashboard.setEntry("Claw Rotation", caliGirls.getTopPos());
-        armDashboard.setEntry("Claw Set Rotation", caliGirls.lastPosTop);
-        // armDashboard.setEntry("Arm Rotation", caliGirls.lastPosBottom);
-        armDashboard.setEntry("Arm Real", caliGirls.getBottomPos());
+        // // // //Arm
+        // // armDashboard.setEntry("Arm Extension", armExtension.getPosition());
+        // armDashboard.setEntry("Ext Set", armExtension.lastpos);
+        // // armDashboard.setEntry("Claw Rotation", caliGirls.getTopPos());
+        // armDashboard.setEntry("Claw Set Rotation", caliGirls.lastPosTop);
+        // // armDashboard.setEntry("Arm Rotation", caliGirls.lastPosBottom);
+        // armDashboard.setEntry("Arm Real", caliGirls.getBottomPos());
 
 
     }
