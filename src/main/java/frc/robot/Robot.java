@@ -115,7 +115,7 @@ public class Robot extends TimedRobot {
         DriveTrain.getInstance().updateSwerveStates();
         CommandScheduler.getInstance().run();
 
-        Logging.updateLogging();
+        // Logging.updateLogging();
     }
 
     @Override
