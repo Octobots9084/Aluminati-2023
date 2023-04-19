@@ -38,6 +38,7 @@ import frc.robot.robot.ButtonConfig;
 import frc.robot.robot.ControlMap;
 import frc.robot.robot.DriverButtonConfig;
 import frc.robot.robot.Logging;
+import frc.robot.subsystems.Light;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
@@ -172,6 +173,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void disabledInit() {
+        Light.getInstance().AdrUpdateStrobe(0, 0, 255, 1);
         CommandScheduler.getInstance().cancelAll();
     }
 

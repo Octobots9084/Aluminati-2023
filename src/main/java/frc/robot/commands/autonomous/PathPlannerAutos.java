@@ -103,13 +103,13 @@ public final class PathPlannerAutos {
     public static CommandBase DriveCollectChargeBlue() {
         // DriveTrain.getInstance().setTargetRotationAngle(0);
         // DriveTrain.getInstance().setUseDriverAssist(true);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("RedCableConHigCubLo", new PathConstraints(4.5, 4)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("OverchargeBlue", new PathConstraints(4.5, 4)));
     }
 
     public static CommandBase DriveCollectChargeRed() {
         // DriveTrain.getInstance().setTargetRotationAngle(0);
         // DriveTrain.getInstance().setUseDriverAssist(true);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("RedCableConHigCubLo", new PathConstraints(4.5, 4)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("OverchargeRed", new PathConstraints(4.5, 4)));
     }
 
     

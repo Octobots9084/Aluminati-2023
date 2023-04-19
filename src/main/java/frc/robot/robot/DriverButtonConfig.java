@@ -124,10 +124,10 @@ public class DriverButtonConfig {
 
 				
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
-			.onFalse(new InstantCommand(() -> Light.getInstance().AdrUpdateStrobe(0, 0, 255, 0.5)));
+			.onFalse(new InstantCommand(() -> Light.getInstance().AdrUpdateStrobe(0, 0, 255, 1)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 14)
-			.onFalse(new InstantCommand(() -> Light.getInstance().AdrUpdateStrobe(0, 0, 255, 0.5)));
+			.onFalse(new InstantCommand(() -> Light.getInstance().AdrUpdateStrobe(0, 0, 255, 1)));
 
 		//Switch 15 reserved for manual override
 
