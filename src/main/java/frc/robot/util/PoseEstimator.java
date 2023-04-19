@@ -35,7 +35,6 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.swerve.SwerveModule;
 // import frc.robot.subsystems.vision.LeftCameraWrapper;
 // import frc.robot.subsystems.vision.RightCameraWrapper;
