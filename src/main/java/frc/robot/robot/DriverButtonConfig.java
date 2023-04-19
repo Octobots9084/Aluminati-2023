@@ -1,4 +1,5 @@
 package frc.robot.robot;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -22,6 +23,7 @@ import frc.robot.commands.swerve.SetDriveAngle;
 import frc.robot.commands.swerve.SetDriverAssist;
 import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.commands.vision.AutoAlign;
+import frc.robot.subsystems.Light;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
 
@@ -114,7 +116,18 @@ public class DriverButtonConfig {
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 12)
 				.onTrue(new ArmPosInstant(ArmPositions.STOW).alongWith(new SetSpatulaVoltageAndPos(-0.5, 0.45)));
 
+		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
+				.onTrue(new InstantCommand(() -> Light.getInstance().AdrUpdateStrobe(200, 0, 255, 0.5)));
 
+		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 14)
+				.onTrue(new InstantCommand(() -> Light.getInstance().AdrUpdateStrobe(255, 255, 0, 0.5)));
+
+				
+		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
+			.onFalse(new InstantCommand(() -> Light.getInstance().AdrUpdateStrobe(0, 0, 255, 0.5)));
+
+		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 14)
+			.onFalse(new InstantCommand(() -> Light.getInstance().AdrUpdateStrobe(0, 0, 255, 0.5)));
 
 		//Switch 15 reserved for manual override
 

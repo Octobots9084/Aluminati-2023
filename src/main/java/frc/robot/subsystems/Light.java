@@ -1,6 +1,9 @@
 package frc.robot.subsystems;
 
+import javax.swing.plaf.basic.BasicBorders.RadioButtonBorder;
+
 import com.ctre.phoenix.led.CANdle;
+import com.ctre.phoenix.led.RainbowAnimation;
 import com.ctre.phoenix.led.StrobeAnimation;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -61,8 +64,12 @@ public class Light extends SubsystemBase {
         return light;
     }
     private StrobeAnimation strobeAnimation = new StrobeAnimation(0, 100, 0, 0, strobeSpeed, 60);// default light settings
+    private RainbowAnimation rainbowAnimation = new RainbowAnimation(1, 0.1, 60);
     public Light() {
         this.candle = new CANdle(MotorIDs.CANDLE_ID);
+    }
+    public void setRainbow() {
+        candle.animate(rainbowAnimation);
     }
 
 
