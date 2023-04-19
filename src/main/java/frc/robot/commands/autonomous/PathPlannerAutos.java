@@ -81,34 +81,34 @@ public final class PathPlannerAutos {
     // }
 
     public static CommandBase CableSideBlue() {
-        DriveTrain.getInstance().setTargetRotationAngle(0);
-        DriveTrain.getInstance().setUseDriverAssist(true);
+        // DriveTrain.getInstance().setTargetRotationAngle(0);
+        // DriveTrain.getInstance().setUseDriverAssist(true);
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("BluCableConHigCubLo", new PathConstraints(4.5, 4)));
     }
 
     
     public static CommandBase CableSideBlue2() {
-        DriveTrain.getInstance().setTargetRotationAngle(0);
-        DriveTrain.getInstance().setUseDriverAssist(true);
+        // DriveTrain.getInstance().setTargetRotationAngle(0);
+        // DriveTrain.getInstance().setUseDriverAssist(true);
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("CableConHigCubHigBlue", new PathConstraints(4.5, 4)));
     }
 
 
     public static CommandBase CableSideRed() {
-        DriveTrain.getInstance().setTargetRotationAngle(0);
-        DriveTrain.getInstance().setUseDriverAssist(true);
+        // DriveTrain.getInstance().setTargetRotationAngle(0);
+        // DriveTrain.getInstance().setUseDriverAssist(true);
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("CableConHigCubHigRed", new PathConstraints(4.5, 4)));
     }
 
     public static CommandBase DriveCollectChargeBlue() {
-        DriveTrain.getInstance().setTargetRotationAngle(0);
-        DriveTrain.getInstance().setUseDriverAssist(true);
+        // DriveTrain.getInstance().setTargetRotationAngle(0);
+        // DriveTrain.getInstance().setUseDriverAssist(true);
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("RedCableConHigCubLo", new PathConstraints(4.5, 4)));
     }
 
     public static CommandBase DriveCollectChargeRed() {
-        DriveTrain.getInstance().setTargetRotationAngle(0);
-        DriveTrain.getInstance().setUseDriverAssist(true);
+        // DriveTrain.getInstance().setTargetRotationAngle(0);
+        // DriveTrain.getInstance().setUseDriverAssist(true);
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("RedCableConHigCubLo", new PathConstraints(4.5, 4)));
     }
 
