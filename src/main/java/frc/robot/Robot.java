@@ -173,7 +173,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void disabledInit() {
-        Light.getInstance().AdrUpdateStrobe(0, 0, 255, 1);
+        Light.getInstance().AdrUpdateStrobe(150, 150, 150, 1);
         CommandScheduler.getInstance().cancelAll();
     }
 

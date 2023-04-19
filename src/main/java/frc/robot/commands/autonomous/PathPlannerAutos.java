@@ -98,7 +98,7 @@ public final class PathPlannerAutos {
     public static CommandBase DriveCollectChargeBlue() {
         // DriveTrain.getInstance().setTargetRotationAngle(0);
         // DriveTrain.getInstance().setUseDriverAssist(true);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("OverchargeBlue", new PathConstraints(4.5, 4)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("OverchargeBlue", new PathConstraints(3, 2)));
     }
 
     public static CommandBase DriveCollectChargeRed() {

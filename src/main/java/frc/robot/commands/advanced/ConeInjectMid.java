@@ -18,7 +18,7 @@ public class ConeInjectMid extends SequentialCommandGroup {
         addCommands(
                 new ExtensionPosTolerance(0).withTimeout(2),
                 new CaliBottomPosTolerance(aPosition.armAngle, aPosition.angleHold).withTimeout(2),
-                new CaliTopPosTolerance(aPosition.wrist),
+                new CaliTopPosTolerance(aPosition.wrist).withTimeout(3),
                 new ExtensionPosTolerance(aPosition.extension).withTimeout(5),
                 // new SetArmAngle(pos - 0.1, caliGirls.getBottomKf()),
                 // new MoveArmRotationToPos(pos, caliGirls.getBottomKf()),

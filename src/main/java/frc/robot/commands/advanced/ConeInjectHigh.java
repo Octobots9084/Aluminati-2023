@@ -1,5 +1,6 @@
 package frc.robot.commands.advanced;
 
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.arm.CaliGirlsBottomMoveDownALittle;
@@ -20,11 +21,13 @@ public class ConeInjectHigh extends SequentialCommandGroup {
         addCommands(
                 new ExtensionPosTolerance(0).withTimeout(0.25),
                 new CaliBottomPosTolerance(aPosition.armAngle, aPosition.angleHold).withTimeout(2),
-                new CaliTopPosTolerance(aPosition.wrist),
+                new CaliTopPosTolerance(aPosition.wrist).withTimeout(3),
                 new ExtensionPosTolerance(aPosition.extension).withTimeout(5),
                 new CaliGirlsBottomMoveDownALittle(),
+                
                 new WaitCommand(0.25),
                 new IntakeSpeedInstant(2),
+                
                 new WaitCommand(0.1),
                 new ExtensionPosTolerance(5),
                 new ExtensionPosTolerance(0),

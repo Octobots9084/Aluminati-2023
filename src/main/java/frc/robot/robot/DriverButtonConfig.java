@@ -41,6 +41,10 @@ public class DriverButtonConfig {
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
 				.onTrue(new BalanceChargeStation());
+
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
+				.onTrue(new InstantCommand(() -> Light.getInstance().setRainbow()));
+
 		
 		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 8).onTrue(new SetSpatulaVoltageAndPos(-12, 0));
 		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 10).onTrue(new SetSpatulaVoltageAndPos(0, 0.45));
