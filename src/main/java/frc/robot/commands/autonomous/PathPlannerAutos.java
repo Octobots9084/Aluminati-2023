@@ -1,18 +1,15 @@
 package frc.robot.commands.autonomous;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.pathplanner.lib.PathConstraints;
 import com.pathplanner.lib.PathPlanner;
-import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.auto.PIDConstants;
 import com.pathplanner.lib.auto.SwerveAutoBuilder;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -30,10 +27,8 @@ import frc.robot.commands.autonomous.arm.AutoConeMid;
 import frc.robot.commands.autonomous.arm.AutoConeTopBalance;
 import frc.robot.commands.autonomous.arm.AutoCubeLow;
 import frc.robot.commands.autonomous.arm.AutoCubeMid;
-import frc.robot.commands.autonomous.arm.AutoCubeTop;
 import frc.robot.commands.autonomous.arm.AutoGroundIntakeCube;
 import frc.robot.commands.spatula.SetSpatulaVoltageAndPos;
-import frc.robot.commands.vision.AutoAutoAlign;
 import frc.robot.subsystems.arm.ArmPositions;
 import frc.robot.subsystems.arm.CaliGirls;
 import frc.robot.subsystems.swerve.DriveTrain;

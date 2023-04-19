@@ -12,9 +12,6 @@ import frc.robot.commands.advanced.CubeInjectMid;
 import frc.robot.commands.arm.basic.SetItemMode;
 import frc.robot.commands.arm.basic.instant.ArmPosInstant;
 import frc.robot.commands.arm.basic.instant.IntakeSpeedInstant;
-import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
-import frc.robot.commands.arm.basic.tolerance.CaliTopPosTolerance;
-import frc.robot.commands.arm.basic.tolerance.ExtensionPosTolerance;
 import frc.robot.commands.arm.manual.ArmZero;
 import frc.robot.commands.arm.yeet.Arm2PosStow;
 import frc.robot.commands.autonomous.BalanceChargeStation;
@@ -25,7 +22,6 @@ import frc.robot.commands.swerve.ZeroGyro;
 import frc.robot.commands.vision.AutoAlign;
 import frc.robot.subsystems.Light;
 import frc.robot.subsystems.arm.ArmPositions;
-import frc.robot.subsystems.arm.CaliGirls;
 
 public class DriverButtonConfig {
 	public void initTeleop() {

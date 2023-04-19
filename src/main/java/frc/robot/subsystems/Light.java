@@ -1,7 +1,5 @@
 package frc.robot.subsystems;
 
-import javax.swing.plaf.basic.BasicBorders.RadioButtonBorder;
-
 import com.ctre.phoenix.led.CANdle;
 import com.ctre.phoenix.led.RainbowAnimation;
 import com.ctre.phoenix.led.StrobeAnimation;

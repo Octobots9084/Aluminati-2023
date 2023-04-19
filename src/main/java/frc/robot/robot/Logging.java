@@ -6,7 +6,6 @@ import frc.robot.commands.autonomous.PathPlannerAutos;
 import frc.robot.commands.autonomous.arm.AutoConeTop;
 import frc.robot.subsystems.arm.ArmExtension;
 import frc.robot.subsystems.arm.CaliGirls;
-import frc.robot.subsystems.spatula.SpatulaFlip;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
 import frc.robot.util.shuffleboard.RSTab;

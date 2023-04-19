@@ -4,12 +4,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 import com.revrobotics.SparkMaxPIDController;
 import frc.robot.robot.MotorIDs;
 import frc.robot.robot.Tuning;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
-import frc.robot.robot.Logging;
 
 public class SpatulaFlip extends SubsystemBase {
     public CANSparkMax spatulaMotor;

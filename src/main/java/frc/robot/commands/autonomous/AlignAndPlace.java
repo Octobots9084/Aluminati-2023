@@ -20,21 +20,10 @@
 
 package frc.robot.commands.autonomous;
 
-import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.advanced.ConeInjectHigh;
-import frc.robot.commands.arm.basic.instant.ArmPosInstant;
 import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
 import frc.robot.commands.vision.AutoAutoAlign;
-import frc.robot.robot.ControlMap;
 import frc.robot.subsystems.arm.ArmPositions;
-import frc.robot.subsystems.swerve.DriveTrain;
-import frc.robot.util.Gyro;
-import frc.robot.util.MathUtil;
 
 /**
  * Represents a swerve drive style drivetrain.

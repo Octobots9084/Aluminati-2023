@@ -58,7 +58,7 @@ public class PoseEstimator {
         // this.rightCameraWrapper = new RightCameraWrapper();
         this.gyro = gyro;
 
-        SmartDashboard.putData("Field",m_field);
+        // SmartDashboard.putData("Field",m_field);
         this.swerveModules = swerveModules;
         SwerveModulePosition[] swerveModulePositions = {
             swerveModules[0].getModulePosition(),

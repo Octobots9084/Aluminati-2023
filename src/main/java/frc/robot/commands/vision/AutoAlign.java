@@ -2,7 +2,6 @@ package frc.robot.commands.vision;
 
 import org.photonvision.targeting.PhotonTrackedTarget;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.commands.swerve.SetDriveAngle;
@@ -55,12 +54,12 @@ public class AutoAlign extends CommandBase {
             if (vision.getTapeCamHasTarget()) {
                 if (vision.getBestTarget() != null) {
                     cameraToTarget = vision.getBestTarget();
-                            SmartDashboard.putNumber("Degrees", cameraToTarget.getYaw()-3);
+                            // SmartDashboard.putNumber("Degrees", cameraToTarget.getYaw()-3);
                             //light.setDegrees(cameraToTarget.getYaw()-3);
                             //light.setHasTarget(true);
                             //light.lightUpdateControl(-1);
                             ySpeed = (cameraToTarget.getYaw()-3) * 0.1;
-                            SmartDashboard.putNumber("Degrees to target", cameraToTarget.getYaw()-3);
+                            // SmartDashboard.putNumber("Degrees to target", cameraToTarget.getYaw()-3);
                             
                             if(MathUtil.isWithinTolerance(cameraToTarget.getYaw()-3,0,1)){
                                 light.AdrUpdateStrobe(0, 255, 0, 1);

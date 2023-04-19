@@ -29,7 +29,6 @@ import com.ctre.phoenix.motorcontrol.TalonFXControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
-import com.revrobotics.CANSparkMaxLowLevel.PeriodicFrame;
 import com.revrobotics.SparkMaxAbsoluteEncoder.Type;
 
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -39,7 +38,6 @@ import frc.robot.robot.Logging;
 import frc.robot.robot.Tuning;
 import frc.robot.util.MotorUtil;
 import frc.robot.util.PIDConfig;
-import frc.robot.util.StatusFrameDemolisher;
 import frc.robot.util.SwerveUtil;
 
 public class SwerveModule {
