@@ -56,7 +56,7 @@ public final class PathPlannerAutos {
             Map.entry("RotateTo0",new DriveDriverAssist(0)),
             Map.entry("RotateTo180", new DriveDriverAssist(180)),
             Map.entry("AlignPosition", new ArmPosInstant(ArmPositions.AUTO_ALIGN)),
-            Map.entry("OtherPlace", new SetSpatulaVoltageAndPos(0, 0.12).alongWith(new WaitCommand(0.12)).andThen(new SetSpatulaVoltageAndPos(4, 0.12)).andThen(new WaitCommand(0.3)).andThen(new SetSpatulaVoltageAndPos(0, 0.45)))));
+            Map.entry("OtherPlace", new SetSpatulaVoltageAndPos(0, 0.12).alongWith(new WaitCommand(0.3)).andThen(new SetSpatulaVoltageAndPos(2, 0.15)).andThen(new WaitCommand(0.3)).andThen(new SetSpatulaVoltageAndPos(0, 0.45)))));
 
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
             DriveTrain.getInstance()::getPose2dPathplanner,
@@ -184,6 +184,11 @@ public final class PathPlannerAutos {
     public static CommandBase OverchargeRedNoBalance() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("OverchargeRedNoBalance", new PathConstraints(3, 1)));
     }
+
+    public static CommandBase ComplexCableRed() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ComplexCableRed", new PathConstraints(3, 1)));
+    }
+
     private PathPlannerAutos() {
         throw new UnsupportedOperationException("This is a utility class!");
     }

@@ -2,17 +2,17 @@
   "waypoints": [
     {
       "anchorPoint": {
-        "x": 1.8070073746985102,
-        "y": 3.3
+        "x": 1.85,
+        "y": 5.0
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.80700737469851,
-        "y": 3.3
+        "x": 2.255205651638122,
+        "y": 4.722844138983571
       },
       "holonomicAngle": 180.0,
       "isReversal": false,
-      "velOverride": 1.0,
+      "velOverride": null,
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
@@ -26,41 +26,16 @@
     },
     {
       "anchorPoint": {
-        "x": 4.30215262712979,
-        "y": 3.1904927718557285
+        "x": 7.25,
+        "y": 4.482699521747118
       },
       "prevControl": {
-        "x": 3.8335936725025057,
-        "y": 3.2358371868196594
+        "x": 5.965011067682621,
+        "y": 4.888919164428913
       },
       "nextControl": {
-        "x": 5.011151020875508,
-        "y": 3.1218800240738847
-      },
-      "holonomicAngle": 180.0,
-      "isReversal": false,
-      "velOverride": 0.5,
-      "isLocked": false,
-      "isStopPoint": false,
-      "stopEvent": {
-        "names": [],
-        "executionBehavior": "parallel",
-        "waitBehavior": "none",
-        "waitTime": 0
-      }
-    },
-    {
-      "anchorPoint": {
-        "x": 7.241065323785427,
-        "y": 3.3391537253830568
-      },
-      "prevControl": {
-        "x": 6.24121392323643,
-        "y": 3.3563925426339014
-      },
-      "nextControl": {
-        "x": 6.24121392323643,
-        "y": 3.3563925426339014
+        "x": 5.965011067682621,
+        "y": 4.888919164428913
       },
       "holonomicAngle": 180.0,
       "isReversal": true,
@@ -76,42 +51,89 @@
     },
     {
       "anchorPoint": {
-        "x": 4.062008009893337,
-        "y": 3.156186397964807
+        "x": 4.370765374911635,
+        "y": 4.768585970838132
       },
       "prevControl": {
-        "x": 5.978061422572366,
-        "y": 3.1561863979648064
+        "x": 5.028928020719371,
+        "y": 4.842536829917654
       },
-      "nextControl": null,
-      "holonomicAngle": 180.0,
+      "nextControl": {
+        "x": 3.35300961614762,
+        "y": 4.654231391201726
+      },
+      "holonomicAngle": 0,
       "isReversal": false,
       "velOverride": null,
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 1.9921901184743878,
+        "y": 4.7571505128744915
+      },
+      "prevControl": {
+        "x": 2.7126239701837473,
+        "y": 4.768585970838132
+      },
+      "nextControl": {
+        "x": 1.2717562667650282,
+        "y": 4.745715054910851
+      },
+      "holonomicAngle": 0.0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": true,
+      "stopEvent": {
         "names": [
-          "BalanceChargeStation"
+          "OtherPlace"
         ],
         "executionBehavior": "sequential",
         "waitBehavior": "none",
         "waitTime": 0
       }
+    },
+    {
+      "anchorPoint": {
+        "x": 6.692163341530678,
+        "y": 4.814327802692695
+      },
+      "prevControl": {
+        "x": 6.309075499748717,
+        "y": 4.825763260656335
+      },
+      "nextControl": null,
+      "holonomicAngle": 0,
+      "isReversal": false,
+      "velOverride": null,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
     }
   ],
-  "maxVelocity": 3.0,
-  "maxAcceleration": null,
-  "isReversed": null,
   "markers": [
     {
-      "position": 1.4618181818181482,
+      "position": 0.6400000000000008,
       "names": [
         "event",
         "OtherCollect"
       ]
     },
     {
-      "position": 2.1381818181818204,
+      "position": 1.1927272727272673,
       "names": [
         "event",
         "OtherIntakeIn"

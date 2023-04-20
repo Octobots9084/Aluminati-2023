@@ -55,7 +55,6 @@ public class SpatulaFlip extends SubsystemBase {
     }
 
     
-
     public void setSpatulaPos(double angle) {
         if (angle > 0.46) {
             angle = 0.46;
