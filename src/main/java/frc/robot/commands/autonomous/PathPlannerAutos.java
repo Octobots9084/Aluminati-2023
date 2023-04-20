@@ -101,6 +101,8 @@ public final class PathPlannerAutos {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("OverchargeBlue", new PathConstraints(3, 1)));
     }
 
+    
+
     public static CommandBase DriveCollectChargeRed() {
         // DriveTrain.getInstance().setTargetRotationAngle(0);
         // DriveTrain.getInstance().setUseDriverAssist(true);
@@ -163,7 +165,27 @@ public final class PathPlannerAutos {
     public static CommandBase GetOutOfDaWay() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("GetOutOfDaWayCable", new PathConstraints(2, 1)));
     }
+    public static CommandBase SimpleCableSideBlue() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("SimpleCableBlue", new PathConstraints(3, 1)));
+    }
+    public static CommandBase SimpleCableSideRed() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("SimpleCableRed", new PathConstraints(3, 1)));
+    }
+    public static CommandBase SimpleSubstationBlue() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("SimpleSubstationBlue", new PathConstraints(3, 1)));
+    }
+    public static CommandBase SimpleSubstationRed() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("SimpleSubstationRed", new PathConstraints(3, 1)));
+    }
+
+    public static CommandBase OverchargeBlueNoBalance() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("OverchargeBlueNoBalance", new PathConstraints(3, 1)));
+    }
+    public static CommandBase OverchargeRedNoBalance() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("OverchargeRedNoBalance", new PathConstraints(3, 1)));
+    }
     private PathPlannerAutos() {
         throw new UnsupportedOperationException("This is a utility class!");
     }
+
 }

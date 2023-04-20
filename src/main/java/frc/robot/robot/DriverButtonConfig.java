@@ -59,7 +59,7 @@ public class DriverButtonConfig {
 
 		//switch 14 reserved for feild-centric toggle, testing to be moved to codriver
 
-		new JoystickButton(ControlMap.DRIVER_BUTTONS, 15)
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 7)
 				.whileTrue(new BalanceChargeStation());
 
 		//Switch 16 reserved for auto align toggle

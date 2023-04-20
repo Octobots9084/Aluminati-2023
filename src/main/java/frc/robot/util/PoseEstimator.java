@@ -44,7 +44,6 @@ import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import frc.robot.subsystems.swerve.SwerveModule;
 // import frc.robot.subsystems.vision.LeftCameraWrapper;
 // import frc.robot.subsystems.vision.RightCameraWrapper;
-import frc.robot.subsystems.vision.PhotonCameraWrapper;
 
 public class PoseEstimator {
     public final SwerveDrivePoseEstimator swerveDrivePoseEstimator;
@@ -54,7 +53,6 @@ public class PoseEstimator {
     private final SwerveModule[] swerveModules;
     // public LeftCameraWrapper leftCameraWrapper;
     // public RightCameraWrapper rightCameraWrapper;
-    public PhotonCameraWrapper photonCameraWrapper;
     public final AtomicReference<Boolean> useAprilTags = new AtomicReference<Boolean>(false);
     public final AtomicReference<Double> prevTime = new AtomicReference<Double>(0.0);
     public Field2d m_field = new Field2d();
@@ -62,7 +60,6 @@ public class PoseEstimator {
     public PoseEstimator(Gyro gyro, SwerveDriveKinematics swerveDriveKinematics, SwerveModule[] swerveModules) {
         // this.leftCameraWrapper = new LeftCameraWrapper();
         // this.rightCameraWrapper = new RightCameraWrapper();
-        this.photonCameraWrapper = new PhotonCameraWrapper();
         this.gyro = gyro;
 
         // SmartDashboard.putData("Field",m_field);
@@ -170,16 +167,6 @@ public class PoseEstimator {
         //     } 
         // }
 
-        try {
-            Optional<EstimatedRobotPose> result = photonCameraWrapper.getEstimatedGlobalPose(getRobotPose());
-            if (result.isPresent()) {
-                swerveDrivePoseEstimator.addVisionMeasurement(result.get().estimatedPose.toPose2d(),
-                        Timer.getFPGATimestamp());
-            }
-
-        } catch (Exception e) {
-            //deez
-        }
         resetLock.unlock();
 
     }
