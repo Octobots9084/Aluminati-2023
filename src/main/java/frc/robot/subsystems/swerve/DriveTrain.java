@@ -53,7 +53,7 @@ public class DriveTrain extends SubsystemBase {
     }
 
     //Drive Speed Constants
-    public static final double MAX_SPEED = 5; // m/s
+    public static final double MAX_SPEED = 10; // m/s
     public static final double MAX_ACCELERATION = 0.5; // m/s
     public static final double MAX_ANGULAR_SPEED = Math.PI * 3 * 0.8; // rad/s
     public static final double MAX_ANGULAR_ACCELERATION = Math.PI * 3; // rad/s
@@ -92,9 +92,6 @@ public class DriveTrain extends SubsystemBase {
         // swervePosition[1] = new Translation2d(0.32, -0.32);
         // swervePosition[2] = new Translation2d(-0.32, 0.32);
         // swervePosition[3] = new Translation2d(-0.32, 0.32);
-
-
-
 
         swervePosition[0] = new Translation2d(.3556, .3556);
         swervePosition[1] = new Translation2d(.3556, -.3556);
@@ -149,7 +146,8 @@ public class DriveTrain extends SubsystemBase {
                 previousRot = rot;
 
             } else {
-                if (MathUtil.isWithinTolerance(rot, 0, 0.01) && !MathUtil.isWithinTolerance(previousRot, 0, 0.01) && !Robot.isAutoFlag()) {
+                if (MathUtil.isWithinTolerance(rot, 0, 0.01) && !MathUtil.isWithinTolerance(previousRot, 0, 0.01)
+                        && !Robot.isAutoFlag()) {
                     this.setTargetRotationAngle(gyro.getUnwrappedAngle());
                     previousRot = rot;
                 }
@@ -198,6 +196,7 @@ public class DriveTrain extends SubsystemBase {
         swerveModules[2].killDaCan();
         swerveModules[3].killDaCan();
     }
+
     public SwerveModuleState[] getModuleStates() {
         SwerveModuleState[] swerveModuleStates = new SwerveModuleState[4];
         for (int i = 0; i < 4; i++) {
@@ -213,8 +212,8 @@ public class DriveTrain extends SubsystemBase {
 
     public Pose2d getPose2dPathplanner() {
         return this.getPoseEstimator().getRobotPose();//new Pose2d(this.getPoseEstimator().getRobotPose().getX(), this.getPoseEstimator().getRobotPose().getY(),
-                // new Rotation2d((Math.abs(this.getPoseEstimator().getRobotPose().getRotation().getRadians()) % 180)
-                //         * Math.signum(this.getPoseEstimator().getRobotPose().getRotation().getRadians())));
+        // new Rotation2d((Math.abs(this.getPoseEstimator().getRobotPose().getRotation().getRadians()) % 180)
+        //         * Math.signum(this.getPoseEstimator().getRobotPose().getRotation().getRadians())));
     }
 
     public void resetPosePathplanner(Pose2d pose2d) {

@@ -32,15 +32,15 @@ public class AutoAlign extends CommandBase {
     @Override
     public void initialize() {
         // try {
-            if (vision.getTapeCamHasTarget()) {
-                if (vision.getBestTarget() != null) {
-                    cameraToTarget = vision.getBestTarget();
-                    caliGirls.setBottomPos(ArmPositions.AUTO_ALIGN.armAngle);
-                    //caliGirls.setBottomKf();
-                } else {
-                    end(true);
-                }
+        if (vision.getTapeCamHasTarget()) {
+            if (vision.getBestTarget() != null) {
+                cameraToTarget = vision.getBestTarget();
+                caliGirls.setBottomPos(ArmPositions.AUTO_ALIGN.armAngle);
+                //caliGirls.setBottomKf();
+            } else {
+                end(true);
             }
+        }
         // } catch (Exception e) {
         //     // TO DO: handle exception
         // }
@@ -54,31 +54,27 @@ public class AutoAlign extends CommandBase {
             if (vision.getTapeCamHasTarget()) {
                 if (vision.getBestTarget() != null) {
                     cameraToTarget = vision.getBestTarget();
-                            // SmartDashboard.putNumber("Degrees", cameraToTarget.getYaw()-3);
-                            //light.setDegrees(cameraToTarget.getYaw()-3);
-                            //light.setHasTarget(true);
-                            //light.lightUpdateControl(-1);
-                            ySpeed = (cameraToTarget.getYaw()-3) * 0.1;
-                            // SmartDashboard.putNumber("Degrees to target", cameraToTarget.getYaw()-3);
-                            
-                            if(MathUtil.isWithinTolerance(cameraToTarget.getYaw()-3,0,4)){
-                                light.AdrUpdateStrobe(0, 255, 0, 1);
-                            } else {
-                                light.AdrUpdateStrobe(0, 0, 255, 1);
-                            }
-                            
+                    // SmartDashboard.putNumber("Degrees", cameraToTarget.getYaw()-3);
+                    //light.setDegrees(cameraToTarget.getYaw()-3);
+                    //light.setHasTarget(true);
+                    //light.lightUpdateControl(-1);
+                    ySpeed = (cameraToTarget.getYaw() - 3) * 0.1;
+                    // SmartDashboard.putNumber("Degrees to target", cameraToTarget.getYaw()-3);
+
+                    if (MathUtil.isWithinTolerance(cameraToTarget.getYaw() - 3, 0, 2)) {
+                        light.AdrUpdateStrobe(255, 200, 0, 1);
+                    } else {
+                        light.AdrUpdateStrobe(0, 0, 255, 1);
+                    }
+
                 } else {
-                            ySpeed = 0;
-                            //light.setHasTarget(false);
-                            //light.lightUpdateControl(-1);
-                            light.AdrUpdateStrobe(255, 0, 0, 1);
+                    ySpeed = 0;
+                    //light.setHasTarget(false);
+                    //light.lightUpdateControl(-1);
+                    light.AdrUpdateStrobe(255, 0, 0, 1);
                     end(true);
                     // driveTrain.drive(0, 0, 0, true);
                 }
-
-                
-                
-
 
                 //SmartDashboard.putNumber("Y_SPED", ySpeed);
                 CommandScheduler.getInstance().schedule(new SetDriveAngle(180));
