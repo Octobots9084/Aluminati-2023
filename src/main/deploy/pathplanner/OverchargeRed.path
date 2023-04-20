@@ -12,7 +12,34 @@
       },
       "holonomicAngle": 180.0,
       "isReversal": false,
-      "velOverride": null,
+      "velOverride": 1.0,
+      "isLocked": false,
+      "isStopPoint": false,
+      "stopEvent": {
+        "names": [
+          "ConeTop"
+        ],
+        "executionBehavior": "sequential",
+        "waitBehavior": "none",
+        "waitTime": 0
+      }
+    },
+    {
+      "anchorPoint": {
+        "x": 4.325023543057072,
+        "y": 3.2819764355648537
+      },
+      "prevControl": {
+        "x": 3.8564645884297875,
+        "y": 3.3273208505287846
+      },
+      "nextControl": {
+        "x": 5.03402193680279,
+        "y": 3.21336368778301
+      },
+      "holonomicAngle": 180.0,
+      "isReversal": false,
+      "velOverride": 0.5,
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
@@ -24,16 +51,16 @@
     },
     {
       "anchorPoint": {
-        "x": 6.408932134103584,
-        "y": 3.3001395917321754
+        "x": 7.3,
+        "y": 3.15
       },
       "prevControl": {
-        "x": 5.408932134103584,
-        "y": 3.3001395917321754
+        "x": 6.3,
+        "y": 3.15
       },
       "nextControl": {
-        "x": 7.408932134103584,
-        "y": 3.3001395917321754
+        "x": 8.3,
+        "y": 3.15
       },
       "holonomicAngle": 180.0,
       "isReversal": false,
@@ -49,11 +76,11 @@
     },
     {
       "anchorPoint": {
-        "x": 3.9766493208200093,
+        "x": 4.0,
         "y": 3.3
       },
       "prevControl": {
-        "x": 5.892702733499038,
+        "x": 5.9160534126790285,
         "y": 3.2999999999999994
       },
       "nextControl": null,
@@ -66,22 +93,25 @@
         "names": [
           "BalanceChargeStation"
         ],
-        "executionBehavior": "parallel",
+        "executionBehavior": "sequential",
         "waitBehavior": "none",
         "waitTime": 0
       }
     }
   ],
+  "maxVelocity": 3.0,
+  "maxAcceleration": null,
+  "isReversed": null,
   "markers": [
     {
-      "position": 0.8145454545454084,
+      "position": 1.6581818181817805,
       "names": [
         "event",
         "OtherCollect"
       ]
     },
     {
-      "position": 1.7745454545453845,
+      "position": 2.639999999999975,
       "names": [
         "event",
         "OtherIntakeIn"

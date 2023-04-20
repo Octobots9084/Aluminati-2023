@@ -120,6 +120,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
+       
         // SmartDashboard.putNumber("Initialized", 1);
         // SmartDashboard.putBoolean("14actual", ControlMap.DRIVER_BUTTONS.getRawButton(14));
         CommandScheduler.getInstance().cancelAll();
@@ -131,7 +132,7 @@ public class Robot extends TimedRobot {
         Robot.autoFlag = false;
         DriveTrain.getInstance().setUseDriverAssist(true);
         Gyro.getInstance().setAngleAdjustment(180);
-
+        DriveTrain.getInstance().getPoseEstimator().cancelOdometry();
         //DriveTrain.getInstance().getPoseEstimator().useAprilTags.set(true);
 
 

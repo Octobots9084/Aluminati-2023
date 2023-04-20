@@ -22,27 +22,35 @@ package frc.robot.commands.autonomous;
 
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.PIDCommand;
+import frc.robot.subsystems.Light;
 import frc.robot.subsystems.swerve.DriveTrain;
 import frc.robot.util.Gyro;
+import frc.robot.util.MathUtil;
 
 public class BalanceChargeStationAuto extends PIDCommand {
     DriveTrain driveTrain;
     Gyro gyro;
-
+    Light light;
     public BalanceChargeStationAuto() {
         super(
-                new PIDController(0.04, 0.000, 0.015),
+                new PIDController(0.002, 0.000, 0),
                 Gyro.getInstance()::getPitch,
                 0,
                 output -> DriveTrain.getInstance().drive(-output * 0.55/*0.55*/, 0, 0, true),
                 DriveTrain.getInstance());
 
         getController().setTolerance(20, 20);
+        light = Light.getInstance();
 
     }
 
     @Override
     public boolean isFinished() {
+        if (MathUtil.isWithinTolerance(Gyro.getInstance().getPitch(), 0, 3)) {
+            light.AdrUpdateStrobe(255, 0, 0, 1);
+        } else {
+            light.AdrUpdateStrobe(255, 0, 0, 0);
+        }
         // SmartDashboard.putBoolean("Error", MathUtil.isWithinTolerance(getController().getPositionError(), 0, 2.5));
         // SmartDashboard.putNumber("POsition error", getController().getPositionError());
         return false;//(MathUtil.isWithinTolerance(getController().getPositionError(),0,3));

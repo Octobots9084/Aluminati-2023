@@ -21,6 +21,9 @@
 package frc.robot.util;
 
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.ReentrantLock;
@@ -47,11 +50,10 @@ public class PoseEstimator {
     private final SwerveModule[] swerveModules;
     // public LeftCameraWrapper leftCameraWrapper;
     // public RightCameraWrapper rightCameraWrapper;
-
     public final AtomicReference<Boolean> useAprilTags = new AtomicReference<Boolean>(false);
     public final AtomicReference<Double> prevTime = new AtomicReference<Double>(0.0);
     public Field2d m_field = new Field2d();
-
+    ScheduledExecutorService e;
     public PoseEstimator(Gyro gyro, SwerveDriveKinematics swerveDriveKinematics, SwerveModule[] swerveModules) {
         // this.leftCameraWrapper = new LeftCameraWrapper();
         // this.rightCameraWrapper = new RightCameraWrapper();
@@ -81,11 +83,17 @@ public class PoseEstimator {
                 new MatBuilder<>(Nat.N3(), Nat.N1()).fill(0.01, 0.01, 0.01) //Vision Measurement stdev
         );
 
-        var e = Executors.newScheduledThreadPool(1);
+        e = Executors.newScheduledThreadPool(1);
         e.scheduleWithFixedDelay(this::updateOdometry, 5, 15, TimeUnit.MILLISECONDS);
+
+        
         robotPose.set(new Pose2d());
         prevTime.set(Timer.getFPGATimestamp());
         this.swerveDrivePoseEstimator.getEstimatedPosition();
+    }
+
+    public void cancelOdometry() {
+        e.shutdown();
     }
 
     public Pose2d getRobotPose() {

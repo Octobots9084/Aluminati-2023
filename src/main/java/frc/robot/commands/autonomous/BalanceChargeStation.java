@@ -45,10 +45,10 @@ public class BalanceChargeStation extends PIDCommand {
 
     @Override
     public boolean isFinished() {
-        if (MathUtil.isWithinTolerance(Gyro.getInstance().getPitch(), 0, 5)) {
-            light.AdrUpdateStrobe(255, 0, 0, 0);
-        } else {
+        if (MathUtil.isWithinTolerance(Gyro.getInstance().getPitch(), 0, 3)) {
             light.AdrUpdateStrobe(255, 0, 0, 1);
+        } else {
+            light.AdrUpdateStrobe(255, 0, 0, 0);
         }
         // SmartDashboard.putBoolean("Error", MathUtil.isWithinTolerance(getController().getPositionError(), 0, 2.5));
         // SmartDashboard.putNumber("POsition error", getController().getPositionError());
