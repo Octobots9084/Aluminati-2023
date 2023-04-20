@@ -58,10 +58,10 @@ public class AutoAlign extends CommandBase {
                     //light.setDegrees(cameraToTarget.getYaw()-3);
                     //light.setHasTarget(true);
                     //light.lightUpdateControl(-1);
-                    ySpeed = (cameraToTarget.getYaw() - 3) * 0.1;
+                    ySpeed = (cameraToTarget.getYaw() - 1.5) * 0.1;
                     // SmartDashboard.putNumber("Degrees to target", cameraToTarget.getYaw()-3);
 
-                    if (MathUtil.isWithinTolerance(cameraToTarget.getYaw() - 3, 0, 2)) {
+                    if (MathUtil.isWithinTolerance(cameraToTarget.getYaw() - 1.5, 0, 2)) {
                         light.AdrUpdateStrobe(255, 200, 0, 1);
                     } else {
                         light.AdrUpdateStrobe(0, 0, 255, 1);
