@@ -192,6 +192,12 @@ public class DriveTrain extends SubsystemBase {
 
     }
 
+    public void killDaCan() {
+        swerveModules[0].killDaCan();
+        swerveModules[1].killDaCan();
+        swerveModules[2].killDaCan();
+        swerveModules[3].killDaCan();
+    }
     public SwerveModuleState[] getModuleStates() {
         SwerveModuleState[] swerveModuleStates = new SwerveModuleState[4];
         for (int i = 0; i < 4; i++) {
