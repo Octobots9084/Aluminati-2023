@@ -57,10 +57,10 @@ public class SpatulaFlip extends SubsystemBase {
     
 
     public void setSpatulaPos(double angle) {
-        if (angle > 0.48) {
-            angle = 0.48;
-        } else if (angle < 0.05) {
-            angle = 0.05;
+        if (angle > 0.46) {
+            angle = 0.46;
+        } else if (angle < 0.12) {
+            angle = 0.12;
         }
         lastPosSpatula = angle;
         pidControllerSpatula.setReference(angle, ControlType.kPosition);

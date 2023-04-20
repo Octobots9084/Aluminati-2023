@@ -51,7 +51,7 @@ public final class PathPlannerAutos {
             Map.entry("StowArm", new Arm2PosStow(ArmPositions.STOW)),
             Map.entry("DrivePosition", new ExtensionPosTolerance(0.0).andThen(new CaliTopPosTolerance(ArmPositions.PRE_DRIVE_POSITION.wrist)).andThen(new CaliBottomPosTolerance(ArmPositions.PRE_DRIVE_POSITION.armAngle, CaliGirls.getInstance().getBottomKf())).alongWith(new WaitCommand(0.3)).andThen(new CaliTopPosTolerance(ArmPositions.DRIVE_POSITION.wrist))),
             Map.entry("Wait1", new WaitCommand(1)),
-            Map.entry("OtherCollect",new SetSpatulaVoltageAndPos(-12, 0).alongWith(new Arm2PosStow(ArmPositions.STOW))),
+            Map.entry("OtherCollect",new SetSpatulaVoltageAndPos(-12, 0.12).alongWith(new Arm2PosStow(ArmPositions.STOW))),
             Map.entry("OtherIntakeIn",new SetSpatulaVoltageAndPos(-0.5, 0.45)),
             Map.entry("RotateTo0",new DriveDriverAssist(0)),
             Map.entry("RotateTo180", new DriveDriverAssist(180)),
@@ -98,7 +98,7 @@ public final class PathPlannerAutos {
     public static CommandBase DriveCollectChargeBlue() {
         // DriveTrain.getInstance().setTargetRotationAngle(0);
         // DriveTrain.getInstance().setUseDriverAssist(true);
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("OverchargeBlue", new PathConstraints(3, 1)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("OverchargeBlue", new PathConstraints(3, 1.3)));
     }
 
     

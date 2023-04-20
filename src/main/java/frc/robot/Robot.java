@@ -64,19 +64,19 @@ public class Robot extends TimedRobot {
         Logging.updateLogging();
         periodicCycles++;
         if (periodicCycles%101==0) {
-            SmartDashboard.putNumber("Team", 9084);
+            Logging.autoDashboard.setEntry("Team", 9084);
         }
 
         if (periodicCycles%203==0) {
-            SmartDashboard.putNumber("Team", 9);
+            Logging.autoDashboard.setEntry("Team", 9);
         }
 
         if (periodicCycles%305==0) {
-            SmartDashboard.putNumber("Team", 90);
+            Logging.autoDashboard.setEntry("Team", 90);
         }
 
         if (periodicCycles%407==0) {
-            SmartDashboard.putNumber("Team", 908);
+            Logging.autoDashboard.setEntry("Team", 908);
         }
         
         // SmartDashboard.putNumber("Extens2ion", ArmExtension.getInstance().getPosition());
