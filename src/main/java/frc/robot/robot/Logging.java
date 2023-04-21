@@ -61,8 +61,9 @@ public class Logging {
 
         autoChooser.addOption("EMERGENCYJustBalance", PathPlannerAutos.JustBalance());
         autoChooser.addOption("INDEVREDComplexCable", PathPlannerAutos.ComplexCableRed());
-        autoChooser.addOption("INDEVComplexCableBLUE", PathPlannerAutos.ComplexCableBlue());
+        autoChooser.addOption("ComplexCableBLUE", PathPlannerAutos.ComplexCableBlue());
         autoChooser.addOption("INDEVComplexSubstationBlue", PathPlannerAutos.ComplexSubstationBlue());
+        autoChooser.addOption("INDEVFullCableBlue", PathPlannerAutos.FullCableBlue());
         // autoChooser.addOption("DONNOTUSEBalance Charge Station", PathPlannerAutos.PlaceConeAndBalance());
         // autoChooser.addOption("Move and Grab Cone Bottom", PathPlannerAutos.PlaceConeAndMoveBackBottom());
         // autoChooser.addOption("Move and Grab Cone Top", PathPlannerAutos.PlaceConeAndMoveBackTop());
