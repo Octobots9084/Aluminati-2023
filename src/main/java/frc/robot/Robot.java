@@ -141,6 +141,7 @@ public class Robot extends TimedRobot {
         // SmartDashboard.putNumber("Initialized", 1);
         // SmartDashboard.putBoolean("14actual", ControlMap.DRIVER_BUTTONS.getRawButton(14));
         CommandScheduler.getInstance().cancelAll();
+
         initializeDefaultCommands();
         ArmExtension.getInstance().setOffset();
         if (!autoFlag) {
@@ -152,7 +153,7 @@ public class Robot extends TimedRobot {
         DriveTrain.getInstance().getPoseEstimator().cancelOdometry();
         DriveTrain.getInstance().killDaCan();
         //DriveTrain.getInstance().getPoseEstimator().useAprilTags.set(true);
-
+        Light.getInstance().AdrUpdateStrobe(255, 10, 0, 1);
     }
 
     @Override
@@ -160,6 +161,7 @@ public class Robot extends TimedRobot {
         Robot.autoFlag = true;
 
         CommandScheduler.getInstance().cancelAll();
+        Light.getInstance().setRainbow();
         //new driveToPos(new Pose2d(14.16, 1.4, new Rotation2d()));
         //CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
         // CommandScheduler.getInstance().schedule(PathPlannerAutos.TestAutoOne());
