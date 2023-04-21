@@ -60,6 +60,7 @@ public class Logging {
         autoChooser.addOption("OverchargeBlueNoBalance", PathPlannerAutos.OverchargeBlueNoBalance());
         autoChooser.addOption("OverchargeRedNoBalance", PathPlannerAutos.OverchargeRedNoBalance());
         autoChooser.addOption("REDComplexCable", PathPlannerAutos.ComplexCableRed());
+        autoChooser.addOption("ComplexSubstationBlue", PathPlannerAutos.ComplexSubstationBlue());
         // autoChooser.addOption("DONNOTUSEBalance Charge Station", PathPlannerAutos.PlaceConeAndBalance());
         // autoChooser.addOption("Move and Grab Cone Bottom", PathPlannerAutos.PlaceConeAndMoveBackBottom());
         // autoChooser.addOption("Move and Grab Cone Top", PathPlannerAutos.PlaceConeAndMoveBackTop());

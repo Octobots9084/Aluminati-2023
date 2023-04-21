@@ -189,6 +189,20 @@ public final class PathPlannerAutos {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ComplexCableRed", new PathConstraints(3, 1)));
     }
 
+    public static CommandBase ComplexCableBlue() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ComplexCableBlue", new PathConstraints(3, 1)));
+    }
+
+    public static CommandBase ComplexSubstationRed() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ComplexCableRed", new PathConstraints(3, 1)));
+    }
+
+    public static CommandBase ComplexSubstationBlue() {
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ComplexSubstationBlue", new PathConstraints(3, 1)));
+    }
+
+
+
     private PathPlannerAutos() {
         throw new UnsupportedOperationException("This is a utility class!");
     }
