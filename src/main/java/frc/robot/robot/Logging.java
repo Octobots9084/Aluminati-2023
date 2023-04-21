@@ -48,18 +48,18 @@ public class Logging {
     private void addAutoOptions() {
         //
         autoChooser.setDefaultOption("No Movement", new AutoConeTop());
-        autoChooser.addOption("REDCenter", PathPlannerAutos.DriveCollectChargeRed());
         autoChooser.addOption("CenterBLUE", PathPlannerAutos.DriveCollectChargeBlue());
+        autoChooser.addOption("REDCenter", PathPlannerAutos.DriveCollectChargeRed());
         // autoChooser.addOption("REDCableSide", PathPlannerAutos.CableSideBlue2());
         // autoChooser.addOption("CableSideBLUE", PathPlannerAutos.CableSideRed());
         autoChooser.addOption("SimpleCableSideBLUE", PathPlannerAutos.SimpleCableSideBlue());
         autoChooser.addOption("REDSimpleCableSide", PathPlannerAutos.SimpleCableSideRed());
         autoChooser.addOption("SimpleSubstationBLUE", PathPlannerAutos.SimpleSubstationBlue());
-        autoChooser.addOption("REDSimpleSubstation", PathPlannerAutos.SimpleSubstationBlue());
+        autoChooser.addOption("REDSimpleSubstation", PathPlannerAutos.SimpleSubstationRed());
         autoChooser.addOption("OverchargeNoBalanceBLUE", PathPlannerAutos.OverchargeBlueNoBalance());
         autoChooser.addOption("REDOverchargeNoBalance", PathPlannerAutos.OverchargeRedNoBalance());
 
-        autoChooser.addOption("EMERGENCYONLYJustBalance", PathPlannerAutos.JustBalance());
+        autoChooser.addOption("EMERGENCYJustBalance", PathPlannerAutos.JustBalance());
         autoChooser.addOption("INDEVREDComplexCable", PathPlannerAutos.ComplexCableRed());
         autoChooser.addOption("INDEVComplexSubstationBlue", PathPlannerAutos.ComplexSubstationBlue());
         // autoChooser.addOption("DONNOTUSEBalance Charge Station", PathPlannerAutos.PlaceConeAndBalance());

@@ -53,6 +53,7 @@ public class Robot extends TimedRobot {
     public static double autoStartTime = 0.0;
     private static boolean autoFlag = false;
     private static int periodicCycles = 0;
+
     public static boolean isAutoFlag() {
         return autoFlag;
     }
@@ -63,22 +64,22 @@ public class Robot extends TimedRobot {
 
         Logging.updateLogging();
         periodicCycles++;
-        if (periodicCycles%101==0) {
+        if (periodicCycles % 101 == 0) {
             Logging.autoDashboard.setEntry("Team", 9084);
         }
 
-        if (periodicCycles%203==0) {
+        if (periodicCycles % 203 == 0) {
             Logging.autoDashboard.setEntry("Team", 9);
         }
 
-        if (periodicCycles%305==0) {
+        if (periodicCycles % 305 == 0) {
             Logging.autoDashboard.setEntry("Team", 90);
         }
 
-        if (periodicCycles%407==0) {
+        if (periodicCycles % 407 == 0) {
             Logging.autoDashboard.setEntry("Team", 908);
         }
-        
+
         // SmartDashboard.putNumber("Extens2ion", ArmExtension.getInstance().getPosition());
         // SmartDashboard.putNumber("Arm Rotat2ion", CaliGirls.getInstance().getTopPos());
         // SmartDashboard.putNumber("Claw Rot2ation", CaliGirls.getInstance().getBottomPos());
@@ -136,7 +137,7 @@ public class Robot extends TimedRobot {
 
     @Override
     public void teleopInit() {
-       
+
         // SmartDashboard.putNumber("Initialized", 1);
         // SmartDashboard.putBoolean("14actual", ControlMap.DRIVER_BUTTONS.getRawButton(14));
         CommandScheduler.getInstance().cancelAll();
@@ -147,18 +148,17 @@ public class Robot extends TimedRobot {
         }
         Robot.autoFlag = false;
         DriveTrain.getInstance().setUseDriverAssist(true);
-        Gyro.getInstance().setAngleAdjustment(180);
+        Gyro.getInstance().setAngleAdjustmentNoReset(180);
         DriveTrain.getInstance().getPoseEstimator().cancelOdometry();
         DriveTrain.getInstance().killDaCan();
         //DriveTrain.getInstance().getPoseEstimator().useAprilTags.set(true);
-
 
     }
 
     @Override
     public void autonomousInit() {
         Robot.autoFlag = true;
-        
+
         CommandScheduler.getInstance().cancelAll();
         //new driveToPos(new Pose2d(14.16, 1.4, new Rotation2d()));
         //CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
@@ -193,9 +193,7 @@ public class Robot extends TimedRobot {
     public void disabledInit() {
         Light.getInstance().AdrUpdateStrobe(150, 150, 150, 1);
         CommandScheduler.getInstance().cancelAll();
-        
 
-        
     }
 
     private void initializeAllSubsystems() {
@@ -216,7 +214,7 @@ public class Robot extends TimedRobot {
         Gyro.getInstance().resetGyro();
         DriveTrain.getInstance().setTargetRotationAngle(0);
         // DriveTrain.getInstance().drive(0, 0, 0, true);
-        DriveTrain.getInstance().getPoseEstimator().resetPose(new Pose2d(0,0, new Rotation2d()));
+        DriveTrain.getInstance().getPoseEstimator().resetPose(new Pose2d(0, 0, new Rotation2d()));
     }
 
     private void initializeDefaultCommands() {

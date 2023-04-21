@@ -80,12 +80,15 @@ public class Gyro {
         navX.setAngleAdjustment(angle);
     }
 
+    public void setAngleAdjustmentNoReset(double angle) {
+        navX.setAngleAdjustment(angle);
+    }
+
     public double getRoll() {
         // SmartDashboard.putNumber("Gryo pitch", navX.getRoll());
         // Logging.driveDashboard.setEntry("Gyro Pitch", navX.getRoll());
         return navX.getRoll();
     }
-
 
     public double getPitch() {
         // SmartDashboard.putNumber("Gryo pitch", navX.getRoll());
@@ -96,5 +99,5 @@ public class Gyro {
     public void resetGyro() {
         navX.reset();
     }
-    
+
 }

@@ -1,4 +1,5 @@
 package frc.robot.robot;
+
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
@@ -31,13 +32,11 @@ public class DriverButtonConfig {
 
 		//Button 3 reserved for victory dance
 
-
 		//new JoystickButton(ControlMap.DRIVER_BUTTONS, 5).onTrue(new InstantCommand(() -> Light.getInstance().cycleMode()));
 		//new JoystickButton(ControlMap.DRIVER_BUTTONS, 15).onTrue(new InstantCommand(() -> Light.getInstance().AdrUpdateStrobe(255, 255, 255, 0)));
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 6)
 				.onTrue(new ZeroGyro());
-
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 1)
 				.onTrue(new BalanceChargeStation());
@@ -45,11 +44,9 @@ public class DriverButtonConfig {
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 3)
 				.onTrue(new InstantCommand(() -> Light.getInstance().setRainbow()));
 
-		
 		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 8).onTrue(new SetSpatulaVoltageAndPos(-12, 0));
 		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 10).onTrue(new SetSpatulaVoltageAndPos(0, 0.45));
 		// new JoystickButton(ControlMap.DRIVER_BUTTONS, 12).onTrue(new SetSpatulaVoltageAndPos(4, 0.2).andThen(new WaitCommand(1.5)).andThen(new SetSpatulaVoltageAndPos(0, 0.45)));
-
 
 		new JoystickButton(ControlMap.DRIVER_BUTTONS, 13)
 				.whileTrue(new SetDriverAssist(true));
@@ -68,13 +65,12 @@ public class DriverButtonConfig {
 		new JoystickButton(ControlMap.DRIVER_RIGHT, 1)
 				.whileTrue(new AutoAlign());
 
-
 		//Driver Joystick Right
 		new JoystickButton(ControlMap.DRIVER_LEFT, 1)
-				.onTrue(new SetDriveAngle(0).withTimeout(1));
+				.onTrue(new SetDriveAngle(0));
 
 		new JoystickButton(ControlMap.DRIVER_LEFT, 2)
-				.onTrue(new SetDriveAngle(180).withTimeout(1));
+				.onTrue(new SetDriveAngle(180));
 
 		////END DRIVER 1//////////////////////////
 
@@ -84,7 +80,8 @@ public class DriverButtonConfig {
 				.onTrue(new CollectFloor().alongWith(new SetSpatulaVoltageAndPos(0, 0.45)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 4)
-				.onTrue(new SetSpatulaVoltageAndPos(-12, .12).alongWith(new Arm2PosStow(ArmPositions.STOW)).andThen(new WaitCommand(0.2)).andThen(new SetSpatulaVoltageAndPos(-8, .12)));
+				.onTrue(new SetSpatulaVoltageAndPos(-12, .12).alongWith(new Arm2PosStow(ArmPositions.STOW))
+						.andThen(new WaitCommand(0.2)).andThen(new SetSpatulaVoltageAndPos(-8, .12)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 2)
 				.onTrue(new CollectSubstation().alongWith(new SetSpatulaVoltageAndPos(0, 0.45)));
@@ -93,19 +90,23 @@ public class DriverButtonConfig {
 				.onTrue(new SetSpatulaVoltageAndPos(-0.5, 0.45).andThen(new Arm2PosStow(ArmPositions.DRIVE_POSITION)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 5)
-				.onTrue(new SetSpatulaVoltageAndPos(0, 0.12).alongWith(new WaitCommand(0.15)).andThen(new SetSpatulaVoltageAndPos(2, 0.15)).andThen(new WaitCommand(0.3)).andThen(new SetSpatulaVoltageAndPos(0, 0.45)));
+				.onTrue(new SetSpatulaVoltageAndPos(0, 0.12).alongWith(new WaitCommand(0.15))
+						.andThen(new SetSpatulaVoltageAndPos(2, 0.15)).andThen(new WaitCommand(0.3))
+						.andThen(new SetSpatulaVoltageAndPos(0, 0.45)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 6)
 				.whileTrue(new ArmZero());
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 7)
-				.onTrue(new SequentialCommandGroup(new SetItemMode(false).alongWith(new SetSpatulaVoltageAndPos(0, 0.45)), new CubeInjectHigh()));
+				.onTrue(new SequentialCommandGroup(
+						new SetItemMode(false).alongWith(new SetSpatulaVoltageAndPos(0, 0.45)), new CubeInjectHigh()));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 8)
 				.onTrue(new ConeInjectHigh().alongWith(new SetSpatulaVoltageAndPos(0, 0.45)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 9)
-				.onTrue(new SequentialCommandGroup(new SetItemMode(false).alongWith(new SetSpatulaVoltageAndPos(0, 0.45)), new CubeInjectMid()));
+				.onTrue(new SequentialCommandGroup(
+						new SetItemMode(false).alongWith(new SetSpatulaVoltageAndPos(0, 0.45)), new CubeInjectMid()));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 10)
 				.onTrue(new ConeInjectMid().alongWith(new SetSpatulaVoltageAndPos(0, 0.45)));
@@ -122,12 +123,11 @@ public class DriverButtonConfig {
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 14)
 				.onTrue(new InstantCommand(() -> Light.getInstance().AdrUpdateStrobe(255, 255, 0, 0.5)));
 
-				
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 13)
-			.onFalse(new InstantCommand(() -> Light.getInstance().AdrUpdateStrobe(0, 0, 255, 1)));
+				.onFalse(new InstantCommand(() -> Light.getInstance().AdrUpdateStrobe(0, 0, 255, 1)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 14)
-			.onFalse(new InstantCommand(() -> Light.getInstance().AdrUpdateStrobe(0, 0, 255, 1)));
+				.onFalse(new InstantCommand(() -> Light.getInstance().AdrUpdateStrobe(0, 0, 255, 1)));
 
 		//Switch 15 reserved for manual override
 
@@ -142,7 +142,8 @@ public class DriverButtonConfig {
 				.onTrue(new IntakeSpeedInstant(-10));
 
 		new JoystickButton(ControlMap.CO_DRIVER_RIGHT, 2)
-				.onTrue(new SequentialCommandGroup(new IntakeSpeedInstant(3), new WaitCommand(2), new IntakeSpeedInstant(0)));
+				.onTrue(new SequentialCommandGroup(new IntakeSpeedInstant(3), new WaitCommand(2),
+						new IntakeSpeedInstant(0)));
 
 		////END CO-DRIVER//////////////////////////
 	}
