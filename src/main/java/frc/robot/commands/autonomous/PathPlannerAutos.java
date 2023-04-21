@@ -39,7 +39,7 @@ public final class PathPlannerAutos {
             Map.entry("BalanceChargeStation", new BalanceChargeStation()),
             Map.entry("ConeTop", new ConeInjectHigh()),
             Map.entry("AutoAlign", new AlignAndPlace()),
-            Map.entry("AlignArm", new CaliBottomPosTolerance(ArmPositions.AUTO_ALIGN.armAngle,0.0)),
+            Map.entry("AlignArm", new CaliBottomPosTolerance(ArmPositions.AUTO_ALIGN.armAngle, 0.0)),
             Map.entry("ConeTopBalance", new AutoConeTopBalance()),
             Map.entry("ConeMid", new AutoConeMid()),
             Map.entry("ConeLow", new AutoConeLow()),
@@ -49,19 +49,29 @@ public final class PathPlannerAutos {
             Map.entry("IntakeCone", new CollectFloor()),
             Map.entry("IntakeCube", new AutoGroundIntakeCube()),
             Map.entry("StowArm", new Arm2PosStow(ArmPositions.STOW)),
-            Map.entry("DrivePosition", new ExtensionPosTolerance(0.0).andThen(new CaliTopPosTolerance(ArmPositions.PRE_DRIVE_POSITION.wrist)).andThen(new CaliBottomPosTolerance(ArmPositions.PRE_DRIVE_POSITION.armAngle, CaliGirls.getInstance().getBottomKf())).alongWith(new WaitCommand(0.3)).andThen(new CaliTopPosTolerance(ArmPositions.DRIVE_POSITION.wrist))),
+            Map.entry("DrivePosition",
+                    new ExtensionPosTolerance(0.0)
+                            .andThen(new CaliTopPosTolerance(ArmPositions.PRE_DRIVE_POSITION.wrist))
+                            .andThen(new CaliBottomPosTolerance(ArmPositions.PRE_DRIVE_POSITION.armAngle,
+                                    CaliGirls.getInstance().getBottomKf()))
+                            .alongWith(new WaitCommand(0.3))
+                            .andThen(new CaliTopPosTolerance(ArmPositions.DRIVE_POSITION.wrist))),
             Map.entry("Wait1", new WaitCommand(1)),
-            Map.entry("OtherCollect",new SetSpatulaVoltageAndPos(-12, 0.12).alongWith(new Arm2PosStow(ArmPositions.STOW))),
-            Map.entry("OtherIntakeIn",new SetSpatulaVoltageAndPos(-0.5, 0.45)),
-            Map.entry("RotateTo0",new DriveDriverAssist(0)),
+            Map.entry("OtherCollect",
+                    new SetSpatulaVoltageAndPos(-12, 0.12).alongWith(new Arm2PosStow(ArmPositions.STOW))),
+            Map.entry("OtherIntakeIn", new SetSpatulaVoltageAndPos(-0.5, 0.45)),
+            Map.entry("RotateTo0", new DriveDriverAssist(0)),
             Map.entry("RotateTo180", new DriveDriverAssist(180)),
             Map.entry("AlignPosition", new ArmPosInstant(ArmPositions.AUTO_ALIGN)),
-            Map.entry("OtherPlace", new SetSpatulaVoltageAndPos(0, 0.12).alongWith(new WaitCommand(0.3)).andThen(new SetSpatulaVoltageAndPos(2, 0.15)).andThen(new WaitCommand(0.3)).andThen(new SetSpatulaVoltageAndPos(0, 0.45)))));
+            Map.entry("OtherPlace",
+                    new SetSpatulaVoltageAndPos(0, 0.12).alongWith(new WaitCommand(0.3))
+                            .andThen(new SetSpatulaVoltageAndPos(2, 0.15)).andThen(new WaitCommand(0.3))
+                            .andThen(new SetSpatulaVoltageAndPos(0, 0.45)))));
 
     public static final SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
             DriveTrain.getInstance()::getPose2dPathplanner,
             DriveTrain.getInstance().getPoseEstimator()::resetPose,
-            new PIDConstants(1.7,0, 0),
+            new PIDConstants(1.7, 0, 0),
             new PIDConstants(2, 0, 0),
             DriveTrain.getInstance()::driveAutos,
             eventMap,
@@ -81,13 +91,11 @@ public final class PathPlannerAutos {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("BluCableConHigCubLo", new PathConstraints(4.5, 4)));
     }
 
-    
     public static CommandBase CableSideBlue2() {
         // DriveTrain.getInstance().setTargetRotationAngle(0);
         // DriveTrain.getInstance().setUseDriverAssist(true);
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("CableConHigCubHigBlue", new PathConstraints(4.5, 4)));
     }
-
 
     public static CommandBase CableSideRed() {
         // DriveTrain.getInstance().setTargetRotationAngle(0);
@@ -101,8 +109,6 @@ public final class PathPlannerAutos {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("OverchargeBlue", new PathConstraints(3, 1.3)));
     }
 
-    
-
     public static CommandBase DriveCollectChargeRed() {
         // DriveTrain.getInstance().setTargetRotationAngle(0);
         // DriveTrain.getInstance().setUseDriverAssist(true);
@@ -113,22 +119,20 @@ public final class PathPlannerAutos {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("JustBalance", new PathConstraints(3, 1)));
     }
 
-    
-
     // public static CommandBase Square() {
-
 
     //     return autoBuilder.fullAuto(PathPlanner.loadPathGroup("PlacingTesting", new PathConstraints(3, 2)));
     // }
-
 
     public static CommandBase PlaceConeAndBalance() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStationMove", new PathConstraints(20, 20)));
     }
 
     public static CommandBase PlaceConeAndBalanceAndCommunity() {
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ChargeStationMoveAndGoOutsideCommunityNoCube", new PathConstraints(1.5, 3)));
+        return autoBuilder.fullAuto(
+                PathPlanner.loadPathGroup("ChargeStationMoveAndGoOutsideCommunityNoCube", new PathConstraints(1.5, 3)));
     }
+
     public static CommandBase PlaceConeAndMoveBackBottom() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("MoveAndGrabConeBottom", new PathConstraints(2, 1)));
     }
@@ -138,9 +142,10 @@ public final class PathPlannerAutos {
     }
 
     public static CommandBase Place2Cone() {
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("MoveAndGrabConeBottomAndComeBack", new PathConstraints(2, 1)));
+        return autoBuilder
+                .fullAuto(PathPlanner.loadPathGroup("MoveAndGrabConeBottomAndComeBack", new PathConstraints(2, 1)));
     }
-    
+
     public static CommandBase threedc2Cones() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("3-d-c 2 ALL CONES", new PathConstraints(4, 3)));
     }
@@ -152,7 +157,7 @@ public final class PathPlannerAutos {
     public static CommandBase squarespiiin() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("square + spin", new PathConstraints(1, 1)));
     }
-    
+
     public static CommandBase none() {
         return Commands.none();
     }
@@ -161,19 +166,22 @@ public final class PathPlannerAutos {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ConHigConHigBal", new PathConstraints(5, 3)));
     }
 
-    
     public static CommandBase GetOutOfDaWay() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("GetOutOfDaWayCable", new PathConstraints(2, 1)));
     }
+
     public static CommandBase SimpleCableSideBlue() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("SimpleCableBlue", new PathConstraints(3, 1)));
     }
+
     public static CommandBase SimpleCableSideRed() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("SimpleCableRed", new PathConstraints(3, 1)));
     }
+
     public static CommandBase SimpleSubstationBlue() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("SimpleSubstationBlue", new PathConstraints(3, 1)));
     }
+
     public static CommandBase SimpleSubstationRed() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("SimpleSubstationRed", new PathConstraints(3, 1)));
     }
@@ -181,6 +189,7 @@ public final class PathPlannerAutos {
     public static CommandBase OverchargeBlueNoBalance() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("OverchargeBlueNoBalance", new PathConstraints(3, 1)));
     }
+
     public static CommandBase OverchargeRedNoBalance() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("OverchargeRedNoBalance", new PathConstraints(3, 1)));
     }
@@ -190,7 +199,7 @@ public final class PathPlannerAutos {
     }
 
     public static CommandBase ComplexCableBlue() {
-        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ComplexCableBlue", new PathConstraints(3, 1)));
+        return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ComplexCableBlue", new PathConstraints(3, 2)));
     }
 
     public static CommandBase ComplexSubstationRed() {
@@ -200,8 +209,6 @@ public final class PathPlannerAutos {
     public static CommandBase ComplexSubstationBlue() {
         return autoBuilder.fullAuto(PathPlanner.loadPathGroup("ComplexSubstationBlue", new PathConstraints(3, 1)));
     }
-
-
 
     private PathPlannerAutos() {
         throw new UnsupportedOperationException("This is a utility class!");
