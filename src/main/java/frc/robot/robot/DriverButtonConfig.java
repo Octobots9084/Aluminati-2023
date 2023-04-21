@@ -87,7 +87,8 @@ public class DriverButtonConfig {
 				.onTrue(new CollectSubstation().alongWith(new SetSpatulaVoltageAndPos(0, 0.45)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 3)
-				.onTrue(new SetSpatulaVoltageAndPos(-0.5, 0.45).andThen(new Arm2PosStow(ArmPositions.DRIVE_POSITION)));
+				.onTrue(new SetSpatulaVoltageAndPos(12, 0.3).andThen(new WaitCommand(0.4))
+						.andThen(new SetSpatulaVoltageAndPos(0, 0.45)));
 
 		new JoystickButton(ControlMap.CO_DRIVER_BUTTONS, 5)
 				.onTrue(new SetSpatulaVoltageAndPos(0, 0.12).alongWith(new WaitCommand(0.15))
