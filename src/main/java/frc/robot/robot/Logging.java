@@ -48,19 +48,20 @@ public class Logging {
     private void addAutoOptions() {
         //
         autoChooser.setDefaultOption("No Movement", new AutoConeTop());
-        autoChooser.addOption("REDCableSide", PathPlannerAutos.CableSideBlue2());
-        autoChooser.addOption("CableSideBLUE", PathPlannerAutos.CableSideRed());
         autoChooser.addOption("REDCenter", PathPlannerAutos.DriveCollectChargeRed());
         autoChooser.addOption("CenterBLUE", PathPlannerAutos.DriveCollectChargeBlue());
-        autoChooser.addOption("JustBalance", PathPlannerAutos.JustBalance());
+        // autoChooser.addOption("REDCableSide", PathPlannerAutos.CableSideBlue2());
+        // autoChooser.addOption("CableSideBLUE", PathPlannerAutos.CableSideRed());
         autoChooser.addOption("SimpleCableSideBLUE", PathPlannerAutos.SimpleCableSideBlue());
         autoChooser.addOption("REDSimpleCableSide", PathPlannerAutos.SimpleCableSideRed());
         autoChooser.addOption("SimpleSubstationBLUE", PathPlannerAutos.SimpleSubstationBlue());
         autoChooser.addOption("REDSimpleSubstation", PathPlannerAutos.SimpleSubstationBlue());
-        autoChooser.addOption("OverchargeBlueNoBalance", PathPlannerAutos.OverchargeBlueNoBalance());
-        autoChooser.addOption("OverchargeRedNoBalance", PathPlannerAutos.OverchargeRedNoBalance());
-        autoChooser.addOption("REDComplexCable", PathPlannerAutos.ComplexCableRed());
-        autoChooser.addOption("ComplexSubstationBlue", PathPlannerAutos.ComplexSubstationBlue());
+        autoChooser.addOption("OverchargeNoBalanceBLUE", PathPlannerAutos.OverchargeBlueNoBalance());
+        autoChooser.addOption("REDOverchargeNoBalance", PathPlannerAutos.OverchargeRedNoBalance());
+
+        autoChooser.addOption("EMERGENCYONLYJustBalance", PathPlannerAutos.JustBalance());
+        autoChooser.addOption("INDEVREDComplexCable", PathPlannerAutos.ComplexCableRed());
+        autoChooser.addOption("INDEVComplexSubstationBlue", PathPlannerAutos.ComplexSubstationBlue());
         // autoChooser.addOption("DONNOTUSEBalance Charge Station", PathPlannerAutos.PlaceConeAndBalance());
         // autoChooser.addOption("Move and Grab Cone Bottom", PathPlannerAutos.PlaceConeAndMoveBackBottom());
         // autoChooser.addOption("Move and Grab Cone Top", PathPlannerAutos.PlaceConeAndMoveBackTop());
@@ -73,10 +74,8 @@ public class Logging {
         // // autoChooser.addOption("Onemeter", PathPlannerAutos.Onemeter());
         // autoChooser.addOption("square", PathPlannerAutos.Square());
         // autoChooser.addOption("ConHigConHigBal", PathPlannerAutos.ConHigConHigBal());
-    
-        // autoChooser.addOption("DONOTUSEnALANCEv3", new AutoDriveOntoChargeStationAndCommunity());
-        
 
+        // autoChooser.addOption("DONOTUSEnALANCEv3", new AutoDriveOntoChargeStationAndCommunity());
 
     }
 
@@ -93,7 +92,6 @@ public class Logging {
         // // armDashboard.setEntry("spatula", SpatulaFlip.getInstance().getSpatulaPos());
         // armDashboard.setEntry("spatula set", SpatulaFlip.getInstance().lastPosSpatula);
         // // // armDashboard.setEntry("spatula pos", SpatulaFlip.getInstance());
-        
 
         // // // //Arm
         // // armDashboard.setEntry("Arm Extension", armExtension.getPosition());
@@ -102,7 +100,6 @@ public class Logging {
         // armDashboard.setEntry("Claw Set Rotation", caliGirls.lastPosTop);
         // // armDashboard.setEntry("Arm Rotation", caliGirls.lastPosBottom);
         // armDashboard.setEntry("Arm Real", caliGirls.getBottomPos());
-
 
     }
 
