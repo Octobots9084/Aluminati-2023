@@ -7,7 +7,7 @@ public enum ArmPositions {
     PRE_CONE_PLACE_HIGH(.785, 0.09, 71, .567), //correct 3/27
     PRE_CONE_PLACE_MID(.77, 0.06, 23.5, .619), //good 3/28
     INTAKE_GROUND(.585, 0.03, 31.4, 0.47), //correctish 3/27
-    INTAKE_SUBSTATION(.78, 0, 0, .69), //good 3/28
+    INTAKE_SUBSTATION(.78, 0, 0, .66), //good 3/28
     CUBE_PLACE_HIGH(.77, 0.09, 47, .65), //good 3/28
     CUBE_PLACE_MID(.642, 0.06, 0, .493),
     DRIVE_POSITION(.5, 0, 0, .31), //good 3/28

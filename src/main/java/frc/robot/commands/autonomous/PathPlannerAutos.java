@@ -18,6 +18,7 @@ import frc.robot.commands.advanced.CollectFloor;
 import frc.robot.commands.advanced.ConeInjectHigh;
 import frc.robot.commands.advanced.CubeInjectHigh;
 import frc.robot.commands.arm.basic.instant.ArmPosInstant;
+import frc.robot.commands.arm.basic.instant.IntakeSpeedInstant;
 import frc.robot.commands.arm.basic.tolerance.CaliBottomPosTolerance;
 import frc.robot.commands.arm.basic.tolerance.CaliTopPosTolerance;
 import frc.robot.commands.arm.basic.tolerance.ExtensionPosTolerance;
@@ -37,7 +38,7 @@ public final class PathPlannerAutos {
     private static final Map<String, Command> eventMap = new HashMap<>(Map.ofEntries(
             Map.entry("driveToPos", new DriveToPosition(new Pose2d(14, 0.7, new Rotation2d(0)))),
             Map.entry("BalanceChargeStation", new BalanceChargeStation()),
-            Map.entry("ConeTop", new ConeInjectHigh()),
+            Map.entry("ConeTop", new IntakeSpeedInstant(-10).andThen(new ConeInjectHigh())),
             Map.entry("AutoAlign", new AlignAndPlace()),
             Map.entry("AlignArm", new CaliBottomPosTolerance(ArmPositions.AUTO_ALIGN.armAngle, 0.0)),
             Map.entry("ConeTopBalance", new AutoConeTopBalance()),
