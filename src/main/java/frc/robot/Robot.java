@@ -115,6 +115,7 @@ public class Robot extends TimedRobot {
             // SmartDashboard.putBoolean("14", false);
             new DriverButtonConfig().initTeleop();
         }
+        DriveTrain.getInstance().killDaCan();
 
     }
 
@@ -151,7 +152,7 @@ public class Robot extends TimedRobot {
         DriveTrain.getInstance().setUseDriverAssist(true);
         Gyro.getInstance().setAngleAdjustmentNoReset(180);
         DriveTrain.getInstance().getPoseEstimator().cancelOdometry();
-        DriveTrain.getInstance().killDaCan();
+        
         //DriveTrain.getInstance().getPoseEstimator().useAprilTags.set(true);
         Light.getInstance().AdrUpdateStrobe(255, 10, 0, 1);
     }
