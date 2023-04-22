@@ -108,6 +108,8 @@ public class CaliGirls extends SubsystemBase {
             this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 500);
             this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 500);
             this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 500);
+            this.motorBottomFollower.setCANTimeout(1000);
+
         }
     }
 
