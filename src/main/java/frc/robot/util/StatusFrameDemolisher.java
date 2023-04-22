@@ -29,8 +29,11 @@ public class StatusFrameDemolisher {
             motor.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 255);
             motor.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 255);
         }
+        motor.setStatusFramePeriod(StatusFrameEnhanced.Status_1_General, 255);
         motor.setStatusFramePeriod(StatusFrameEnhanced.Status_3_Quadrature, 255);
         motor.setStatusFramePeriod(StatusFrameEnhanced.Status_4_AinTempVbat, 255);
+        motor.setStatusFramePeriod(StatusFrameEnhanced.Status_8_PulseWidth, 255);
+        motor.setStatusFramePeriod(StatusFrameEnhanced.Status_Brushless_Current, 255);
         motor.setStatusFramePeriod(StatusFrameEnhanced.Status_12_Feedback1, 255);
     }
 
