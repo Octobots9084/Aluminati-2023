@@ -86,8 +86,8 @@ public class PoseEstimator {
                 new MatBuilder<>(Nat.N3(), Nat.N1()).fill(0.01, 0.01, 0.01) //Vision Measurement stdev
         );
 
-        // e = Executors.newScheduledThreadPool(1);
-        // e.scheduleWithFixedDelay(this::updateOdometry, 5, 15, TimeUnit.MILLISECONDS);
+        e = Executors.newScheduledThreadPool(1);
+        e.scheduleWithFixedDelay(this::updateOdometry, 5, 15, TimeUnit.MILLISECONDS);
 
         
         robotPose.set(new Pose2d());
@@ -96,7 +96,7 @@ public class PoseEstimator {
     }
 
     public void cancelOdometry() {
-        //e.shutdown();
+        e.shutdown();
     }
 
     public Pose2d getRobotPose() {

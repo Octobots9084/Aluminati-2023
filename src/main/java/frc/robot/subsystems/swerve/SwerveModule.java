@@ -100,13 +100,13 @@ public class SwerveModule {
         this.steeringMotor.setSmartCurrentLimit(Tuning.TURN_MOTOR_STALL, Tuning.TURN_MOTOR_FREE);
         this.steeringMotor.setCANTimeout(1000);
         StatusFrameDemolisher.demolishStatusFrames(driveMotor, false);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 20);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 20);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 20);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 20);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 20);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 20);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 20);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 500);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 500);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 500);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 500);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 500);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 15);
+        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 500);
 
         try {
             Thread.sleep(200);
@@ -120,13 +120,12 @@ public class SwerveModule {
     }
 
     public void killDaCan() {
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 255);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 255);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 255);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
-        this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
+        // this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);
+        // this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 255);
+        // this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 255);
+        // this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 255);
+        // this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
+        // this.steeringMotor.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
     }
 
     public double getAngle() {

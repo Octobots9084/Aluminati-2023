@@ -85,29 +85,29 @@ public class CaliGirls extends SubsystemBase {
             this.motorBottomFollower.follow(motorBottom, true);
 
 
-            this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);
-            this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 255);
-            this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 255);
-            this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 255);
-            this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
-            this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
-            this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
+            this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 5);
+            this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 20);
+            this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 500);
+            this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 500);
+            this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 500);
+            this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 20);
+            this.motorBottom.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 500);
 
-            this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);
-            this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 255);
-            this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 255);
-            this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 255);
-            this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
-            this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
-            this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
+            this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 500);
+            this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 500);
+            this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 500);
+            this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 500);
+            this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 500);
+            this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 20);
+            this.motorTop.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 500);
 
-            this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 255);
-            this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 255);
-            this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 255);
-            this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 255);
-            this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 255);
-            this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 255);
-            this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 255);
+            this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus0, 100);
+            this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus1, 500);
+            this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus2, 500);
+            this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus3, 500);
+            this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus4, 500);
+            this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus5, 500);
+            this.motorBottomFollower.setPeriodicFramePeriod(PeriodicFrame.kStatus6, 500);
         }
     }
 
