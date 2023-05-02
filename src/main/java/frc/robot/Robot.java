@@ -208,7 +208,7 @@ public class Robot extends TimedRobot {
         ArmExtension.getInstance();
         Roller.getInstance();
         Logging.getInstance();
-        SpatulaFlip.getInstance();
+        SpatulaFlip.getInstance();It
         RollingPins.getInstance();
         new ArmPosInstant(ArmPositions.STOW);
     }
@@ -225,8 +225,8 @@ public class Robot extends TimedRobot {
         CaliGirls.getInstance().lastPosTop = CaliGirls.getInstance().getTopPos();
         ArmExtension.getInstance().lastpos = ArmExtension.getInstance().getPosition();
         CommandScheduler.getInstance().setDefaultCommand(DriveTrain.getInstance(), new SwerveControl());
-        CommandScheduler.getInstance().setDefaultCommand(CaliGirls.getInstance(), new CGControl());
-        CommandScheduler.getInstance().setDefaultCommand(ArmExtension.getInstance(), new ExtensionControl());
+        // CommandScheduler.getInstance().setDefaultCommand(CaliGirls.getInstance(), new CGControl());
+        // CommandScheduler.getInstance().setDefaultCommand(ArmExtension.getInstance(), new ExtensionControl());
         CommandScheduler.getInstance().schedule(new SetSpatulaVoltageAndPos(0, 0.45));
     }
 }

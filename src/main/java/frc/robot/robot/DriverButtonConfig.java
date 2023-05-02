@@ -62,7 +62,7 @@ public class DriverButtonConfig {
 		//Switch 16 reserved for auto align toggle
 
 		//Driver Joystick Left
-		new JoystickButton(ControlMap.DRIVER_RIGHT, 1)
+		new JoystickButton(ControlMap.DRIVER_BUTTONS, 15)
 				.whileTrue(new AutoAlign());
 
 		//Driver Joystick Right
