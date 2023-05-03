@@ -159,37 +159,38 @@ public class Robot extends TimedRobot {
 
     @Override
     public void autonomousInit() {
-        Robot.autoFlag = true;
+        // Robot.autoFlag = true;
 
-        CommandScheduler.getInstance().cancelAll();
-        Light.getInstance().setRainbow();
-        //new driveToPos(new Pose2d(14.16, 1.4, new Rotation2d()));
-        //CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
-        // CommandScheduler.getInstance().schedule(PathPlannerAutos.TestAutoOne());
-        //CommandScheduler.getInstance().schedule(new driveToPos(new Pose2d(0.0, FieldConstants.length/2, new Rotation2d(0,0))));
+        // CommandScheduler.getInstance().cancelAll();
+        // Light.getInstance().setRainbow();
+        // //new driveToPos(new Pose2d(14.16, 1.4, new Rotation2d()));
+        // //CommandScheduler.getInstance().schedule(PathPlannerAutos.BalanceChargeStation());
+        // // CommandScheduler.getInstance().schedule(PathPlannerAutos.TestAutoOne());
+        // //CommandScheduler.getInstance().schedule(new driveToPos(new Pose2d(0.0, FieldConstants.length/2, new Rotation2d(0,0))));
 
-        Robot.autoStartTime = Timer.getFPGATimestamp();
-        Gyro.getInstance().setAngleAdjustment(0);
-        resetRobotPoseAndGyro();
-        // DriveTrain.getInstance().setUseDriverAssist(true);
-        try {
-            var command = Logging.getAutoChooser().getSelected();
-            if (command != null) {
-                CommandScheduler.getInstance().schedule(command);
-            }
-        } catch (Exception e) {
-            // I fuxed it
-        }
+        // Robot.autoStartTime = Timer.getFPGATimestamp();
+        // Gyro.getInstance().setAngleAdjustment(0);
+        // resetRobotPoseAndGyro();
+        // // DriveTrain.getInstance().setUseDriverAssist(true);
+        // try {
+        //     var command = Logging.getAutoChooser().getSelected();
+        //     if (command != null) {
+        //         CommandScheduler.getInstance().schedule(command);
+        //     }
+        // } catch (Exception e) {
+        //     // I fuxed it
+        // }
+        SmartDashboard.putString("Silly billy", "You enabled in autonomous");
 
     }
 
     @Override
     public void autonomousPeriodic() {
-        DriveTrain.getInstance().updateSwerveStates();
-        DriveTrain.getInstance().getPoseEstimator().updateOdometry();
-        DriveTrain.getInstance().updateSwerveStates();
-        CommandScheduler.getInstance().run();
-        Logging.updateLogging();
+        // DriveTrain.getInstance().updateSwerveStates();
+        // DriveTrain.getInstance().getPoseEstimator().updateOdometry();
+        // DriveTrain.getInstance().updateSwerveStates();
+        // CommandScheduler.getInstance().run();
+        // Logging.updateLogging();
     }
 
     @Override
