@@ -35,7 +35,7 @@ public class AutoAlign extends CommandBase {
         if (vision.getTapeCamHasTarget()) {
             if (vision.getBestTarget() != null) {
                 cameraToTarget = vision.getBestTarget();
-                caliGirls.setBottomPos(ArmPositions.AUTO_ALIGN.armAngle);
+                //caliGirls.setBottomPos(ArmPositions.AUTO_ALIGN.armAngle);
                 //caliGirls.setBottomKf();
             } else {
                 end(true);
