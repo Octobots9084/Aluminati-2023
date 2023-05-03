@@ -208,7 +208,7 @@ public class Robot extends TimedRobot {
         ArmExtension.getInstance();
         Roller.getInstance();
         Logging.getInstance();
-        SpatulaFlip.getInstance();It
+        SpatulaFlip.getInstance();
         RollingPins.getInstance();
         new ArmPosInstant(ArmPositions.STOW);
     }
