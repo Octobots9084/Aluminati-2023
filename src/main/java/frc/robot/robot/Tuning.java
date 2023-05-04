@@ -88,10 +88,10 @@ public class Tuning {
         public static final double EXTENSION_MIN_OUT = -1;
 
         //Drive Motors
-        public static final PIDConfig FL_DRIVE_PID = new PIDConfig(0.1, 0.00, 0.0, 0.1);
-        public static final PIDConfig FR_DRIVE_PID = new PIDConfig(0.1, 0.00, 0.0, 0.1);
-        public static final PIDConfig BL_DRIVE_PID = new PIDConfig(0.1, 0.00, 0.0, 0.1);
-        public static final PIDConfig BR_DRIVE_PID = new PIDConfig(0.1, 0.00, 0.0, 0.1);
+        public static final PIDConfig FL_DRIVE_PID = new PIDConfig(0.1, 0.00, 0.0, 0.08);
+        public static final PIDConfig FR_DRIVE_PID = new PIDConfig(0.1, 0.00, 0.0, 0.08);
+        public static final PIDConfig BL_DRIVE_PID = new PIDConfig(0.1, 0.00, 0.0, 0.08);
+        public static final PIDConfig BR_DRIVE_PID = new PIDConfig(0.1, 0.00, 0.0, 0.08);
         public static final PIDConfig FL_DRIVE_PID2 = new PIDConfig(0.76235, 0.00, 0.0, 0.);
         public static final PIDConfig FR_DRIVE_PID2 = new PIDConfig(0.65149, 0.00, 0.0, 0.);
         public static final PIDConfig BL_DRIVE_PID2 = new PIDConfig(0.35147, 0.00, 0.0, 0.);
@@ -111,10 +111,10 @@ public class Tuning {
         public static final int TURN_MOTOR_STALL = 31;
 
         //Turn Motors
-        public static final PIDConfig FL_TURN_PID = new PIDConfig(20, .0, 0.02);
-        public static final PIDConfig FR_TURN_PID = new PIDConfig(20, .0, 0.02);
-        public static final PIDConfig BL_TURN_PID = new PIDConfig(20, .0, 0.02);
-        public static final PIDConfig BR_TURN_PID = new PIDConfig(20, .0, 0.02);
+        public static final PIDConfig FL_TURN_PID = new PIDConfig(5, .0, 0.02);
+        public static final PIDConfig FR_TURN_PID = new PIDConfig(5, .0, 0.02);
+        public static final PIDConfig BL_TURN_PID = new PIDConfig(5, .0, 0.02);
+        public static final PIDConfig BR_TURN_PID = new PIDConfig(5, .0, 0.02);
         public static final SmartMotionConfig TM_SM_CONFIG = new SmartMotionConfig(
                         true,
                         20000.0,

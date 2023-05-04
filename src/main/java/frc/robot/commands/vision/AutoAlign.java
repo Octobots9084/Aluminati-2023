@@ -58,7 +58,7 @@ public class AutoAlign extends CommandBase {
                     //light.setDegrees(cameraToTarget.getYaw()-3);
                     //light.setHasTarget(true);
                     //light.lightUpdateControl(-1);
-                    ySpeed = (cameraToTarget.getYaw() - 1.5) * 0.1;
+                    ySpeed = (cameraToTarget.getYaw() - 1.5) - 0.1;
                     // SmartDashboard.putNumber("Degrees to target", cameraToTarget.getYaw()-3);
 
                     if (MathUtil.isWithinTolerance(cameraToTarget.getYaw() - 1.5, 0, 2)) {
@@ -77,7 +77,7 @@ public class AutoAlign extends CommandBase {
                 }
 
                 //SmartDashboard.putNumber("Y_SPED", ySpeed);
-                CommandScheduler.getInstance().schedule(new SetDriveAngle(180));
+                CommandScheduler.getInstance().schedule(new SetDriveAngle(0));
                 driveTrain.drive(driveTrain.previousXSpeed, ySpeed, 0, true);
             }
         } catch (Exception e) {

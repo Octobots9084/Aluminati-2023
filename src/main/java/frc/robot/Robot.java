@@ -150,7 +150,7 @@ public class Robot extends TimedRobot {
         }
         Robot.autoFlag = false;
         DriveTrain.getInstance().setUseDriverAssist(true);
-        Gyro.getInstance().setAngleAdjustmentNoReset(180);
+        Gyro.getInstance().setAngleAdjustment(0);
         DriveTrain.getInstance().getPoseEstimator().cancelOdometry();
         
         //DriveTrain.getInstance().getPoseEstimator().useAprilTags.set(true);
